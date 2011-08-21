@@ -1,0 +1,23 @@
+<h1>Listing flashes</h1>
+
+<table>
+  <tr>
+    <th>Category</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @flashes.each do |flash| %>
+  <tr>
+    <td><%= flash.category %></td>
+    <td><%= link_to 'Show', flash %></td>
+    <td><%= link_to 'Edit', edit_flash_path(flash) %></td>
+    <td><%= link_to 'Destroy', flash, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Flash', new_flash_path %>

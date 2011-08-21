@@ -1,0 +1,5 @@
+<% @flashes.each do |flash| %>
+  <%= link_to flash.url do%>
+    <%= image_tag(flash.image.url) %>
+  <% end %>
+<% end %>

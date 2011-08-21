@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @msg.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @msg.body %>
+</p>
+
+<p>
+  <b>From:</b>
+  <%= @msg.from %>
+</p>
+
+<p>
+  <b>To:</b>
+  <%= @msg.to %>
+</p>
+
+<p>
+  <b>Is read:</b>
+  <%= @msg.is_read %>
+</p>
+
+
+<%= link_to 'Edit', edit_msg_path(@msg) %> |
+<%= link_to t('labels.back'), msgs_path %>

@@ -1,0 +1,3 @@
+<% @cheapest.each do |cheap| %>
+    <li><%= link_to "#{cheap.good}(#{cheap.price})",cheap.good %></li>
+<% end unless @cheapest.blank? %>

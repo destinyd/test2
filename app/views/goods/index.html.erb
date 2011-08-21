@@ -1,0 +1,10 @@
+<h1>Listing goods</h1>
+
+<%= render 'goods/search' %>
+<div id="goods">
+<%= render 'goods/goods' %>
+</div>
+
+<br />
+
+<%= link_to 'New Good', new_category_good_path(@category) %>

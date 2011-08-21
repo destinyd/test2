@@ -1,0 +1,27 @@
+<h1>Listing integrals</h1>
+
+<table>
+  <tr>
+    <th>Point</th>
+    <th>Desc</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @integrals.each do |integral| %>
+  <tr>
+    <td><%= integral.point %></td>
+    <td><%= integral.desc %></td>
+    <td><%= integral.user %></td>
+    <td><%= link_to t('labels.show'), integral %></td>
+    <td><%= link_to 'Edit', edit_integral_path(integral) %></td>
+    <td><%= link_to 'Destroy', integral, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Integral', new_integral_path %>

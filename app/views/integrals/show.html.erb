@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Point:</b>
+  <%= @integral.point %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @integral.desc %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @integral.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_integral_path(@integral) %> |
+<%= link_to t('labels.back'), integrals_path %>

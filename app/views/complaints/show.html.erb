@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Type:</b>
+  <%= @complaint.type_id %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @complaint.desc %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @complaint.user %>
+</p>
+
+<p>
+  <b>Target:</b>
+  <%= @complaint.target %>
+</p>
+
+
+<%= link_to 'Edit', edit_complaint_path(@complaint) %> |
+<%= link_to t('labels.back'), complaints_path %>

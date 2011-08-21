@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b><%= label :price,:price%>:</b>
+  <%= @price.price %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @price.type_id %>
+</p>
+
+<p>
+  <b>Region:</b>
+  <%= @price.region_id %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @price.amount %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @price.user %>
+</p>
+
+<p>
+  <b>Finish at:</b>
+  <%= @price.finish_at %>
+</p>
+<%= render 'comments/comments' %>
+
+
+<%= link_to t('labels.edit'), edit_good_price_path(@good,@price) %> |
+<%= link_to t('labels.back'), good_prices_path %>

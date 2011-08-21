@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uploadable_id: 1
+  uploadable_type: MyString
+  deleted_at: 2011-05-06 15:47:44
+
+two:
+  uploadable_id: 1
+  uploadable_type: MyString
+  deleted_at: 2011-05-06 15:47:44

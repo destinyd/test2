@@ -1,0 +1,23 @@
+<div  class="m">
+  <%= image_tag @upload.image.url %>
+<br />
+<!--
+<p>
+  <b>Uploadable:</b>
+  <%= @upload.uploadable_id %>
+</p>
+
+<p>
+  <b>Uploadable type:</b>
+  <%= @upload.uploadable_type %>
+</p>
+
+<p>
+  <b>Deleted at:</b>
+  <%= @upload.deleted_at %>
+</p>-->
+
+
+<%= link_to '修改', edit_upload_path(@upload) ,:class =>  "user_show"%> 
+<%= link_to '退后', @upload.uploadable %>
+</div>

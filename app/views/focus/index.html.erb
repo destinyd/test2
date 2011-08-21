@@ -1,0 +1,19 @@
+<% title "Focus" %>
+
+<table>
+  <tr>
+    <th>Focusable</th>
+    <th>Focusable Type</th>
+  </tr>
+  <% for focus in @focus %>
+    <tr>
+      <td><%= focus.focusable_id %></td>
+      <td><%= focus.focusable_type %></td>
+      <td><%= link_to "Show", focus %></td>
+      <td><%= link_to "Edit", edit_focus_path(focus) %></td>
+      <td><%= link_to "Destroy", focus, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Focus", new_focus_path %></p>

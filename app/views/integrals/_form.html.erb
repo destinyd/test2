@@ -1,0 +1,29 @@
+<%= form_for(@integral) do |f| %>
+  <% if @integral.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@integral.errors.count, "error") %> prohibited this integral from being saved:</h2>
+
+      <ul>
+      <% @integral.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :point %><br />
+    <%= f.text_field :point %>
+  </div>
+  <div class="field">
+    <%= f.label :desc %><br />
+    <%= f.text_field :desc %>
+  </div>
+  <div class="field">
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

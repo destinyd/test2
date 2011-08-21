@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  price: 1.5
+  type_id: 1
+  region_id: 1
+  amount: 1
+  user: 
+  finish_at: 2011-04-21 21:01:42
+
+two:
+  price: 1.5
+  type_id: 1
+  region_id: 1
+  amount: 1
+  user: 
+  finish_at: 2011-04-21 21:01:42

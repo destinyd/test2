@@ -1,0 +1,31 @@
+<h1>Listing msgs</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Is read</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @msgs.each do |msg| %>
+  <tr>
+    <td><%= msg.title %></td>
+    <td><%= msg.body %></td>
+    <td><%= msg.from %></td>
+    <td><%= msg.to %></td>
+    <td><%= msg.is_read %></td>
+    <td><%= link_to t('labels.show'), msg %></td>
+    <td><%= link_to 'Edit', edit_msg_path(msg) %></td>
+    <td><%= link_to 'Destroy', msg, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Msg', new_msg_path %>

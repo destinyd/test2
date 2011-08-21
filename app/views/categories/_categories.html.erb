@@ -1,0 +1,40 @@
+<div class="tabs"><%= render "categories/tabs" %></div>
+
+<div class="mt">
+    <div class="l flashAD">
+      <%= render 'flashes/flashes' %>
+    </div>
+    <div class="l articles"><h3>文章</h3><%= render 'articles/articles_li' %></div>
+</div>
+
+<div class="mt">
+  <div class="l in_l">
+    <h3>最低价</h3>
+    <%= render 'prices/prices_li' %>
+  </div>
+  <div class="l in_l"> 
+    <h3>最新商品</h3> 
+    <%= render 'goods/recent'  %>
+  </div>
+  <div class="l in_l"> 
+    <h3>最多关注</h3> 
+    <%= render 'focus/li'  %>
+  </div>
+</div>
+
+<div class="mt">
+    <div class="l in_l"><h3>最新留言</h3><%= render 'comments/comments_li' %></div>
+    <div class="l in_l"><h3>积分排行榜</h3><%= render 'integrals/li' %> </div>
+    <div class="l in_r"><h3>最新会员</h3><%= render :partial => 'shared/user_li' %></div>
+</div>
+<div class="mt">
+  <div class="l in_l">
+    <h3>最新图片</h3>
+    <%= render 'uploads/li' %>
+  </div>
+</div>
+<div class="mt">
+<div class="c friendslinks"><h3>友情链接</h3></div>
+  </div>
+<div class="powerby">版权</div>
+

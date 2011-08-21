@@ -1,0 +1,3 @@
+$('#comments_size').html("<%=@commentable.comments.size%>条评论");
+$('#comments').html('<%= escape_javascript(render(@comments)) %>');
+$('#new_comment')[0].reset();

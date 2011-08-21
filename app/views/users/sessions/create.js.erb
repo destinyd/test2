@@ -1,0 +1,4 @@
+$('.head_login').html('<%= escape_javascript(render :partial => 'shared/is_login') %>');
+$('.user_show').show();
+$('.user_hide').hide();
+<% flash.discard %>;

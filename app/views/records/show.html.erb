@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Target:</b>
+  <%= @record.target %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @record.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_record_path(@record) %> |
+<%= link_to t('labels.back'), records_path %>

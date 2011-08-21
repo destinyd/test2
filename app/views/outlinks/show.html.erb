@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Url:</b>
+  <%= @outlink.url %>
+</p>
+
+<p>
+  <b>Verified:</b>
+  <%= @outlink.verified %>
+</p>
+
+<p>
+  <b>Target:</b>
+  <%= @outlink.target %>
+</p>
+
+
+<%= link_to 'Edit', edit_outlink_path(@outlink) %> |
+<%= link_to t('labels.back'), outlinks_path %>

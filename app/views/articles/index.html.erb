@@ -1,0 +1,9 @@
+<h1><%= "#{@category.name}：" if @category %>文章列表</h1>
+<div class="articles_index">
+<% @articles.each do |article| %>
+      <li><span class="title"><%= link_to article.title, article %></span><span class="date"><%= article.updated_at %></span></li>
+<% end %>
+</div>
+<br /><br /><br />
+
+<%= link_to '你也来发表一篇？', new_article_path if @category %>

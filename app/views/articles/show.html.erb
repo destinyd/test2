@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h2 class="title" style='text-align:center;'>
+  <%= @article.title %>
+</h2>
+<dir class="under_title" style="text-align:center;">
+  作者:<%= @article.user %> 发表于:<%= @article.updated_at %>
+  <%= link_to '编辑', edit_article_path(@article) if @article.user == current_user %>
+  <%= link_to '删除', @article, :confirm => '你确定？', :method => :delete  if @article.user == current_user %>
+</dir>
+
+<p>
+  <%= @article.content %>
+</p>

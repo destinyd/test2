@@ -1,0 +1,20 @@
+<h1>Listing prices</h1>
+
+<table>
+  <tr>
+    <th>Price</th>
+    <th>Type</th>
+    <th>Region</th>
+    <th>Amount</th>
+    <th>User</th>
+    <th>Finish at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<%= render @prices %>
+
+<br />
+
+<%= link_to 'New Price', new_good_price_path %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  point: 1
+  desc: MyString
+  user: 
+
+two:
+  point: 1
+  desc: MyString
+  user: 

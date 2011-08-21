@@ -1,0 +1,60 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+"zh-CN":
+  home:
+    name: "主页"
+  admin:
+    dashboard:
+      pagename: "管理员"
+      name: "Dashboard"
+      model_name: "Model名称"
+      last_used: "最后使用"
+      records: "Records"
+      modify: "修改"
+      add_new: "添加"
+      show: "显示"
+      ago: "以前"
+    history:
+      name: "历史"
+      page_name: "%{name}的历史"
+      no_activity: "No Activity"
+    credentials:
+      log_out: "登出"
+    list:
+      edit_action: "编辑"
+      delete_action: "删除"
+      select_action: "选择"
+      delete_selected: "删除已选"
+      add_new: "添加"
+      search: "搜索"
+      select: "选择%{name}进行修改"
+      show_all: "显示全部"
+    new:
+      basic_info: "基础信息"
+      required: "一引用"
+      optional: "Optional"
+      one_char: "character."
+      many_chars: "characters or fewer."
+      chosen: "Chosen %{name}"
+      select_choice: "Select your choice(s) and click"
+      chose_all: "Choose all"
+      clear_all: "Clear all"
+      save: "Save"
+      save_and_add_another: "Save and add another"
+      save_and_edit: "Save and edit"
+      cancel: "Cancel"
+    delete:
+      flash_confirmation: "%{name} was successfully destroyed"
+      confirmation: "Yes, I'm sure"
+    flash:
+      successful: "%{name} was successfully %{action}"
+      error: "%{name} failed to be %{action}"
+      noaction: "No actions were taken"
+    actions:
+      create: "创建"
+      created: "已创建"
+      update: "更新"
+      updated: "已更新"
+      delete: "删除"
+      deleted: "已删除"

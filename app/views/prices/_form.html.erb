@@ -1,0 +1,44 @@
+    <%= javascript_include_tag "city" %>
+<% @price ||= Price.new %>
+<%= form_for [@good,@price]  do |f| %>
+  <% if @price.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@price.errors.count, "error") %> prohibited this price from being saved:</h2>
+
+      <ul>
+      <% @price.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </div>
+<!--  <div class="field">
+    <%= f.label :type_id,'' %><br />
+    <%= f.select :type_id,
+    Price.types %>
+  </div>-->
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>  
+  <div class="field">  
+    <%= f.label :region_id,"地区" %><br />  
+    <select id="s1" style="width:140px"></select> 
+    <select id="s2"></select> 
+    <select id="s3"></select>   
+  </div>
+    <%= f.hidden_field :region_id,:id => 'region_id' %>
+  <div class="field">
+    <%= f.label :amount,"商品数量(不填为未知)" %><br />
+    <%= f.text_field :amount %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<script>setup() ;</script>

@@ -1,0 +1,29 @@
+<h1>Listing complaints</h1>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Desc</th>
+    <th>User</th>
+    <th>Target</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @complaints.each do |complaint| %>
+  <tr>
+    <td><%= complaint.type_id %></td>
+    <td><%= complaint.desc %></td>
+    <td><%= complaint.user %></td>
+    <td><%= complaint.target %></td>
+    <td><%= link_to t('labels.show'), complaint %></td>
+    <td><%= link_to 'Edit', edit_complaint_path(complaint) %></td>
+    <td><%= link_to 'Destroy', complaint, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Complaint', new_complaint_path %>

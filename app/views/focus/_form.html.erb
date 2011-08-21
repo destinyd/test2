@@ -1,0 +1,12 @@
+<%= form_for @focus do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :focusable_id %><br />
+    <%= f.text_field :focusable_id %>
+  </p>
+  <p>
+    <%= f.label :focusable_type %><br />
+    <%= f.text_field :focusable_type %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

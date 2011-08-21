@@ -1,0 +1,27 @@
+<h1>Listing outlinks</h1>
+
+<table>
+  <tr>
+    <th>Url</th>
+    <th>Verified</th>
+    <th>Target</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @outlinks.each do |outlink| %>
+  <tr>
+    <td><%= outlink.url %></td>
+    <td><%= outlink.verified %></td>
+    <td><%= outlink.target %></td>
+    <td><%= link_to t('labels.show'), outlink %></td>
+    <td><%= link_to 'Edit', edit_outlink_path(outlink) %></td>
+    <td><%= link_to 'Destroy', outlink, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Outlink', new_outlink_path %>

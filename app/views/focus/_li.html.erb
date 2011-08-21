@@ -1,0 +1,3 @@
+<% @focus.each do |focus| %>
+    <li><%= link_to focus.to_most_s,focus.focusable %></li>
+<% end unless @focus.blank? %>

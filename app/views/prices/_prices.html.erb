@@ -1,0 +1,11 @@
+  <% unless @prices.empty? %>   
+    <h2><%= "#{@prices.size}条价格信息" %></h2>  
+    <div id="prices">  
+    <%= render @prices %>
+    <%= will_paginate @prices %>
+    </div>  
+  <% end %> 
+  
+    <h3>留下您看到的价格</h3>  
+ 
+  <%= render :partial => 'prices/form' %>  

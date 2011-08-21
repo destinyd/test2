@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  body: MyString
+  from: 1
+  to: 1
+  is_read: false
+
+two:
+  title: MyString
+  body: MyString
+  from: 1
+  to: 1
+  is_read: false

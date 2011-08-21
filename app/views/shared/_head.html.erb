@@ -1,0 +1,12 @@
+<div class='head_left'>
+ <div class='head_logo'><a href='/' alt='折扣网'><img src='/images/rails.png' alt='折扣网logo' /></a></div>
+ <div class='head_logo'><a href="/">折扣网</a></div>
+ <div class='head_city'>选择城市</div>
+</div>
+<div class='head_login'>
+<% if user_signed_in? %>
+ <%= render :partial =>'shared/is_login' -%>
+<% else %>
+ <%= render :partial =>'shared/login' -%>
+<% end %>
+</div>
