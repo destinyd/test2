@@ -3,7 +3,7 @@ class Focus < ActiveRecord::Base
   belongs_to :focusable, :polymorphic => true
   validates :focusable_id, :presence => true
   validates :focusable_type, :presence => true
-  validates :user_id, :presence => true
+  validates :user_id, :presence => true,:uniqueness => {:scope => [:focusable_id,:focusable_type]}
   
   scope :most, :select => 'focusable_id,focusable_type,count(*) as count',:group => 'focusable_id,focusable_type'
   

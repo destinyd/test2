@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :got_msgs, :class_name => "Msg",:as => :getable
   has_many :articles
   has_many :uploads
+  has_many :focuss
   
   scope :recent ,limit(10).order('id desc')#.select('email,created_at')
   def to_s

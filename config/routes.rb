@@ -1,5 +1,10 @@
 Zhekou::Application.routes.draw do
 
+  resources :userhomes do
+    collection do
+      get :integrals
+    end
+  end
   resources :flashes
 
   resources :articles do

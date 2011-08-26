@@ -1,6 +1,6 @@
 <div class="product_l"
-<a href='javascript:' onclick='show_and_hide(".product_detail",".product_images");'>详细</a>
-<a href='javascript:' onclick='show_and_hide(".product_images",".product_detail");'>图片</a>
+<a href='#' onclick="show_and_hide('.product_detail','.product_images')">详细</a>
+<a href='#' onclick="show_and_hide('.product_images','.product_detail')">图片</a>
 <div class="product_detail">
 <p>
   <b>名称:</b>
@@ -27,7 +27,7 @@
 </div>
 
 <p>
-<%= button_to '关注',good_focus_path(@good) %>
+<%= button_to '关注',good_focus_path(@good),:remote => true %>
 </p>
 <%= render 'comments/comments' %>
   </div>

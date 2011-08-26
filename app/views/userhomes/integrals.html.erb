@@ -1,0 +1,7 @@
+<%= content_tag :ol do %>
+  <% @integrals.each do |integral| %>
+    <%= content_tag :li do%>
+      <%=integral.point%> at <%=integral.created_at %>
+    <% end %>
+  <% end %>
+<% end %>

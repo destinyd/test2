@@ -177,6 +177,7 @@ zh-CN:
 
   activemodel:
     errors:
+      taken: "已经被使用"
       template:
         header:
           one: "有 1 个错误发生导致「%{model}」无法被保存。"
@@ -244,4 +245,6 @@ zh-CN:
     sign_in: 登录
     sign_up: 注册
     forgot?: 忘记密码？
+  notice:
+    success: 成功
 

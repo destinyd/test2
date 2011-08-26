@@ -13,7 +13,11 @@ class FocusController < ApplicationController
   def create
     @focus = current_user.focuss.build#(params[:focus])
     @focus.focusable = @focusable
-    @focus.save
+    unless @focus.save 
+      @errors  = @focus.errors
+      render 'fault' 
+    end
+    
   end
 
   def destroy

@@ -1,6 +1,6 @@
 class PricesController < ApplicationController
-  before_filter :get_good#, :except => [:update,:create]
   before_filter :authenticate_user!,:except =>[:index,:show]
+  before_filter :get_good#, :except => [:update,:create]
   # GET /prices
   # GET /prices.xml
   def index
