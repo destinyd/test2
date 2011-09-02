@@ -1,16 +1,20 @@
 source 'http://rubygems.org'
 #source 'http://gemcutter.org'
 
-gem 'rails', '3.0.10'
+gem 'rails'#, '3.0.10'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #FOR WIN
 #gem 'mysql', :require => 'mysql'  
-gem 'mysql2', '0.2.13'
+gem 'mysql2'#, '0.2.13te3'
+gem 'sass'
+gem 'coffee-script'
+gem 'uglifier'
+
 
 #dd
-gem 'rake','0.8.7'
+gem 'rake'#,'0.8.7'
 gem 'devise' # Devise must be required before RailsAdmin
 gem 'paperclip'
 gem 'mime-types', :require => 'mime/types'
@@ -20,6 +24,7 @@ gem 'jquery-rails'
 gem 'awesome_nested_set'
 
 gem 'geocoder'
+gem "therubyracer", :require => 'v8'
 #gem "mocha", :group => :test
 #gem 'rake','!= 0.9.0'
 
