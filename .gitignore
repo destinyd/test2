@@ -6,3 +6,5 @@ config/database.yml
 *.swp
 Gemfile
 Gemfile.lock
+public/images/items/
+db/schema.rb
