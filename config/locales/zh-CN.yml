@@ -223,8 +223,12 @@ zh-CN:
       good: "商品"
       category: 分类
       flash: 广告图片
+      category: 分类
+
     attributes:
       price:
+        price: 价格
+
   attributes:
     created_at: '创建于'
     updated_at: '修改于'
@@ -238,6 +242,8 @@ zh-CN:
     category: 分类
     password: 密码
     remember_me: 记住我
+    desc: 描述
+    parent_id: 隶属于
 
   labels:
     back: 返回
@@ -247,4 +253,7 @@ zh-CN:
     forgot?: 忘记密码？
   notice:
     success: 成功
-
+  titles:
+    new: "新增%{model}"
+    edit: "修改%{model}"
+    index: "%{model}列表"
