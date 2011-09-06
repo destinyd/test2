@@ -97,7 +97,7 @@ private
   end
 
   def too_soon
-    if 10.minutes.ago > Time.now - @complaintable.complaints.where(:user_id => current_user.id).first.created_at
+    if @complaintable.complaints.where(:user_id => 1,:created_at => 5.minutes.ago..Time.now).count == 0
       true
     else
       redirect_to @complaintable,:notice  => '你对这货有那么多怨气吗？先歇歇，等会再来。'

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  reviewable_id: 1
+  reviewable_type: MyString
+  status: 1
+
+two:
+  reviewable_id: 1
+  reviewable_type: MyString
+  status: 1

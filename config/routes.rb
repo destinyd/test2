@@ -1,5 +1,7 @@
 Zhekou::Application.routes.draw do
 
+  resources :reviews
+
   resources :userhomes do
     collection do
       get :integrals

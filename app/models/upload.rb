@@ -4,6 +4,9 @@ class Upload < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif']
   
   acts_as_commentable
+
+  has_many :reviews, :as => :reviewable
+  scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
  
   has_attached_file :image, 
                      :styles => { :original => '250x250>',  :small => '120x120>' }, 

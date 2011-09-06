@@ -1,0 +1,147 @@
+*{
+  padding:0;
+  margin:0;
+  line-height:24px;
+}
+li{
+  list-style:none;
+}
+hr{
+  width:90%;
+}
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  margin:0;
+  padding:0;
+  background: url("/images/body_bg.gif") repeat-x scroll 0 0 transparent;
+}
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px; }
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px; }
+
+a {
+  color: #000;
+  text-decoration: none;
+  &:visited {
+    color: #666; }
+  &:hover {
+    color: #fff;
+    background-color: #000; } }
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px; } }
+
+#notice {
+  color: green; }
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table; }
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff; }
+  ul li {
+    font-size: 12px;
+    list-style: square; } }
+#container{
+  /*width:90%;*/
+  width:1200px;
+  margin:auto;
+  /*background-color:#f0f0f0;*/
+  position:relative;
+  margin-top:20px;
+}
+.l{
+    float:left;
+}
+.r{ float:right;}
+.m{ text-align:center;}
+
+#head{
+  background-color: #F6F6F6;
+  height:24px;
+  line-height:24px;
+  overflow:hidden;
+}
+.head_left{
+    div{
+     float:left;
+     margin-left:10px;
+     width:80px;
+    }
+}
+.head_login{
+ float:right;
+ width:480px;
+ text-align:right;
+ margin-right:20px;
+}
+.input{
+    width:80px;
+}
+.user_left{
+    float:left;
+    width:180px;
+    overflow:hidden;
+}
+.user_right{
+    width:980px;
+    float:left;
+}
+.text_area{
+    width:80%;
+    height:250px;
+}
+
+h3{
+  font-size:13px;
+  padding-left:10px;
+  background: url("/images/h3_bg.jpg") repeat-x scroll 0 0 transparent;
+}
+.module{
+    margin-bottom:20px;
+    border:1px solid #E3E3E3;
+    min-height:100px;
+  .module_content{
+        padding-left:10px;
+  }
+  ul{
+        margin-left:10px;
+  }
+}
+.p45{
+  float:left;
+  width:40%;
+  margin-left: 5%;
+  margin-bottom: 15px;
+  min-height:300px;
+}
+.p90{
+  width:90%;
+}
