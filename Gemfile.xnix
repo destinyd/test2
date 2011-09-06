@@ -8,7 +8,7 @@ gem 'rails'#, '3.0.10'
 #FOR WIN
 #gem 'mysql', :require => 'mysql'  
 gem 'mysql2'#, '0.2.13te3'
-gem 'sass'
+gem 'sass-rails'
 gem 'coffee-script'
 gem 'uglifier'
 

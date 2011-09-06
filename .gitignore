@@ -9,3 +9,4 @@ Gemfile.lock
 public/images/items/
 db/schema.rb
 .idea/*
+.sass-cache/

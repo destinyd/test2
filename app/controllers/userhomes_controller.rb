@@ -5,5 +5,6 @@ class UserhomesController < ApplicationController
 
   def integrals
     @integrals=current_user.integrals
+    @integrals_count = @integrals.sum(:point)
   end
 end

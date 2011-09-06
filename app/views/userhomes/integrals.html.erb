@@ -1,7 +1,8 @@
+您总共有<span style="color:red"><%=@integrals_count%></span>点积分
 <%= content_tag :ol do %>
   <% @integrals.each do |integral| %>
     <%= content_tag :li do%>
-      <%=integral.point%> at <%=integral.created_at %>
+      获得<span style="color:red"><%=integral.point%></span>积分 于 <%=integral.created_at %>
     <% end %>
   <% end %>
 <% end %>

@@ -6,6 +6,8 @@ class Price < ActiveRecord::Base
   validates :type_id, :presence => true
   validates :price, :presence => true
 
+  has_many :complaints, :as => :complaintable
+
   acts_as_commentable
 
   default_scope order('price asc,finish_at desc,created_at desc')

@@ -11,6 +11,9 @@ class Article < ActiveRecord::Base
   end
   has_many :integrals, :as => :integralable
 
+  has_many :complaints, :as => :complaintable
+  accepts_nested_attributes_for :complaints
+
   def valid
     return if self.is_valid
     self.update_attribute(:is_valid, true)

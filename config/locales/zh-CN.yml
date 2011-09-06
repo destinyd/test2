@@ -224,6 +224,8 @@ zh-CN:
       category: 分类
       flash: 广告图片
       category: 分类
+      article: 文章
+      integral: 积分
 
     attributes:
       price:
@@ -244,6 +246,8 @@ zh-CN:
     remember_me: 记住我
     desc: 描述
     parent_id: 隶属于
+    title: 标题
+    content: 内容
 
   labels:
     back: 返回
@@ -251,6 +255,9 @@ zh-CN:
     sign_in: 登录
     sign_up: 注册
     forgot?: 忘记密码？
+    sure?: 你确定
+    edit: 修改
+    del: 删除
   notice:
     success: 成功
   titles:

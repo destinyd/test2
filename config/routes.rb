@@ -9,13 +9,19 @@ Zhekou::Application.routes.draw do
 
   resources :articles do
     resources :comments
+    resources :complaints
   end
+
+  resources :complaints
 
   resources :focus
 
   resources :goods do
     resources :comments
     resources :uploads
+    resources :complaints
+    resources :prices
+    resources :focus
   end
 
   get "home/index"
@@ -35,15 +41,11 @@ Zhekou::Application.routes.draw do
 
   resources :msgs
 
-  resources :complaints
+  #resources :complaints
 
-  resources :goods do
-    resources :prices
-    resources :focus
-  end
-  
     resources :prices do
       resources :comments
+      resources :complaints
     end
 
   resources :categories do
@@ -52,14 +54,7 @@ Zhekou::Application.routes.draw do
     resources :articles
   end
 
-  resources :prices
-  
 
-#  resources :integrals
-
-#  resources :users do
-#    resources :integrals
-#  end
   
   root :to => "home#index"
 

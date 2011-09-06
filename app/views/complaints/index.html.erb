@@ -17,13 +17,11 @@
     <td><%= complaint.desc %></td>
     <td><%= complaint.user %></td>
     <td><%= complaint.target %></td>
-    <td><%= link_to t('labels.show'), complaint %></td>
-    <td><%= link_to 'Edit', edit_complaint_path(complaint) %></td>
-    <td><%= link_to 'Destroy', complaint, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to t('labels.show'), [@complaintable,complaint] %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Complaint', new_complaint_path %>
+<%#= link_to t('labels.new'), new_complaint_path %>

@@ -8,6 +8,8 @@ class Good < ActiveRecord::Base
   has_many :uploads, :as => :uploadable
   has_many :focuss, :as => :focusable
 
+  has_many :complaints, :as => :complaintable
+
   validates :name, :presence => true
   
   acts_as_commentable
