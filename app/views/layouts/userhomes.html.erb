@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title><%= content_for?(:title) ? yield(:title) : "折扣网" %></title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= yield(:head) %>
+  </head>
+  <body>
+	<div id="head"><%= render :partial => 'shared/head' %></div>
+    <div id="container">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <% end %>
+      <%= content_tag :h1, yield(:title) if show_title? %>
+      <div style="height:500px">
+        <div class="l userhome_left" style='width:240px;height:300px;display:block'><%=render 'left' %></div>
+        <div class="l userhome_right">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+  if('<%=current_user.to_s%>' != '')
+    $(".user_show").show();
+  else
+    $(".user_hide").show();
+  </script>
+</html>
