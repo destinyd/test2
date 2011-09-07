@@ -10,7 +10,7 @@ class Article < ActiveRecord::Base
     self.title
   end
   has_many :integrals, :as => :integralable
-  has_many :complaints, :as => :complaintable
+#  has_many :complaints, :as => :complaintable
 
   has_many :reviews, :as => :reviewable
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)

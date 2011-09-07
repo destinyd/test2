@@ -4,8 +4,12 @@
 <div class="under_title" style="text-align:center;">
   作者:<%= @article.user %> 发表于:<%= @article.updated_at %>
   <%= link_to t('labals.edit'), edit_article_path(@article) if @article.user == current_user %>
-  <%= link_to t('labels.del'), @article, :confirm => t('labels.sure?'), :method => :delete  if @article.user == current_user %>
-  <%= link_to '投诉', new_article_complaint_path(@article) if current_user and @article.user != current_user %>
+  <% if @article.user == current_user  %>
+    <%= link_to t('labels.del'), @article, :confirm => t('labels.sure?'), :method => :delete %>
+  <% else %>
+    <%= link_to '+1', up_article_reviews_path(@article) %>
+    <%= link_to '投诉', new_article_review_path(@article)%>
+  <% end %>
 </div>
 
 <p>

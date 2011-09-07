@@ -12,9 +12,14 @@ Zhekou::Application.routes.draw do
   resources :articles do
     resources :comments
     resources :complaints
+    resources :reviews do
+      collection do
+        get :up
+      end
+    end
   end
 
-  resources :complaints
+  #resources :complaints
 
   resources :focus
 
@@ -22,6 +27,7 @@ Zhekou::Application.routes.draw do
     resources :comments
     resources :uploads
     resources :complaints
+    resources :reviews
     resources :prices
     resources :focus
   end
@@ -45,10 +51,11 @@ Zhekou::Application.routes.draw do
 
   #resources :complaints
 
-    resources :prices do
-      resources :comments
-      resources :complaints
-    end
+  resources :prices do
+    resources :comments
+    resources :complaints
+    resources :reviews
+  end
 
   resources :categories do
     resources :goods
