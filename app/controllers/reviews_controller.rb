@@ -1,5 +1,5 @@
 # coding: utf-8
-class @reviewablesController < ApplicationController
+class ReviewsController < ApplicationController
   before_filter :authenticate_user!#, :only => [:create]
   before_filter :find_reviewable
   before_filter :too_soon , :only =>[:new,:create]
@@ -89,9 +89,10 @@ class @reviewablesController < ApplicationController
   # POST /reviews.json
   def up
     @review = @reviewable.reviews.build(params[:review])
+    
 
     respond_to do |format|
-      if @review.save
+      if @review.up  @reviewable
         format.html { redirect_to @reviewable, notice: '@reviewable was successfully created.' }
         format.json { render json: @review, status: :created, location: @review }
       else
@@ -112,7 +113,7 @@ private
   end
 
   def too_soon
-    if @reviewable.reviews.where(:user_id => 1,:created_at => 5.minutes.ago..Time.now).count == 0
+    if @reviewable.reviews.where(:user_id => current_user,:created_at => 5.minutes.ago..Time.now).count == 0
       true
     else
       redirect_to @complaintable,:notice  => '你对这货有那么多怨气吗？先歇歇，等会再来。'
