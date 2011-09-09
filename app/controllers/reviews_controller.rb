@@ -2,7 +2,7 @@
 class ReviewsController < ApplicationController
   before_filter :authenticate_user!#, :only => [:create]
   before_filter :find_reviewable
-  before_filter :too_soon , :only =>[:new,:create]
+  before_filter :too_soon , :only =>[:new,:create,:up]
   # GET /reviews
   # GET /reviews.json
   def index
@@ -89,10 +89,9 @@ class ReviewsController < ApplicationController
   # POST /reviews.json
   def up
     @review = @reviewable.reviews.build(params[:review])
-    
 
     respond_to do |format|
-      if @review.up  @reviewable
+      if @review.up current_user
         format.html { redirect_to @reviewable, notice: '@reviewable was successfully created.' }
         format.json { render json: @review, status: :created, location: @review }
       else
@@ -116,7 +115,7 @@ private
     if @reviewable.reviews.where(:user_id => current_user,:created_at => 5.minutes.ago..Time.now).count == 0
       true
     else
-      redirect_to @complaintable,:notice  => '你对这货有那么多怨气吗？先歇歇，等会再来。'
+      redirect_to @reviewable,:notice  => '先歇歇，等会再来。'
       false
     end
   end

@@ -45,13 +45,11 @@ class UploadsController < ApplicationController
     @upload = current_user.uploads.new(params[:upload])
     @upload.uploadable  = @uploadable
 
-    respond_to do |format|
       if @upload.save
-        format.html { redirect_to(@uploadable, :notice => 'Upload was successfully created.') }
+        redirect_to(@uploadable, :notice => 'Upload was successfully created.') 
       else
-        format.html { render :action => "new" }
+        render :action => "new"
       end
-    end
   end
 
   # PUT /uploads/1

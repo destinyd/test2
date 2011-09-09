@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.xml
   def index
-    @articles = @category.blank? ? Article.all : @category.articles
+    @articles = @category.blank? ? Article.truth :  @category.articles.truth
 
     respond_to do |format|
       format.html # index.html.erb

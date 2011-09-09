@@ -10,18 +10,9 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :reviewable_id %><br />
-    <%= f.number_field :reviewable_id %>
-  </div>
-  <div class="field">
-    <%= f.label :reviewable_type %><br />
-    <%= f.text_field :reviewable_type %>
-  </div>
   <div class="field">
     <%= f.label :status %><br />
-    <%= f.number_field :status %>
+    <%= f.select :status,Review.selects %>
   </div>
   <div class="actions">
     <%= f.submit %>

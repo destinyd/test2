@@ -3,7 +3,7 @@ class Article < ActiveRecord::Base
   belongs_to :category
   acts_as_commentable
 
-  default_scope order('is_top desc,id desc')
+  default_scope order('articles.is_top desc,articles.id desc')
   scope :recent,limit(10)
 
   def to_s
@@ -14,6 +14,9 @@ class Article < ActiveRecord::Base
 
   has_many :reviews, :as => :reviewable
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
+  scope :review_low, Filter.new(self).extend(ReviewFilter)
+  scope :truth,review_low(Review.truth_point)
+ 
 
 #  accepts_nested_attributes_for :complaints
 

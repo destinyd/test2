@@ -6,18 +6,26 @@ module ToCreateFilter
   def call(*args)
     start_time = args.shift
     end_time = args.shift
+    super(*args)
     klass.where(active:1).where(
       :created_at => start_time..end_time
     )
-    super(*args)
   end
 end
 
 module ReviewTypeFilter
   def call(*args)
     status = args.shift
-    klass.joins(:reviews).
-      where('reviews.status' => status )
     super(*args)
+    result = klass.scoped.joins(:reviews).
+      where('reviews.status' => status )
   end
+end
+
+module ReviewFilter
+  def call(*args)
+    low = args.shift
+    super(*args)
+    d = klass.scoped.joins(:reviews).having("sum(reviews.status) >= ?", low)
   end
+end
