@@ -1,0 +1,4 @@
+<% if @reviewable.user != current_user %>
+  <%= link_to '+1', reviewable_path(@reviewable.class.to_s.pluralize.downcase,@reviewable.id, :action => :up) %>
+  <%= link_to '更多的评价', reviewable_path(@reviewable.class.to_s.pluralize.downcase,@reviewable.id, :action => :new) %>
+<% end %>
