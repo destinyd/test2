@@ -27,7 +27,8 @@
 </div>
 
 <p>
-<%= button_to '关注',good_focus_path(@good),:remote => true %>
+  <%= button_to '关注',good_focus_path(@good),:remote => true %>
+  <%= render 'reviews/links' %>
 </p>
 <%= render 'comments/comments' %>
   </div>

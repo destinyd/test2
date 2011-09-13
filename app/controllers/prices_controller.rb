@@ -17,6 +17,7 @@ class PricesController < ApplicationController
   def show
     @price = @good.prices.find(params[:id])
     @commentable = @price
+    @reviewable = @price
 
     respond_to do |format|
       format.html # show.html.erb

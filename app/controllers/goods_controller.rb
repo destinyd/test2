@@ -21,6 +21,7 @@ class GoodsController < ApplicationController
     @uploads  = @good.uploads
     
     @commentable = @good
+    @reviewable = @good
 
     respond_to do |format|
       format.html # show.html.erb

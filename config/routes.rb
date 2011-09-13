@@ -27,7 +27,11 @@ Zhekou::Application.routes.draw do
     resources :comments
     resources :uploads
     resources :complaints
-    resources :reviews
+    resources :reviews do
+      collection do
+        get :up
+      end
+    end
     resources :prices
     resources :focus
   end
@@ -54,7 +58,11 @@ Zhekou::Application.routes.draw do
   resources :prices do
     resources :comments
     resources :complaints
-    resources :reviews
+    resources :reviews do
+      collection do
+        get :up
+      end
+    end
   end
 
   resources :categories do
@@ -66,6 +74,7 @@ Zhekou::Application.routes.draw do
 
   
   root :to => "home#index"
+  match "/:reviewable_type/:reviewable_id/reviews/:action" => "reviews#:action",:as => 'reviewable'
 
 #  match "/users/sign_out(.:format)",:controller => 'users/sessions',:action => :destroy,:as => 'destroy_user_session'
   

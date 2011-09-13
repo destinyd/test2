@@ -1,12 +1,16 @@
 # coding: utf-8
 class Price < ActiveRecord::Base
+  STATUS_LOW = 5
   belongs_to :user
   belongs_to :good
   has_many :outlinks, :as => :outlinkable
   validates :type_id, :presence => true
   validates :price, :presence => true
 
-#  has_many :complaints, :as => :complaintable
+  has_many :reviews, :as => :reviewable
+  scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
+  scope :review_low, Filter.new(self).extend(ReviewFilter)
+  scope :truth,review_low(Review.truth_point)
 
   acts_as_commentable
 
@@ -36,6 +40,16 @@ class Price < ActiveRecord::Base
 
   def type_id=(value)
     write_attribute(:type_id, TYPE.index(value))
+  end
+
+  def price
+    @status = self.reviews.sum(:status)
+    if @status < STATUS_LOW
+      read_attribute(:price).to_s + '(待审)'
+    else
+      read_attribute(:price)
+    end
+
   end
 
   def self.types

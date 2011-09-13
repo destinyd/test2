@@ -16,14 +16,14 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1
   # GET /reviews/1.json
-  def show
-    @review = @reviewable.reviews.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @review }
-    end
-  end
+#  def show
+#    @review = @reviewable.reviews.find(params[:id])
+#
+#    respond_to do |format|
+#      format.html # show.html.erb
+#      format.json { render json: @review }
+#    end
+#  end
 
   # GET /reviews/new
   # GET /reviews/new.json
@@ -48,7 +48,7 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @reviewable, notice: '@reviewable was successfully created.' }
+        format.html { redirect_to :back, notice: '@reviewable was successfully created.' }
         format.json { render json: @review, status: :created, location: @review }
       else
         format.html { render action: "new" }
@@ -92,7 +92,7 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.up current_user
-        format.html { redirect_to @reviewable, notice: '@reviewable was successfully created.' }
+        format.html { redirect_to :back, notice: '@reviewable was successfully created.' }
         format.json { render json: @review, status: :created, location: @review }
       else
         format.html { render action: "new" }

@@ -1,4 +1,6 @@
+# coding: utf-8
 class Good < ActiveRecord::Base
+  STATUS_LOW = 2
   belongs_to :user
   belongs_to :category
   has_many :prices
@@ -43,7 +45,12 @@ class Good < ActiveRecord::Base
   end
 
   def to_s
-    self.name
+    @status = self.reviews.sum(:status)
+    if @status < STATUS_LOW
+      self.name + '(待审)'
+    else
+      self.name
+    end
   end
 
   has_many :integrals, :as => :integralable

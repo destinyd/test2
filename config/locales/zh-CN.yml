@@ -226,6 +226,7 @@ zh-CN:
       category: 分类
       article: 文章
       integral: 积分
+      review: 评价
 
     attributes:
       price:
@@ -248,6 +249,7 @@ zh-CN:
     parent_id: 隶属于
     title: 标题
     content: 内容
+    status: 评价
 
   labels:
     back: 返回

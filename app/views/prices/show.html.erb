@@ -5,29 +5,30 @@
 </p>
 
 <p>
-  <b>Type:</b>
+  <b><%= label :price,:type_id%>:</b>
   <%= @price.type_id %>
 </p>
 
 <p>
-  <b>Region:</b>
+  <b><%= label :price,:region_id%>:</b>
   <%= @price.region_id %>
 </p>
 
 <p>
-  <b>Amount:</b>
+  <b><%= label :price,:amount%>:</b>
   <%= @price.amount %>
 </p>
 
 <p>
-  <b>User:</b>
+  <b><%= label :price,:user%>:</b>
   <%= @price.user %>
 </p>
 
 <p>
-  <b>Finish at:</b>
+  <b><%= label :price,:finish_at%>:</b>
   <%= @price.finish_at %>
 </p>
+<%= render 'reviews/links' %>
 <%= render 'comments/comments' %>
 
 
