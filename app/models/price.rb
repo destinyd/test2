@@ -42,7 +42,7 @@ class Price < ActiveRecord::Base
     write_attribute(:type_id, TYPE.index(value))
   end
 
-  def price
+  def human_price
     @status = self.reviews.sum(:status)
     if @status < STATUS_LOW
       read_attribute(:price).to_s + '(待审)'

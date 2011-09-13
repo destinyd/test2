@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.xml
   def index
-    @categories = Category.roots.valids
+    @categories = Category.roots.valid
 
     respond_to do |format|
       format.html # index.html.erb

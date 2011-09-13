@@ -1,4 +1,4 @@
-<h1>Listing goods</h1>
+<h1><%= action_show %></h1>
 
 <%= render 'goods/search' %>
 <div id="goods">
@@ -7,4 +7,4 @@
 
 <br />
 
-<%= link_to 'New Good', new_category_good_path(@category) %>
+<%= link_to t('labels.new'), new_category_good_path(@category) %>

@@ -250,6 +250,7 @@ zh-CN:
     title: 标题
     content: 内容
     status: 评价
+    comment: 你的评论
 
   labels:
     back: 返回
@@ -260,6 +261,7 @@ zh-CN:
     sure?: 你确定
     edit: 修改
     del: 删除
+    new: 添加
   notice:
     success: 成功
   titles:

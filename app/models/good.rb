@@ -40,7 +40,7 @@ class Good < ActiveRecord::Base
 
   def cheapest
     @cheapest = self.prices.min{|price| price.price}
-    checapest_price = @cheapest.try(:price)
+    checapest_price = @cheapest.try(:human_price)
     checapest_price ||= "none"
   end
 
