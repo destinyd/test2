@@ -251,6 +251,11 @@ zh-CN:
     content: 内容
     status: 评价
     comment: 你的评论
+    type: 类型
+    region_id: 地区
+    amount: 数量
+    user: 提交者
+
 
   labels:
     back: 返回

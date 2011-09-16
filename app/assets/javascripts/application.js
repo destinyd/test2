@@ -39,6 +39,12 @@ function ajaxForm(formdom,action){
         return false;
       });
 
+      $('#review_status').change(
+        function(){
+          $('#new_review').submit();
+        }
+      )
+
       ajaxForm($('#new_comment'));
 
     })

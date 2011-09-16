@@ -8,6 +8,7 @@ class Review < ActiveRecord::Base
   belongs_to :user
   #validates :desc, :presence => true
   validates :status, :presence => true
+  scope :reviewed_by, proc{|user| where(:user_id => user)}
 
   def self.types
     STATUS_TYPES
