@@ -45,14 +45,15 @@ class ReviewsController < ApplicationController
   # POST /reviews.json
   def create
     @review = @reviewable.reviews.build(params[:review])
+    @review.user = current_user
 
     respond_to do |format|
       if @review.save
         format.html { redirect_to :back, notice: '@reviewable was successfully created.' }
-        format.json { render json: @review, status: :created, location: @review }
+        format.js 
       else
-        format.html { render action: "new" }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
+        #format.html { render action: "new" }
+        format.js {render 'fault'}
       end
     end
   end
@@ -84,22 +85,7 @@ class ReviewsController < ApplicationController
 #      format.json { head :ok }
 #    end
 #  end
-  #
-  # POST /reviews
-  # POST /reviews.json
-  def up
-    @review = @reviewable.reviews.build(params[:review])
 
-    respond_to do |format|
-      if @review.up current_user
-        format.html { redirect_to :back, notice: '@reviewable was successfully created.' }
-        format.json { render json: @review, status: :created, location: @review }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 private
 
   def find_reviewable
@@ -112,10 +98,14 @@ private
   end
 
   def too_soon
-    if @reviewable.reviews.where(:user_id => current_user,:created_at => 5.minutes.ago..Time.now).count == 0
+    if @reviewable.reviews.where(:user_id => current_user).count == 0
       true
     else
-      redirect_to @reviewable,:notice  => '先歇歇，等会再来。'
+      @error = '你已经评价过了。'
+    respond_to do |format|
+      format.js {render 'fault.js'}
+      format.html {redirect_to @reviewable,:notice  => '先歇歇，等会再来。'}
+    end
       false
     end
   end

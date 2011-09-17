@@ -38,14 +38,10 @@ function ajaxForm(formdom,action){
         $.get(this.action, $(this).serialize(), null, 'script');
         return false;
       });
-
-      $('#review_status').change(
-        function(){
-          $('#new_review').submit();
-        }
-      )
-
       ajaxForm($('#new_comment'));
 
     })
-
+function send_review(){
+  $('#new_review').submit();
+  $('#review_status').attr('enable',false);
+}
