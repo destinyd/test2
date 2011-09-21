@@ -9,33 +9,30 @@
 </p>
 
 <p>
-  <b><%= label :price,:region_id%>:</b>
-  <%= @price.region_id %>
-</p>
-
-<p>
   <b><%= label :price,:address%>:</b>
   <%= @price.address %>
 </p>
 
 <p>
   <b><%= label :price,:amount%>:</b>
-  <%= @price.amount %>
+  <%= @price.human_amount %>
+</p>
+
+<p>
+  <b><%= label :price,:finish_at%>:</b>
+  <%= @price.human_finish_at %>
 </p>
 
 <p>
   <b><%= label :price,:user%>:</b>
   <%= @price.user %>
 </p>
-
-<p>
-  <b><%= label :price,:finish_at%>:</b>
-  <%= @price.finish_at %>
-</p>
-<h3>附近价格</h3>
-<p>
-<% @price.near_prices.each do |price| %>
-  <%= link_to price.human_price,[@good,price] %><%= price.address %>
+<% unless @price.near_prices.blank? %>
+  <h3>附近价格</h3>
+  <p>
+  <% @price.near_prices.each do |price| %>
+    <%= link_to price.human_price,[@good,price] %><%= price.address %>
+  <% end %>
 <% end %>
 </p>
 <%= render 'reviews/links' %>

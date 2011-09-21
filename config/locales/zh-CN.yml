@@ -227,6 +227,7 @@ zh-CN:
       article: 文章
       integral: 积分
       review: 评价
+      upload: 上传文件
 
     attributes:
       price:

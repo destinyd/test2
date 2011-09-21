@@ -24,11 +24,11 @@ class Price < ActiveRecord::Base
   #type [0:userlocal1day 1:userurl1day 2:团购 3:拍卖 10:商家普价 11:上架优惠 12:商家限量]
 
   TYPE = {
-  1=>'本地单价',
-  2=>'网络单价',
-  10=>'团购价',
-  20=>'批发价',
-  50=>'成本价',
+  0=>'本地单价',
+  11=>'网络单价',
+  21=>'团购价',
+  31=>'批发价',
+  51=>'成本价',
   101=>'商家发布价',
   102=>'商家优惠价',
   103=>'商家限量价'
@@ -52,7 +52,16 @@ class Price < ActiveRecord::Base
     else
       read_attribute(:price)
     end
+  end
 
+  def human_amount
+    return '不限量' if self.amount.nil?
+    self.amount 
+  end
+
+  def human_finish_at
+    return '不限时' if self.finish_at.nil?
+    self.finish_at
   end
 
   def self.types
@@ -66,7 +75,8 @@ class Price < ActiveRecord::Base
   end
 
   def near_prices long = 2
-    self.nearbys(long).where(:good_id => self.good_id).limit(10)
+    @nears = self.nearbys(long)
+    @nears.blank? ? @nears : @nears.where(:good_id => self.good_id).limit(10)
   end
 
 end
