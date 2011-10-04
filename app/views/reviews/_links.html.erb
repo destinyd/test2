@@ -1,6 +1,6 @@
 <% if @reviewable.user != current_user and @reviewable.reviews.reviewed_by(current_user).blank?%>
-<%= form_for [@reviewable,Review.new],:remote => true do |f| %>
-  <%= f.label :status %>
-  <%= f.select :status,Review.selects,{ :include_blank => true },{:onchange =>'send_review()'} %>
+  <%= form_for [@reviewable,Review.new],:remote => true do |f| %>
+    <%= f.label :status %>
+    <%= f.select :status,Review.selects,{ :include_blank => '请选择你的评价' },{:onchange =>'send_review()'} %>
   <% end %>
 <% end %>

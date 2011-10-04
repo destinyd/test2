@@ -1,0 +1,5 @@
+var obj_sign_in = $('#sign_in');
+if(obj_sign_in.length <= 0)
+  $('body').append('<%=j(render 'users/sessions/new') %>');
+var obj_sign_in = $('#sign_in');
+obj_sign_in.dialog();

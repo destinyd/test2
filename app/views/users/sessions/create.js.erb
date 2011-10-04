@@ -1,4 +1,6 @@
 $('.head_login').html('<%= escape_javascript(render :partial => 'shared/is_login') %>');
 $('.user_show').show();
 $('.user_hide').hide();
+var obj_sign_in = $('#sign_in');
+obj_sign_in.remove();
 <% flash.discard %>;
