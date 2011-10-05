@@ -9,8 +9,8 @@
 //= require jquery-ui
 //= require_tree .
 function show_and_hide(show,hide){
-  $(show).show();
   $(hide).hide();
+  $(show).show();
   return false;
 }
 function ajaxForm(formdom,action){

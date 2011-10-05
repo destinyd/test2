@@ -1,5 +1,13 @@
 Zhekou::Application.routes.draw do
 
+  get "attrs/index"
+
+  get "attrs/show"
+
+  get "attrs/create"
+
+  get "attrs/review"
+
   resources :reviews
 
   resources :userhomes do
@@ -34,6 +42,7 @@ Zhekou::Application.routes.draw do
     end
     resources :prices
     resources :focus
+    resources :attrs,:only => [:index,:show,:create,:review]
   end
 
   get "home/index"

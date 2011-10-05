@@ -136,7 +136,7 @@ a {
     float:left;
     width:35%
 }
-.product_images{
+.product_images,.product_attrs{
   display:none;
 }
 .input{

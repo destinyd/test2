@@ -1,7 +1,8 @@
 <div class="product_l">
-<a href='javascript:' onclick="show_and_hide('.product_detail','.product_images')">详细</a>
-<a href='javascript:' onclick="show_and_hide('.product_images','.product_detail')">图片</a>
-<div class="product_detail">
+<a href='javascript:' onclick="show_and_hide('.product_detail','.goods_div')">详细</a>
+<a href='javascript:' onclick="show_and_hide('.product_images','.goods_div')">图片</a>
+<a id="a_attrs" href='javascript:' onclick="get_attrs(<%=@good.id%>);show_and_hide('.product_attrs','.goods_div')">属性</a>
+<div class="product_detail goods_div">
 <p>
   <b>名称:</b>
   <%= @good.name %>
@@ -22,9 +23,16 @@
   <%= @good.category %>
 </p>
 </div>
-<div class="product_images">
+<div class="product_images goods_div">
   <%= render  'uploads/uploads',:locals => {:commentable  => @good} %>
 </div>
+<div class="product_attrs goods_div">
+  <h3>属性:</h3>
+  <div id='attrs'>
+  </div>
+  <%= link_to '新建',good_attrs_path(@good) %>
+</div>
+
 
 <p>
   <%= button_to '关注',good_focus_path(@good),:remote => true %>
