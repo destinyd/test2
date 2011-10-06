@@ -8,10 +8,16 @@ class AttrsController < ApplicationController
     render :json => @attrs
   end
 
+  def new
+    @attr = @able.attrs.build
+  end
+
   def show
   end
 
   def create
+    @attr= @able.attrs.build(params[:attr])
+    @attr.save
   end
 
   def review

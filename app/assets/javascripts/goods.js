@@ -11,6 +11,3 @@ function get_attrs(id){
     });
   });
 }
-function new_attr(){
-  var a;
-}

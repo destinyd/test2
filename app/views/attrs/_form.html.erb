@@ -1,0 +1,4 @@
+<%= form_for [@able,@attr],:remote => true do |f| %>
+<li id='<%= @attr.hash %>'>    <%= f.text_field :name %>:<%= f.text_field :value %><%= f.submit %><a href='javascript:' onclick="$('#<%= @attr.hash %>').parent.remove()">X</a></li>
+<% end -%>
+

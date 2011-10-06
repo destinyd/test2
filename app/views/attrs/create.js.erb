@@ -1,0 +1,5 @@
+$('.new_attr').remove();
+<% if @attr.supported %>
+$('#attrs').append('<li id="attr_<%=j h @attr.name%>"><%=j h @attr.name%>:<%=j h @attr.value%></li>');
+<% end -%>
+alert('添加成功');

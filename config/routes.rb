@@ -42,7 +42,7 @@ Zhekou::Application.routes.draw do
     end
     resources :prices
     resources :focus
-    resources :attrs,:only => [:index,:show,:create,:review]
+    resources :attrs,:only => [:index,:show,:create,:review,:new]
   end
 
   get "home/index"
