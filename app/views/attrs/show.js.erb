@@ -1,0 +1,8 @@
+<% unless @attrs.blank? %>
+  $('body').append('<div class="attrs_values"><%=j render @attrs,:locals => {:attrs => @attrs}%></div>')
+  $('.attrs_values').dialog({
+     close: function(ev, ui) { 
+        $(this).remove(); 
+    }
+  });
+<%end%>

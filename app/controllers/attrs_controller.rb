@@ -13,6 +13,7 @@ class AttrsController < ApplicationController
   end
 
   def show
+    @attrs = @able.attrs.where(:name => params[:id])
   end
 
   def create
