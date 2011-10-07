@@ -1,14 +1,9 @@
 Zhekou::Application.routes.draw do
 
-  get "attrs/index"
-
-  get "attrs/show"
-
-  get "attrs/create"
-
-  get "attrs/review"
-
   resources :reviews
+  resources :attrs,:only => [:new] do
+    resources :reviews
+  end
 
   resources :userhomes do
     collection do
@@ -20,11 +15,7 @@ Zhekou::Application.routes.draw do
   resources :articles do
     resources :comments
     resources :complaints
-    resources :reviews do
-      collection do
-        get :up
-      end
-    end
+    resources :reviews
   end
 
   #resources :complaints
@@ -35,14 +26,12 @@ Zhekou::Application.routes.draw do
     resources :comments
     resources :uploads
     resources :complaints
-    resources :reviews do
-      collection do
-        get :up
-      end
-    end
+    resources :reviews
     resources :prices
     resources :focus
-    resources :attrs,:only => [:index,:show,:create,:review,:new]
+    resources :attrs,:only => [:index,:show,:create,:new] do
+      resources :reviews
+    end
   end
 
   get "home/index"
@@ -67,11 +56,7 @@ Zhekou::Application.routes.draw do
   resources :prices do
     resources :comments
     resources :complaints
-    resources :reviews do
-      collection do
-        get :up
-      end
-    end
+    resources :reviews
   end
 
   resources :categories do

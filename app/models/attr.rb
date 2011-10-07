@@ -6,6 +6,8 @@ class Attr < ActiveRecord::Base
   validates :attrable_type,:presence => true
   scope :supported,where(:supported => true)
 
+  has_many :reviews, :as => :reviewable
+
   before_create  :supported_first
   private
   def supported_first
