@@ -18,6 +18,7 @@ class Good < ActiveRecord::Base
   validates :name, :presence => true
   
   acts_as_commentable
+  acts_as_taggable
 
   default_scope order('id desc')#.includes(:prices) #
 
