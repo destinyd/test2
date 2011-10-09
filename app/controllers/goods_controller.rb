@@ -1,4 +1,5 @@
 class GoodsController < ApplicationController
+  before_filter :authenticate_user!, :only => [:new,:create,:edit,:update,:destroy]
   helper_method :sort_column, :sort_direction
   
   # GET /goods
@@ -33,6 +34,7 @@ class GoodsController < ApplicationController
   # GET /goods/new.xml
   def new
     @good = current_user.goods.build
+    @good.outlinks.build
 
     respond_to do |format|
       format.html # new.html.erb

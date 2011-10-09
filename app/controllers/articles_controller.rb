@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-#  before_filter :get_articles,:except => [:update,:new]
+  before_filter :authenticate_user!, :only => [:new,:create,:edit,:update,:destroy]
   # GET /articles
   # GET /articles.xml
   def index

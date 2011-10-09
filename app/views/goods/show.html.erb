@@ -22,6 +22,10 @@
   <b>标签:</b>
   <%= @good.tag_list %>
 </p>
+<p>
+  <b>外链:</b>
+  <%= link_to @good.outlinks.first.try(:url),@good.outlinks.first.try(:url) unless @good.outlinks.blank? %>
+</p>
 </div>
 <div class="product_images goods_div">
   <%= render  'uploads/uploads',:locals => {:commentable  => @good} %>

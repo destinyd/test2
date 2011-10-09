@@ -10,8 +10,10 @@ class Good < ActiveRecord::Base
   has_many :focuss, :as => :focusable
   has_many :attrs, :as => :attrable
 #  has_many :complaints, :as => :complaintable
-
   has_many :reviews, :as => :reviewable
+
+  accepts_nested_attributes_for :outlinks
+
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
 
   validates :name, :presence => true

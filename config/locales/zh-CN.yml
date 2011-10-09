@@ -228,6 +228,8 @@ zh-CN:
       integral: 积分
       review: 评价
       upload: 上传文件
+      attr: 属性
+      outlinks: 外链
 
     attributes:
       price:
@@ -256,6 +258,8 @@ zh-CN:
     region_id: 地区
     amount: 数量
     user: 提交者
+    tag_list: 标签
+    url: 链接
 
 
   labels:
