@@ -59,13 +59,6 @@ Zhekou::Application.routes.draw do
     resources :reviews
   end
 
-#  resources :categories do
-#    resources :goods
-#    resources :focus
-#    resources :articles
-#  end
-
-
   
   root :to => "home#index"
   match "/:reviewable_type/:reviewable_id/reviews/:action" => "reviews#:action",:as => 'reviewable'
