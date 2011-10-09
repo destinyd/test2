@@ -11,8 +11,8 @@
 			define width and height of list item (slide)
 			entire slider area will adjust according to the parameters provided here
 		*/ 
-		width:696px;
-		height:241px;
+		width:650px;
+		height:300px;
 		overflow:hidden; 
 		}	
 	#prevBtn, #nextBtn,

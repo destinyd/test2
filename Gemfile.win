@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-#source 'http://gemcutter.org'
+source 'http://gemcutter.org'
 
 gem 'rails'#, '3.0.10'
 # Bundle edge Rails instead:
