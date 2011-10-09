@@ -25,6 +25,7 @@ class FlashesController < ApplicationController
   # GET /flashes/new.xml
   def new
     @flash = Flash.new
+    @flash.build_outlink
 
     respond_to do |format|
       format.html # new.html.erb

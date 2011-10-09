@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Category</th>
     <th></th>
     <th></th>
     <th></th>
@@ -10,7 +9,6 @@
 
 <% @flashes.each do |flash| %>
   <tr>
-    <td><%= flash.category %></td>
     <td><%= link_to 'Show', flash %></td>
     <td><%= link_to 'Edit', edit_flash_path(flash) %></td>
     <td><%= link_to 'Destroy', flash, :confirm => 'Are you sure?', :method => :delete %></td>
