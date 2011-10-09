@@ -1,5 +1,5 @@
 <% if @articles.blank? %>
-    <%= link_to "还没有文章，你来写一篇？",new_category_article_path(params[:id]) unless params[:id].blank? %>
+    <%= link_to "还没有文章，你来写一篇？",new_article_path%>
 <% else %>
     <% @articles.each do |article| %>
         <li><%= link_to article,article %></li>

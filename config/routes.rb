@@ -59,11 +59,11 @@ Zhekou::Application.routes.draw do
     resources :reviews
   end
 
-  resources :categories do
-    resources :goods
-    resources :focus
-    resources :articles
-  end
+#  resources :categories do
+#    resources :goods
+#    resources :focus
+#    resources :articles
+#  end
 
 
   

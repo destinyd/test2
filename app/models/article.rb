@@ -2,7 +2,6 @@
 class Article < ActiveRecord::Base
   STATUS_LOW = 2
   belongs_to :user
-  belongs_to :category
   acts_as_commentable
 
   default_scope order('articles.is_top desc,articles.id desc')

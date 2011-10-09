@@ -2,5 +2,5 @@
   <%= form_for [@reviewable,Review.new],:remote => true do |f| %>
     <%= f.label :status %>
     <%= f.select :status,Review.selects,{ :include_blank => '请选择你的评价' },{:onchange =>'send_review()'} %>
-  <% end %>
-<% end %>
+  <% end -%>
+<% end -%>

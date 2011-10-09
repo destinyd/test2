@@ -1,11 +1,9 @@
 class ArticlesController < ApplicationController
-  before_filter :get_category
 #  before_filter :get_articles,:except => [:update,:new]
   # GET /articles
   # GET /articles.xml
   def index
-    @articles = @category.blank? ? Article.truth :  @category.articles.truth
-
+    @articles = Article.truth
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @articles }
@@ -27,7 +25,7 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   # GET /articles/new.xml
   def new
-    @article = current_user.articles.new(:category_id => params[:category_id])
+    @article = current_user.articles.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -85,12 +83,6 @@ class ArticlesController < ApplicationController
   end
 
   private
-
-  def get_category
-    unless params[:category_id].blank?
-      @category = Category.find params[:category_id]
-    end
-  end
 #
 #  def get_articles
 #    unless tmp = get_category

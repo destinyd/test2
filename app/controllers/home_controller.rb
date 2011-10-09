@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @categories = Category.roots
+#    @categories = Category.roots
     @articles = Article.recent
     @flashes = Flash.recent# if @flashes.blank?
     @cheapest =     Price.cheapest

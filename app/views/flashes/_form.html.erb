@@ -17,8 +17,8 @@
   </div>  
 
   <div class="field">
-    <%= f.label :category_id %><br />
-    <%= f.select :category_id, Category.all.collect{|category| [category.name,category.id]},{:include_blank => '空闲分类'} %>
+    <%= f.label :tag_list %><br />
+    <%= f.text_field :tag_list %>
   </div>
   <div class="actions">
     <%= f.submit %>

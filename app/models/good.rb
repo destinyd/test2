@@ -2,7 +2,6 @@
 class Good < ActiveRecord::Base
   STATUS_LOW = 2
   belongs_to :user
-  belongs_to :category
   has_many :prices
   has_many :uploads, :as => :uploadable
   has_many :outlinks, :as => :outlinkable
@@ -23,14 +22,6 @@ class Good < ActiveRecord::Base
   default_scope order('id desc')#.includes(:prices) #
 
   scope :recent,limit(10)
-
-  scope :get, lambda { |category_id|
-  if category_id.nil? || category_id.blank?
-    scoped
-  else
-    where(:category_id => category_id)
-  end
-  }
 
   def self.search(search)
     if search
