@@ -17,6 +17,10 @@ Zhekou::Application.routes.draw do
     resources :reviews
   end
 
+  resources :outlinks do
+    resources :reviews
+  end
+
   resources :focus
 
   resources :goods do
@@ -43,8 +47,6 @@ Zhekou::Application.routes.draw do
 #  get '/users/sign_out(.:format)',:to => 'users/sessions#destroy'
 
   resources :records
-
-  resources :outlinks
 
   resources :msgs
 

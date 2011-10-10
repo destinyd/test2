@@ -1,4 +1,6 @@
 class OutlinksController < ApplicationController
+  before_filter :find_able
+  before_filter :authenticate_user!, :only => [:new,:create,:edit,:update,:destroy]
   # GET /outlinks
   # GET /outlinks.xml
   def index
@@ -24,31 +26,31 @@ class OutlinksController < ApplicationController
   # GET /outlinks/new
   # GET /outlinks/new.xml
   def new
-    @outlink = Outlink.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @outlink }
-    end
+    @outlink = current_user.outlinks.build
   end
 
   # GET /outlinks/1/edit
   def edit
-    @outlink = Outlink.find(params[:id])
+    @outlink = current_user.outlinks.find(params[:id])
   end
 
   # POST /outlinks
   # POST /outlinks.xml
   def create
-    @outlink = Outlink.new(params[:outlink])
+    @outlink = current_user.outlinks.new(params[:outlink])
+    @outlink.outlinkable = @able
 
     respond_to do |format|
       if @outlink.save
-        format.html { redirect_to(@outlink, :notice => 'Outlink was successfully created.') }
-        format.xml  { render :xml => @outlink, :status => :created, :location => @outlink }
+        format.html {redirect_to :back,notice: 'success'}
+        format.js
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @outlink.errors, :status => :unprocessable_entity }
+        @error = ''
+        @outlink.errors.full_messages.each do |msg|
+          @error += msg
+        end
+        format.html {render :new}
+        format.js{ render 'fault'}
       end
     end
   end
@@ -56,7 +58,7 @@ class OutlinksController < ApplicationController
   # PUT /outlinks/1
   # PUT /outlinks/1.xml
   def update
-    @outlink = Outlink.find(params[:id])
+    @outlink = current_user.outlinks.find(params[:id])
 
     respond_to do |format|
       if @outlink.update_attributes(params[:outlink])
@@ -72,12 +74,22 @@ class OutlinksController < ApplicationController
   # DELETE /outlinks/1
   # DELETE /outlinks/1.xml
   def destroy
-    @outlink = Outlink.find(params[:id])
+    @outlink = current_user.outlinks.find(params[:id])
     @outlink.destroy
 
     respond_to do |format|
       format.html { redirect_to(outlinks_url) }
       format.xml  { head :ok }
     end
+  end
+private
+
+  def find_able
+    params.each do |name, value|
+        if name =~ /(.+)_id$/
+            return @able = $1.classify.constantize.find(value)  
+        end  
+    end  
+    nil  
   end
 end

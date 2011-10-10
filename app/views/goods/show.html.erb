@@ -23,10 +23,6 @@
   <b>标签:</b>
   <%= @good.tag_list %>
 </p>
-<p>
-  <b>外链:</b>
-  <%= link_to @good.outlinks.first.try(:url),@good.outlinks.first.try(:url) unless @good.outlinks.blank? %>
-</p>
 </div>
 <div class="product_images goods_div h">
   <%= render  'uploads/uploads',:locals => {:commentable  => @good} %>
@@ -37,17 +33,17 @@
   <%= link_to '新建',new_good_attr_path(@good),:remote => true %>
 </div>
 <div class="product_links goods_div h">
-  <% @links.each do |link| %>
-    <%= link_to link.human_link,link.url ,:target => '_blank'%> 
-    <%= render 'reviews/up_down',:locals => {:reviewable => link} %> <br />
-  <% end %>
+  <ul id='links'%>
+    <%= render @links %>
+  </ul>
   <%= link_to '新建',new_good_outlink_path(@good),:remote => true %>
 </div>
 
 
 <p>
   <%= button_to '关注',good_focus_path(@good),:remote => true %>
-  <%= render 'reviews/links' %>
+  <% @reviewable = @good %>
+  <%= render 'reviews/links',:locals => {:reviewable => @good} %>
 </p>
 <%= render 'comments/comments' %>
   </div>

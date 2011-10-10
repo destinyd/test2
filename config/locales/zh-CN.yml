@@ -177,7 +177,6 @@ zh-CN:
 
   activemodel:
     errors:
-      taken: "已经被使用"
       template:
         header:
           one: "有 1 个错误发生导致「%{model}」无法被保存。"
@@ -227,7 +226,7 @@ zh-CN:
       review: 评价
       upload: 上传文件
       attr: 属性
-      outlinks: 外链
+      outlink: 外链
 
     attributes:
       price:
