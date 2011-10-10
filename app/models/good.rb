@@ -9,7 +9,6 @@ class Good < ActiveRecord::Base
   has_many :uploads, :as => :uploadable
   has_many :focuss, :as => :focusable
   has_many :attrs, :as => :attrable
-#  has_many :complaints, :as => :complaintable
   has_many :reviews, :as => :reviewable
 
   accepts_nested_attributes_for :outlinks

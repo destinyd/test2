@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   
   has_many :comments
-  has_many :complaints
   has_many :goods
   has_many :integrals
   has_many :msgs

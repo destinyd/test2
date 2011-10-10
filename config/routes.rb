@@ -14,7 +14,6 @@ Zhekou::Application.routes.draw do
 
   resources :articles do
     resources :comments
-    resources :complaints
     resources :reviews
   end
 
@@ -25,7 +24,6 @@ Zhekou::Application.routes.draw do
   resources :goods do
     resources :comments
     resources :uploads
-    resources :complaints
     resources :reviews
     resources :prices
     resources :focus
@@ -51,11 +49,8 @@ Zhekou::Application.routes.draw do
 
   resources :msgs
 
-  #resources :complaints
-
   resources :prices do
     resources :comments
-    resources :complaints
     resources :reviews
   end
 

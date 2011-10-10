@@ -22,9 +22,6 @@ class Article < ActiveRecord::Base
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
   scope :review_low, Filter.new(self).extend(ReviewFilter)
   scope :truth,review_low(Review.truth_point)
- 
-
-#  accepts_nested_attributes_for :complaints
 
   def valid
     return if self.is_valid
