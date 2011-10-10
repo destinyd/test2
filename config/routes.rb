@@ -55,7 +55,7 @@ Zhekou::Application.routes.draw do
 
   
   root :to => "home#index"
-  match "/:reviewable_type/:reviewable_id/reviews/:action" => "reviews#:action",:as => 'reviewable'
+  match "/:reviewable_type/:reviewable_id/reviews" => "reviews#:action",:as => 'reviewable'
 
 #  match "/users/sign_out(.:format)",:controller => 'users/sessions',:action => :destroy,:as => 'destroy_user_session'
   

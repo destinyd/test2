@@ -38,7 +38,8 @@
 </div>
 <div class="product_links goods_div h">
   <% @links.each do |link| %>
-    <%= link_to link.human_link,link.url ,:target => '_blank'%><br />
+    <%= link_to link.human_link,link.url ,:target => '_blank'%> 
+    <%= render 'reviews/up_down',:locals => {:reviewable => link} %> <br />
   <% end %>
   <%= link_to '新建',new_good_outlink_path(@good),:remote => true %>
 </div>

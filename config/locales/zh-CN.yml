@@ -277,3 +277,5 @@ zh-CN:
     index: "%{model}列表"
   review:
     pending: 待审
+    s1: '+1'
+    s-1: '睬'
