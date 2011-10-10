@@ -17,8 +17,6 @@ Zhekou::Application.routes.draw do
     resources :reviews
   end
 
-  #resources :complaints
-
   resources :focus
 
   resources :goods do

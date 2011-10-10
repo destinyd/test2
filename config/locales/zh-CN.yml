@@ -221,9 +221,7 @@ zh-CN:
       user: "用户"
       comment: "评论"
       good: "商品"
-      category: 分类
       flash: 广告图片
-      category: 分类
       article: 文章
       integral: 积分
       review: 评价
@@ -245,7 +243,6 @@ zh-CN:
     address:  '商家地址'
     price: 单价
     image: 图片
-    category: 分类
     password: 密码
     remember_me: 记住我
     desc: 描述

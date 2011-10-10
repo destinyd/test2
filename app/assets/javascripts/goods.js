@@ -11,3 +11,17 @@ function get_attrs(id){
     });
   });
 }
+$(function () {
+      $('#goods th a, .pagination a').live('click',
+        function () {
+          $.getScript(this.href);
+          return false;
+        }
+      );
+      // Search form.
+      $('#goods_search').submit(function () {
+        $.get(this.action, $(this).serialize(), null, 'script');
+        return false;
+      });
+})
+

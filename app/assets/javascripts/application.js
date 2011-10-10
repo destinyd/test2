@@ -26,23 +26,10 @@ function ajaxForm(formdom,action){
         });
 
 }
-    $(function () {
-
-      $('#goods th a, .pagination a').live('click',
-        function () {
-          $.getScript(this.href);
-          return false;
-        }
-      );
-      // Search form.
-      $('#goods_search').submit(function () {
-        $.get(this.action, $(this).serialize(), null, 'script');
-        return false;
-      });
-      ajaxForm($('#new_comment'));
-
-    })
 function send_review(){
   $('#new_review').submit();
   $('#review_status').attr('enable',false);
 }
+$(function(){
+  ajaxForm($('#new_comment'));
+})
