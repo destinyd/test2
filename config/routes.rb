@@ -25,6 +25,7 @@ Zhekou::Application.routes.draw do
     resources :reviews
     resources :prices
     resources :focus
+    resources :outlinks
     resources :attrs,:only => [:index,:show,:create,:new] do
       resources :reviews
     end

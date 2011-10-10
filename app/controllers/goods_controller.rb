@@ -20,6 +20,7 @@ class GoodsController < ApplicationController
     @good = Good.find(params[:id])
     @prices = @good.prices.paginate(:per_page => 10, :page => params[:page])
     @uploads  = @good.uploads
+    @links  = @good.outlinks
     
     @commentable = @good
     @reviewable = @good

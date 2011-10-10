@@ -1,3 +1,4 @@
+# coding: utf-8
 class Filter < Struct.new(:klass)
   def call(*args); end
 end
@@ -27,5 +28,24 @@ module ReviewFilter
     low = args.shift
     super(*args)
     d = klass.scoped.joins(:reviews).having("sum(reviews.status) >= ?", low)
+  end
+end
+
+
+module ReviewPending
+  def self.included(base)
+    base.extend ClassMethods
+  end
+  class ClassMethods
+      class_eval{
+        def human_s
+          attr = args.shift
+          super(*args)
+          status = klass.reviews.sum(status)
+          result = read_attribute(attr)
+          result + '(待审)' if status < STATUS_LOW
+          result
+        end
+      }
   end
 end

@@ -275,3 +275,5 @@ zh-CN:
     new: "新增%{model}"
     edit: "修改%{model}"
     index: "%{model}列表"
+  review:
+    pending: 待审
