@@ -20,9 +20,9 @@ class Good < ActiveRecord::Base
   acts_as_commentable
   acts_as_taggable
 
-  default_scope order('id desc')#.includes(:prices) #
+#  default_scope order('id desc')#.includes(:prices) #
 
-  scope :recent,limit(10)
+  scope :recent,order('id desc').limit(10)
 
   def self.search(search)
     if search
