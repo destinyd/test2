@@ -7,4 +7,13 @@ class ApplicationController < ActionController::Base
     def sort_column  
       Good.column_names.include?(params[:sort]) ? params[:sort] : "name"  
     end          
+
+    def find_able
+      params.each do |name, value|
+          if name =~ /(.+)_id$/
+              return @able = $1.classify.constantize.find(value)  
+          end  
+      end  
+      nil  
+    end
 end

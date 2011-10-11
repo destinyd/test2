@@ -23,16 +23,4 @@ class AttrsController < ApplicationController
 
   def review
   end
-
-private
-
-  def find_able
-    params.each do |name, value|
-        if name =~ /(.+)_id$/
-            return @able = $1.classify.constantize.find(value)  
-        end  
-    end  
-    nil  
-  end
-
 end

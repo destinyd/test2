@@ -68,6 +68,10 @@ class Price < ActiveRecord::Base
     TYPE
   end
 
+  def self.selects
+    TYPE.invert
+  end
+
   def valid
     return if self.is_valid
     self.update_attribute(:is_valid, true)

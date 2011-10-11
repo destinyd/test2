@@ -1,5 +1,6 @@
 Zhekou::Application.routes.draw do
 
+  resources :prices,:only => [:index,:show,:new,:create]
   resources :reviews
   resources :attrs,:only => [:new] do
     resources :reviews

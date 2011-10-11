@@ -13,15 +13,21 @@
     </div>
   <% end %>
 
+  <%= f.fields_for :good do |gf| %>
+    <div class="field">
+      <%= gf.label :name %><br />
+      <%= gf.text_field :name %>
+      <%= gf.hidden_field :id %>
+    </div>
+  <% end if @able.blank? %>
   <div class="field">
     <%= f.label :price %><br />
     <%= f.text_field :price %>
   </div>
-<!--  <div class="field">
+  <div class="field">
     <%= f.label :type_id,'' %><br />
-    <%= f.select :type_id,
-    Price.types %>
-  </div>-->
+    <%= f.select :type_id,Price.selects %>
+  </div>
   <div class="field">
     <%= f.label :address %><br />
     <%= f.text_field :address %>

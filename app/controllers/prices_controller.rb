@@ -1,10 +1,10 @@
 class PricesController < ApplicationController
   before_filter :authenticate_user!,:except =>[:index,:show]
-  before_filter :get_good#, :except => [:update,:create]
+  before_filter :find_able#, :except => [:update,:create]
   # GET /prices
   # GET /prices.xml
   def index
-    @prices = @good.prices
+    @prices = @able.blank? ? Price.scoped : @able.prices
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,7 @@ class PricesController < ApplicationController
   # GET /prices/1
   # GET /prices/1.xml
   def show
-    @price = @good.prices.find(params[:id])
+    @price = @able.blank? ? Price.find(params[:id]) : @able.prices.find(params[:id])
     @commentable = @price
     @reviewable = @price
 
@@ -28,8 +28,7 @@ class PricesController < ApplicationController
   # GET /prices/new
   # GET /prices/new.xml
   def new
-    #@good = Good.find(params[:good_id])
-    @price = @good.prices.build
+    @price = @able.blank? ? current_user.prices.build : @able.prices.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,17 +37,14 @@ class PricesController < ApplicationController
   end
 
   # GET /prices/1/edit
-  def edit
-    @price = @good.prices.find(params[:id])
-  end
+#  def edit
+#    @price = @able.blank? ? Price. : @able.prices.find(params[:id])
+#  end
 
   # POST /prices
   # POST /prices.xml
   def create
-    #@good = Good.find(params[:good_id])
-    #@good = Good.find(good_id)
-    @price = @good.prices.build(params[:price])
-    @price.user = current_user
+    @price = @able.blank? ? current_user.prices.build(params[:price]) : @able.prices.build(params[:price]).merge(:user => current_user)
 
       if @price.save
         redirect_to([@price.good,@price], :notice => 'Price was successfully created.')
@@ -59,35 +55,18 @@ class PricesController < ApplicationController
 
   # PUT /prices/1
   # PUT /prices/1.xml
-  def update
-    @price = @good.prices.find(params[:id])
+#  def update
+#    @price = @able.blank? ? Price. : @able.prices.find(params[:id])
+#
+#    respond_to do |format|
+#      if @price.update_attributes(params[:price])
+#        format.html { redirect_to([@good,@price], :notice => 'Price was successfully updated.') }
+#        format.xml  { head :ok }
+#      else
+#        format.html { render :action => "edit" }
+#        format.xml  { render :xml => @price.errors, :status => :unprocessable_entity }
+#      end
+#    end
+#  end
 
-    respond_to do |format|
-      if @price.update_attributes(params[:price])
-        format.html { redirect_to([@good,@price], :notice => 'Price was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @price.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /prices/1
-  # DELETE /prices/1.xml
-  def destroy
-    @price = @good.prices.find(params[:id])
-    @price.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(good_prices_url) }
-      format.xml  { head :ok }
-    end
-  end
-  
-  private
-    def get_good
-      good_id = params[:good_id]
-      @good = Good.find(good_id)
-    end
 end
