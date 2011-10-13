@@ -256,6 +256,7 @@ zh-CN:
     user: 提交者
     tag_list: 标签
     url: 链接
+    type_id: 类型
 
 
   labels:
