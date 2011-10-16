@@ -5,11 +5,14 @@ class GoodsController < ApplicationController
   # GET /goods
   # GET /goods.xml
   def index
-    @goods = Good.order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+    @goods = Good.search(params[:term]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @goods }
+      format.json { 
+        @term = @goods.map{ |g|  { :value => g.name, :id => g.id}}
+        render :json => @term
+      }
       format.js
     end
   end
