@@ -28,7 +28,12 @@ class PricesController < ApplicationController
   # GET /prices/new
   # GET /prices/new.xml
   def new
-    @price = @able.blank? ? current_user.prices.build : @able.prices.build
+    if @able.blank?
+      @price =  current_user.prices.build 
+      @price.build_good
+    else
+      @price = @able.prices.build
+    end
 
     respond_to do |format|
       format.html # new.html.erb

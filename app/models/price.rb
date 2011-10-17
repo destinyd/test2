@@ -6,6 +6,10 @@ class Price < ActiveRecord::Base
   has_many :outlinks, :as => :outlinkable
   validates :type_id, :presence => true
   validates :price, :presence => true
+  accepts_nested_attributes_for :good
+
+  attr_accessor :good_name
+  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name
 
   has_many :integrals, :as => :integralable
   has_many :reviews, :as => :reviewable
@@ -17,7 +21,6 @@ class Price < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
 
-  default_scope order('price asc,finish_at desc,created_at desc')
   scope :cheapest,order("price desc").limit(10).includes(:good)
 
   #validates :country_code, :presence => true, :inclusion => { :in => Country.all_codes }
@@ -81,6 +84,13 @@ class Price < ActiveRecord::Base
   def near_prices long = 2
     @nears = self.nearbys(long)
     @nears.blank? ? @nears : @nears.where(:good_id => self.good_id).limit(10)
+  end
+
+  before_create  :valid_good
+  private
+  def valid_good
+    self.good = Good.where(:name => self.good_name).first
+    self.good = self.build_good(:name => self.good_name) if self.good.blank?
   end
 
 end

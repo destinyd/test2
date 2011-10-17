@@ -16,8 +16,7 @@
   <%= f.fields_for :good do |gf| %>
     <div class="field">
       <%= f.label :name %><br />
-      <%= gf.text_field :name %>
-      <%= gf.hidden_field :id %>
+      <%= f.text_field :good_name %>
     </div>
   <% end if @able.blank? %>
   <div class="field">

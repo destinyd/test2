@@ -29,15 +29,14 @@
 </p>
 <% unless @price.near_prices.blank? %>
   <h3>附近价格</h3>
-  <p>
+  <ul>
   <% @price.near_prices.each do |price| %>
-    <%= link_to price.human_price,[@good,price] %><%= price.address %>
+    <li><%= link_to price.human_price,[@good,price] %><%= price.address %></li>
   <% end %>
+  </ul>
 <% end %>
-</p>
 <%= render 'reviews/links' %>
 <%= render 'comments/comments' %>
 
 
-<%= link_to t('labels.edit'), edit_good_price_path(@good,@price) %> |
-<%= link_to t('labels.back'), @good %>
+<%= link_to t('labels.back'), :back %>
