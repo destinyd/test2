@@ -15,8 +15,10 @@
 
 <div class="mt">
   <div class="l in_l">
-    <h3>最低价</h3>
+    <h3>最低价<span style='float:right;font-size:12px'><%= link_to "更多",prices_path %> </span></h3>
+    <ul>
     <%= render 'prices/prices_li' %>
+  </ul>
   </div>
   <div class="l in_l"> 
     <h3>最新商品</h3> 
