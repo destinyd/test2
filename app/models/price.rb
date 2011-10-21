@@ -86,6 +86,10 @@ class Price < ActiveRecord::Base
     @nears.blank? ? @nears : @nears.where(:good_id => self.good_id).limit(10)
   end
 
+  def to_s
+    "#{self.good}(#{human_price})"
+  end
+
   before_create  :valid_good
   private
   def valid_good

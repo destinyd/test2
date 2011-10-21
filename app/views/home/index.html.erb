@@ -14,16 +14,9 @@
 </div>
 
 <div class="mt">
-  <div class="l in_l">
-    <h3>最低价<span style='float:right;font-size:12px'><%= link_to "更多",prices_path %> </span></h3>
-    <ul>
-    <%= render 'prices/prices_li' %>
-  </ul>
-  </div>
-  <div class="l in_l"> 
-    <h3>最新商品</h3> 
-    <%= render 'goods/recent'  %>
-  </div>
+  <%= render 'section',:things => @cheapest,:title=> "最低价",:section_path => prices_path %>
+  <%= render 'section',:things => @recent_goods,:title=> "最新产品",:section_path => goods_path %>
+  <%#= render 'section',:things => @focus,:title=> "最多关注",:section_path => goods_path %>
   <div class="l in_l"> 
     <h3>最多关注</h3> 
     <%= render 'focus/li'  %>
