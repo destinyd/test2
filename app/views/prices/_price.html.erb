@@ -1,5 +1,5 @@
       <div class="price" data-time="<%= price.created_at.to_i %>">  
-        <strong>(<%= price.type_id %>) 价格：<%=link_to price.human_price ,[@good,price]%> 剩余：<%= price.amount %></strong>  
+        <strong>(<%= price.type_id %>) 价格：<%=link_to price.human_price ,price%> 剩余：<%= price.amount %></strong>  
         <em>截止日期： <%= price.created_at %></em>
         地址：<%= price.address %>
       </div>  

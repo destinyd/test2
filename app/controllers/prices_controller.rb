@@ -49,10 +49,10 @@ class PricesController < ApplicationController
   # POST /prices
   # POST /prices.xml
   def create
-    @price = @able.blank? ? current_user.prices.build(params[:price]) : @able.prices.build(params[:price]).merge(:user => current_user)
-
+    @price = current_user.prices.build(params[:price]) 
+    @price.good_id = @able.id if @price.good_id.nil? and !@able.nil?
       if @price.save
-        redirect_to([@price.good,@price], :notice => 'Price was successfully created.')
+        redirect_to(@price, :notice => 'Price was successfully created.')
       else
         render :action => "new"
       end
