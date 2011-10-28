@@ -94,4 +94,13 @@ class GoodsController < ApplicationController
 #    end
 #  end
 
+  def tags
+    @tags = Good.tag_counts.includes(:taggings)
+  end
+
+  def tag
+    @tagname = params[:id]
+    @taggables  = Good.tagged_with params[:id]
+  end
+
 end

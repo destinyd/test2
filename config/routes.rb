@@ -34,6 +34,12 @@ Zhekou::Application.routes.draw do
     resources :attrs,:only => [:index,:show,:create,:new] do
       resources :reviews
     end
+    collection do
+      get :tags
+    end
+    member do
+      get :tag
+    end
   end
 
   get "home/index"

@@ -1,0 +1,6 @@
+<dl>
+  <dt><%= tag %></dt>
+  <% tag.taggings.each do |tagging| %>
+    <dd><%= link_to tagging.taggable,tagging.taggable %></dd>
+  <% end %>
+</dl>
