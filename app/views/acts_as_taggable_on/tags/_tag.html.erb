@@ -1,5 +1,5 @@
 <dl>
-  <dt><%= tag %></dt>
+  <dt><%= link_to tag,tag_good_path(tag) %></dt>
   <% tag.taggings.each do |tagging| %>
     <dd><%= link_to tagging.taggable,tagging.taggable %></dd>
   <% end %>
