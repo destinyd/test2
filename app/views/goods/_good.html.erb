@@ -1,9 +1,11 @@
-<tr>
-<td>
-<%= link_to good,good %>
-</td><td>
-<%= good.cheapest %>
-</td><td>
-<%= good.created_at %>
-</td>
-</tr>
+<%= content_tag :ul,:class => 'table' do %>
+  <%= content_tag 'li' do -%>
+    <%= link_to good,good %>
+  <% end %>
+  <%= content_tag 'li' do -%>
+    <%= good.cheapest %>
+  <% end %>
+  <%= content_tag 'li' do -%>
+    <%= good.created_at %>
+  <% end %>
+<% end %>

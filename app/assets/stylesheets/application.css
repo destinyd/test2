@@ -5,6 +5,11 @@ body {
   margin:0;
   padding:0;
 }
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote,p{padding:0; margin:0;}
+table,td,tr,th{font-size:12px;}
+li{list-style-type:none;}
+img{vertical-align:top;border:0;}
+ol,ul {list-style:none;}
 .h{
   display:none;
 }
@@ -115,6 +120,9 @@ a {
     border:solid 1px #000;
     margin-left:10px;
 }
+.in_l{
+  float:left;
+}
 .in_l li,.in_r li,.articles li{
     list-style-position:inside;
 }
@@ -185,4 +193,12 @@ a {
   width:100%; /*width:683px*/
   height:328px;
 }
-
+.table{
+  clear:both;
+  margin:10px;
+}
+.table li{
+  float:left;
+  width:200px;
+  overflow:hidden;
+}

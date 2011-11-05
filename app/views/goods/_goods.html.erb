@@ -1,11 +1,9 @@
 <%= hidden_field_tag :direction, params[:direction] %>  
 <%= hidden_field_tag :sort, params[:sort] %>  
-<table class="pretty">  
-  <tr>  
-    <th><%= sortable "name", "名称" %></th>  
-    <th>最低价</th>  
-    <th><%= sortable  "created_at","创建时间" %></th>  
-  </tr>  
+<ul class="table pretty">  
+    <li><%= sortable "name", "名称" %></li>  
+    <li>最低价</li>  
+    <li><%= sortable  "created_at","创建时间" %></li>  
+</ul>
 <%= render @goods %>
-</table>
 <%= will_paginate @goods %> 

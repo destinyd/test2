@@ -1,6 +1,1 @@
-<dl>
-  <dt><%= link_to tag,tag_good_path(tag) %></dt>
-  <% tag.taggings.each do |tagging| %>
-    <dd><%= link_to tagging.taggable,tagging.taggable %></dd>
-  <% end %>
-</dl>
+<%= render 'section',:things => tag.taggings.map(&:taggable),:title=> tag.name,:section_path => tag_good_path(tag.name) %>
