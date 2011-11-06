@@ -31,13 +31,10 @@
     <%= f.label :address %><br />
     <%= f.text_field :address %>
   </div>  
-  <div class="field">  
-    <%= f.label :region_id,"地区" %><br />  
-    <select id="s1" style="width:140px"></select> 
-    <select id="s2"></select> 
-    <select id="s3"></select>   
-  </div>
-    <%= f.hidden_field :region_id,:id => 'region_id' %>
+  <div class="field">
+    <%= f.label :desc %><br />
+    <%= f.text_field :desc %>
+  </div>  
   <div class="field">
     <%= f.label :amount,"商品数量(不填为未知)" %><br />
     <%= f.text_field :amount %>
@@ -46,4 +43,3 @@
     <%= f.submit %>
   </div>
 <% end %>
-<script>setup() ;</script>
