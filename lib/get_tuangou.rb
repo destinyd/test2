@@ -16,7 +16,9 @@ class Get_tuangou
         xml = http.get(uri.path)
         parser, parser.string = XML::Parser.new, xml
         doc, posts = parser.parse, []
+        node = Hash.new
         doc.find(t.docfind).each do |d|
+          d.each{|a| node[a.name] = a.content}
           eval(t.suite)
         end
       end
