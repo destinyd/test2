@@ -12,6 +12,7 @@ gem 'uglifier'
 
 
 #dd
+gem 'libxml-ruby'
 gem 'rake'#,'0.8.7'
 gem 'devise' # Devise must be required before RailsAdmin
 gem 'paperclip'

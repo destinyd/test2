@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 source 'http://gemcutter.org'
 
-gem 'rails'#, '3.0.10'
+gem 'rails', '3.1.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -12,6 +12,7 @@ gem 'uglifier'
 
 
 #dd
+gem 'libxml-ruby'
 gem 'rake'#,'0.8.7'
 gem 'devise' # Devise must be required before RailsAdmin
 gem 'paperclip'
@@ -22,7 +23,7 @@ gem 'jquery-rails'
 gem 'awesome_nested_set'
 
 gem 'geocoder'
-gem 'acts-as-taggable-on', '~>2.1.0'
+gem 'acts-as-taggable-on'#, '~>2.1.0'
 #gem "therubyracer", :require => 'v8'
 #gem "mocha", :group => :test
 #gem 'rake','!= 0.9.0'
