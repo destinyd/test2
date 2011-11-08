@@ -1,31 +1,28 @@
 # coding: utf-8
-class Get_tuangou
-  def initialize(args)
-    @tuan_apis =TuanApi.where(:enable => true)
+class GetTuangou
+  require 'net/http'
+  require 'xml'
+  def initialize
+    @tuan_urls =TuanUrl.where(:enable => true).includes(:tuan_api)
   end
 
   def get_all
-    require 'net/http'
-    require 'xml'
     log = Rails.logger
     log.info "获取团购数据开始"
-    @tuan_apis.each do |t|
+    @tuan_urls.each do |t|
       log.info "开始获取#{t.name}的数据"
       uri = URI.parse t.url
-      Net::HTTP.start(uri.host) do |http|
-        xml = http.get(uri.path)
-        parser, parser.string = XML::Parser.new, xml
-        doc, posts = parser.parse, []
-        nodes = Hash.new
-        doc.find(t.docfind).each do |d|
-          d.each{|a| nodes[a.name] = a.content}
-          p = Price.new nodes
-          p.price = nodes['price']
-          p.type_id = 21
-          p.finish_at = nodes['end_date'].to_i
-          p.address = nodes['division_name'] + d.find('//vendor/district').first.content 
-          eval(t.suite)
-        end
+      xml = Net::HTTP.get uri.host, uri.request_uri
+      parser, parser.string = XML::Parser.new, xml
+      doc = parser.parse
+      doc.find(t.docfind).each do |d|
+        n = {}
+        d.each{|a| n[a.name] = a.content}
+        p = Price.new
+#        suite = "d = d.find('//data/display').first;d.each{|a| n[a.name] = a.content};p.price = n['price'];p.type_id = 21;p.finish_at = n['endTime'].to_i;p.address = n['city'];p.title=n['title'];o = p.outlinks.new;o.url = n['loc'];"
+#        eval(suite)
+        eval(t.suite)
+        p.save if Outlink.where(:url => p.outlinks.map(&:url)).blank?
       end
       log.info "获取#{t.name}的数据结束"
     end

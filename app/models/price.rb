@@ -20,8 +20,10 @@ class Price < ActiveRecord::Base
   acts_as_commentable
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
+  before_create :valid_singleton_for_tuan
 
-  scope :cheapest,order("price").limit(10).includes(:good)
+  scope :cheapest,order("price").limit(10)
+  scope :recent,order("id desc").limit(10)
 
   #validates :country_code, :presence => true, :inclusion => { :in => Country.all_codes }
   #type [0:userlocal1day 1:userurl1day 2:团购 3:拍卖 10:商家普价 11:上架优惠 12:商家限量]
@@ -45,7 +47,7 @@ class Price < ActiveRecord::Base
   end
 
   def type_id=(value)
-    write_attribute(:type_id, TYPE.index(value))
+    write_attribute(:type_id, TYPE.key(value))
   end
 
   def human_price
@@ -87,7 +89,7 @@ class Price < ActiveRecord::Base
   end
 
   def to_s
-    "#{self.good}(#{human_price})"
+    "(#{human_price})#{self.title}"
   end
 
   before_create  :valid_good
@@ -96,6 +98,13 @@ class Price < ActiveRecord::Base
     if self.good_id.nil?
       self.good = Good.where(:name => self.good_name).first
       self.good = self.build_good(:name => self.good_name) if self.good.blank?
+    end
+  end
+
+  def valid_singleton_for_tuan
+    if self.type_id == 21 and !self.outlinks.blank?
+      links = Outlink.where(:url => self.outlinks.map(&:url))
+      self.errors.add(:url,'has') unless links.blank?
     end
   end
 

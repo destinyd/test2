@@ -4,6 +4,7 @@ class HomeController < ApplicationController
     @articles = Article.recent
     @flashes = Flash.recent# if @flashes.blank?
     @cheapest =     Price.cheapest
+    @recent_prices =     Price.recent
     @recent_goods = Good.recent
     @recent_users    = User.recent
     @integrals  = Integral.recent
