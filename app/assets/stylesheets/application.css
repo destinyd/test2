@@ -125,6 +125,12 @@ a {
 }
 .in_l li,.in_r li,.articles li{
     list-style-position:inside;
+    overflow:hidden;
+    width:95%;
+}
+.in_l li a{
+    display:inline;
+    white-space:nowrap;
 }
 .articles{
     margin-left:20px;
