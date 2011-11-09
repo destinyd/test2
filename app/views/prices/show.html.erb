@@ -1,4 +1,8 @@
 <p>
+  <b><%= label :price,:title%>:</b>
+  <%= @price.title %>
+</p>
+<p>
   <b><%= label :price,:price%>:</b>
   <%= @price.price %>
 </p>
@@ -22,10 +26,9 @@
   <b><%= label :price,:finish_at%>:</b>
   <%= @price.human_finish_at %>
 </p>
-
 <p>
-  <b><%= label :price,:user%>:</b>
-  <%= @price.user %>
+  <b><%= label :price,:desc%>:</b>
+  <%= @price.desc %>
 </p>
 <% unless @price.near_prices.blank? %>
   <h3>附近价格</h3>

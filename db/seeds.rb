@@ -10,13 +10,13 @@ TuanApi.create [
   {
   :name => "窝窝团",
   :docfind => "//deals/deal",
-  :suite  => "p.price = n['price'];p.type_id = \"团购价\";p.finish_at = n['end_date'].to_i;p.address = n['division_name'];p.title=n['title'];o = p.outlinks.new;o.url = n['deal_url'];",
+  :suite  => "p.price = n['price'];p.type_id = \"团购价\";p.finish_at = n['end_date'].to_i;p.address = n['division_name'];p.title=n['title'];o = p.outlinks.new;o.url = n['deal_url'];p.uploads.new(:image_file_name => n['large_image_url']);",
   :tuan_urls=> [TuanUrl.new( {      :name => "窝窝团柳州", :url => "http://www.55tuan.com/openAPI.do?city=liuzhou", :enable => true})]
 },
   {
   :name => "hao123",
   :docfind => "//urlset/url",
-  :suite  => "d = d.children[1].first;d.each{|a| n[a.name] = a.content};p.price = n['price'];p.type_id = \"团购价\";p.finish_at = n['endTime'].to_i;p.address = n['city'];p.title=n['title'];o = p.outlinks.new;o.url = n['loc'];",
+  :suite  => "d = d.children[1].first;d.each{|a| n[a.name] = a.content};p.price = n['price'];p.type_id = \"团购价\";p.finish_at = n['endTime'].to_i;p.address = n['city'];p.title=n['title'];o = p.outlinks.new;o.url = n['loc'];p.uploads.new(:image_file_name => n['image']);",
   :tuan_urls=> [
     TuanUrl.new( {      :name => "F团柳州", :url => "http://newapi.ftuan.com/api/v2.aspx?city=liuzhou", :enable => true}),
     TuanUrl.new( {      :name => "拉手团柳州", :url => "http://open.client.lashou.com/api/detail/city/427", :enable => true}),

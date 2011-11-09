@@ -13,6 +13,7 @@ class Price < ActiveRecord::Base
 
   has_many :integrals, :as => :integralable
   has_many :reviews, :as => :reviewable
+  has_many :uploads, :as => :uploadable
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
   scope :review_low, Filter.new(self).extend(ReviewFilter)
   scope :truth,review_low(Review.truth_point)
