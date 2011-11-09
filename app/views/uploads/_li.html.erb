@@ -1,6 +1,6 @@
 <%  @uploads.each do |upload| %>
   <%= link_to [@commentable,upload] do%>
-<%= image_tag(upload.image.url(:small)) %>
+<%= image_tag(upload.image_updated_at ? upload.image.url(:small) : upload.image_file_name) %>
 <%  end %>
 <% end %><br />
 <%= link_to '你也上传一张？',"#{params[:id]}/uploads/new" %>
