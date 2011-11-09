@@ -9,7 +9,7 @@ class Price < ActiveRecord::Base
   accepts_nested_attributes_for :good
 
   attr_accessor :good_name
-  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name
+  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at
 
   has_many :integrals, :as => :integralable
   has_many :reviews, :as => :reviewable
@@ -84,12 +84,17 @@ class Price < ActiveRecord::Base
   end
 
   def near_prices long = 2
-    @nears = self.nearbys(long)
-    @nears.blank? ? @nears : @nears.where(:good_id => self.good_id).limit(10)
+    @nears = self.nearbys(long).limit(10)
+    @nears.length > 0 ? @nears : @nears.where(:good_id => self.good_id).limit(10)
   end
 
   def to_s
-    "(#{human_price})#{self.title}"
+    case self.type_id
+    when 21
+      self.title
+    else
+      "(#{human_price})#{self.title}"
+    end
   end
 
   before_create  :valid_good
