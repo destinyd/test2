@@ -34,7 +34,7 @@
   <h3>附近价格</h3>
   <ul>
   <% @price.near_prices.each do |price| %>
-    <li><%= link_to price,[@good,price] %><%= price.address %></li>
+    <li><%= price.outlinks.blank? ? price : link_to(price,price.outlinks.first.url)%><%= price.address %></li>
   <% end %>
   </ul>
 <% end %>
