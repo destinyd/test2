@@ -14,7 +14,7 @@ class Good < ActiveRecord::Base
 
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
 
-  validates :name, :presence => true
+  validates :name, :presence => true,:uniqueness => true
   
   acts_as_commentable
   acts_as_taggable

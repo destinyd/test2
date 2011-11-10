@@ -10,6 +10,7 @@ class Price < ActiveRecord::Base
 
   attr_accessor :good_name
   attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at
+  attr_accessible :good_attributes,:on => :update
 
   has_many :integrals, :as => :integralable
   has_many :reviews, :as => :reviewable

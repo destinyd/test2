@@ -1,61 +1,12 @@
 <div class="product_l">
-<a href='javascript:' onclick="show_and_hide('.product_detail','.goods_div')">详细</a>
-<a href='javascript:' onclick="show_and_hide('.product_images','.goods_div')">图片</a>
-<a id="a_attrs" href='javascript:' onclick="get_attrs(<%=@good.id%>);show_and_hide('.product_attrs','.goods_div')">属性</a>
-<a href='javascript:' onclick="show_and_hide('.product_links','.goods_div')">外链</a>
-<div class="product_detail goods_div">
-<p>
-  <b>名称:</b>
-  <%= @good.name %>
-</p>
-
-<p>
-  <b>描述:</b>
-  <%= @good.desc %>
-</p>
-
-<p>
-  <b>提交者:</b>
-  <%= @good.user %>
-</p>
-
-<p>
-  <b>标签:</b>
-  <%= @good.tag_list %>
-</p>
+  <%= render 'goods/good_show',:good => @good %>
+  <%= render 'comments/comments' %>
 </div>
-<div class="product_images goods_div h">
-  <%= render  'uploads/uploads',:locals => {:commentable  => @good} %>
-</div>
-<div class="product_attrs goods_div h">
-  <div id='attrs'>
+<div class="product_r">
+  <div id="prices">
+  <%= render 'prices/prices' %>
   </div>
-  <%= link_to '新建',new_good_attr_path(@good),:remote => true %>
 </div>
-<div class="product_links goods_div h">
-  <ul id='links'%>
-    <%= render @links %>
-  </ul>
-  <%= link_to '新建',new_good_outlink_path(@good),:remote => true %>
-</div>
-
-
-<p>
-  <%= button_to '关注',good_focus_path(@good),:remote => true %>
-  <% @reviewable = @good %>
-  <%= render 'reviews/links',:locals => {:reviewable => @good} %>
-</p>
-<%= render 'comments/comments' %>
-  </div>
-  <div class="product_r">
-<div id="prices">
-<%= render 'prices/prices' %>
-</div>
-
-
-
-
-<%= link_to t('labels.back'), goods_path %>
-    </div>
 <div class="c"></div>
+<%= link_to t('labels.back'), goods_path %>
 

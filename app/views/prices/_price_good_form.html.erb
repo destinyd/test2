@@ -1,0 +1,24 @@
+<% price.build_good %>
+<%= form_for price do |f| -%>
+  <%= f.fields_for :good do |gf| %>
+    <div class="field">
+      <%= gf.label :name %><br />
+      <%= gf.text_field :name,:id => 'price_good_name' %>
+    </div>
+    <div class="field">
+      <%= gf.label :desc %><br />
+      <%= gf.text_field :desc %>
+    </div>
+    <div class="field">
+      <%= gf.label :tag_list %><br />
+      <%= gf.text_field :tag_list %>
+    </div>
+    <%= gf.fields_for :outlinks do |ff| %>
+      <%= ff.label :url %><br />
+      <%= ff.text_field :url %>
+    <%end %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end -%>
+<% end -%>

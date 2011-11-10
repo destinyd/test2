@@ -1,4 +1,3 @@
-    <%= javascript_include_tag "city" %>
 <% @price ||= Price.new %>
 <%= form_for [@good,@price]  do |f| %>
   <% if @price.errors.any? %>

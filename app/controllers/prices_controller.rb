@@ -60,18 +60,18 @@ class PricesController < ApplicationController
 
   # PUT /prices/1
   # PUT /prices/1.xml
-#  def update
-#    @price = @able.blank? ? Price. : @able.prices.find(params[:id])
-#
-#    respond_to do |format|
-#      if @price.update_attributes(params[:price])
-#        format.html { redirect_to([@good,@price], :notice => 'Price was successfully updated.') }
-#        format.xml  { head :ok }
-#      else
-#        format.html { render :action => "edit" }
-#        format.xml  { render :xml => @price.errors, :status => :unprocessable_entity }
-#      end
-#    end
-#  end
+   def update
+     @price =  Price.find(params[:id])
+ 
+     respond_to do |format|
+       if @price.update_attributes(params[:price])
+         format.html { redirect_to([@good,@price], :notice => 'Price was successfully updated.') }
+         format.xml  { head :ok }
+       else
+         format.html { render :action => "edit" }
+         format.xml  { render :xml => @price.errors, :status => :unprocessable_entity }
+       end
+     end
+   end
 
 end

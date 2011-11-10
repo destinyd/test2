@@ -1,3 +1,4 @@
+<div class="product_l">
 <p>
   <b><%= label :price,:title%>:</b>
   <%= @price.title %>
@@ -40,6 +41,10 @@
 <% end %>
 <%= render 'reviews/links' %>
 <%= render 'comments/comments' %>
-
-
+</div>
+<div class="product_r">
+  <%= render 'goods/good_show',:good => @price.good unless @price.good.blank? %>
+  <%= render 'prices/price_good_form',:price => @price if @price.good.blank? %>
+</div>
+<div class="c"></div>
 <%= link_to t('labels.back'), :back %>

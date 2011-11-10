@@ -1,0 +1,45 @@
+<a href='javascript:' onclick="show_and_hide('.product_detail','.goods_div')">详细</a>
+<a href='javascript:' onclick="show_and_hide('.product_images','.goods_div')">图片</a>
+<a id="a_attrs" href='javascript:' onclick="get_attrs(<%=good.id%>);show_and_hide('.product_attrs','.goods_div')">属性</a>
+<a href='javascript:' onclick="show_and_hide('.product_links','.goods_div')">外链</a>
+<div class="product_detail goods_div">
+<p>
+  <b>名称:</b>
+  <%= good.name %>
+</p>
+
+<p>
+  <b>描述:</b>
+  <%= good.desc %>
+</p>
+
+<p>
+  <b>提交者:</b>
+  <%= good.user %>
+</p>
+
+<p>
+  <b>标签:</b>
+  <%= good.tag_list %>
+</p>
+</div>
+<div class="product_images goods_div h">
+<%= render  'uploads/uploads',:commentable  => good,:uploads => good.uploads %>
+</div>
+<div class="product_attrs goods_div h">
+  <div id='attrs'>
+  </div>
+  <%= link_to '新建',new_good_attr_path(good),:remote => true %>
+</div>
+<div class="product_links goods_div h">
+  <ul id='links'%>
+    <%= render good.outlinks %>
+  </ul>
+  <%= link_to '新建',new_good_outlink_path(good),:remote => true %>
+</div>
+  <p>
+    <%= button_to '关注',good_focus_path(good),:remote => true %>
+    <% @reviewable = good %>
+    <%= render 'reviews/links',:locals => {:reviewable => good} %>
+  </p>
+
