@@ -31,11 +31,11 @@
   <b><%= label :price,:desc%>:</b>
   <%= @price.desc %>
 </p>
-<% unless @price.near_prices.blank? %>
+<% if @price.near_prices %>
   <h3>附近价格</h3>
   <ul>
   <% @price.near_prices.each do |price| %>
-    <li><%= price.outlinks.blank? ? price : link_to(price,price.outlinks.first.url)%><%= price.address %></li>
+    <li><%= price.type_id != "团购价" ? price : link_to(price,price.outlinks.first.url)%><%= price.address %></li>
   <% end %>
   </ul>
 <% end %>
