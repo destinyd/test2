@@ -100,12 +100,12 @@ class Price < ActiveRecord::Base
     end
   end
 
-  before_create  :valid_good
+  before_save  :valid_good
   private
   def valid_good
-    if self.good_id.nil?
+    if self.good_name and self.good_id.nil?
       self.good = Good.where(:name => self.good_name).first
-      self.good = self.build_good(:name => self.good_name) if self.good.blank?
+      self.good = self.create_good(:name => self.good_name) unless self.good
     end
   end
 
