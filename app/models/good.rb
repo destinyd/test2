@@ -3,6 +3,7 @@ class Good < ActiveRecord::Base
   STATUS_LOW = 2
   belongs_to :user
   has_many :prices
+  has_many :good_prices
   has_many :outlinks, :as => :outlinkable
   has_many :records, :as => :recordable
   has_many :uploads, :as => :uploadable

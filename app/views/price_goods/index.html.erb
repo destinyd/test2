@@ -1,0 +1,19 @@
+<% title "Price Goods" %>
+
+<table>
+  <tr>
+    <th>Price</th>
+    <th>Good</th>
+  </tr>
+  <% for price_goods in @price_goods %>
+    <tr>
+      <td><%= price_goods.price_id %></td>
+      <td><%= price_goods.good_id %></td>
+      <td><%= link_to "Show", price_goods %></td>
+      <td><%= link_to "Edit", edit_price_goods_path(price_goods) %></td>
+      <td><%= link_to "Destroy", price_goods, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Price Goods", new_price_goods_path %></p>

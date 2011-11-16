@@ -1,0 +1,16 @@
+<% title "Price Goods" %>
+
+<p>
+  <strong>Price:</strong>
+  <%= @price_goods.price_id %>
+</p>
+<p>
+  <strong>Good:</strong>
+  <%= @price_goods.good_id %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_price_goods_path(@price_goods) %> |
+  <%= link_to "Destroy", @price_goods, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", price_goods_path %>
+</p>

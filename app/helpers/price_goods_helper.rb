@@ -1,0 +1,2 @@
+module PriceGoodsHelper
+end

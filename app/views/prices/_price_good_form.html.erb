@@ -1,12 +1,12 @@
 商品绑定
-<%# price.build_good %>
+<%# price.goods %>
 <%= form_for price do |f| -%>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :good_name %>
     <%= f.hidden_field :good_id %>
   </div>
-  <%= f.fields_for :good do |gf| %>
+  <%= f.fields_for :goods do |gf| %>
 <!--    <div class="field">
       <%= gf.label :name %><br />
       <%= gf.text_field :name,:id => 'price_good_name' %>
