@@ -28,8 +28,9 @@ class Price < ActiveRecord::Base
   after_validation :geocode, :if => :address_changed?
   before_create :valid_singleton_for_tuan
 
-  scope :cheapest,order("price").limit(10)
-  scope :recent,order("id desc").limit(10)
+  scope :running,where("finish_at > ?",Time.now.to_i)
+  scope :cheapest,running.order("price").limit(10)
+  scope :recent,running.order("id desc").limit(10)
 
   #validates :country_code, :presence => true, :inclusion => { :in => Country.all_codes }
   #type [0:userlocal1day 1:userurl1day 2:团购 3:拍卖 10:商家普价 11:上架优惠 12:商家限量]
