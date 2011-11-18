@@ -35,7 +35,9 @@
   <h3>附近价格</h3>
   <ul>
   <% @price.near_prices.each do |price| %>
-    <li><%= price.type_id != "团购价" ? price : link_to(price,price.outlinks.first.url)%><%= price.address %></li>
+    <li><%#= price.type_id != "团购价" ? %>
+      <%=link_to(price,price)%><%= price.address %>
+    </li>
   <% end %>
   </ul>
 <% end %>

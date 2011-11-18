@@ -92,8 +92,11 @@ class Price < ActiveRecord::Base
 
   def near_prices long = 2
     @nears = self.nearbys(long)
-    @nears = @nears.limit(10) unless @nears.length == 0 
-    @nears.length == 0 ? @nears : @nears.where(:good_id => self.good_id).limit(10)
+    if @nears.length != 0
+      good_nears = @nears.where(:good_id => self.good_id).limit(10)
+      return good_nears if good_nears.length > 0
+    end
+    @nears.limit(10)
   end
 
   def to_s
