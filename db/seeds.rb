@@ -16,7 +16,7 @@ TuanApi.create [
   {
   :name => "hao123",
   :docfind => "//urlset/url",
-  :suite  => "d = d.children[1].first;d.each{|a| n[a.name] = a.content};p.price = n['price'];p.type_id = \"团购价\";p.finish_at = Time.at(n['endTime'].to_i);p.address = n['city'];p.title=n['title'];o = p.outlinks.new;o.url = n['loc'];p.uploads.new(:image_file_name => n['image']);",
+:suite=>"d=d.children[1].first;d.each{|a|n[a.name]=a.content};p.price=n['price'];p.type_id=\"团购价\";p.finish_at=Time.at(n['endTime'].to_i);p.address=n['city'];p.title=n['title'];o=p.outlinks.new;o.url=n['loc'];p.uploads.new(:image_file_name=>n['image']);",
   :tuan_urls=> [
     TuanUrl.new( {      :name => "24卷柳州", :url => "http://static.24quan.com/cms/liuzhou_bus.php", :enable => true}),
     TuanUrl.new( {      :name => "拉手团柳州", :url => "http://open.client.lashou.com/api/detail/city/427", :enable => true}),
