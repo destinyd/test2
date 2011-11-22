@@ -45,8 +45,10 @@
 <%= render 'comments/comments' %>
 </div>
 <div class="product_r">
-  <%= render 'goods/good_show',:good => @price.good unless @price.good.blank? %>
-  <%= render 'prices/price_good_form',:price => @price if @price.good.blank? %>
+  <% @price.goods.each do |good| %>
+    <%= render 'goods/good_show',:good => good %>
+  <% end unless @price.goods.nil? %>
+  <%= render 'prices/price_good_form',:price => @price %>
 </div>
 <div class="c"></div>
 <%= link_to t('labels.back'), :back %>
