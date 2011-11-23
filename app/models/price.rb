@@ -2,11 +2,10 @@
 class Price < ActiveRecord::Base
   STATUS_LOW = 5
   belongs_to :user
-  belongs_to :good
+#  belongs_to :good
   has_many :outlinks, :as => :outlinkable
   validates :type_id, :presence => true
   validates :price, :presence => true
-  accepts_nested_attributes_for :good
 
   attr_accessor :good_name
   attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at
@@ -18,6 +17,7 @@ class Price < ActiveRecord::Base
 
   has_many :price_goods
   has_many :goods, :through => :price_goods
+  accepts_nested_attributes_for :goods
 
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
   scope :review_low, Filter.new(self).extend(ReviewFilter)
@@ -111,9 +111,10 @@ class Price < ActiveRecord::Base
   before_save  :valid_good
   private
   def valid_good
-    if self.good_name and self.good_id.nil?
-      self.good = Good.where(:name => self.good_name).first
-      self.good = self.create_good(:name => self.good_name) unless self.good
+    if self.good_name
+      good = Good.where(:name => self.good_name).first
+      self.goods <<  good unless good.nil?
+      self.goods << self.goods.create(:name => self.good_name) if self.goods.blank?
     end
   end
 

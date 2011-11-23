@@ -31,6 +31,9 @@
   <b><%= label :price,:desc%>:</b>
   <%= @price.desc %>
 </p>
+链接：<%= link_to @price.outlinks.first.url,@price.outlinks.first.url %>
+<%= image_tag @price.uploads.first.image_file_name unless @price.type_id != "团购价" or @price.uploads.blank?%>
+<br /><br />
 <% if @price.near_prices %>
   <h3>附近价格</h3>
   <ul>
