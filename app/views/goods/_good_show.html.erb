@@ -23,6 +23,9 @@
   <b>标签:</b>
   <%= good.tag_list %>
 </p>
+<% if !good.uploads.blank? %>
+<%= image_tag good.uploads.first.image.url  %>
+<% end  %>
 </div>
 
 <div class="product_images goods_div h">
