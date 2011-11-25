@@ -7,9 +7,9 @@ class Price < ActiveRecord::Base
   validates :type_id, :presence => true
   validates :price, :presence => true
 
-  attr_accessor :good_name
+  attr_accessor :good_name,:good_user_id
   attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at
-  attr_accessible :good_attributes,:on => :update
+  attr_accessible :good_attributes,:good_user_id,:on => :update
 
   has_many :integrals, :as => :integralable
   has_many :reviews, :as => :reviewable
@@ -114,7 +114,11 @@ class Price < ActiveRecord::Base
     if self.good_name
       good = Good.where(:name => self.good_name).first
       self.goods <<  good unless good.nil?
-      self.goods << self.goods.create(:name => self.good_name) if self.goods.blank?
+      if self.goods.map(&:user_id).include? self.good_user_id
+        self.errors.add(:goods,"has_post") 
+        return false
+      end
+      self.goods << self.goods.create(:name => self.good_name,:user_id => self.good_user_id) unless self.goods.map(&:name).include?(self.good_name)
     end
   end
 

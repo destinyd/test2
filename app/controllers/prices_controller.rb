@@ -62,6 +62,7 @@ class PricesController < ApplicationController
   # PUT /prices/1.xml
    def update
      @price =  Price.find(params[:id])
+     params[:price][:good_user_id] = current_user.id
  
      respond_to do |format|
        if @price.update_attributes(params[:price])
