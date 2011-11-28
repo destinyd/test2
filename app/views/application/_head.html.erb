@@ -1,9 +1,11 @@
 <% session['loc'] = request.location if session['loc'].blank? %>
 <% @loc = session['loc']%>
 <div class='head_left'>
- <div class='head_logo'><a href='/' alt='折扣网'><img src='/images/rails.png' alt='折扣网logo' /></a></div>
- <div class='head_logo'><a href="/">折扣网</a></div>
- <div class='head_city'>您的位置:<%=@loc.city%></div>
+  <ul>
+    <li><a href='/' alt='折扣网'><span>神马价</span></a></li>
+    <li><a href='/' alt='记账'><span class="current">记账</span></a></li>
+    <li>您的位置:<%=@loc.city%></li>
+  </ul>
 </div>
 <div class='head_login'>
 <% if user_signed_in? %>
