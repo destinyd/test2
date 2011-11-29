@@ -1,12 +1,14 @@
-$main-color: #1E7B12;
-$second-color: #FFF;
+$main-color: #333;
+$first-color: #FFFFFF;
+$second-color: #FFB380;
+$third-color: #CCC;
 @mixin rounded-corners($radius){
   border-radius: $radius;
   -moz-border-radius: $radius;
   -webkit-border-radius: $radius;
 }
 body {
-  background-color: #FFF;
+  background-color: $first-color;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px;
   margin:0;
@@ -179,15 +181,15 @@ a{
     width:80px;
 }
 #head{
-  background-color: #000;
+  background-color: $main-color;
+  color: $third-color;
   height:30px;
   overflow:hidden;
-  color: $second-color;
   line-height: 27px;
   font-size: 13px/26px;
   a{
-    color: $second-color;
     line-height: 27px;
+    color: $third-color;
   }
   .head_left{
     ul
@@ -195,14 +197,18 @@ a{
       li{
         height:30px;
         float:left;
+        &.current{
+          background-color: $first-color;
+          a{
+            color: $second-color;
+          }
+        }
         a{
+          height: 30px;
           span{
             line-height: 27px;
             height:30px;
             padding:0 10px;
-            &.current{
-              background-color: #CCC;
-            }
           }
         }
       }
