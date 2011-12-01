@@ -1,7 +1,7 @@
-$main-color: #333;
+$main-color: #66CCFF;
 $first-color: #FFFFFF;
-$second-color: #FFB380;
-$third-color: #CCC;
+$second-color: #FF6600;
+$font-color: #444;
 @mixin rounded-corners($radius){
   border-radius: $radius;
   -moz-border-radius: $radius;
@@ -9,6 +9,7 @@ $third-color: #CCC;
 }
 body {
   background-color: $first-color;
+  color:  $font-color;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px;
   margin:0;
@@ -90,7 +91,7 @@ ol,ul {list-style:none;}
 }
 
 a{
-  color: $main-color;
+  color: $font-color;
   text-decoration: none;
   img {
   border: none;
@@ -132,19 +133,33 @@ a{
     margin-top:10px;
     min-height:250px;
 }
-.in_l,.in_r{
-    width:30%;
-    border:solid 1px #000;
-    margin-left:10px;
-    @include rounded-corners(5px);
-}
 .in_l{
-  float:left;
+    width:30%;
+    border:solid 1px $main-color;
+    margin-left:10px;
+    float:left;
+    @include rounded-corners(5px);
+    h3{
+      height:25px;
+      line-height:25px;
+      padding:3px 5px;
+      background-color:$main-color;
+      color:$first-color;
+      a{
+        font-size:14px;
+        color:$first-color;
+      }
+    }
+    ul{
+      padding:2px 8px 8px 8px;
+      li{
+        padding:1px 0;
+      }
+    }
 }
-.in_l li,.in_r li,.articles li{
+.in_l li,.articles li{
     list-style-position:inside;
     overflow:hidden;
-    width:95%;
 }
 .in_l li a{
     display:inline;
@@ -182,14 +197,15 @@ a{
 }
 #head{
   background-color: $main-color;
-  color: $third-color;
+  color: $first-color;
   height:30px;
   overflow:hidden;
   line-height: 27px;
   font-size: 13px/26px;
+  border-bottom:solid 1px $second-color;
   a{
     line-height: 27px;
-    color: $third-color;
+    color: $first-color;
   }
   .head_left{
     ul
@@ -198,10 +214,7 @@ a{
         height:30px;
         float:left;
         &.current{
-          background-color: $first-color;
-          a{
-            color: $second-color;
-          }
+          border-top:solid 2px $second-color;
         }
         a{
           height: 30px;
@@ -227,7 +240,6 @@ a{
 #container {
   width: 75%;
   margin: 0 auto;
-  background-color: #FFF;
   padding: 20px 40px;
   margin-top: 20px;
   clear:both;
