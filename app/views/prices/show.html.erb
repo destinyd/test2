@@ -47,11 +47,11 @@
 <%= render 'reviews/links' %>
 <%= render 'comments/comments' %>
 </div>
-<div class="product_r">
+<aside>
   <% @price.goods.each do |good| %>
     <%= render 'goods/good_show',:good => good %>
   <% end unless @price.goods.nil? %>
   <%= render 'prices/price_good_form',:price => @price %>
-</div>
+</aside>
 <div class="c"></div>
 <%= link_to t('labels.back'), :back %>

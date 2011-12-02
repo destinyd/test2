@@ -9,14 +9,15 @@
   <%= yield(:head) %>
   </head>
   <body>
-    <div id="head"><%= render :partial => 'head' %></div>
-    <div id="container">
+    <header><%= render :partial => 'head' %></header>
+    <article>
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <% end %>
       <%= content_tag :h1, yield(:title) if show_title? %>
       <%= yield %>
-    </div>
+    </article>
+  <%= render 'footer' %>
   </body>
   <script>
   if('<%=current_user.to_s%>' != '')
