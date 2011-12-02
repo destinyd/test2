@@ -5,6 +5,8 @@
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+<!--[if IE]>
+ <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
   <%= yield(:head) %>
   </head>
