@@ -92,7 +92,7 @@ ol,ul {list-style:none;}
 
 a{
   color: $font-color;
-  text-decoration: none;
+  /*text-decoration: none;*/
   img {
   border: none;
   }
@@ -136,8 +136,8 @@ a{
 .in_l{
     width:30%;
     border:solid 1px $main-color;
-    margin-left:10px;
     float:left;
+    margin:5px;
     @include rounded-corners(5px);
     h3{
       height:25px;
@@ -150,9 +150,9 @@ a{
         color:$first-color;
       }
     }
-    ul{
+    ul,form{
       padding:2px 8px 8px 8px;
-      li{
+      li,div{
         padding:1px 0;
       }
     }
@@ -252,6 +252,8 @@ article {
   padding: 20px 40px;
   margin-top: 20px;
   clear:both;
+  position:relative;
+  min-height:300px;
 }
 
 .user_show,.user_hide{

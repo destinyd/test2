@@ -30,7 +30,7 @@ class PricesController < ApplicationController
   def new
     if @able.blank?
       @price =  current_user.prices.build 
-      @price.build_good
+      @price.goods.new
     else
       @price = @able.prices.build
     end

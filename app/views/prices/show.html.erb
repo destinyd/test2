@@ -35,6 +35,7 @@
 <%= image_tag @price.uploads.first.image_file_name unless @price.type_id != "团购价" or @price.uploads.blank?%>
 <br /><br />
 <% if @price.near_prices %>
+<div class="in_l" style="width:95%;float:none">
   <h3>附近价格</h3>
   <ul>
   <% @price.near_prices.each do |price| %>
@@ -43,15 +44,23 @@
     </li>
   <% end %>
   </ul>
+</div>
 <% end %>
 <%= render 'reviews/links' %>
 <%= render 'comments/comments' %>
 </div>
 <aside>
   <% @price.goods.each do |good| %>
+  <div class="in_l" style="width:95%;margin-bottom:10px;">
+    <h3><%= good.name %></h3>
+    <div>
     <%= render 'goods/good_show',:good => good %>
+  </div>
+  </div>
   <% end unless @price.goods.nil? %>
-  <%= render 'prices/price_good_form',:price => @price %>
+  <div class="in_l" style="width:95%">
+    <%= render 'prices/price_good_form',:price => @price %>
+</div>
 </aside>
 <div class="c"></div>
 <%= link_to t('labels.back'), :back %>

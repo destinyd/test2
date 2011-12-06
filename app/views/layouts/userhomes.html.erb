@@ -5,22 +5,25 @@
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+<!--[if IE]>
+ <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
   <%= yield(:head) %>
   </head>
   <body>
-	<div id="head"><%= render :partial => 'head' %></div>
-    <div id="container">
+	<header><%= render :partial => 'head' %></header>
+    <article>
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <% end %>
       <%= content_tag :h1, yield(:title) if show_title? %>
       <div style="height:500px">
-        <div class="l userhome_left" style='width:240px;height:300px;display:block'><%=render 'left' %></div>
+        <div class="in_l userhome_left" style='width:240px;height:300px;display:block'><%=render 'left' %></div>
         <div class="l userhome_right">
           <%= yield %>
         </div>
       </div>
-    </div>
+    </article>
   </body>
   <script>
   if('<%=current_user.to_s%>' != '')
