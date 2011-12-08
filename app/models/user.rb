@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :uploads
   has_many :focuss
   has_many :outlinks
+  has_many :records
 
   scope :recent ,limit(10).order('id desc')#.select('email,created_at')
   def to_s

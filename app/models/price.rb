@@ -28,7 +28,7 @@ class Price < ActiveRecord::Base
   after_validation :geocode, :if => :address_changed?
   before_create :valid_singleton_for_tuan
 
-  scope :running,where("finish_at > ?",Time.now.to_i)
+  scope :running,where("finish_at > ?",Time.now)
   scope :cheapest,running.order("price").limit(10)
   scope :recent,running.order("id desc").limit(10)
 
