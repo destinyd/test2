@@ -1,4 +1,9 @@
 Zhekou::Application.routes.draw do
+  resources :my_tasks
+
+  resources :user_tasks
+
+  resources :tasks
 
   resources :price_goods
 

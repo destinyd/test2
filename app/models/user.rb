@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
   has_many :outlinks
   has_many :records
 
+  has_many :user_tasks
+  has_many :tasks,:through => :user_tasks
+
   scope :recent ,limit(10).order('id desc')#.select('email,created_at')
   def to_s
   	self.email
