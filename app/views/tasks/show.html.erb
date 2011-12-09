@@ -1,0 +1,52 @@
+<% title "Task" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @task.name %>
+</p>
+<p>
+  <strong>Desc:</strong>
+  <%= @task.desc %>
+</p>
+<p>
+  <strong>Requirement Desc:</strong>
+  <%= @task.requirement_desc %>
+</p>
+<p>
+  <strong>Requirement:</strong>
+  <%= @task.requirement %>
+</p>
+<p>
+  <strong>Incentives Desc:</strong>
+  <%= @task.incentives_desc %>
+</p>
+<p>
+  <strong>Incentives:</strong>
+  <%= @task.incentives %>
+</p>
+<p>
+  <strong>Type:</strong>
+  <%= @task.type_id %>
+</p>
+<p>
+  <strong>Times:</strong>
+  <%= @task.times %>
+</p>
+<p>
+  <strong>Started At:</strong>
+  <%= @task.started_at %>
+</p>
+<p>
+  <strong>Finished At:</strong>
+  <%= @task.finished_at %>
+</p>
+<p>
+  <strong>Group:</strong>
+  <%= @task.group_id %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_task_path(@task) %> |
+  <%= link_to "Destroy", @task, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", tasks_path %>
+</p>

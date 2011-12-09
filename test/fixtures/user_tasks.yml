@@ -1,0 +1,13 @@
+one:
+  user_id: 1
+  task_id: 1
+  accept_at: 2011-12-09 09:30:55
+  finished_at: 1
+  degree: 1
+
+two:
+  user_id: 1
+  task_id: 1
+  accept_at: 2011-12-09 09:30:55
+  finished_at: 1
+  degree: 1

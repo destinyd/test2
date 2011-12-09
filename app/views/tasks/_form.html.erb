@@ -1,0 +1,48 @@
+<%= form_for @task do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :desc %><br />
+    <%= f.text_area :desc %>
+  </p>
+  <p>
+    <%= f.label :requirement_desc %><br />
+    <%= f.text_field :requirement_desc %>
+  </p>
+  <p>
+    <%= f.label :requirement %><br />
+    <%= f.text_field :requirement %>
+  </p>
+  <p>
+    <%= f.label :incentives_desc %><br />
+    <%= f.text_field :incentives_desc %>
+  </p>
+  <p>
+    <%= f.label :incentives %><br />
+    <%= f.text_field :incentives %>
+  </p>
+  <p>
+    <%= f.label :type_id %><br />
+    <%= f.number_field :type_id %>
+  </p>
+  <p>
+    <%= f.label :times %><br />
+    <%= f.number_field :times %>
+  </p>
+  <p>
+    <%= f.label :started_at %><br />
+    <%= f.datetime_select :started_at %>
+  </p>
+  <p>
+    <%= f.label :finished_at %><br />
+    <%= f.datetime_select :finished_at %>
+  </p>
+  <p>
+    <%= f.label :group_id %><br />
+    <%= f.number_field :group_id %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

@@ -1,0 +1,24 @@
+<h1>Listing my_tasks</h1>
+
+<h3>已接任务</h3>
+<dl>
+<% @my_tasks.each do |my_task| %>
+  <dt><%= my_task.name %></dt>
+  <dd><%= my_task.desc %></dd>
+<% end %>
+</dl>
+
+<br />
+
+<h3>可接任务</h3>
+<dl>
+<% @acceptables.each do |my_task| %>
+  <dt><%= my_task.name %></dt>
+  <dd>
+  <%= my_task.desc %><br />
+  <%= link_to "接受",my_tasks_path(:task_id => my_task.id),:method=>:post,:remote => true  %>
+  </dd>
+<% end %>
+</dl>
+
+<br />

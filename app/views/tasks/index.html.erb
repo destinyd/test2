@@ -1,0 +1,37 @@
+<% title "Tasks" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Desc</th>
+    <th>Requirement Desc</th>
+    <th>Requirement</th>
+    <th>Incentives Desc</th>
+    <th>Incentives</th>
+    <th>Type</th>
+    <th>Times</th>
+    <th>Started At</th>
+    <th>Finished At</th>
+    <th>Group</th>
+  </tr>
+  <% for task in @tasks %>
+    <tr>
+      <td><%= task.name %></td>
+      <td><%= task.desc %></td>
+      <td><%= task.requirement_desc %></td>
+      <td><%= task.requirement %></td>
+      <td><%= task.incentives_desc %></td>
+      <td><%= task.incentives %></td>
+      <td><%= task.type_id %></td>
+      <td><%= task.times %></td>
+      <td><%= task.started_at %></td>
+      <td><%= task.finished_at %></td>
+      <td><%= task.group_id %></td>
+      <td><%= link_to "Show", task %></td>
+      <td><%= link_to "Edit", edit_task_path(task) %></td>
+      <td><%= link_to "Destroy", task, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Task", new_task_path %></p>

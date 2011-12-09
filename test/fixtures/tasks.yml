@@ -1,0 +1,25 @@
+one:
+  name: MyString
+  desc: MyText
+  requirement_desc: MyString
+  requirement: MyString
+  incentives_desc: MyString
+  incentives: MyString
+  type_id: 1
+  times: 1
+  started_at: 2011-12-09 09:28:19
+  finished_at: 2011-12-09 09:28:19
+  group_id: 1
+
+two:
+  name: MyString
+  desc: MyText
+  requirement_desc: MyString
+  requirement: MyString
+  incentives_desc: MyString
+  incentives: MyString
+  type_id: 1
+  times: 1
+  started_at: 2011-12-09 09:28:19
+  finished_at: 2011-12-09 09:28:19
+  group_id: 1

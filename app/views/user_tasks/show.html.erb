@@ -1,0 +1,28 @@
+<% title "User Task" %>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_task.user_id %>
+</p>
+<p>
+  <strong>Task:</strong>
+  <%= @user_task.task_id %>
+</p>
+<p>
+  <strong>Accept At:</strong>
+  <%= @user_task.accept_at %>
+</p>
+<p>
+  <strong>Finished At:</strong>
+  <%= @user_task.finished_at %>
+</p>
+<p>
+  <strong>Degree:</strong>
+  <%= @user_task.degree %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_user_task_path(@user_task) %> |
+  <%= link_to "Destroy", @user_task, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", user_tasks_path %>
+</p>

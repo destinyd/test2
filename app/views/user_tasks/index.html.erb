@@ -1,0 +1,25 @@
+<% title "User Tasks" %>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Task</th>
+    <th>Accept At</th>
+    <th>Finished At</th>
+    <th>Degree</th>
+  </tr>
+  <% for user_task in @user_tasks %>
+    <tr>
+      <td><%= user_task.user_id %></td>
+      <td><%= user_task.task_id %></td>
+      <td><%= user_task.accept_at %></td>
+      <td><%= user_task.finished_at %></td>
+      <td><%= user_task.degree %></td>
+      <td><%= link_to "Show", user_task %></td>
+      <td><%= link_to "Edit", edit_user_task_path(user_task) %></td>
+      <td><%= link_to "Destroy", user_task, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New User Task", new_user_task_path %></p>
