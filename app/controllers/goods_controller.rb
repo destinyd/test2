@@ -1,6 +1,7 @@
 class GoodsController < ApplicationController
   before_filter :authenticate_user!, :only => [:new,:create,:edit,:update,:destroy]
   helper_method :sort_column, :sort_direction
+  respond_to :html, :json
   
   # GET /goods
   # GET /goods.xml
@@ -70,16 +71,9 @@ class GoodsController < ApplicationController
   # PUT /goods/1.xml
   def update
     @good = current_user.goods.find(params[:id])
+    @good.update_attributes(params[:good])
+    respond_with @good
 
-    respond_to do |format|
-      if @good.update_attributes(params[:good])
-        format.html { redirect_to(@good, :notice => 'Good was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @good.errors, :status => :unprocessable_entity }
-      end
-    end
   end
 
   # DELETE /goods/1

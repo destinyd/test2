@@ -7,6 +7,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.purr
+//= require best_in_place
 //= require_tree .
 function show_and_hide(show,hide){
   $(hide).hide();

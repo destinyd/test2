@@ -24,8 +24,9 @@ gem 'awesome_nested_set'
 gem 'geocoder'
 gem 'acts-as-taggable-on'#, '~>2.1.0'
 gem "therubyracer", :require => 'v8'
- #gem 'ruby-debug19', :require => 'ruby-debug'
-#dd
 #gem "mocha", :group => :test
 
+#gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'best_in_place'
+#dd
 
