@@ -1,4 +1,5 @@
 class MyTasksController < ApplicationController
+  respond_to :html, :json,:js
   before_filter :authenticate_user!
   before_filter :get_my_task
   # GET /my_tasks
@@ -43,44 +44,47 @@ class MyTasksController < ApplicationController
   # POST /my_tasks
   # POST /my_tasks.json
   def create
-    @rs = @my_task.accept(:task_id => params[:task_id])
+    @id = params[:task_id]
+    @task = @my_task.accept(:task_id => @id)
 
     respond_to do |format|
-      if @rs.nil?
-        #format.html { render action: "new" }
+      if @task.nil?
+        @error = "task already taken"
+        format.js { render 'fault' }
         format.json { render json: "has taken", status: :unprocessable_entity }
       else
-        #format.html { redirect_to @my_task, notice: 'My task was successfully created.' }
-        format.json { render json: @rs, status: :created}#, location: @rs }
+        format.js
+        format.json { render json: @task, status: :created}#, location: @rs }
       end
     end
   end
 
-  # PUT /my_tasks/1
-  # PUT /my_tasks/1.json
-  #def update
-    #@my_task = MyTask.find(params[:id])
+  # 完成
+  def update
+    @my_task = MyTask.find(params[:id])
 
-    #respond_to do |format|
-      #if @my_task.update_attributes(params[:my_task])
-        #format.html { redirect_to @my_task, notice: 'My task was successfully updated.' }
-        #format.json { head :ok }
-      #else
-        #format.html { render action: "edit" }
-        #format.json { render json: @my_task.errors, status: :unprocessable_entity }
-      #end
-    #end
-  #end
+    respond_to do |format|
+      if @my_task.update_attributes(params[:my_task])
+        format.html { redirect_to @my_task, notice: 'My task was successfully updated.' }
+        format.json { head :ok }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @my_task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /my_tasks/1
   # DELETE /my_tasks/1.json
   def destroy
-    @my_task = MyTask.find(params[:id])
-    @my_task.destroy
+    @id = params[:id]
+    @task = @my_task.give_up(@id)
 
     respond_to do |format|
-      format.html { redirect_to my_tasks_url }
-      format.json { head :ok }
+      if @task
+        format.js
+        format.json { head :ok }
+      end
     end
   end
 

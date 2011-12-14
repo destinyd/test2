@@ -12,13 +12,23 @@ class MyTasks
     Task.all
   end
 
-  def accept(args)
-    @task_id =args[:task_id]
-    accepted = @user.user_tasks.where(:task_id => @task_id,:finished_at=>nil)
+  def accept(task_id)
+    accepted = @user.user_tasks.where(:task_id => task_id,:finished_at=>nil)
 
     if accepted.blank?
-      @user.tasks << Task.find(@task_id) 
+      @task = Task.find(task_id)
+      @user.tasks << @task
       @user.save
+      @task
+    end
+  end
+
+  def give_up(task_id)
+    user_task = @user.user_tasks.where(:"user_tasks.task_id" => task_id).first
+    if user_task
+      @task = user_task.task
+      user_task.destroy 
+      @task
     end
   end
 
