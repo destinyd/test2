@@ -45,7 +45,7 @@ class MyTasksController < ApplicationController
   # POST /my_tasks.json
   def create
     @id = params[:task_id]
-    @task = @my_task.accept(:task_id => @id)
+    @task = @my_task.accept(@id)
 
     respond_to do |format|
       if @task.nil?
@@ -61,17 +61,18 @@ class MyTasksController < ApplicationController
 
   # 完成
   def update
-    @my_task = MyTask.find(params[:id])
+    @id = params[:id]
+    @task = @my_task.finish(@id)
 
-    respond_to do |format|
-      if @my_task.update_attributes(params[:my_task])
-        format.html { redirect_to @my_task, notice: 'My task was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @my_task.errors, status: :unprocessable_entity }
-      end
-    end
+    #respond_to do |format|
+      #if @my_task.update_attributes(params[:my_task])
+        #format.html { redirect_to @my_task, notice: 'My task was successfully updated.' }
+        #format.json { head :ok }
+      #else
+        #format.html { render action: "edit" }
+        #format.json { render json: @my_task.errors, status: :unprocessable_entity }
+      #end
+    #end
   end
 
   # DELETE /my_tasks/1

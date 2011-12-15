@@ -1,27 +1,19 @@
-<h1>Listing my_tasks</h1>
+<h1>任务列表</h1>
 
 <h3>已接任务</h3>
 <dl id="accepted">
-<% @my_tasks.each do |my_task| %>
-  <dt class="accepted_<%= my_task.id %>"><%= my_task.name %></dt>
-  <dd class="accepted_<%= my_task.id %>">
-  <%= my_task.desc %><br />
-  <%= link_to t('labels.del'),my_task_path(my_task.id),:method=>:delete,:remote => true,:comfirm =>t('labels.sure?')  %>
-  </dd>
-<% end %>
+  <% @my_tasks.each do |my_task| %>
+    <%= render 'task',:task => my_task,:id => 'accepted',:link_path => link_to( t('labels.give_up'),my_task_path(my_task.id),:method=>:delete,:remote => true,:comfirm =>t('labels.sure?')) + link_to(t('labels.finish'),my_task_path(my_task),:method=>:put,:remote => true) %>
+  <% end %>
 </dl>
 
 <br />
 
 <h3>可接任务</h3>
 <dl id="acceptables">
-<% @acceptables.each do |my_task| %>
-  <dt class="acceptables_<%= my_task.id %>"><%= my_task.name %></dt>
-  <dd class="acceptables_<%= my_task.id %>">
-  <%= my_task.desc %><br />
-  <%= link_to "接受",my_tasks_path(:task_id => my_task.id),:method=>:post,:remote => true  %>
-  </dd>
-<% end %>
+  <% @acceptables.each do |my_task| %>
+    <%= render 'task',:task => my_task,:id => 'acceptables',:link_path => link_to(t('labels.accept'),my_tasks_path(:task_id => my_task.id),:method=>:post,:remote => true) %>
+  <% end %>
 </dl>
 
 <br />

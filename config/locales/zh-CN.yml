@@ -271,6 +271,8 @@ zh-CN:
     edit: 修改
     del: 删除
     new: 添加
+    give_up: 放弃
+    accept: 接受
   notice:
     success: 成功
   titles:

@@ -5,6 +5,7 @@ module ApplicationHelper
     direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"  
     link_to title, params.merge(:sort => column, :direction => direction, :page => nil), {:class => css_class}  
   end
+
   def action_show(class_constantize  = nil,diy_action = nil)
     class_constantize ||=  controller_name.singularize.capitalize.constantize
     diy_action ||= action_name

@@ -9,7 +9,7 @@ class MyTasks
   end
 
   def acceptables
-    Task.all
+    Task.all - @user.tasks
   end
 
   def accept(task_id)
@@ -24,12 +24,17 @@ class MyTasks
   end
 
   def give_up(task_id)
-    user_task = @user.user_tasks.where(:"user_tasks.task_id" => task_id).first
+    user_task = @user.user_tasks.where(:task_id => task_id).first
     if user_task
       @task = user_task.task
       user_task.destroy 
       @task
     end
+  end
+
+  def finish(task_id)
+    user_task = @user.user_tasks.where(:finished_at => nil,:task_id => task_id).first
+    user_task.finish if user_task and user_task
   end
 
 end

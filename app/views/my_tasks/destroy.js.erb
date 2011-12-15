@@ -1,2 +1,2 @@
-$('#acceptables').append('<%= j render 'task',:task => @task,:id => 'acceptables' %>');
+$('#acceptables').append('<%= j render 'task',:task => @task,:id => 'acceptables',:link_path => link_to("接受",my_tasks_path(:task_id => @task.id),:method=>:post,:remote => true) %>');
 $('.accepted_<%= @id %>').remove();

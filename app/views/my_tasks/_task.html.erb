@@ -1,2 +1,2 @@
-<dt <%= "id='#{id}_#{task.id}'" unless id.blank? %>><%= task.name %></dt>
-<dd><%= task.desc %></dd>
+<dt <%= "class='#{id}_#{task.id}'" %>><%= task.name %></dt>
+<dd <%= "class='#{id}_#{task.id}'" %>><%= task.desc %><br /><%= link_path %></dd>
