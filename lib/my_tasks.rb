@@ -13,9 +13,10 @@ class MyTasks
   end
 
   def accept(task_id)
-    accepted = @user.user_tasks.where(:task_id => task_id,:finished_at=>nil)
+    user_tasks = @user.user_tasks
+    accepted = user_tasks.where(:"user_tasks.task_id"=>task_id,:finished_at=>nil)
 
-    if accepted.blank?
+    if accepted
       @task = Task.find(task_id)
       @user.tasks << @task
       @user.save
