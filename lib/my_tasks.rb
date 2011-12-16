@@ -5,7 +5,7 @@ class MyTasks
   end
 
   def accepted
-    @user.tasks
+    @user.tasks - self.finisheds
   end
 
   def acceptables
@@ -34,7 +34,12 @@ class MyTasks
 
   def finish(task_id)
     user_task = @user.user_tasks.where(:finished_at => nil,:task_id => task_id).first
-    user_task.finish if user_task and user_task
+    user_task.finish if user_task and user_task.could_finish?
+  end
+
+  def finisheds
+    finisheds = @user.user_tasks.where("finished_at IS NOT NULL").includes(:task)
+    finisheds = finisheds.map(&:task)
   end
 
 end

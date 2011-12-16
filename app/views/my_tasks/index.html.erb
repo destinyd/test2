@@ -3,7 +3,7 @@
 <h3>已接任务</h3>
 <dl id="accepted">
   <% @my_tasks.each do |my_task| %>
-    <%= render 'task',:task => my_task,:id => 'accepted',:link_path => link_to( t('labels.give_up'),my_task_path(my_task.id),:method=>:delete,:remote => true,:comfirm =>t('labels.sure?')) + link_to(t('labels.finish'),my_task_path(my_task),:method=>:put,:remote => true) %>
+    <%= render 'accepted',:my_task => my_task %>
   <% end %>
 </dl>
 

@@ -1,0 +1,2 @@
+<%= render 'task',:task => my_task,:id => 'accepted',:link_path => link_to( t('labels.give_up'),my_task_path(my_task.id),:method=>:delete,:remote => true,:comfirm =>t('labels.sure?')) + " " + link_to(t('labels.finish'),my_task_path(my_task),:method=>:put,:remote => true) %>
+

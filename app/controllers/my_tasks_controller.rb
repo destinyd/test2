@@ -17,7 +17,7 @@ class MyTasksController < ApplicationController
   # GET /my_tasks/1
   # GET /my_tasks/1.json
   def show
-    @my_task = MyTask.find(params[:id])
+    @my_task = MyTask.find params[:id]
 
     respond_to do |format|
       format.html # show.html.erb
@@ -45,7 +45,7 @@ class MyTasksController < ApplicationController
   # POST /my_tasks.json
   def create
     @id = params[:task_id]
-    @task = @my_task.accept(@id)
+    @task = @my_task.accept @id
 
     respond_to do |format|
       if @task.nil?
@@ -62,24 +62,27 @@ class MyTasksController < ApplicationController
   # 完成
   def update
     @id = params[:id]
-    @task = @my_task.finish(@id)
+    @task = @my_task.finish @id
 
-    #respond_to do |format|
-      #if @my_task.update_attributes(params[:my_task])
+    respond_to do |format|
+      if @task
         #format.html { redirect_to @my_task, notice: 'My task was successfully updated.' }
-        #format.json { head :ok }
-      #else
+        format.js
+        format.json { head :ok }
+      else
+        @error = 'cannot finish'
         #format.html { render action: "edit" }
-        #format.json { render json: @my_task.errors, status: :unprocessable_entity }
-      #end
-    #end
+        format.js{ render 'fault'}
+        format.json { render json: @my_task.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /my_tasks/1
   # DELETE /my_tasks/1.json
   def destroy
     @id = params[:id]
-    @task = @my_task.give_up(@id)
+    @task = @my_task.give_up @id
 
     respond_to do |format|
       if @task
