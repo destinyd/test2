@@ -29,7 +29,7 @@ class PricesController < ApplicationController
   # GET /prices/new.xml
   def new
     if @able.blank?
-      @price =  current_user.prices.build 
+      @price =  Price.new params[:price] 
       @price.goods.new
     else
       @price = @able.prices.build
