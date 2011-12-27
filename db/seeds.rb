@@ -54,3 +54,5 @@ Article.create(
 }
 ]
 )
+
+GetTuangou.new.get_all
