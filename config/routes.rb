@@ -1,4 +1,6 @@
 Zhekou::Application.routes.draw do
+  resources :user_infos
+
   resources :my_tasks
 
   resources :user_tasks
