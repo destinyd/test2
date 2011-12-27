@@ -6,8 +6,10 @@ class Article < ActiveRecord::Base
 
   default_scope order('articles.is_top desc,articles.id desc')
   scope :recent,limit(10)
+  validates :title, :presence => true,:uniqueness => true
 
   def to_s
+    return self.title if self.is_valid
     @status = self.reviews.sum(:status)
     if @status < STATUS_LOW
       self.title + '(待审)'
