@@ -259,6 +259,8 @@ zh-CN:
     tag_list: 标签
     url: 链接
     type_id: 类型
+    username: 用户名
+    password_confirmation: 密码验证
 
 
   labels:

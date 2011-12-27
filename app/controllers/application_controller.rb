@@ -16,9 +16,4 @@ class ApplicationController < ActionController::Base
     end  
     nil  
   end
-
-  def after_sign_in_path_for(resource)
-    return new_user_info_path unless resource.user_info
-    stored_location_for(resource) || root_path 
-  end
 end

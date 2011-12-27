@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me,:username
   
   has_many :prices
   has_many :comments
@@ -21,11 +21,12 @@ class User < ActiveRecord::Base
 
   has_many :user_tasks
   has_many :tasks,:through => :user_tasks
-  has_one  :user_info
+
+  validates :username, :presence => true,:uniqueness => true
 
   scope :recent ,limit(10).order('id desc')#.select('email,created_at')
   def to_s
-  	self.email
+    self.username || self.email
   end
   def get_point(point,integralable,desc = nil)
     integral = self.integrals.new :point => point,
