@@ -1,6 +1,6 @@
 <% content_for :head do %>
-<%= javascript_include_tag "easyslider" %>
-<%= stylesheet_link_tag    "easyslide" %>
+  <%= javascript_include_tag "easyslider" %>
+  <%= stylesheet_link_tag    "easyslide" %>
 <% end -%>
 <div class="tabs"><%#= render "categories/tabs" %></div>
 
@@ -21,23 +21,27 @@
 
 <div class="mt">
   <%#= render 'section',:things => @focus,:title=> "最多关注",:section_path => goods_path %>
-  <div class="l in_l"> 
-    <h3>最多关注</h3> 
-    <ul>
-    <%= render 'focus/li'  %>
-    </ul>
-  </div>
+  <% unless @focus.blank? %>
+    <div class="l in_l"> 
+      <h3>最多关注</h3> 
+      <ul>
+        <%= render 'focus/li'  %>
+      </ul>
+    </div>
+  <% end %>
   <%= render 'section',:things => @good_tags,:title=> "商品Tags",:section_path => tags_goods_path,:link_name => 'name',:link_path => 'tag_good_path' %>
-<div class="l in_l"><h3>经验排行榜</h3>
-  <ul>
-      <%= render 'integrals/li' %>
-  </ul>
+  <% if @exps.length > 0 %>
+    <div class="l in_l"><h3>经验排行榜</h3>
+      <ul>
+        <%= render 'integrals/li' %>
+      </ul>
+    </div>
+  <% end %>
+  <!--  <div class="l in_r"><h3>最新会员</h3><%= render :partial => 'user_li' %></div> -->
 </div>
-    <!--  <div class="l in_r"><h3>最新会员</h3><%= render :partial => 'user_li' %></div> -->
-</div>
-<!--<div class="mt">
-  <div class="l in_l">
-    <h3>最新图片</h3>
-    <%#= render 'uploads/li' %>
-  </div>
-</div> -->
+<%#<div class="mt">%>
+  <%#<div class="l in_l">%>
+    <%#<h3>最新图片</h3>%>
+    <%#[>= render 'uploads/li' <]%>
+    <%#</div>%>
+  <%#</div>%>

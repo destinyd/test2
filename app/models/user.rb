@@ -28,14 +28,13 @@ class User < ActiveRecord::Base
   def to_s
     self.username || self.email
   end
-  def get_point(point,integralable,desc = nil)
-    integral = self.integrals.new :point => point,
-      :desc => desc
+  def get_point(point,integralable,type_id = 0,desc = nil)
+    integral = self.integrals.new :point => point,:desc => desc,:type_id => type_id
     integral.integralable = integralable
     integral.save!
   end
 
-  def points
-    self.integrals.sum(:point)
+  def points type_id = 0
+    self.integrals.sum(:point).where(:type_id => type_id)
   end
 end
