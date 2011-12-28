@@ -1,10 +1,13 @@
 <h3>商品绑定</h3>
-<%= form_for price do |f| -%>
+<%= form_for price.price_goods.new,:url => price_goods_path do |f| -%>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :good_name %>
     <%= f.hidden_field :good_id %>
+    <%= f.hidden_field :price_id %>
+    <button>确定</button>
   </div>
+  <div class="fields_for">
   <%= f.fields_for :goods do |gf| %>
 <!--    <div class="field">
       <%= gf.label :name %><br />
@@ -24,6 +27,7 @@
     <%end %>
     -->
   <% end -%>
+</div>
   <div class="actions">
     <%= f.submit %>
   </div>

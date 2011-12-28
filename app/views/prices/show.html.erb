@@ -31,7 +31,9 @@
   <b><%= label :price,:desc%>:</b>
   <%= @price.desc %>
 </p>
-链接：<%= link_to @price.outlinks.first.url,@price.outlinks.first.url %>
+<%  unless @price.outlinks.blank? %>
+链接：<%= link_to @price.outlinks.first.url,@price.outlinks.first.url%>
+<% end -%>
 <%= image_tag @price.uploads.first.image_file_name unless @price.type_id != "团购价" or @price.uploads.blank?%>
 <br /><br />
 <% if @price.near_prices %>
@@ -57,7 +59,7 @@
     <%= render 'goods/good_show',:good => good %>
   </div>
   </div>
-  <% end unless @price.goods.nil? %>
+  <% end unless @price.goods.blank? %>
   <div class="in_l" style="width:95%">
     <%= render 'prices/price_good_form',:price => @price %>
 </div>
