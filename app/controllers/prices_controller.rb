@@ -29,11 +29,12 @@ class PricesController < ApplicationController
   # GET /prices/new.xml
   def new
     if @able.blank?
-      @price =  current_user.prices.build 
+      @price =  Price.new  
       @price.goods.new
     else
-      @price = @able.prices.build
+      @price = @able.prices.build params[:price]
     end
+    self.type_id = -1 if params[:price] and params[:price][:type_id] == -1
 
     respond_to do |format|
       format.html # new.html.erb

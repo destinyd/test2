@@ -12,18 +12,22 @@
     </div>
   <% end %>
 
-  <%= f.fields_for :good do |gf| %>
+<!--  <%= f.fields_for :good do |gf| %>
     <div class="field">
       <%= f.label :name %><br />
       <%= f.text_field :good_name %>
     </div>
-  <% end if @able.blank? %>
+    <% end if @able.blank? %>-->
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
   <div class="field">
     <%= f.label :price %><br />
     <%= f.text_field :price %>
   </div>
   <div class="field">
-    <%= f.label :type_id,'' %><br />
+    <%= f.label :type_id %><br />
     <%= f.select :type_id,Price.selects %>
   </div>
   <div class="field">

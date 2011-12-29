@@ -6,9 +6,10 @@ class Price < ActiveRecord::Base
   has_many :outlinks, :as => :outlinkable
   validates :type_id, :presence => true
   validates :price, :presence => true
+  validates :title, :presence => true
 
   attr_accessor :good_name,:good_user_id
-  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at
+  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:title,:desc
   attr_accessible :good_attributes,:good_user_id,:on => :update
 
   has_many :integrals, :as => :integralable
@@ -36,14 +37,16 @@ class Price < ActiveRecord::Base
   #type [0:userlocal1day 1:userurl1day 2:团购 3:拍卖 10:商家普价 11:上架优惠 12:商家限量]
 
   TYPE = {
+  -1=>'记账',
   0=>'本地单价',
+  1=>'折扣价',
   11=>'网络单价',
   21=>'团购价',
   31=>'批发价',
   51=>'成本价',
-  101=>'商家发布价',
-  102=>'商家优惠价',
-  103=>'商家限量价'
+  #101=>'商家发布价',
+  #102=>'商家优惠价',
+  #103=>'商家限量价'
   }
 
 
@@ -53,9 +56,9 @@ class Price < ActiveRecord::Base
     TYPE[t]
   end
 
-  def type_id=(value)
-    write_attribute(:type_id, TYPE.key(value))
-  end
+  #def type_id=(value)
+    #write_attribute(:type_id, TYPE.key(value))
+  #end
 
   def human_price
     @status = self.reviews.sum(:status)
@@ -96,12 +99,12 @@ class Price < ActiveRecord::Base
       good_nears = @nears.where(:good_id => self.good_id).limit(10)
       return good_nears if good_nears.length > 0
     end
-    @nears.limit(10)
+    @nears.limit(10) if @nears.length > 0
   end
 
   def to_s
     case self.type_id
-    when 21
+    when '团购价'
       self.title
     else
       "(#{human_price})#{self.title}"
@@ -113,17 +116,21 @@ class Price < ActiveRecord::Base
   def valid_good
     if self.good_name
       good = Good.where(:name => self.good_name).first
-      self.goods <<  good unless good.nil?
-      if self.goods.map(&:user_id).include? self.good_user_id
-        self.errors.add(:goods,"has_post") 
-        return false
+      if good
+        if self.goods.include? good
+          self.errors.add(:goods,"has_post") 
+          return false
+        else
+          self.goods <<  good
+        end
+      else
+        self.goods << self.goods.new(:name => self.good_name,:user_id => self.good_user_id) 
       end
-      self.goods << self.goods.create(:name => self.good_name,:user_id => self.good_user_id) unless self.goods.map(&:name).include?(self.good_name)
     end
   end
 
   def valid_singleton_for_tuan
-    if self.type_id == 21 and !self.outlinks.blank?
+    if self.type_id == '团购价' and !self.outlinks.blank?
       links = Outlink.where(:url => self.outlinks.map(&:url))
       self.errors.add(:url,'has') unless links.blank?
     end

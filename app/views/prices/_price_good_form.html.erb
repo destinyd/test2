@@ -1,30 +1,35 @@
+<% price_good = price.price_goods.new %>
+<% price_good.build_good %>
 <h3>商品绑定</h3>
-<%= form_for price do |f| -%>
-  <div class="field">
+<%= form_for price_good,:url => price_goods_path,:remote => true do |f| -%>
+  <div class="field" id="new_price_good_f">
     <%= f.label :name %><br />
     <%= f.text_field :good_name %>
     <%= f.hidden_field :good_id %>
+    <%= f.hidden_field :price_id %>
+    <button id="new_price_good_btn" onclick="return good_bound()">确定</button>
   </div>
-  <%= f.fields_for :goods do |gf| %>
-<!--    <div class="field">
-      <%= gf.label :name %><br />
+  <div class="fields_for" id="new_price_good_ff">
+  <%= f.fields_for :good do |gf| %>
+    <div class="field">
+      <%= gf.label t('attributes.name') %><br />
       <%= gf.text_field :name,:id => 'price_good_name' %>
     </div>
     <div class="field">
-      <%= gf.label :desc %><br />
+      <%= gf.label t('attributes.desc') %><br />
       <%= gf.text_field :desc %>
     </div>
     <div class="field">
-      <%= gf.label :tag_list %><br />
+      <%= gf.label t('attributes.tag_list') %><br />
       <%= gf.text_field :tag_list %>
     </div>
     <%= gf.fields_for :outlinks do |ff| %>
-      <%= ff.label :url %><br />
+      <%= ff.label t('attributes.url') %><br />
       <%= ff.text_field :url %>
     <%end %>
-    -->
   <% end -%>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :id => 'price_good_good_submit' %>
   </div>
+</div>
 <% end -%>

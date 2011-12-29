@@ -31,7 +31,9 @@
   <b><%= label :price,:desc%>:</b>
   <%= @price.desc %>
 </p>
-链接：<%= link_to @price.outlinks.first.url,@price.outlinks.first.url %>
+<%  unless @price.outlinks.blank? %>
+链接：<%= link_to @price.outlinks.first.url,@price.outlinks.first.url%>
+<% end -%>
 <%= image_tag @price.uploads.first.image_file_name unless @price.type_id != "团购价" or @price.uploads.blank?%>
 <br /><br />
 <% if @price.near_prices %>
@@ -50,16 +52,18 @@
 <%= render 'comments/comments' %>
 </div>
 <aside>
+  <div id="goods">
   <% @price.goods.each do |good| %>
-  <div class="in_l" style="width:95%;margin-bottom:10px;">
-    <h3><%= good.name %></h3>
-    <div>
-    <%= render 'goods/good_show',:good => good %>
-  </div>
-  </div>
-  <% end unless @price.goods.nil? %>
+    <%= render 'prices/price_good',:good => good %>
+  <% end unless @price.goods.blank? %>
+</div>
   <div class="in_l" style="width:95%">
+  <% unless @price.goods.length > 0 and current_user and @price.goods.map(&:user_id).include?(current_user.id) %>
     <%= render 'prices/price_good_form',:price => @price %>
+  <% else %>
+    <h3>商品绑定</h3>
+    <div>您已提交过绑定</div>
+  <% end %>
 </div>
 </aside>
 <div class="c"></div>

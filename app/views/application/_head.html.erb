@@ -3,7 +3,8 @@
 <div class='head_left'>
   <ul>
     <li><a href='/' alt='折扣网'><div>神马价</div></a></li>
-    <li class="current"><a href='/prices/new' alt='记账'><div class="current">记账</div></a></li>
+    <li<%# class="current"%>><a href='/prices/new' alt='记账'><div>记账</div></a></li>
+    <li><a href='/goods/new' alt='晒物'><div>晒物</div></a></li>
     <li>您的位置:<%=@loc.city if @loc%></li>
   </ul>
 </div>
