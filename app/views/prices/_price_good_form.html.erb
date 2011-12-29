@@ -1,5 +1,5 @@
 <h3>商品绑定</h3>
-<% unless price.goods.length > 0 and current_user and price.goods.map(&:user_id).include?(current_user.id) %>
+<% if price.could_post_good? current_user %>
   <% price_good = price.price_goods.new %>
   <% price_good.build_good %>
   <%= form_for price_good,:url => price_goods_path,:remote => true do |f| -%>
