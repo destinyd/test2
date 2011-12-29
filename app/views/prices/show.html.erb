@@ -52,16 +52,18 @@
 <%= render 'comments/comments' %>
 </div>
 <aside>
+  <div id="goods">
   <% @price.goods.each do |good| %>
-  <div class="in_l" style="width:95%;margin-bottom:10px;">
-    <h3><%= good.name %></h3>
-    <div>
-    <%= render 'goods/good_show',:good => good %>
-  </div>
-  </div>
+    <%= render 'prices/price_good',:good => good %>
   <% end unless @price.goods.blank? %>
+</div>
   <div class="in_l" style="width:95%">
+  <% unless @price.goods.length > 0 and current_user and @price.goods.map(&:user_id).include?(current_user.id) %>
     <%= render 'prices/price_good_form',:price => @price %>
+  <% else %>
+    <h3>商品绑定</h3>
+    <div>您已提交过绑定</div>
+  <% end %>
 </div>
 </aside>
 <div class="c"></div>

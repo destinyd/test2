@@ -35,3 +35,25 @@ function send_review(){
 $(function(){
   ajaxForm($('#new_comment'));
 })
+function good_bound(){
+  var obj = $('#price_good_good_id');
+  var obj_good_name = $('#price_good_good_name');
+  console.log(obj_good_name);
+  if(obj.val())
+  {
+    obj_good_name.remove();
+    $('#new_price_good_btn').hide();
+    $('#new_price_good').submit();
+  }
+  else{
+    $('#new_price_good_btn').hide();
+    console.log(obj_good_name.val());
+    $('#price_good_name').val(obj_good_name.val());
+    obj_good_name.remove();
+    $('#price_good_good_id').remove();
+    $('#new_price_good_ff').show();
+    $('#new_price_good_f').hide();
+    $('#price_good_good_submit').attr('disabled',true)
+  }
+  return false;
+}
