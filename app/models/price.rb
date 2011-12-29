@@ -7,6 +7,8 @@ class Price < ActiveRecord::Base
   validates :type_id, :presence => true
   validates :price, :presence => true
   validates :title, :presence => true
+  
+  validates :title, :uniqueness => {:scope => :type_id } ,:if => :is_tuangou? #限制 当创建的时候
 
   attr_accessor :good_name,:good_user_id
   attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:title,:desc
@@ -27,7 +29,7 @@ class Price < ActiveRecord::Base
   acts_as_commentable
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
-  before_create :valid_singleton_for_tuan
+  #before_create :valid_singleton_for_tuan
 
   scope :running,where("finish_at > ?",Time.now)
   scope :cheapest,running.order("price").limit(10)
@@ -133,11 +135,15 @@ class Price < ActiveRecord::Base
     end
   end
 
-  def valid_singleton_for_tuan
-    if self.type_id == '团购价' and !self.outlinks.blank?
-      links = Outlink.where(:url => self.outlinks.map(&:url))
-      self.errors.add(:url,'has') unless links.blank?
-    end
+  #def valid_singleton_for_tuan
+    #if self.type_id == '团购价'
+      #links = Outlink.where(:url => self.outlinks.map(&:url))
+      #self.errors.add(:url,'has') unless links.blank?
+    #end
+  #end
+
+  def is_tuangou?
+    self.type_id == '团购价'
   end
 
 end
