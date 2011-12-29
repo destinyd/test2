@@ -1,1 +1,2 @@
 $('#goods').append('<%= j render 'prices/price_good',:good => @price_good.good %>')
+$('#section_form_price_good').html('<%= j render 'prices/price_good_form',:price => @price_good.price %>')

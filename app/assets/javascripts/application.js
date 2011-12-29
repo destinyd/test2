@@ -41,8 +41,10 @@ function good_bound(){
   console.log(obj_good_name);
   if(obj.val())
   {
-    obj_good_name.remove();
-    $('#new_price_good_btn').hide();
+    //obj_good_name.remove();
+    obj_good_name.attr('disabled',true);
+    $('#new_price_good_btn').attr('disabled',true);
+    $('#new_price_good_ff').remove();
     $('#new_price_good').submit();
   }
   else{
@@ -53,7 +55,7 @@ function good_bound(){
     $('#price_good_good_id').remove();
     $('#new_price_good_ff').show();
     $('#new_price_good_f').hide();
-    $('#price_good_good_submit').attr('disabled',true)
+    //$('#price_good_good_submit').attr('disabled',true)
   }
   return false;
 }
