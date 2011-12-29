@@ -4,7 +4,7 @@
   <ul>
     <li><a href='/' alt='折扣网'><div>神马价</div></a></li>
     <li class="current"><a href='/prices/new' alt='记账'><div class="current">记账</div></a></li>
-    <li>您的位置:<%=@loc.city%></li>
+    <li>您的位置:<%=@loc.city if @loc%></li>
   </ul>
 </div>
 <div class='head_login'>
