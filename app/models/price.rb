@@ -8,7 +8,7 @@ class Price < ActiveRecord::Base
   validates :price, :presence => true
   validates :title, :presence => true
   
-  validates :title, :uniqueness => {:scope => :type_id } ,:if => :is_tuangou? #限制 当创建的时候
+  validates :title, :uniqueness => { :scope => [:finish_at,:price,:address] } ,:if => :is_tuangou? #限制 当创建的时候
 
   attr_accessor :good_name,:good_user_id
   attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:title,:desc
@@ -54,7 +54,6 @@ class Price < ActiveRecord::Base
 
   def type_id
     t = read_attribute(:type_id)
-    t  ||= 0
     TYPE[t]
   end
 
@@ -135,6 +134,10 @@ class Price < ActiveRecord::Base
     end
   end
 
+  def is_tuangou?
+    self.read_attribute(:type_id) == 21
+  end
+
   #def valid_singleton_for_tuan
     #if self.type_id == '团购价'
       #links = Outlink.where(:url => self.outlinks.map(&:url))
@@ -142,8 +145,5 @@ class Price < ActiveRecord::Base
     #end
   #end
 
-  def is_tuangou?
-    self.type_id == '团购价'
-  end
 
 end
