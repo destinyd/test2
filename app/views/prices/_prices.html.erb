@@ -1,5 +1,5 @@
 <% unless @prices.empty? %>   
-<div id="prices" class="in_l" style="width:95%">
+<div id="prices" class="section" style="width:95%">
   <h3><%= "#{@prices.size}条价格信息" %></h2>  
   <div id="prices">  
   <%= render @prices %>
@@ -8,7 +8,7 @@
 </div>
 <% end %> 
 
-<div id="prices" class="in_l" style="width:95%">
+<div id="prices" class="section" style="width:95%">
 <h3>留下您看到的价格</h3>  
 <div>
 <%= render :partial => 'prices/form' %>  

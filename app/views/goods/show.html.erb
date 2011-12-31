@@ -1,8 +1,10 @@
 <div class="product_l">
-  <%= render 'goods/good_show',:good => @good %>
+  <div class="good">
+    <%= render 'goods/good_show',:good => @good %>
+  </div>
   <%= render 'comments/comments' %>
 </div>
 <aside>
-  <%= render 'prices/prices' %>
+<%= render 'prices/prices' %>
 </aside>
 <div class="c"></div>

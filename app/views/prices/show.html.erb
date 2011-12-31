@@ -37,7 +37,7 @@
 <%= image_tag @price.uploads.first.image_file_name unless @price.type_id != "团购价" or @price.uploads.blank?%>
 <br /><br />
 <% if @price.near_prices %>
-<div class="in_l" style="width:95%;float:none">
+<div class="section" style="width:95%;float:none">
   <h3>附近价格</h3>
   <ul>
   <% @price.near_prices.each do |price| %>
@@ -57,7 +57,7 @@
     <%= render 'prices/price_good',:good => good %>
   <% end unless @price.goods.blank? %>
 </div>
-  <div class="in_l" style="width:95%" id='section_form_price_good'>
+  <div class="section" style="width:95%" id='section_form_price_good'>
     <%= render 'prices/price_good_form',:price => @price %>
 </div>
 </aside>
