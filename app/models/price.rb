@@ -11,8 +11,7 @@ class Price < ActiveRecord::Base
   validates :title, :uniqueness => { :scope => [:finish_at,:price,:address] } ,:if => :is_tuangou? #限制 当创建的时候
 
   attr_accessor :good_name,:good_user_id
-  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:title,:desc
-  attr_accessible :good_attributes,:good_user_id,:on => :update
+  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:title,:desc,:good_attributes,:outlink_attributes,:upload_attributes
 
   has_many :integrals, :as => :integralable
   has_many :reviews, :as => :reviewable
@@ -21,6 +20,8 @@ class Price < ActiveRecord::Base
   has_many :price_goods
   has_many :goods, :through => :price_goods
   accepts_nested_attributes_for :goods
+  accepts_nested_attributes_for :uploads
+  accepts_nested_attributes_for :outlinks
 
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
   scope :review_low, Filter.new(self).extend(ReviewFilter)
