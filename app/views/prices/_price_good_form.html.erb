@@ -2,6 +2,7 @@
 <% if price.could_post_good? current_user %>
   <% price_good = price.price_goods.new %>
   <% price_good.build_good %>
+  <div class="user_show">
   <%= form_for price_good,:url => price_goods_path,:remote => true do |f| -%>
     <div class="field" id="new_price_good_f">
       <%= f.label :name %><br />
@@ -33,6 +34,10 @@
         <%= f.submit :id => 'price_good_good_submit' %>
       </div>
     </div>
+  </div>
+  <div class="user_hide">
+    请登录后再帮顶。
+  </div>
   <% end -%>
 <% else %>
     <div>您已提交过绑定</div>
