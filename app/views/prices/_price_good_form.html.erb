@@ -3,7 +3,7 @@
   <%= link_to "请先登录。",new_user_session_path(:format => :js),:method => :get,:remote => true  %>
 </div>
 <div class="user_show">
-  <% if  price.could_post_good? current_user %>
+  <% unless price.could_post_good? current_user %>
     您已提交过绑定
   <% else %>
     <% price_good = price.price_goods.new %>
