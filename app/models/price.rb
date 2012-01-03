@@ -113,7 +113,7 @@ class Price < ActiveRecord::Base
   end
 
   def could_post_good? user
-    !self.goods.map(&:user_id).include?(user.id)
+    user and !self.goods.map(&:user_id).include?(user.id)
   end
 
   before_save  :valid_good
