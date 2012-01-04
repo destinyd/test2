@@ -8,7 +8,7 @@ class Price < ActiveRecord::Base
   validates :price, :presence => true
   validates :title, :presence => true
   
-  validates :title, :uniqueness => { :scope => [:finish_at,:price,:address] } ,:if => :is_tuangou? #限制 当创建的时候
+  validates :title, :uniqueness => { :scope => [:finish_at,:price,:address] } ,:if => :is_tuangou? ,:on => :create #限制 当创建的时候
 
   attr_accessor :good_name,:good_user_id
   attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes
