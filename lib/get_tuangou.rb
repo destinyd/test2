@@ -13,6 +13,7 @@ class GetTuangou
       log.info "开始获取#{t.name}的数据"
       uri = URI.parse t.url
       xml = Net::HTTP.get uri.host, uri.request_uri
+      xml.gsub /\n/,''
       begin
       parser, parser.string = XML::Parser.new, xml
       doc = parser.parse
@@ -25,13 +26,9 @@ class GetTuangou
         n = {}
         d.each{|a| n[a.name] = a.content}
         p = {}
-#        suite = "d = d.find('//data/display').first;d.each{|a| n[a.name] = a.content};p.price = n['price'];p.type_id = 21;p.finish_at = n['endTime'].to_i;p.address = n['city'];p.title=n['title'];o = p.outlinks.new;o.url = n['loc'];"
-#        eval(suite)
         eval(t.suite)
-        #p.save
         arr.push p
       end
-      debugger
       Price.create arr
       log.info "获取#{t.name}的数据结束"
     end
