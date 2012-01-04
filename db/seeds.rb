@@ -32,7 +32,7 @@ TuanApi.create [
     TuanUrl.new( {      :name => "24卷柳州", :url => "http://static.24quan.com/cms/liuzhou_bus.php", :enable => true}),
     TuanUrl.new( {      :name => "糯米团柳州", :url => "http://www.nuomi.com/api/dailydeal?version=v1&city=liuzhou", :enable => true}),
     TuanUrl.new( {      :name => "F团柳州", :url => "http://newapi.ftuan.com/api/v2.aspx?city=liuzhou", :enable => true}),
-    TuanUrl.new( {      :name => "趣团", :url => "http://www.quwan.com/tuan/api/hao123.php", :enable => true}),
+    #TuanUrl.new( {      :name => "趣团", :url => "http://www.quwan.com/tuan/api/hao123.php", :enable => true}), 2 0
   ]
   },
   {
