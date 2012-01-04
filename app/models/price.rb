@@ -3,12 +3,12 @@ class Price < ActiveRecord::Base
   STATUS_LOW = 5
   belongs_to :user
 #  belongs_to :good
-  has_many :outlinks, :as => :outlinkable
+  has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   validates :type_id, :presence => true
   validates :price, :presence => true
   validates :title, :presence => true
   
-  validates :title, :uniqueness => { :scope => [:finish_at,:price,:address] } ,:if => :is_tuangou? ,:on => :create #限制 当创建的时候
+  validates :title, :uniqueness => { :scope => [:finish_at,:price,:address] } ,:if => :is_tuangou? #限制 当创建的时候
 
   attr_accessor :good_name,:good_user_id
   attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes
