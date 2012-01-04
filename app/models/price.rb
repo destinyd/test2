@@ -13,11 +13,11 @@ class Price < ActiveRecord::Base
   attr_accessor :good_name,:good_user_id
   attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes
 
-  has_many :integrals, :as => :integralable
-  has_many :reviews, :as => :reviewable
-  has_many :uploads, :as => :uploadable
+  has_many :integrals, :as => :integralable, :dependent => :destroy
+  has_many :reviews, :as => :reviewable, :dependent => :destroy
+  has_many :uploads, :as => :uploadable, :dependent => :destroy
 
-  has_many :price_goods
+  has_many :price_goods, :dependent => :destroy
   has_many :goods, :through => :price_goods
   accepts_nested_attributes_for :goods
   accepts_nested_attributes_for :uploads

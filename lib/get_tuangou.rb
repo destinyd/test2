@@ -9,10 +9,20 @@ class GetTuangou
   def get_all
     log = Rails.logger
     log.info "获取团购数据开始"
+    @error_times =0
     @tuan_urls.each do |t|
       log.info "开始获取#{t.name}的数据"
       uri = URI.parse t.url
-      xml = Net::HTTP.get uri.host, uri.request_uri
+      begin
+        xml = Net::HTTP.get uri.host, uri.request_uri
+      rescue Timeout::Error
+        if @error_times > 2
+          @error_times =0
+          next
+        end
+        @error_times += 1
+        retry
+      end
       xml.gsub! /\n/,''
       begin
       parser, parser.string = XML::Parser.new, xml
