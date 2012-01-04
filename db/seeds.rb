@@ -6,17 +6,19 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+TuanApi.destroy_all
+TuanUrl.destroy_all
 TuanApi.create [
   {
   :name => "窝窝团",
   :docfind => "//deals/deal",
-  :suite  => "p[:price]=n['price'];p[:type_id]=21;p[:finish_at]=Time.at(n['end_date'].to_i);p[:address]=n['division_name'];p[:title]=n['title'];o=p[:outlink_attributes]=n['deal_url'];p[:upload_attributes]={:image_file_name => n['large_image_url']};",
+  :suite  => "p[:price]=n['price'];p[:type_id]=21;p[:finish_at]=Time.at(n['end_date'].to_i);p[:address]=n['division_name'];p[:title]=n['title'];o=p[:outlinks_attributes]=[{:url =>n['deal_url']}];p[:uploads_attributes]=[{:image_file_name => n['large_image_url']}];",
   :tuan_urls=> [TuanUrl.new( {      :name => "窝窝团柳州", :url => "http://www.55tuan.com/openAPI.do?city=liuzhou", :enable => true})]
 },
   {
   :name => "hao123",
   :docfind => "//urlset/url",
-:suite=>"d=d.children[1].first;d.each{|a|n[a.name]=a.content};p[:price]=n['price'];p[:type_id]=21;p[:finish_at]=Time.at(n['endTime'].to_i);p[:address]=n['city'];p[:title]=n['title'];o=p[:outlink_attributes]=n['loc'];p[:upload_attributes]={:image_file_name=>n['image']};",
+:suite=>"d=d.children[1].first;d.each{|a|n[a.name]=a.content};p[:price]=n['price'];p[:type_id]=21;p[:finish_at]=Time.at(n['endTime'].to_i);p[:address]=n['city'];p[:title]=n['title'];o=p[:outlinks_attributes]=[{:url=>n['loc']}];p[:uploads_attributes]=[{:image_file_name=>n['image']}];",
   :tuan_urls=> [
     TuanUrl.new( {      :name => "24卷柳州", :url => "http://static.24quan.com/cms/liuzhou_bus.php", :enable => true}),
     TuanUrl.new( {      :name => "拉手团柳州", :url => "http://open.client.lashou.com/api/detail/city/427", :enable => true}),

@@ -11,7 +11,7 @@ class Price < ActiveRecord::Base
   validates :title, :uniqueness => { :scope => [:finish_at,:price,:address] } ,:if => :is_tuangou? #限制 当创建的时候
 
   attr_accessor :good_name,:good_user_id
-  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:title,:desc,:good_attributes,:outlink_attributes,:upload_attributes
+  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes
 
   has_many :integrals, :as => :integralable
   has_many :reviews, :as => :reviewable

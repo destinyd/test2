@@ -31,12 +31,10 @@ class GetTuangou
         #p.save
         arr.push p
       end
+      debugger
       Price.create arr
       log.info "获取#{t.name}的数据结束"
     end
     log.info "获取团购数据结束"
   end
 end
-      debugger
-
-
