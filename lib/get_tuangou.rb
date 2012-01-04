@@ -13,7 +13,7 @@ class GetTuangou
       log.info "开始获取#{t.name}的数据"
       uri = URI.parse t.url
       xml = Net::HTTP.get uri.host, uri.request_uri
-      xml.gsub /\n/,''
+      xml.gsub! /\n/,''
       begin
       parser, parser.string = XML::Parser.new, xml
       doc = parser.parse
@@ -26,6 +26,7 @@ class GetTuangou
         n = {}
         d.each{|a| n[a.name] = a.content}
         p = {}
+        debugger
         eval(t.suite)
         arr.push p
       end
