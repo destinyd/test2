@@ -26,7 +26,6 @@ class GetTuangou
         n = {}
         d.each{|a| n[a.name] = a.content}
         p = {}
-        debugger
         eval(t.suite)
         arr.push p
       end
