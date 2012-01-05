@@ -1,1 +1,1 @@
-<%= render 'section',:things => tag.taggings.map(&:taggable),:title=> tag.name,:section_path => tag_good_path(tag.name) %>
+<%= render 'section',:plus => {:things => tag.taggings.map(&:taggable),:title=> tag.name,:section_path => tag_good_path(tag.name)} %>

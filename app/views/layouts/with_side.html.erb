@@ -8,9 +8,7 @@
     </div>
     <aside>
     <%= yield(:sidebar) %>
-    <%= render 'section',:plus => {:things => @recent_articles,:title=> "最新公告",:section_path => articles_path} %>
     </aside>
-    <div class="c"></div>
     </article>
 <%= render 'after_layout' %>
 

@@ -197,7 +197,10 @@ a{
 aside{
     margin-left:10px;
     float:left;
-    width:35%
+    width:35%;
+    .section{
+      width:95%;
+    }
 }
 aside,.product_l{
   .section{
@@ -287,7 +290,7 @@ article {
   margin:10px;
   li{
     float:left;
-    width:200px;
+    width:150px;
     overflow:hidden;
 }
 }
@@ -311,4 +314,10 @@ footer{
 }
 .good{
   margin-bottom:10px;
+}
+.good_tags{
+  .section{
+      width:30%;
+      margin-right:10px;
+  }
 }

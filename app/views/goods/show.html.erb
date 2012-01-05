@@ -5,6 +5,6 @@
   <%= render 'comments/comments' %>
 </div>
 <aside>
-<%= render 'prices/prices' %>
-</aside>
-<div class="c"></div>
+<% content_for :sidebar do -%>
+  <%= render 'prices/prices' %>
+<% end -%>
