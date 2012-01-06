@@ -4,7 +4,7 @@ class PricesController < ApplicationController
   # GET /prices
   # GET /prices.xml
   def index
-    @prices = @able.blank? ? Price.scoped : @able.prices
+    @prices = @able.blank? ? Price.paginate(:per_page => 10, :page => params[:page]) : @able.prices.paginate(:per_page => 10, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

@@ -3,22 +3,25 @@ class Price < ActiveRecord::Base
   STATUS_LOW = 5
   belongs_to :user
 #  belongs_to :good
-  has_many :outlinks, :as => :outlinkable
+  has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   validates :type_id, :presence => true
   validates :price, :presence => true
   validates :title, :presence => true
+  
+  validates :title, :uniqueness => { :scope => [:finish_at,:price,:address] } ,:if => :is_tuangou? #限制 当创建的时候
 
   attr_accessor :good_name,:good_user_id
-  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:title,:desc
-  attr_accessible :good_attributes,:good_user_id,:on => :update
+  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes
 
-  has_many :integrals, :as => :integralable
-  has_many :reviews, :as => :reviewable
-  has_many :uploads, :as => :uploadable
+  has_many :integrals, :as => :integralable, :dependent => :destroy
+  has_many :reviews, :as => :reviewable, :dependent => :destroy
+  has_many :uploads, :as => :uploadable, :dependent => :destroy
 
-  has_many :price_goods
+  has_many :price_goods, :dependent => :destroy
   has_many :goods, :through => :price_goods
   accepts_nested_attributes_for :goods
+  accepts_nested_attributes_for :uploads
+  accepts_nested_attributes_for :outlinks
 
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
   scope :review_low, Filter.new(self).extend(ReviewFilter)
@@ -27,9 +30,9 @@ class Price < ActiveRecord::Base
   acts_as_commentable
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
-  before_create :valid_singleton_for_tuan
+  #before_create :valid_singleton_for_tuan
 
-  scope :running,where("finish_at > ?",Time.now)
+  scope :running,where("finish_at > ? OR finish_at is null",Time.now)
   scope :cheapest,running.order("price").limit(10)
   scope :recent,running.order("id desc").limit(10)
 
@@ -52,7 +55,6 @@ class Price < ActiveRecord::Base
 
   def type_id
     t = read_attribute(:type_id)
-    t  ||= 0
     TYPE[t]
   end
 
@@ -111,6 +113,10 @@ class Price < ActiveRecord::Base
     end
   end
 
+  def could_post_good? user
+    user and !self.goods.map(&:user_id).include?(user.id)
+  end
+
   before_save  :valid_good
   private
   def valid_good
@@ -129,11 +135,16 @@ class Price < ActiveRecord::Base
     end
   end
 
-  def valid_singleton_for_tuan
-    if self.type_id == '团购价' and !self.outlinks.blank?
-      links = Outlink.where(:url => self.outlinks.map(&:url))
-      self.errors.add(:url,'has') unless links.blank?
-    end
+  def is_tuangou?
+    self.read_attribute(:type_id) == 21
   end
+
+  #def valid_singleton_for_tuan
+    #if self.type_id == '团购价'
+      #links = Outlink.where(:url => self.outlinks.map(&:url))
+      #self.errors.add(:url,'has') unless links.blank?
+    #end
+  #end
+
 
 end

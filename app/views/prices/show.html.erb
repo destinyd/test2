@@ -1,70 +1,68 @@
-<div class="product_l">
-<p>
+<% @where_name = @price.title %>
+<% @where = @price %>
+<div>
+  <p>
   <b><%= label :price,:title%>:</b>
   <%= @price.title %>
-</p>
-<p>
+  </p>
+  <p>
   <b><%= label :price,:price%>:</b>
   <%= @price.price %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b><%= label :price,:type%>:</b>
   <%= @price.type_id %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b><%= label :price,:address%>:</b>
   <%= @price.address %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b><%= label :price,:amount%>:</b>
   <%= @price.human_amount %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b><%= label :price,:finish_at%>:</b>
   <%= @price.human_finish_at %>
-</p>
-<p>
+  </p>
+  <p>
   <b><%= label :price,:desc%>:</b>
   <%= @price.desc %>
-</p>
-<%  unless @price.outlinks.blank? %>
-链接：<%= link_to @price.outlinks.first.url,@price.outlinks.first.url%>
+  </p>
+  <%  unless @price.outlinks.blank? %>
+    链接：<%= link_to @price.outlinks.first.url,@price.outlinks.first.url%>
+  <% end -%>
+  <%= image_tag @price.uploads.first.image_file_name unless @price.type_id != "团购价" or @price.uploads.blank?%>
+</div>
+
+<% content_for :plus do -%>
+  <% if @price.near_prices %>
+    <div class="section" style="width:95%;float:none">
+      <h3>附近价格</h3>
+      <ul>
+        <% @price.near_prices.each do |price| %>
+          <li><%#= price.type_id != "团购价" ? %>
+          <%=link_to(price,price)%><%= price.address %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= render 'reviews/links' %>
+  <%= render 'comments/comments' %>
 <% end -%>
-<%= image_tag @price.uploads.first.image_file_name unless @price.type_id != "团购价" or @price.uploads.blank?%>
-<br /><br />
-<% if @price.near_prices %>
-<div class="in_l" style="width:95%;float:none">
-  <h3>附近价格</h3>
-  <ul>
-  <% @price.near_prices.each do |price| %>
-    <li><%#= price.type_id != "团购价" ? %>
-      <%=link_to(price,price)%><%= price.address %>
-    </li>
-  <% end %>
-  </ul>
-</div>
-<% end %>
-<%= render 'reviews/links' %>
-<%= render 'comments/comments' %>
-</div>
-<aside>
+
+<% content_for :sidebar do -%>
   <div id="goods">
-  <% @price.goods.each do |good| %>
-    <%= render 'prices/price_good',:good => good %>
-  <% end unless @price.goods.blank? %>
-</div>
-  <div class="in_l" style="width:95%">
-  <% unless @price.goods.length > 0 and current_user and @price.goods.map(&:user_id).include?(current_user.id) %>
-    <%= render 'prices/price_good_form',:price => @price %>
-  <% else %>
-    <h3>商品绑定</h3>
-    <div>您已提交过绑定</div>
-  <% end %>
-</div>
-</aside>
-<div class="c"></div>
-<%= link_to t('labels.back'), :back %>
+    <% @price.goods.each do |good| %>
+      <%= render 'prices/price_good',:good => good %>
+      <% end unless @price.goods.blank? %>
+    </div>
+    <div class="section" id='section_form_price_good'>
+      <%= render 'prices/price_good_form',:price => @price %>
+    </div>
+  <% end -%>

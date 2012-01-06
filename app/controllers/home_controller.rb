@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
+    @articles = @recent_articles
 #    @categories = Category.roots
-    @articles = Article.recent
     @flashes = Flash.recent# if @flashes.blank?
     @cheapest =     Price.cheapest
     @recent_prices =     Price.recent
@@ -10,7 +10,7 @@ class HomeController < ApplicationController
     @exps  = Integral.recent
 #    @uploads  = Upload.recent
     @focus  = Focus.most
-    @good_tags = Good.tag_counts
+    @good_tags = Good.tag_counts.order('count desc').limit(10)
   end
 
 end

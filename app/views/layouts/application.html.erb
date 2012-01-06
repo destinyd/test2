@@ -1,33 +1,31 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  <title><%= content_for?(:title) ? yield(:title) + t('title') : t('title') %></title>
-  <meta name="description" content="<%= content_for?(:desc) ? yield(:desc) + t('desc') : t('desc') %>"/>
-  <meta name="keywords" content="<%= content_for?(:keywords) ? yield(:keywords) + t('keywords') : t('keywords') %>"/>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-<!--[if IE]>
- <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-  <%= yield(:head) %>
-  </head>
-  <body>
-    <header><%= render :partial => 'head' %></header>
-    <article>
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}",:class=> 'flash_message' %>
-      <% end %>
-      <%= content_tag :h1, yield(:title) if show_title? %>
-      <%= yield %>
-    </article>
-  <%= render 'footer' %>
-  </body>
-  <script>
-  if('<%=current_user.to_s%>' != '')
-    $(".user_show").show();
-  else
-    $(".user_hide").show();
-  $('.flash_message').purr();
-  </script>
-</html>
+<%= render 'before_layout' %>
+<article>
+<div class="product_l">
+  <div class="section">
+    <h3>
+      <a href='/'>神马价</a>
+      <%  if controller_name != 'home' -%>
+        &raquo; <%= link_to t("controller.#{controller_name}"),eval("#{controller_name}_path")%>
+      <% end -%>
+      <% unless (controller_name == 'home' or ['index'].include? action_name) or @where -%>
+        &raquo; <%= link_to t("action.#{controller_name}.#{action_name}") %>
+      <% end -%>
+      <% if controller_name != 'home' and @where -%>
+        &raquo; <%= link_to @where_name,@where  %>
+      <% end -%>
+    </h3>
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+    <%= yield %>
+  </div>
+  <div class="c"></div>
+  <%= yield(:plus) %>
+</div>
+<aside>
+<%= yield(:sidebar) %>
+<%= render 'section',:plus => {:things => @recent_articles,:title=> "最新公告",:section_path => articles_path} %>
+</aside>
+<div class="c"></div>
+</article>
+<%= render 'after_layout' %>

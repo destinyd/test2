@@ -12,5 +12,7 @@ class Flash < ActiveRecord::Base
 
   default_scope order('id desc')
   scope :recent,limit(5)
+  has_one :outlink, :as => :outlinkable
+  accepts_nested_attributes_for :outlink
 
 end

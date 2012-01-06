@@ -1,10 +1,13 @@
+<% @where_name = @good.name %>
+<% @where = @good %>
 <div class="product_l">
-  <%= render 'goods/good_show',:good => @good %>
+  <div class="good">
+    <%= render 'goods/good_show',:good => @good %>
+  </div>
+</div>
+<% content_for :plus do -%>
   <%= render 'comments/comments' %>
-</div>
-<div class="product_r">
+<% end -%>
+<% content_for :sidebar do -%>
   <%= render 'prices/prices' %>
-</div>
-<div class="c"></div>
-<%= link_to t('labels.back'), goods_path %>
-
+<% end -%>

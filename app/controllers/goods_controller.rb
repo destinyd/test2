@@ -1,4 +1,5 @@
 class GoodsController < ApplicationController
+  #layout 'side',:on => [:show]
   before_filter :authenticate_user!, :only => [:new,:create,:edit,:update,:destroy]
   helper_method :sort_column, :sort_direction
   respond_to :html, :json

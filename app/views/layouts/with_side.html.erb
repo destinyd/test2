@@ -1,0 +1,14 @@
+<%= render 'before_layout' %>
+    <article>
+    <div class="product_l">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <% end %>
+      <%= yield %>
+    </div>
+    <aside>
+    <%= yield(:sidebar) %>
+    </aside>
+    </article>
+<%= render 'after_layout' %>
+

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :get_recents
   def sort_direction  
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"  
   end  
@@ -15,5 +16,9 @@ class ApplicationController < ActionController::Base
       end  
     end  
     nil  
+  end
+  private
+  def get_recents
+    @recent_articles = Article.recent
   end
 end
