@@ -1,4 +1,2 @@
-<div class="section" style="width:95%;">
-<h3><%= @tagname %></h3>
+<% @where_name = @tagname; @where = tag_good_path(@tagname) %>
 <%= render @taggables %>
-</div>
