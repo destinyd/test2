@@ -1,18 +1,18 @@
-<h2 class="title" style='text-align:center;'>
-  <%= @article.title %>
-</h2>
-<div class="under_title" style="text-align:center;">
-  <% if @article.user %>
-    作者:<%= @article.user %>
-  <% else %>
-    <span style="color:#F60">网站管理员</span>
-  <% end -%>
-  发表于:<%= @article.updated_at %>
-  <%= link_to t('labels.edit'), edit_article_path(@article) if @article.user and @article.user == current_user %>
-  <%= link_to t('labels.del'), @article, :confirm => t('labels.sure?'), :method => :delete if @article.user and @article.user == current_user %>
-  <%= render 'reviews/links' %>
-</div>
-
-<p>
+<% @where_name = @article.title %>
+<% @where = @article %>
+<div>
+  <div class="under_title" style="text-align:center;">
+    <% if @article.user %>
+      作者:<%= @article.user %>
+    <% else %>
+      <span style="color:#F60">网站管理员</span>
+    <% end -%>
+    发表于:<%= @article.updated_at %>
+    <%= link_to t('labels.edit'), edit_article_path(@article) if @article.user and @article.user == current_user %>
+    <%= link_to t('labels.del'), @article, :confirm => t('labels.sure?'), :method => :delete if @article.user and @article.user == current_user %>
+    <%#= render 'reviews/links' %>
+  </div>
+  <p style="margin-top:20px;">
   <%= @article.content %>
-</p>
+  </p>
+</div>

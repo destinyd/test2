@@ -1,10 +1,13 @@
+<% @where_name = @good.name %>
+<% @where = @good %>
 <div class="product_l">
   <div class="good">
     <%= render 'goods/good_show',:good => @good %>
   </div>
-  <%= render 'comments/comments' %>
 </div>
-<aside>
+<% content_for :plus do -%>
+  <%= render 'comments/comments' %>
+<% end -%>
 <% content_for :sidebar do -%>
   <%= render 'prices/prices' %>
 <% end -%>

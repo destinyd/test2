@@ -156,7 +156,7 @@ a{
         color:$first-color;
       }
     }
-    ul,form{
+    ul,form,div{
       padding:2px 8px 8px 8px;
       li,div{
         padding:1px 0;
@@ -205,6 +205,7 @@ aside{
 aside,.product_l{
   .section{
     margin-bottom:10px;
+    width:95%;
   }
 }
 .product_images,.product_attrs{

@@ -1,3 +1,5 @@
+<% @where_name = @price.title %>
+<% @where = @price %>
 <div>
   <p>
   <b><%= label :price,:title%>:</b>
@@ -35,7 +37,9 @@
     链接：<%= link_to @price.outlinks.first.url,@price.outlinks.first.url%>
   <% end -%>
   <%= image_tag @price.uploads.first.image_file_name unless @price.type_id != "团购价" or @price.uploads.blank?%>
-  <br /><br />
+</div>
+
+<% content_for :plus do -%>
   <% if @price.near_prices %>
     <div class="section" style="width:95%;float:none">
       <h3>附近价格</h3>
@@ -50,8 +54,7 @@
   <% end %>
   <%= render 'reviews/links' %>
   <%= render 'comments/comments' %>
-</div>
-<%= link_to t('labels.back'), :back %>
+<% end -%>
 
 <% content_for :sidebar do -%>
   <div id="goods">
@@ -59,7 +62,7 @@
       <%= render 'prices/price_good',:good => good %>
       <% end unless @price.goods.blank? %>
     </div>
-    <div class="section" style="width:95%" id='section_form_price_good'>
+    <div class="section" id='section_form_price_good'>
       <%= render 'prices/price_good_form',:price => @price %>
     </div>
   <% end -%>

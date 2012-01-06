@@ -252,3 +252,24 @@ zh-CN:
   title: '神马价 测试版0.1 -- 记下您所有的消费，让您什么价都能马上知道'
   desc: '神马价可以保存您记下您所有的消费，帮您查找您所需要的商品价格，让您更好的把住自己的钱包，享受更多实惠。'
   keywords: '神马价,记账,价格对比'
+
+  controller:
+    prices: "价格"
+    users: "用户"
+    comments: "评论"
+    goods: "商品"
+    flashes: 广告图片
+    articles: 公告
+    integrals: 积分
+    reviews: 评价
+    uploads: 上传文件
+    attrs: 属性
+    outlinks: 外链
+    price_goods: "商品绑定"
+  action:
+    prices:
+      new: '记账'
+    goods:
+      new: '添加'
+    articles:
+      new: '添加'

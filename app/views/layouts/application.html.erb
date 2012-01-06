@@ -1,16 +1,32 @@
 <%= render 'before_layout' %>
-    <article>
-    <div class="product_l">
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <% end %>
-      <%= yield %>
-    </div>
-    <aside>
-    <%= yield(:sidebar) %>
-    <%= render 'section',:plus => {:things => @recent_articles,:title=> "最新公告",:section_path => articles_path} %>
-    </aside>
-    <div class="c"></div>
-    </article>
+<article>
+<div class="product_l">
+  <div class="section">
+    <h3>
+      <a href='/'>神马价</a>
+      <%  if controller_name != 'home' -%>
+        &raquo; <%= link_to t("controller.#{controller_name}"),eval("#{controller_name}_path")%>
+      <% end -%>
+      <% unless (controller_name == 'home' or ['index'].include? action_name) or @where -%>
+        &raquo; <%= link_to t("action.#{controller_name}.#{action_name}") %>
+      <% end -%>
+      <% if controller_name != 'home' and @where -%>
+        &raquo; <%= link_to @where_name,@where  %>
+      <% end -%>
+    </h3>
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+    <%= yield %>
+  </div>
+  <div class="c"></div>
+  <%= yield(:plus) %>
+</div>
+<aside>
+<%= yield(:sidebar) %>
+<%= render 'section',:plus => {:things => @recent_articles,:title=> "最新公告",:section_path => articles_path} %>
+</aside>
+<div class="c"></div>
+</article>
 <%= render 'after_layout' %>
 
