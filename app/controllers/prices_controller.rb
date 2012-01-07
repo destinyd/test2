@@ -30,11 +30,10 @@ class PricesController < ApplicationController
   def new
     if @able.blank?
       @price =  Price.new  
-      @price.goods.new
+      #@price.goods.new
     else
-      @price = @able.prices.build params[:price]
+      @price = @able.prices.build
     end
-    self.type_id = -1 if params[:price] and params[:price][:type_id] == -1
 
     respond_to do |format|
       format.html # new.html.erb

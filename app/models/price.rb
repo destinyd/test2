@@ -33,15 +33,14 @@ class Price < ActiveRecord::Base
   #before_create :valid_singleton_for_tuan
 
   scope :running,where("finish_at > ? OR finish_at is null",Time.now)
-  scope :cheapest,running.order("price").limit(10)
-  scope :recent,running.order("id desc").limit(10)
+  scope :cheapest,running.order("price").limit(10).group(:title)
+  scope :recent,running.order("id desc").limit(10).group(:title)
 
   #validates :country_code, :presence => true, :inclusion => { :in => Country.all_codes }
   #type [0:userlocal1day 1:userurl1day 2:团购 3:拍卖 10:商家普价 11:上架优惠 12:商家限量]
 
   TYPE = {
-  -1=>'记账',
-  0=>'本地单价',
+  0=>'本地单价/记账',
   1=>'折扣价',
   11=>'网络单价',
   21=>'团购价',
