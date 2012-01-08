@@ -3,10 +3,10 @@
     <%= content_tag :li do %>
       <% if flash.outlink %>
         <%= link_to flash.outlink.url do%>
-          <%= image_tag(flash.image.url) -%>
+          <%= image_tag(flash.image.url(:flash_pic)) -%>
         <% end -%>
       <% else %>
-        <%= image_tag(flash.image.url) -%>
+        <%= image_tag(flash.image.url(:flash_pic)) -%>
       <% end %>
     <% end -%>
   <% end -%>

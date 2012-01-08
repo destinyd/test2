@@ -7,8 +7,8 @@ class Flash < ActiveRecord::Base
  
   has_attached_file :image, 
                      :styles => { :flash_pic => '600x300>' }, 
-                     :path => ":rails_root/public/images/items/:style_:id_:updated_at.:extension", 
-                     :url => "/images/items/:style_:id_:updated_at.:extension" 
+                     :path => ":rails_root/public/images/flashes/:style_:id_:updated_at.:extension", 
+                     :url => "/images/flashes/:style_:id_:updated_at.:extension" 
 
   default_scope order('id desc')
   scope :recent,limit(5)
