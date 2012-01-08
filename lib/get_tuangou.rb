@@ -32,14 +32,19 @@ class GetTuangou
         next
       end
       arr = []
+      last = t.got_at 
       doc.find(t.docfind).each do |d|
         n = {}
         d.each{|a| n[a.name] = a.content}
         p = {}
         eval(t.suite)
+        last = p[:started_at] if last.nil? or p[:started_at] > last 
+        next if !t.got_at.nil? and p[:started_at] <= t.got_at
         arr.push p
       end
+      t.got_at = last
       Price.create arr
+      t.save
       log.info "获取#{t.name}的数据结束"
     end
     log.info "获取团购数据结束"
