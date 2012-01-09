@@ -275,3 +275,5 @@ zh-CN:
       new: '添加'
     sessions:
       new: '登录'
+    registrations:
+      new: '注册'
