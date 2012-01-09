@@ -39,12 +39,9 @@ class Good < ActiveRecord::Base
   end
 
   def to_s
-    @status = self.reviews.sum(:status)
-    if @status < STATUS_LOW
-      self.name + '(待审)'
-    else
-      self.name
-    end
+    return self.name if self.is_valid
+    return self.name + '(待审)' if self.reviews.sum(:status) < STATUS_LOW
+    self.name
   end
 
   has_many :integrals, :as => :integralable
