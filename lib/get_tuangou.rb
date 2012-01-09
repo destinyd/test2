@@ -25,7 +25,7 @@ class GetTuangou
       end
       xml.gsub! /\n/,''
       begin
-      parser, parser.string = XML::Parser.new, xml
+      parser = XML::Parser.string xml
       doc = parser.parse
       rescue
         log.info "获取#{t.name}的数据失败"

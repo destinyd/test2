@@ -4,7 +4,7 @@ class Outlink < ActiveRecord::Base
   belongs_to :outlinkable, :polymorphic => true
   belongs_to :user
   has_many :reviews, :as => :reviewable
-  validates :url, :presence => true,:uniqueness =>{:scope => [:outlinkable_id, :outlinkable_type]}
+  #validates :url, :presence => true,:uniqueness =>{:scope => [:outlinkable_id, :outlinkable_type]} #to urls 再去验证
   def human_link
     @status = self.reviews.sum(:status)
     if @status < STATUS_LOW
