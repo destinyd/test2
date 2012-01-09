@@ -69,6 +69,7 @@ Zhekou::Application.routes.draw do
   resources :prices do
     resources :comments
     resources :reviews
+    resources :uploads
   end
 
   

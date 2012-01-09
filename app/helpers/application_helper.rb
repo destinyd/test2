@@ -13,4 +13,8 @@ module ApplicationHelper
 #    output  +=  model.model_name.human
 #    elsif action_name == 'new'
   end
+
+  def could_bread?
+    !['home','sessions'].include? controller_name
+  end
 end

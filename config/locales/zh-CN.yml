@@ -273,3 +273,5 @@ zh-CN:
       new: '添加'
     articles:
       new: '添加'
+    sessions:
+      new: '登录'
