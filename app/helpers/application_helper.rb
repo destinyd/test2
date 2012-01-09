@@ -15,6 +15,6 @@ module ApplicationHelper
   end
 
   def could_bread?
-    !['home','sessions'].include? controller_name
+    !['home','sessions','registrations'].include? controller_name
   end
 end
