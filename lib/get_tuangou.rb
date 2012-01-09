@@ -39,7 +39,7 @@ class GetTuangou
         p = {}
         eval(t.suite)
         last = p[:started_at] if last.nil? or p[:started_at] > last 
-        next if !t.got_at.nil? and p[:started_at] <= t.got_at
+        next if !t.got_at.nil? and p[:started_at] < t.got_at
         arr.push p
       end
       t.got_at = last
