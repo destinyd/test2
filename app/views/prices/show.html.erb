@@ -1,3 +1,6 @@
+<% content_for :title do -%>[<%= @price.type_id %>]<%= @price %> <% end -%>
+<% content_for :desc do -%>[<%= @price.type_id %>]<%= @price %> <% end -%>
+<% content_for :keywords do -%><%= @price.type_id %>,<% end -%>
 <% @where_name = @price.title %>
 <% @where = @price %>
 <div>

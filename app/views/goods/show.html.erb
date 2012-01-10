@@ -1,3 +1,6 @@
+<% content_for :title do -%><%= @good %>商品信息、价格 尽在 <% end -%>
+<% content_for :desc do -%><%= @good %>商品信息、价格 尽在神马价。 <% end -%>
+<% content_for :keywords do -%><%= @good %>商品信息,<%= @good %>价格,<%= @good.tag_list.join('价格,') %>价格,<% end -%>
 <% @where_name = @good.name %>
 <% @where = @good %>
 <div class="product_l">
