@@ -63,7 +63,7 @@ class Price < ActiveRecord::Base
   #end
 
   def human_price
-    return self.price.to_s + '元' + '(待审)' if self.is_valid.nil? and self.reviews.sum(:status) < STATUS_LOW
+    return self.price.to_s + '元' + '(待审)' if self.type_id !='团购价' and self.is_valid.nil? and self.reviews.sum(:status) < STATUS_LOW
     self.price.to_s + '元'
   end
 

@@ -1,9 +1,11 @@
 <% tmp = t("action.#{controller_name}.#{action_name}") %>
-<% tmp1 = "最全、最全的#{tmp}信息 尽在" %>
+<% tmp1 = "最新、最全的#{tmp}信息 尽在" %>
 <% content_for :title do -%><%= tmp1 %><% end if tmp -%>
 <% content_for :desc do -%><%= tmp1 %>神马价。<% end if tmp -%>
 <% content_for :keywords do -%>最新<%=tmp%>,<%=tmp%>,<%=tmp%>信息,<% end if tmp -%>
 <%= render @prices %>
-
-<%= will_paginate @prices %> 
+<div class="c"></div>
+<div class="r">
+  <%= will_paginate @prices %> 
+</div>
 <%#= link_to t('labels.new'), new_price_path %>

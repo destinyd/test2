@@ -326,6 +326,21 @@ footer{
       margin-right:10px;
   }
 }
+.price{
+  padding:5px;
+  height:135px;
+  border-bottom:dashed 1px black;
+  .l{
+    padding:2px;
+    a img{
+      width:120px;
+      height:120px;
+    }
+  }
+  .detail{
+    margin-left: 130px;
+  }
+}
 
 /* Easy Slider */
 	#slider ul, #slider li,
