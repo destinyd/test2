@@ -9,7 +9,13 @@ Zhekou::Application.routes.draw do
 
   resources :price_goods
 
-  resources :prices,:only => [:index,:show,:new,:create]
+  resources :prices,:only => [:index,:show,:new,:create] do
+    collection do
+      get :cheapest
+      get :groupbuy
+      get :local
+    end
+  end
   resources :reviews
   resources :attrs,:only => [:new] do
     resources :reviews
@@ -37,7 +43,14 @@ Zhekou::Application.routes.draw do
     resources :comments
     resources :uploads
     resources :reviews
-    resources :prices
+    resources :prices,:only => [:index,:show,:new,:create] do
+    collection do
+      get :cheapest
+      get :groupbuy
+      get :local
+    end
+  end
+
     resources :focus
     resources :outlinks
     resources :attrs,:only => [:index,:show,:create,:new] do

@@ -4,13 +4,16 @@
   <div class="section">
     <h3>
       <a href='/'>神马价</a>
+      <% if @able  %>
+      &raquo; <%= link_to @able,@able  %>
+      <% end -%>
       <%  if could_bread?  -%>
         &raquo; <%= link_to t("controller.#{controller_name}"),eval("#{controller_name}_path")%>
       <% end -%>
-      <% unless ( could_bread? or ['index'].include? action_name) or @where -%>
+      <% unless ( could_bread? and ['index'].include? action_name) or @where -%>
         &raquo; <%= link_to t("action.#{controller_name}.#{action_name}") %>
       <% end -%>
-      <% if controller_name != 'home' and @where -%>
+      <% if could_bread? and @where -%>
         &raquo; <%= link_to @where_name,@where  %>
       <% end -%>
     </h3>

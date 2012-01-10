@@ -1,32 +1,17 @@
 class PricesController < ApplicationController
-  before_filter :authenticate_user!,:except =>[:index,:show]
+  before_filter :authenticate_user!,:only =>[:new,:create,:update]
   before_filter :find_able#, :except => [:update,:create]
-  # GET /prices
-  # GET /prices.xml
+  respond_to :html
   def index
-    @prices = @able.blank? ? Price.paginate(:per_page => 10, :page => params[:page]) : @able.prices.paginate(:per_page => 10, :page => params[:page])
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @prices }
-    end
+    @prices = @able.blank? ? Price.recent.paginate( :page => params[:page]) : @able.prices.paginate( :page => params[:page])
   end
 
-  # GET /prices/1
-  # GET /prices/1.xml
   def show
     @price = @able.blank? ? Price.find(params[:id]) : @able.prices.find(params[:id])
     @commentable = @price
     @reviewable = @price
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @price }
-    end
   end
 
-  # GET /prices/new
-  # GET /prices/new.xml
   def new
     if @able.blank?
       @price =  Price.new  
@@ -34,45 +19,47 @@ class PricesController < ApplicationController
     else
       @price = @able.prices.build
     end
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @price }
-    end
   end
 
   # GET /prices/1/edit
-#  def edit
-#    @price = @able.blank? ? Price. : @able.prices.find(params[:id])
-#  end
+  #  def edit
+  #    @price = @able.blank? ? Price. : @able.prices.find(params[:id])
+  #  end
 
-  # POST /prices
-  # POST /prices.xml
   def create
     @price = current_user.prices.build(params[:price]) 
     @price.good_id = @able.id if @price.good_id.nil? and !@able.nil?
-      if @price.save
-        redirect_to(@price, :notice => 'Price was successfully created.')
-      else
-        render :action => "new"
-      end
+    if @price.save
+      redirect_to(@price, :notice => 'Price was successfully created.')
+    else
+      render :action => "new"
+    end
   end
 
-  # PUT /prices/1
-  # PUT /prices/1.xml
-   def update
-     @price =  Price.find(params[:id])
-     params[:price][:good_user_id] = current_user.id
- 
-     respond_to do |format|
-       if @price.update_attributes(params[:price])
-         format.html { redirect_to([@good,@price], :notice => 'Price was successfully updated.') }
-         format.xml  { head :ok }
-       else
-         format.html { render :action => "edit" }
-         format.xml  { render :xml => @price.errors, :status => :unprocessable_entity }
-       end
-     end
-   end
+  def update
+    @price =  Price.find(params[:id])
+    params[:price][:good_user_id] = current_user.id
+
+    if @price.update_attributes(params[:price])
+      format.html { redirect_to([@good,@price], :notice => 'Price was successfully updated.') }
+    else
+      format.html { render :action => "edit" }
+    end
+  end
+
+  def cheapest
+    @prices = @able.blank? ? Price.cheapest.paginate( :page => params[:page]) : @able.prices.cheapest.paginate( :page => params[:page])
+    render :action => "index"
+  end
+
+  def groupbuy
+    @prices = @able.blank? ? Price.groupbuy.paginate( :page => params[:page]) : @able.prices.groupbuy.paginate( :page => params[:page])
+    render :action => "index"
+  end
+
+  def local
+    @prices = @able.blank? ? Price.local.paginate( :page => params[:page]) : @able.prices.local.paginate( :page => params[:page])
+    render :action => "index"
+  end
 
 end

@@ -7,32 +7,30 @@
     </div>
   </div>
   <div class="articles">
-  <div class="section" style="width:25%;"><h3>文章</h3><%= render 'articles/articles_li' %></div>
-</div>
+    <div class="section" style="width:25%;"><h3>文章</h3><%= render 'articles/articles_li' %></div>
+  </div>
 </div>
 
 <div class="mt">
-  <%= render 'section',:plus => {:things => @cheapest,:title=> "最低价格",:section_path => prices_path,:plusclass => 'home_section'} %>
+  <%= render 'section',:plus => {:things => @cheapest,:title=> "最低价格",:section_path => cheapest_prices_path,:plusclass => 'home_section'} %>
   <%= render 'section',:plus => {:things => @recent_prices,:title=> "最新价格",:section_path => prices_path,:plusclass => 'home_section'} %>
-  <%= render 'section',:plus => {:things => @recent_goods,:title=> "最新产品",:section_path => goods_path,:plusclass => 'home_section'} %>
+  <%= render 'section',:plus => {:things => @recent_groupbuy,:title=> "最新团购",:section_path => groupbuy_prices_path,:plusclass => 'home_section'} %>
 </div>
 
+<div class="mt">
+  <%= render 'section',:plus => {:things => @recent_local,:title=> "最新本地单价",:section_path => local_prices_path,:plusclass => 'home_section'} %>
+  <%= render 'section',:plus => {:things => @recent_goods,:title=> "最新产品",:section_path => goods_path,:plusclass => 'home_section'} %>
+  <%= render 'section',:plus => {:things => @good_tags,:title=> "商品Tags",:section_path => tags_goods_path,:link_name => 'name',:link_path => 'tag_good_path',:plusclass => 'home_section'} %>
+</div>
 <div class="mt">
   <%= render 'section',:plus => {:things => @focus,:title=> "最多关注",:plusclass => 'home_section',:plusable=>'focusable'} %>
-  <%#= render 'section',:plus => {:things => @focus,:title=> "最多关注",:section_path => goods_path %>
-  <%= render 'section',:plus => {:things => @good_tags,:title=> "商品Tags",:section_path => tags_goods_path,:link_name => 'name',:link_path => 'tag_good_path',:plusclass => 'home_section'} %>
-  <% if @exps.length > 0 %>
-    <div class="section"><h3>经验排行榜</h3>
-      <ul>
-        <%= render 'integrals/li' %>
-      </ul>
-    </div>
-  <% end %>
-  <!--  <div class="l in_r"><h3>最新会员</h3><%= render :partial => 'user_li' %></div> -->
+  <div class="section"><h3>经验排行榜</h3>
+    <ul>
+      <%= render 'integrals/li' %>
+    </ul>
+  </div>
+  <div class="l section">
+    <h3>最新图片</h3>
+    <%= render 'uploads/li' %>
+  </div>
 </div>
-<%#<div class="mt">%>
-  <%#<div class="l section">%>
-    <%#<h3>最新图片</h3>%>
-    <%#[>= render 'uploads/li' <]%>
-    <%#</div>%>
-  <%#</div>%>

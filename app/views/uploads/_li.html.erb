@@ -1,5 +1,5 @@
 <%  @uploads.each do |upload| %>
-  <%= link_to [@commentable,upload] do%>
+  <%= link_to upload.uploadable do%>
 <%= image_tag(upload.image_updated_at ? upload.image.url(:small) : upload.image_file_name) %>
 <%  end %>
 <% end %><br />

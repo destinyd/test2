@@ -1,24 +1,32 @@
 <%= render 'footer' %>
-  </body>
-  <script>
-    if('<%=current_user.to_s%>' != '')
-    $(".user_show").show();
-    else
-    $(".user_hide").show();
-    $('.flash_message').purr();
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=0" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+  document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?t=" + new Date().getHours();
   </script>
-  <script type="text/javascript">
+  <!-- Baidu Button END -->
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28185432-1']);
-    _gaq.push(['_setDomainName', 'shenmajia.com']);
-    _gaq.push(['_trackPageview']);
+</body>
+<script>
+  if('<%=current_user.to_s%>' != '')
+  $(".user_show").show();
+  else
+  $(".user_hide").show();
+  $('.flash_message').purr();
+</script>
+<script type="text/javascript">
 
-    (function() {
-     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-     })();
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28185432-1']);
+  _gaq.push(['_setDomainName', 'shenmajia.com']);
+  _gaq.push(['_trackPageview']);
 
-   </script>
- </html>
+  (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+
+ </script>
+</html>

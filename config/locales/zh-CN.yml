@@ -269,6 +269,9 @@ zh-CN:
   action:
     prices:
       new: '记账'
+      cheapest: '最便宜'
+      groupbuy: '团购'
+      local: '本地单价'
     goods:
       new: '添加'
     articles:
