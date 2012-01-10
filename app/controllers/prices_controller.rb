@@ -3,7 +3,7 @@ class PricesController < ApplicationController
   before_filter :find_able#, :except => [:update,:create]
   respond_to :html
   def index
-    @prices = @able.blank? ? Price.recent.paginate( :page => params[:page]) : @able.prices.paginate( :page => params[:page])
+    @prices = @able.blank? ? Price.recent.with_uploads.paginate( :page => params[:page]) : @able.prices.with_uploads.paginate( :page => params[:page])
   end
 
   def show
@@ -48,17 +48,17 @@ class PricesController < ApplicationController
   end
 
   def cheapest
-    @prices = @able.blank? ? Price.cheapest.paginate( :page => params[:page]) : @able.prices.cheapest.paginate( :page => params[:page])
+    @prices = @able.blank? ? Price.cheapest.with_uploads.paginate( :page => params[:page]) : @able.prices.with_uploads.cheapest.paginate( :page => params[:page])
     render :action => "index"
   end
 
   def groupbuy
-    @prices = @able.blank? ? Price.groupbuy.paginate( :page => params[:page]) : @able.prices.groupbuy.paginate( :page => params[:page])
+    @prices = @able.blank? ? Price.groupbuy.with_uploads.paginate( :page => params[:page]) : @able.prices.with_uploads.groupbuy.paginate( :page => params[:page])
     render :action => "index"
   end
 
   def local
-    @prices = @able.blank? ? Price.local.paginate( :page => params[:page]) : @able.prices.local.paginate( :page => params[:page])
+    @prices = @able.blank? ? Price.local.with_uploads.paginate( :page => params[:page]) : @able.prices.with_uploads.local.paginate( :page => params[:page])
     render :action => "index"
   end
 

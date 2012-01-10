@@ -37,6 +37,7 @@ class Price < ActiveRecord::Base
   scope :recent,running.order("id desc")
   scope :groupbuy,recent.where(:type_id=>21)
   scope :local,recent.where(:type_id=>0)
+  scope :with_uploads,includes(:uploads)
 
   #type [0:userlocal1day 1:userurl1day 2:团购 3:拍卖 10:商家普价 11:上架优惠 12:商家限量]
 
