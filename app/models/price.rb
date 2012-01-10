@@ -63,9 +63,8 @@ class Price < ActiveRecord::Base
   #end
 
   def human_price
-    return read_attribute(:price) if self.is_valid
-    return read_attribute(:price).to_s + '(待审)' if self.reviews.sum(:status) < STATUS_LOW
-    read_attribute(:price)
+    return self.price.to_s + '元' + '(待审)' if self.is_valid.nil? and self.reviews.sum(:status) < STATUS_LOW
+    self.price.to_s + '元'
   end
 
   def human_amount

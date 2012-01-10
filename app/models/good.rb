@@ -39,8 +39,7 @@ class Good < ActiveRecord::Base
   end
 
   def to_s
-    return self.name if self.is_valid
-    return self.name + '(待审)' if self.reviews.sum(:status) < STATUS_LOW
+    return self.name + '(待审)' if self.is_valid.nil? and self.reviews.sum(:status) < STATUS_LOW
     self.name
   end
 
