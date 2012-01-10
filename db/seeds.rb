@@ -10,12 +10,6 @@ TuanApi.destroy_all
 TuanUrl.destroy_all
 TuanApi.create [
   {
-  :name => "窝窝团",
-  :docfind => "//deals/deal",
-  :suite  => "p[:price]=n['price'];p[:type_id]=21;p[:finish_at]=Time.at(n['end_date'].to_i);p[:started_at]=Time.at(n['start_date'].to_i);p[:address]=n['division_name'];p[:title]=n['title'];p[:title].gsub!(/<!\\[CDATA\\[(.*)\\]\\]>/,'\\1');o=p[:outlinks_attributes]=[{:url =>n['deal_url']}];p[:uploads_attributes]=[{:image_file_name => n['large_image_url']}];",
-  :tuan_urls=> [TuanUrl.new( {      :name => "窝窝团柳州", :url => "http://www.55tuan.com/openAPI.do?city=liuzhou", :enable => true})]
-},
-  {
   :name => "hao1235",
   :docfind => "//urlset/url",
 :suite=>"d=d.children[5].children[1];d.each{|a|n[a.name]=a.content};p[:price]=n['price'];p[:type_id]=21;p[:finish_at]=Time.at(n['endTime'].to_i);p[:started_at]=Time.at(n['startTime'].to_i);p[:address]=n['city'];p[:title]=n['title'];p[:title].gsub!(/<!\\[CDATA\\[(.*)\\]\\]>/,'\\1');o=p[:outlinks_attributes]=[{:url=>n['loc']}];p[:uploads_attributes]=[{:image_file_name=>n['image']}];",
@@ -49,6 +43,12 @@ TuanApi.create [
     TuanUrl.new( {      :name => "团宝柳州", :url => "http://p5.groupon.cn/xml/city/cityproduct/?cityid=236", :enable => true}),
   ]
   },
+  {
+  :name => "窝窝团",
+  :docfind => "//deals/deal",
+  :suite  => "p[:price]=n['price'];p[:type_id]=21;p[:finish_at]=Time.at(n['end_date'].to_i);p[:started_at]=Time.at(n['start_date'].to_i);p[:address]=n['division_name'];p[:title]=n['title'];p[:title].gsub!(/<!\\[CDATA\\[(.*)\\]\\]>/,'\\1');o=p[:outlinks_attributes]=[{:url =>n['deal_url']}];p[:uploads_attributes]=[{:image_file_name => n['large_image_url']}];",
+  :tuan_urls=> [TuanUrl.new( {      :name => "窝窝团柳州", :url => "http://www.55tuan.com/openAPI.do?city=liuzhou", :enable => true})]
+},
 
 ]
 

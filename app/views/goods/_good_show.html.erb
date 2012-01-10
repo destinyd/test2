@@ -19,7 +19,7 @@
   <%= good.tag_list %>
 </p>
 <% if !good.uploads.blank? %>
-<%= image_tag good.uploads.first.image.url  %>
+<%= image_tag good.uploads.first.image.url if good.uploads.first %>
 <% end  %>
 </div>
 
