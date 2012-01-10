@@ -12,7 +12,7 @@
     发表于:<%= @article.updated_at %>
     <%= link_to t('labels.edit'), edit_article_path(@article) if @article.user and @article.user == current_user %>
     <%= link_to t('labels.del'), @article, :confirm => t('labels.sure?'), :method => :delete if @article.user and @article.user == current_user %>
-    <%#= render 'reviews/links' %>
+    <%#= render 'reviews/links',:reviewable => @article %>
   </div>
   <p style="margin-top:20px;">
   <%= @article.content %>

@@ -40,6 +40,7 @@
     链接：<%= link_to @price.outlinks.first.url,@price.outlinks.first.url%>
   <% end -%>
   <%= image_tag @price.uploads.first.image_file_name unless @price.type_id != "团购价" or @price.uploads.blank?%>
+  <%= render 'reviews/links',:reviewable => @price %>
 </div>
 
 <% content_for :plus do -%>
@@ -55,7 +56,6 @@
       </ul>
     </div>
   <% end %>
-  <%= render 'reviews/links' %>
   <%= render 'comments/comments' %>
 <% end -%>
 

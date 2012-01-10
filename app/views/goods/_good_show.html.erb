@@ -44,6 +44,6 @@
   <p>
     <%= button_to '关注',good_focus_path(good),:remote => true %>
     <% @reviewable = good %>
-    <%= render 'reviews/links',:locals => {:reviewable => good} %>
+    <%= render 'reviews/links',:reviewable => good %>
   </p>
 

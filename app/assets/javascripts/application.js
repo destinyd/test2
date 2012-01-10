@@ -28,9 +28,9 @@ function ajaxForm(formdom,action){
         });
 
 }
-function send_review(){
-  $('#new_review').submit();
-  $('#review_status').attr('enable',false);
+function send_review(selector){
+  $(selector).submit();
+  $(selector + ' select').attr('disable',true);
 }
 $(function(){
   ajaxForm($('#new_comment'));
