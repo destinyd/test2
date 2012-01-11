@@ -15,7 +15,7 @@ class GetTuangou
       uri = URI.parse t.url
       begin
         xml = Net::HTTP.get uri.host, uri.request_uri
-      rescue Timeout::Error
+      rescue #Timeout::Error
         if @error_times > 2
           @error_times =0
           next
@@ -25,8 +25,8 @@ class GetTuangou
       end
       xml.gsub! /\n/,''
       begin
-      parser = XML::Parser.string xml
-      doc = parser.parse
+        parser = XML::Parser.string xml
+        doc = parser.parse
       rescue
         log.info "获取#{t.name}的数据失败"
         next
@@ -42,9 +42,11 @@ class GetTuangou
         next if !t.got_at.nil? and p[:started_at] < t.got_at
         arr.push p
       end
-      t.got_at = last
+      if last > t.got_at
+        t.got_at = last
+        t.save
+      end
       Price.create arr
-      t.save
       log.info "获取#{t.name}的数据结束"
     end
     log.info "获取团购数据结束"
