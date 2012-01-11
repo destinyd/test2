@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
+  <title>你访问的页面不存在</title>
   <style type="text/css">
     body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
     div.dialog {
@@ -19,8 +19,11 @@
 <body>
   <!-- This file lives in public/404.html -->
   <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
+    <h1>你访问的页面不存在</h1>
+    <p>我们将在几秒后，帮您自动跳回到主页。</p>
   </div>
+  <script language="javascript" type="text/javascript"> 
+    window.location.href="/"; 
+  </script> 
 </body>
 </html>
