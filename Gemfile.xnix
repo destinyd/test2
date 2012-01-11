@@ -26,7 +26,8 @@ gem 'acts-as-taggable-on'#, '~>2.1.0'
 gem "therubyracer", :require => 'v8'
 #gem "mocha", :group => :test
 
-#gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'ruby-debug19', :require => 'ruby-debug', :group => :development
 gem 'best_in_place'
+gem 'redis'
 #dd
 
