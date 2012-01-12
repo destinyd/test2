@@ -9,7 +9,6 @@ gem "therubyracer", :require => 'v8'
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'
   gem 'coffee-rails', '~> 3.1.1'
-  #gem 'coffee-script'#, '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -30,13 +29,16 @@ gem 'acts-as-taggable-on'#, '~>2.1.0'
 
 group :development do
   gem "nifty-generators"
-  gem 'linecache19'#, :git => 'https://github.com/mark-moseley/linecache.git' 
+  #gem 'linecache19'#, :git => 'https://github.com/mark-moseley/linecache.git' 
   gem 'ruby-debug-base19'#, :git => 'https://github.com/mark-moseley/ruby-debug.git'
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'ruby-prof'
 end
 
 #gem 'best_in_place'
-gem 'redis'
-gem 'redis-store','~> 1.1.0.rc'
+#gem 'redis'
+#gem 'redis-objects'
+gem 'redis-store','~> 1.0.0.1'
+#gem 'redis-store','~> 1.1.0.rc'
+#gem 'redis-rails'
 gem 'thin'

@@ -1,14 +1,16 @@
 <div class="price c" data-time="<%= price.created_at.to_i %>">  
   <div class="l">
-    <%=  link_to price do %>
-      <%= image_tag(price.uploads.first.image_file_name) if price.uploads.first %>
-    <% end %>
-  </div>
-  <div class="detail">[<%= price.type_id %>] <%=link_to  price.title,price %>
-    <br />
-    价格：<%= price.human_price %>
-    <% if price.address %><br />地址：<%= price.address %><% end %>
-    <% if price.finish_at %><br />
-      截止日期：<em> <%= price.created_at %></em><% end -%>
-  </div>
+    <% if price.uploads.first and price.uploads.first.try('image_file_name') %>
+      <img src='images/nopic.gif' alt='nopic' />
+    <% else %>
+      <%= image_tag(price.uploads.first.image_file_name) %>
+    <% end -%>
+</div>
+<div class="detail">[<%= price.type_id %>] <%=link_to  price.title,price %>
+  <br />
+  价格：<%= price.human_price %>
+  <% if price.address %><br />地址：<%= price.address %><% end %>
+  <% if price.finish_at %><br />
+    截止日期：<em> <%= price.created_at %></em><% end -%>
+</div>
 </div>

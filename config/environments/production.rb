@@ -38,7 +38,10 @@ Zhekou::Application.configure do
   # config.logger = SyslogLogger.new
 
   # Use a different cache store in production
-  config.cache_store = :redis_store#, $config.redis[:server]
+
+  require "redis-store" # HACK
+  config.cache_store = :redis_store, "redis://127.0.0.1:6379/0"
+  #config.cache_store = :redis_store#, $config.redis[:server]
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
