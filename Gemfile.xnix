@@ -5,9 +5,12 @@ gem 'rails'#, '3.1.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'#, '0.2.13te3'
-gem 'sass-rails'
-gem 'coffee-script'
-gem 'uglifier'
+group :assets do
+  gem 'sass-rails'#,   '~> 3.1.5'
+  #gem 'coffee-rails'#, '~> 3.1.1'
+  gem 'coffee-script'#, '~> 3.1.1'
+  gem 'uglifier'#, '>= 1.0.3'
+end
 
 
 #dd
@@ -19,15 +22,18 @@ gem 'mime-types', :require => 'mime/types'
 gem "will_paginate", "~> 3.0.pre2"
 gem "nifty-generators", :group => :development
 gem 'jquery-rails'
-gem 'awesome_nested_set'
+#gem 'awesome_nested_set'
 
 gem 'geocoder'
 gem 'acts-as-taggable-on'#, '~>2.1.0'
-gem "therubyracer", :require => 'v8'
+#gem "therubyracer", :require => 'v8'
+gem "therubyracer", :require => 'v8',:group => :development
 #gem "mocha", :group => :test
 
 gem 'ruby-debug19', :require => 'ruby-debug', :group => :development
-gem 'best_in_place'
+#gem 'best_in_place'
 gem 'redis'
+gem 'redis-store','~> 1.1.0.rc'
+gem 'thin'
 #dd
 
