@@ -37,7 +37,7 @@
   <%= @price.desc %>
   </p>
   <%  unless @price.outlinks.blank? %>
-    链接：<%= link_to @price.outlinks.first.url,@price.outlinks.first.url%>
+    链接：<%= link_to @price.outlinks.first.url,@price.outlinks.first.url ,{:rel=>"nofollow"}%>
     <div class="c"></div>
   <% end -%>
   <%= image_tag @price.uploads.first.image_file_name unless @price.type_id != "团购价" or @price.uploads.blank?%>

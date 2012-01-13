@@ -36,7 +36,7 @@ class Price < ActiveRecord::Base
   scope :cheapest,running.order("price")
   scope :recent,running.order("id desc")
   scope :groupbuy,recent.where(:type_id=>21)
-  scope :cost,recent.where(:type_id=>[0,1]).includes(:reviews)
+  scope :costs,recent.where(:type_id=>[0,1]).includes(:reviews)
   #scope :nearest,running.near_prices
   scope :with_uploads,includes(:uploads)
 

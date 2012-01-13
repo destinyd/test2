@@ -1,4 +1,5 @@
 Zhekou::Application.routes.draw do
+  match '/prices/local' => redirect('/prices/costs')
   resources :user_infos
 
   resources :my_tasks
@@ -13,7 +14,7 @@ Zhekou::Application.routes.draw do
     collection do
       get :cheapest
       get :groupbuy
-      get :local
+      get :costs
     end
   end
   resources :reviews

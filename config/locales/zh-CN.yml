@@ -271,7 +271,7 @@ zh-CN:
       new: '记账'
       cheapest: '便宜价格'
       groupbuy: '团购价格'
-      local: '本地单价'
+      costs: '消费记录'
       index: '价格'
     goods:
       new: '添加'

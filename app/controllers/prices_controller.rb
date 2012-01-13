@@ -57,8 +57,8 @@ class PricesController < ApplicationController
     render :action => "index"
   end
 
-  def local
-    @prices = @able.blank? ? Price.local.with_uploads.paginate( :page => params[:page]) : @able.prices.with_uploads.local.paginate( :page => params[:page])
+  def costs 
+    @prices = @able.blank? ? Price.costs.with_uploads.paginate( :page => params[:page]) : @able.prices.with_uploads.costs.paginate( :page => params[:page])
     render :action => "index"
   end
 

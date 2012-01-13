@@ -18,7 +18,7 @@
 </div>
 
 <div class="mt">
-  <%= render 'section',:plus => {:things => @recent_cost,:title=> "最新消费",:section_path => local_prices_path,:plusclass => 'home_section'} %>
+  <%= render 'section',:plus => {:things => @recent_cost,:title=> "最新消费记录",:section_path => costs_prices_path,:plusclass => 'home_section'} %>
   <%#= render 'section',:plus => {:things => @recent_local,:title=> "附近消费",:section_path => local_prices_path,:plusclass => 'home_section'} %>
   <%= render 'section',:plus => {:things => @recent_goods,:title=> "最新产品",:section_path => goods_path,:plusclass => 'home_section'} %>
   <%= render 'section',:plus => {:things => @good_tags,:title=> "商品Tags",:section_path => tags_goods_path,:link_name => 'name',:link_path => 'tag_good_path',:plusclass => 'home_section'} %>
