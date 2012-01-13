@@ -14,3 +14,4 @@ db/schema.rb
 tags
 vendor/cache/*
 public/images/flashes/*
+public/assets/*

@@ -42,7 +42,7 @@ class GetTuangou
         next if !t.got_at.nil? and p[:started_at] < t.got_at
         arr.push p
       end
-      if last > t.got_at
+      if t.got_at.nil? or last > t.got_at
         t.got_at = last
         t.save
       end

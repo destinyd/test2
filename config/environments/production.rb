@@ -39,8 +39,8 @@ Zhekou::Application.configure do
 
   # Use a different cache store in production
 
-  require "redis-store" # HACK
-  config.cache_store = :redis_store, "redis://127.0.0.1:6379/0"
+#  require "redis-store" # HACK
+#  config.cache_store = :redis_store, "redis://127.0.0.1:6379/0"
   #config.cache_store = :redis_store#, $config.redis[:server]
 
   # Disable Rails's static asset server
