@@ -13,5 +13,4 @@ db/schema.rb
 .sass-cache/
 tags
 vendor/cache/*
-public/assets/*
 public/images/flashes/*
