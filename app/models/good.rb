@@ -22,7 +22,7 @@ class Good < ActiveRecord::Base
 
 #  default_scope order('id desc')#.includes(:prices) #
 
-  scope :recent,order('id desc').limit(10)
+  scope :recent,order('id desc').includes(:reviews).limit(10)
 
   def self.search(search)
     if search
@@ -39,7 +39,7 @@ class Good < ActiveRecord::Base
   end
 
   def to_s
-    return self.name + '(待审)' if self.is_valid.nil? and self.reviews.sum(:status) < STATUS_LOW
+    return self.name + '(待审)' if self.is_valid.nil?# and self.reviews.sum(:status) < STATUS_LOW
     self.name
   end
 

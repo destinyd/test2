@@ -36,15 +36,17 @@ class Price < ActiveRecord::Base
   scope :cheapest,running.order("price")
   scope :recent,running.order("id desc")
   scope :groupbuy,recent.where(:type_id=>21)
-  scope :local,recent.where(:type_id=>0)
+  scope :cost,recent.where(:type_id=>[0,1]).includes(:reviews)
+  #scope :nearest,running.near_prices
   scope :with_uploads,includes(:uploads)
 
   #type [0:userlocal1day 1:userurl1day 2:团购 3:拍卖 10:商家普价 11:上架优惠 12:商家限量]
 
   TYPE = {
-  0=>'本地单价/记账',
-  1=>'折扣价',
-  11=>'网络单价',
+  0=>'消费',
+  1=>'网上消费',
+  5=>'商品价',
+  6=>'折扣价',
   21=>'团购价',
   31=>'批发价',
   51=>'成本价',
@@ -64,7 +66,7 @@ class Price < ActiveRecord::Base
   #end
 
   def human_price
-    return self.price.to_s + '元' + '(待审)' if self.type_id !='团购价' and self.is_valid.nil? and self.reviews.sum(:status) < STATUS_LOW
+    return self.price.to_s + '元' + '(待审)' if self.type_id !='团购价' or self.is_valid.nil?# and self.reviews.sum(:status) < STATUS_LOW
     self.price.to_s + '元'
   end
 

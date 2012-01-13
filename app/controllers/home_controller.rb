@@ -6,7 +6,8 @@ class HomeController < ApplicationController
     @cheapest =     Price.cheapest.limit 10
     @recent_prices =     Price.recent.group(:title).limit 10
     @recent_groupbuy =     Price.groupbuy.group(:title).limit 10
-    @recent_local =     Price.local.limit 10
+    @recent_cost =     Price.cost.limit 10
+    #@recent_nearest =     Price.nearest.limit 10
     @recent_goods = Good.recent.group(:name).limit 10
     @recent_users    = User.recent
     @exps  = Integral.recent
