@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     @articles = @recent_articles
 #    @categories = Category.roots
     @flashes = Flash.recent# if @flashes.blank?
-    @cheapest =     Price.cheapest.limit 10
+    @cheapest =     Price.cheapest.group(:title).limit 10
     @recent_prices =     Price.recent.group(:title).limit 10
     @recent_groupbuy =     Price.groupbuy.group(:title).limit 10
     @recent_cost =     Price.costs.limit 10
