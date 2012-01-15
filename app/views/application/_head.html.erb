@@ -1,13 +1,10 @@
-<% debugger %>
-<% session['loc'] = request.location %>
-<% @loc = session['loc']%>
 <div class='head_left'>
   <ul>
     <li><a href='/' alt='神马价'><div>神马价</div></a></li>
-  <li><%= link_to cheapest_prices_path do %><div>最低价</div><% end %></li>
-  <li><%= link_to cheapest_prices_path do %><div>团购价</div><% end %></li>
-  <li><%= link_to cheapest_prices_path do %><div>实际消费价</div><% end %></li>
-    <li>您的位置:<%=@loc.city if @loc%></li>
+  <li><%= link_to cheapest_prices_path do %><div>最低</div><% end %></li>
+  <li><%= link_to groupbuy_prices_path do %><div>团购</div><% end %></li>
+  <li><%= link_to costs_prices_path do %><div>实际消费</div><% end %></li>
+    <li>您的位置:<%=@geo_result.city if @geo_result%></li>
   </ul>
 </div>
 <div class='head_login'>
