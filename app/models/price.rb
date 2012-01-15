@@ -8,10 +8,10 @@ class Price < ActiveRecord::Base
   validates :price, :presence => true
   validates :title, :presence => true
   
-  validates :title, :uniqueness => { :scope => [:finish_at,:price,:address] } ,:if => :is_tuangou? #限制 当创建的时候
+  validates :title, :uniqueness => { :scope => [:finish_at,:price,:address] } ,:if => :is_tuangou?,:on => :create #限制 当创建的时候
 
   attr_accessor :good_name,:good_user_id
-  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:started_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes
+  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:started_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude
 
   has_many :integrals, :as => :integralable, :dependent => :destroy
   has_many :reviews, :as => :reviewable, :dependent => :destroy
@@ -29,7 +29,8 @@ class Price < ActiveRecord::Base
 
   acts_as_commentable
   geocoded_by :address
-  after_validation :geocode, :if => :address_changed?
+  after_validation :geocode, :if => [:address_changed?,:is_not_locate?],:on =>:create
+  after_validation :geocode, :if => :address_changed?,:on =>:update
   #before_create :valid_singleton_for_tuan
 
   scope :running,where("finish_at > ? OR finish_at is null",Time.now)
@@ -55,6 +56,9 @@ class Price < ActiveRecord::Base
   #103=>'商家限量价'
   }
 
+  def is_not_locate?
+    self.longitude.nil? or self.latitude.nil?
+  end
 
   def type_id
     t = read_attribute(:type_id)

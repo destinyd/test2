@@ -26,6 +26,7 @@ class GetTuangou
       xml.gsub! /\n/,''
       begin
         parser = XML::Parser.string xml
+        #parser = XML::Parser.file 'google.1'
         doc = parser.parse
       rescue
         log.info "获取#{t.name}的数据失败"
@@ -50,5 +51,13 @@ class GetTuangou
       log.info "获取#{t.name}的数据结束"
     end
     log.info "获取团购数据结束"
+  end
+
+  def get_one dom,hashs
+    result = {}
+    hashs.each do |key,value|
+      result[key] = dom.find(value.to_s).first.content if dom.find(value.to_s).first
+    end
+    result
   end
 end
