@@ -1,13 +1,13 @@
 class PricesController < ApplicationController
   before_filter :authenticate_user!,:only =>[:new,:create,:update]
-  before_filter :find_able#, :except => [:update,:create]
-  respond_to :html
+  before_filter :find_able_and_prices, :except => [:update,:create]
+  respond_to :html,:js
   def index
-    @prices = @able.blank? ? Price.recent.with_uploads.paginate( :page => params[:page]) : @able.prices.with_uploads.paginate( :page => params[:page])
+    @prices = @prices.recent.paginate( :page => params[:page])
   end
 
   def show
-    @price = @able.blank? ? Price.find(params[:id]) : @able.prices.find(params[:id])
+    @price = @prices.find(params[:id])
     @commentable = @price
     @reviewable = @price
   end
@@ -48,18 +48,37 @@ class PricesController < ApplicationController
   end
 
   def cheapest
-    @prices = @able.blank? ? Price.cheapest.with_uploads.paginate( :page => params[:page]) : @able.prices.with_uploads.cheapest.paginate( :page => params[:page])
+    @prices = @prices.cheapest.paginate( :page => params[:page])
     render :action => "index"
   end
 
   def groupbuy
-    @prices = @able.blank? ? Price.groupbuy.with_uploads.paginate( :page => params[:page]) : @able.prices.with_uploads.groupbuy.paginate( :page => params[:page])
+    @prices = @prices.groupbuy.paginate( :page => params[:page])
     render :action => "index"
   end
 
   def costs 
-    @prices = @able.blank? ? Price.costs.with_uploads.paginate( :page => params[:page]) : @able.prices.with_uploads.costs.paginate( :page => params[:page])
+    @prices = @prices.costs.paginate( :page => params[:page])
     render :action => "index"
   end
 
+  private
+  def find_able_and_prices
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        if $1 == 'city'
+          @able = $1.classify.constantize.where(:name =>value).limit(1).first
+          @prices = Price.scoped
+        else
+          @able = $1.classify.constantize.find(value) 
+          @prices = @able.prices
+        end 
+        @prices = Price.send action_name if ['cheapest','groupbuy','costs'].include? action_name
+        @prices = Price.recent if action_name == 'index'
+        @prices = @prices.near(value,20) if $1 == 'city'
+        return @prices.with_uploads
+      end  
+    end  
+    @prices = Price.with_uploads
+  end
 end

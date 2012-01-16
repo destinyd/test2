@@ -343,6 +343,24 @@ footer{
     margin-left: 130px;
   }
 }
+.cities{
+  width:100%;
+}
+#cities
+{
+  height:1500px;
+  margin-top:40px;
+  div{
+    width:33%;
+    margin-bottom:5px;
+    margin-right:0.3%;
+    float:left;
+    height:auto;
+    dt,dd{
+      height:auto;
+}
+}
+}
 
 /* Easy Slider */
 	#slider ul, #slider li,

@@ -269,10 +269,10 @@ zh-CN:
   action:
     prices:
       new: '记账'
-      cheapest: '便宜价格'
-      groupbuy: '团购价格'
-      costs: '消费记录'
-      index: '价格'
+      cheapest: '最便宜'
+      groupbuy: '团购'
+      costs: '消费'
+      index: '最新'
     goods:
       new: '添加'
     articles:

@@ -1,4 +1,16 @@
 Zhekou::Application.routes.draw do
+  resources :locates,:only => [:index,:show,:create]
+  resources :cities,:only => [:index,:show] do
+    resources :prices do
+      collection do
+        get :cheapest
+        get :groupbuy
+        get :costs
+      end
+    end
+  end
+
+
   match '/prices/local' => redirect('/prices/costs')
   resources :user_infos
 
@@ -45,12 +57,12 @@ Zhekou::Application.routes.draw do
     resources :uploads
     resources :reviews
     resources :prices,:only => [:index,:show,:new,:create] do
-    collection do
-      get :cheapest
-      get :groupbuy
-      get :local
+      collection do
+        get :cheapest
+        get :groupbuy
+        get :local
+      end
     end
-  end
 
     resources :focus
     resources :outlinks
@@ -70,11 +82,11 @@ Zhekou::Application.routes.draw do
   resources :uploads#,:only  =>  [:show]
 
   devise_for :users     , :controllers => { :sessions => "users/sessions" }
-#  devise_scope :user do
-#    get "sign_out", :to => "users/sessions#destroy"
-#  end
+  #  devise_scope :user do
+  #    get "sign_out", :to => "users/sessions#destroy"
+  #  end
 
-#  get '/users/sign_out(.:format)',:to => 'users/sessions#destroy'
+  #  get '/users/sign_out(.:format)',:to => 'users/sessions#destroy'
 
   resources :records
 
@@ -86,10 +98,10 @@ Zhekou::Application.routes.draw do
     resources :uploads
   end
 
-  
+
   root :to => "home#index"
   match "/:reviewable_type/:reviewable_id/reviews" => "reviews#:action",:as => 'reviewable'
 
-#  match "/users/sign_out(.:format)",:controller => 'users/sessions',:action => :destroy,:as => 'destroy_user_session'
-  
+  #  match "/users/sign_out(.:format)",:controller => 'users/sessions',:action => :destroy,:as => 'destroy_user_session'
+
 end

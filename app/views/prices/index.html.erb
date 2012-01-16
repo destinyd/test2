@@ -3,7 +3,9 @@
 <% content_for :title do -%><%= tmp1 %><% end if tmp -%>
 <% content_for :desc do -%><%= tmp1 %>神马价。<% end if tmp -%>
 <% content_for :keywords do -%>最新<%=tmp%>,<%=tmp%>,<%=tmp%>信息,<% end if tmp -%>
+<%= render 'prices_types' %>
 <%= render @prices %>
+<%= raw "<div><h4>暂无数据</h4></div>" if @prices.blank? %>
 <div class="c"></div>
 <div class="r">
   <%= will_paginate @prices %> 

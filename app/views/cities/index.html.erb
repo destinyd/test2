@@ -1,0 +1,15 @@
+<div class="section cities">
+  <h3>选择你所在城市</h3>
+</div>
+<div id="cities">
+  <% @provinces.each do |province| %>
+    <% if !province.cities.blank? %>
+      <div class="section" style="height:120px;">
+        <h3><%= province.name %></h3>
+        <% province.cities.each do |city| %>
+          <%= link_to city.name,city %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

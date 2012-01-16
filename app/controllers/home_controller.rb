@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     @recent_cost =     Price.costs.limit 10
     #@recent_nearest =     Price.nearest.limit 10
     @recent_goods = Good.recent.group(:name).limit 10
-    @recent_users    = User.recent
+    #@recent_users    = User.recent
     @exps  = Integral.recent
     @uploads  = Upload.recent.includes(:uploadable).limit 6
     @focus  = Focus.most

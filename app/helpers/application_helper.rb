@@ -1,9 +1,11 @@
 module ApplicationHelper
   def initialize(a,b,c)
     super(a,b,c)
-    session[:loc] = request.location unless session[:loc]
-    @loc = session[:loc]
-    session[:geo_result] = Geocoder.search(@loc.city).first if session[:geo_result].nil? and @loc
+    unless session[:geo_result]
+      session[:loc] = request.location unless session[:loc]
+      @loc = session[:loc]
+      session[:geo_result] = Geocoder.search(@loc.city).first if session[:geo_result].nil? and @loc
+    end 
     @geo_result = session[:geo_result]
   end
 
