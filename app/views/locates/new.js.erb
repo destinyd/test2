@@ -1,0 +1,6 @@
+var obj_locate = $('#locate');
+if(obj_locate.length <= 0)
+  $('body').append('<%=j(render 'locates/form') %>');
+var obj_locate = $('#locate');
+obj_locate.dialog();
+

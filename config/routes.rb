@@ -1,5 +1,5 @@
 Zhekou::Application.routes.draw do
-  resources :locates,:only => [:index,:show,:create]
+  resources :locates,:only => [:index,:show,:create,:new]
   resources :cities,:only => [:index,:show] do
     resources :prices do
       collection do

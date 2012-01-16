@@ -1,0 +1,7 @@
+<div id='locate'>
+  <h3><%= t 'labels.sign_in' %></h3>
+<%= form_tag '/locates' do |f| -%>
+  你所在城市/地址：<%= text_field_tag :id %><br />
+  <%= submit_tag '定位' %><br />
+<% end -%>
+</div>

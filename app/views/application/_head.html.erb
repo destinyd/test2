@@ -1,11 +1,15 @@
 <div class='head_left'>
   <ul>
     <li><a href='/' alt='神马价'><div>神马价</div></a></li>
-  <li><%= link_to cheapest_prices_path do %><div>最低</div><% end %></li>
-  <li><%= link_to groupbuy_prices_path do %><div>团购</div><% end %></li>
-  <li><%= link_to costs_prices_path do %><div>实际消费</div><% end %></li>
-  <li><%= link_to '/cities' do %><div>区域价格</div><% end %></li>
-    <li>您的位置:<%=@geo_result.city if @geo_result%></li>
+    <li><%= link_to cheapest_prices_path do %><div>最低</div><% end %></li>
+    <li><%= link_to groupbuy_prices_path do %><div>团购</div><% end %></li>
+    <li><%= link_to costs_prices_path do %><div>实际消费</div><% end %></li>
+    <li><%= link_to '/cities' do %><div>区域价格</div><% end %></li>
+    <li>您的位置:
+    <%=@geo_result.city if @geo_result%>
+    <%="无法确认" unless @geo_result%>
+    <small style="margin-left:5px;"><%= link_to '重新定位',new_locate_path(:format => :js),:method => :get,:remote => true %></small>
+    </li>
   </ul>
 </div>
 <div class='head_login'>
