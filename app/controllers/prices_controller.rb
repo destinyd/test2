@@ -3,7 +3,7 @@ class PricesController < ApplicationController
   before_filter :find_able_and_prices, :except => [:update,:create]
   respond_to :html,:js
   def index
-    @prices = @prices.recent.paginate( :page => params[:page])
+    @prices = @prices.paginate( :page => params[:page])
   end
 
   def show
@@ -48,17 +48,17 @@ class PricesController < ApplicationController
   end
 
   def cheapest
-    @prices = @prices.cheapest.paginate( :page => params[:page])
+    @prices = @prices.paginate( :page => params[:page])
     render :action => "index"
   end
 
   def groupbuy
-    @prices = @prices.groupbuy.paginate( :page => params[:page])
+    @prices = @prices.paginate( :page => params[:page])
     render :action => "index"
   end
 
-  def costs 
-    @prices = @prices.costs.paginate( :page => params[:page])
+  def costs
+    @prices = @prices.paginate( :page => params[:page])
     render :action => "index"
   end
 
@@ -68,17 +68,19 @@ class PricesController < ApplicationController
       if name =~ /(.+)_id$/
         if $1 == 'city'
           @able = $1.classify.constantize.where(:name =>value).limit(1).first
-          @prices = Price.scoped
+          @prices = Price
         else
           @able = $1.classify.constantize.find(value) 
           @prices = @able.prices
         end 
-        @prices = Price.send action_name if ['cheapest','groupbuy','costs'].include? action_name
-        @prices = Price.recent if action_name == 'index'
+        @prices = @prices.send action_name if ['cheapest','groupbuy','costs'].include? action_name
+        @prices = @prices.recent if action_name == 'index'
         @prices = @prices.near(value,20) if $1 == 'city'
         return @prices.with_uploads
       end  
     end  
+    @prices = Price.send action_name if ['cheapest','groupbuy','costs'].include? action_name
+    @prices = Price.recent if action_name == 'index'
     @prices = Price.with_uploads
   end
 end

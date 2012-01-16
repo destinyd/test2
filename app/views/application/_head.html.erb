@@ -6,9 +6,12 @@
     <li><%= link_to costs_prices_path do %><div>实际消费</div><% end %></li>
     <li><%= link_to '/cities' do %><div>区域价格</div><% end %></li>
     <li>您的位置:
-    <%=@geo_result.city if @geo_result%>
+    <%=link_to @geo_result.city,city_path(@geo_result.city) if @geo_result%>
     <%="无法确认" unless @geo_result%>
-    <small style="margin-left:5px;"><%= link_to '重新定位',new_locate_path(:format => :js),:method => :get,:remote => true %></small>
+    <small><%= link_to '(重新定位)',new_locate_path(:format => :js),:method => :get,:remote => true %></small>
+    </li>
+    <li style="margin-left:5px;">
+    <%= text_field_tag :locate_id %><button onclick="if($('#locate_id').val()!='')window.location.href='/locates/'+$('#locate_id').val();return false;">搜索附近</button>
     </li>
   </ul>
 </div>
