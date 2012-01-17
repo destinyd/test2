@@ -1,6 +1,6 @@
 class PricesController < ApplicationController
   before_filter :authenticate_user!,:only =>[:new,:create,:update]
-  before_filter :find_able_and_prices, :except => [:update,:create]
+  before_filter :find_able_and_prices, :except => [:update,:create,:show]
   respond_to :html,:js
   def index
     @prices = @prices.paginate( :page => params[:page])
