@@ -81,6 +81,6 @@ class PricesController < ApplicationController
     end  
     @prices = Price.send action_name if ['cheapest','groupbuy','costs'].include? action_name
     @prices = Price.recent if action_name == 'index'
-    @prices = Price.with_uploads
+    @prices = @prices.with_uploads
   end
 end
