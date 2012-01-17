@@ -69,7 +69,6 @@ class PricesController < ApplicationController
       if name =~ /(.+)_id$/
         if $1 == 'city'
           @able = $1.classify.constantize.where(:name =>value).limit(1).first
-          @prices = Price
         else
           @able = $1.classify.constantize.find(value) 
           @prices = @able.prices

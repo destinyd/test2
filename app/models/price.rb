@@ -46,9 +46,11 @@ class Price < ActiveRecord::Base
   TYPE = {
   0=>'消费',
   1=>'网上消费',
-  5=>'商品价',
-  6=>'折扣价',
+  6=>'折扣价/特价/促销价',
+  7=>'商品标示原价',
+  11=>'商家叫价',
   21=>'团购价',
+  22=>'全国配送团购价',
   31=>'批发价',
   51=>'成本价',
   #101=>'商家发布价',
@@ -70,7 +72,7 @@ class Price < ActiveRecord::Base
   #end
 
   def human_price
-    return self.price.to_s + '元' + '(待审)' if self.type_id !='团购价' or self.is_valid.nil?# and self.reviews.sum(:status) < STATUS_LOW
+    #return self.price.to_s + '元' + '(待审)' if self.type_id !='团购价' or self.is_valid.nil?# and self.reviews.sum(:status) < STATUS_LOW
     self.price.to_s + '元'
   end
 
@@ -89,7 +91,7 @@ class Price < ActiveRecord::Base
   end
 
   def self.selects
-    TYPE.invert
+    TYPE.select{|k,v|k<31}.invert
   end
 
   def valid
@@ -139,7 +141,7 @@ class Price < ActiveRecord::Base
   end
 
   def is_tuangou?
-    self.read_attribute(:type_id) == 21
+    [21,22].include? self.read_attribute(:type_id)
   end
 
   #def valid_singleton_for_tuan
