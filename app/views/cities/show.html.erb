@@ -1,15 +1,19 @@
+<% tmp1 = "最新、最全的#{"《#{@name}》附近的" if @name}价格信息 尽在" %>
+<% content_for :title do -%><%= tmp1 %><% end if tmp1 -%>
+<% content_for :desc do -%><%= tmp1 %>神马价。<% end if tmp1 -%>
 <% @counts = 0 %>
 <div class="mt">
-  <%= render 'section',:plus => {:things => @recent_cost,:title=> "《#{@name}》最新消费记录",:section_path => costs_city_prices_path(@name),:plusclass => 'home_section'} %>
-  <% @counts += 1 unless @recent_cost.blank? %>
-  <%= render 'section',:plus => {:things => @cheapest,:title=> "《#{@name}》最低价格",:section_path => cheapest_city_prices_path(@name),:plusclass => 'home_section'} %>
-  <% @counts += 1 unless @cheapest.blank? %>
-  <%= render 'section',:plus => {:things => @recent_prices,:title=> "《#{@name}》最新价格",:section_path => city_prices_path(@name),:plusclass => 'home_section'} %>
+  <%= render 'section',:plus => {:things => @recent_prices,:title=> "《#{@name}》最新价格",:section_path => eval("#{controller_name.singularize}_prices_path(@name)"),:plusclass => 'home_section'} %>
   <% @counts += 1 unless @recent_groupbuy.blank? %>
-  <% if @counts ==3 %>
+  <%= render 'section',:plus => {:things => @cheapest,:title=> "《#{@name}》最低价格",:section_path => eval("cheapest_#{controller_name.singularize}_prices_path(@name)"),:plusclass => 'home_section'} %>
+  <% @counts += 1 unless @cheapest.blank? %>
+  <%= render 'section',:plus => {:things => @recent_groupbuy,:title=> "《#{@name}》最新团购",:section_path => eval("groupbuy_#{controller_name.singularize}_prices_path(@name)"),:plusclass => 'home_section'} %>
+  <% @counts += 1 unless @recent_groupbuy.blank? %>
+  <% if @counts >=3 %>
   </div>
   <div class="mt">
     <% @counts = 0 %>
   <% end %>
-  <%= render 'section',:plus => {:things => @recent_groupbuy,:title=> "《#{@name}》最新团购",:section_path => groupbuy_city_prices_path(@name),:plusclass => 'home_section'} %>
+  <%= render 'section',:plus => {:things => @recent_cost,:title=> "《#{@name}》最新消费记录",:section_path => eval("costs_#{controller_name.singularize}_prices_path(@name)"),:plusclass => 'home_section'} %>
+  <% @counts += 1 unless @recent_cost.blank? %>
 </div>

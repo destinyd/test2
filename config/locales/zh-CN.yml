@@ -239,6 +239,7 @@ zh-CN:
     give_up: 放弃
     accept: 接受
     finish: 完成
+    locate: 定位
   notice:
     success: 成功
   titles:
@@ -252,7 +253,6 @@ zh-CN:
   title: '神马价 测试版0.1 -- 记下您所有的消费，让您什么价都能马上知道'
   desc: '神马价可以保存您记下您所有的消费，帮您查找您所需要的商品价格，让您更好的把住自己的钱包，享受更多实惠。'
   keywords: '神马价,记账,价格对比'
-  locate: 定位
 
   controller:
     prices: "价格"

@@ -361,6 +361,11 @@ footer{
 }
 }
 }
+button{
+  background-color:$main-color;
+  color:$first-color;
+  border:$first-color solid 1px;
+}
 
 /* Easy Slider */
 	#slider ul, #slider li,
