@@ -2,55 +2,47 @@
 class GetTuangou
   require 'net/http'
   require 'xml'
+  attr_accessor :last
   def initialize
     @tuan_urls =TuanUrl.where(:enable => true).includes(:tuan_api)
   end
 
   def get_all
-    log = Rails.logger
-    log.info "获取团购数据开始"
+    #log = Rails.logger
+    #log.info "获取团购数据开始"
     @error_times =0
     @tuan_urls.each do |t|
-      log.info "开始获取#{t.name}的数据"
+      #log.info "开始获取#{t.name}的数据"
       uri = URI.parse t.url
-      begin
-        xml = Net::HTTP.get uri.host, uri.request_uri
-      rescue #Timeout::Error
-        if @error_times > 2
-          @error_times =0
-          next
-        end
-        @error_times += 1
-        retry
-      end
-      xml.gsub! /\n/,''
-      begin
-        parser = XML::Parser.string xml
-        #parser = XML::Parser.file 'google.1'
-        doc = parser.parse
-      rescue
-        log.info "获取#{t.name}的数据失败"
-        next
-      end
-      arr = []
-      last = t.got_at 
-      doc.find(t.docfind).each do |d|
-        n = {}
-        d.each{|a| n[a.name] = a.content}
-        p = {}
-        eval(t.suite)
-        last = p[:started_at] if last.nil? or p[:started_at] > last 
-        next if !t.got_at.nil? and p[:started_at] < t.got_at
-        arr.push p
-      end
-      if t.got_at.nil? or last > t.got_at
-        t.got_at = last
+      xml = get_xml uri
+      next if xml.nil?
+      #xml.gsub! /\n/,''
+      doc = get_doc xml
+      next if doc.nil?
+      self.last = t.got_at 
+      contents = get_contents doc,t
+      if t.got_at.nil? or self.last > t.got_at
+        t.got_at = self.last
         t.save
       end
-      Price.create arr
-      log.info "获取#{t.name}的数据结束"
+      Price.create contents
+      #log.info "获取#{t.name}的数据结束"
     end
-    log.info "获取团购数据结束"
+    #log.info "获取团购数据结束"
+  end
+
+  def get_contents doc,t
+      contents = []
+      doc.find(t.docfind).each do |d|
+        n = {}
+        p = {}
+        d.each{|a| n[a.name] = a.content}
+        eval(t.suite)
+        self.last = p[:started_at] if last.nil? or p[:started_at] > last 
+        next if !t.got_at.nil? and p[:started_at] < t.got_at
+        contents.push p
+      end
+      contents
   end
 
   def get_one dom,hashs
@@ -59,5 +51,29 @@ class GetTuangou
       result[key] = dom.find(value.to_s).first.content if dom.find(value.to_s).first
     end
     result
+  end
+
+  def get_xml uri
+    begin
+      xml = Net::HTTP.get uri.host, uri.request_uri
+    rescue #Timeout::Error
+      if @error_times > 2
+        @error_times =0
+        return nil
+      end
+      @error_times += 1
+      retry
+    end
+  end
+
+  def get_doc xml
+    begin
+      parser = XML::Parser.string xml
+      #parser = XML::Parser.file 'google.1'
+      doc = parser.parse
+    rescue
+      #log.info "获取#{t.name}的数据失败"
+      #next
+    end
   end
 end
