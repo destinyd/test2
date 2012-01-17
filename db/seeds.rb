@@ -52,9 +52,13 @@
   {
   :name => "google",
   :docfind => "//offer",
-  :suite=>"p=self.get_one(d,{:title=>'title',:price=>'current_price',:started_at => 'start_timestamp',:finish_at => 'end_timestamp',:address=>'shops/shop_info/shop_address',:longitude=>'shops/shop_info/longitude',:latitude=>'shops/shop_info/latitude'});p[:type_id]=21;p[:finish_at]=Time.at(p[:finish_at].to_i);p[:started_at]=Time.at(p[:started_at].to_i);p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'image_url'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'url'})];",
+  :suite=>"p=self.get_one(d,{:title=>'title',:price=>'current_price',:started_at => 'start_timestamp',:desc => 'description',:finish_at => 'end_timestamp',:address=>'shops/shop_info/shop_address',:longitude=>'shops/shop_info/longitude',:latitude=>'shops/shop_info/latitude'});p[:type_id]=21;p[:finish_at]=Time.at(p[:finish_at].to_i);p[:started_at]=Time.at(p[:started_at].to_i);p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'image_url'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'url'})];",
   :tuan_urls=> [
     TuanUrl.find_or_create_by_name("拉手全部").update_attributes(:name=>"拉手全部" , :url => "http://open.client.lashou.com/google", :enable => true),
+    TuanUrl.find_or_create_by_name("58团google").update_attributes(:name=>"58团google" , :url => "http://open.t.58.com/api/google", :enable => true),
+    TuanUrl.find_or_create_by_name("团宝google").update_attributes(:name=>"团宝google" , :url => "http://p5.groupon.cn/xml/city/cityproduct/google", :enable => true),
+    TuanUrl.find_or_create_by_name("糯米团google").update_attributes(:name=>"糯米团google" , :url => "http://www.nuomi.com/api/google", :enable => true),
+    TuanUrl.find_or_create_by_name("24卷google").update_attributes(:name=>"24卷google" , :url => "http://static.24quan.com/cms/google.php", :enable => true),
   ]
   },
 
