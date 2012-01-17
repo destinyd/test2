@@ -10,39 +10,47 @@ class GetTuangou
   def get_all
     #log = Rails.logger
     #log.info "获取团购数据开始"
-    @error_times =0
     @tuan_urls.each do |t|
       #log.info "开始获取#{t.name}的数据"
       uri = URI.parse t.url
-      xml = get_xml uri
-      next if xml.nil?
-      #xml.gsub! /\n/,''
-      doc = get_doc xml
-      next if doc.nil?
-      self.last = t.got_at 
-      contents = get_contents doc,t
-      if t.got_at.nil? or self.last > t.got_at
-        t.got_at = self.last
-        t.save
-      end
-      Price.create contents
+      contents = get_contents_from_t_and_uri t,uri
+      create contents if contents
       #log.info "获取#{t.name}的数据结束"
     end
     #log.info "获取团购数据结束"
   end
 
+  def create contents
+    Price.create contents
+  end
+
+  def get_contents_from_t_and_uri t,uri
+    xml = get_xml uri
+    return if xml.nil?
+    #xml.gsub! /\n/,''
+    doc = get_doc xml
+    return if doc.nil?
+    self.last = t.got_at 
+    contents = get_contents doc,t
+    if t.got_at.nil? or self.last > t.got_at
+      t.got_at = self.last
+      t.save
+    end
+    contents
+  end
+
   def get_contents doc,t
-      contents = []
-      doc.find(t.docfind).each do |d|
-        n = {}
-        p = {}
-        d.each{|a| n[a.name] = a.content}
-        eval(t.suite)
-        self.last = p[:started_at] if last.nil? or p[:started_at] > last 
-        next if !t.got_at.nil? and p[:started_at] < t.got_at
-        contents.push p
-      end
-      contents
+    contents = []
+    doc.find(t.docfind).each do |d|
+      n = {}
+      p = {}
+      d.each{|a| n[a.name] = a.content}
+      eval(t.suite)
+      self.last = p[:started_at] if last.nil? or p[:started_at] > last 
+      next if !t.got_at.nil? and p[:started_at] < t.got_at
+      contents.push p
+    end
+    contents
   end
 
   def get_one dom,hashs
@@ -54,6 +62,7 @@ class GetTuangou
   end
 
   def get_xml uri
+    @error_times =0
     begin
       xml = Net::HTTP.get uri.host, uri.request_uri
     rescue #Timeout::Error
