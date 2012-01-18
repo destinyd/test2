@@ -4,7 +4,7 @@ TuanUrl.all.each{|tuan_url| tuan_url.update_attribute :enable ,0}
 TuanApi.find_or_create_by_name("hao1233").update_attributes(
   :name => "hao123",
   :docfind => "//urlset/url",
-  :suite=>"p=self.get_one(d,{:title=>'data/display/title',:price=>'data/display/price',:started_at => 'data/display/startTime',:finish_at => 'data/display/endTime',:address=>'data/display/city'});p[:type_id]=21;p[:finish_at]=Time.at(p[:finish_at].to_i);p[:started_at]=Time.at(p[:started_at].to_i);p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'data/display/image'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'loc'})];",
+  :suite=>"p=self.get_one(d,{:title=>'data/display/title',:price=>'data/display/price',:started_at => 'data/display/startTime',:finish_at => 'data/display/endTime',:address=>'data/display/city'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'data/display/image'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'loc'})];",
 )
 TuanUrl.find_or_create_by_name("信团柳州").update_attributes(:name=>"信团柳州" , :url => "http://www.cn403.com/api/hao123.php", :enable => true,:tuan_api_name => 'hao123')
 TuanUrl.find_or_create_by_name("米奇").update_attributes(:name=>"米奇" , :url => "http://www.miqi.cn/xml/apis/lab.api.hao123.xml", :enable => true,:tuan_api_name => 'hao123')
@@ -52,3 +52,14 @@ Article.create(
 }
 ]
 )
+
+#geocode
+#Price.where("latitude is null and address <> '全国'").group(:address).each do |b|
+  #b.geocode
+  #Price.connection.execute "update prices set longitude='#{b.longitude}' , latitude = '#{b.latitude}' where latitude is null and address ='#{b.address}'" unless b.latitude.nil?
+#end
+#to all
+#b = Price.where("latitude is null and address = '全国'").first ; 
+#if b
+#b.address = '中国'; b.geocode;  Price.connection.execute "update prices set longitude='#{b.longitude}' , latitude = '#{b.latitude}',address='中国',type_id = 22 where latitude is null and address ='全国'"
+#end

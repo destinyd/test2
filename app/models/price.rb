@@ -30,14 +30,15 @@ class Price < ActiveRecord::Base
 
   acts_as_commentable
   geocoded_by :address
-  after_validation :geocode, :if => [:is_not_locate?,:address_changed?]#,:on =>:create
+  before_create :geocode, :if => [:is_not_locate?,:address_changed?]#,:on =>:create
+  before_update :geocode, :if => :address_changed?#,:on =>:create
   #after_validation :geocode, :if => :address_changed?,:on =>:update
   #before_create :valid_singleton_for_tuan
 
   scope :running,where("finish_at > ? OR finish_at is null",Time.now)
   scope :cheapest,running.order("price")
   scope :recent,running.order("id desc")
-  scope :groupbuy,recent.where(:type_id=>21)
+  scope :groupbuy,recent.where(:type_id=>[21,22])
   scope :costs,recent.where(:type_id=>0..20)#.includes(:reviews)
   #scope :nearest,running.near_prices
   scope :with_uploads,includes(:uploads)

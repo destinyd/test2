@@ -51,7 +51,8 @@ class GetTuangou
     p = {}
     d.each{|a| n[a.name] = a.content}
     eval(t.suite)
-    p[:type_id]=21
+    p[:type_id]=21 unless p[:address] == '全国'
+    p[:type_id]=22 if p[:address] == '全国'
     p[:finish_at]=Time.at(p[:finish_at].to_i)
     p[:started_at]=Time.at(p[:started_at].to_i)
     p[:title].gsub! /\n/,'' if p[:title]
