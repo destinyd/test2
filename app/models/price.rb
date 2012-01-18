@@ -8,7 +8,8 @@ class Price < ActiveRecord::Base
   validates :price, :presence => true
   validates :title, :presence => true
   
-  validates :title, :uniqueness => { :scope => [:finish_at,:price,:address] } ,:if => :is_tuangou?,:on => :create #限制 当创建的时候
+  validates :title, :uniqueness => { :scope => [:finish_at,:address,#:price 不知道为什么 falut
+  ] } ,:if => :is_tuangou? #,:on => :create #限制 当创建的时候
 
   attr_accessor :good_name,:good_user_id
   attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:started_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude
@@ -29,8 +30,8 @@ class Price < ActiveRecord::Base
 
   acts_as_commentable
   geocoded_by :address
-  after_validation :geocode, :if => [:address_changed?,:is_not_locate?],:on =>:create
-  after_validation :geocode, :if => :address_changed?,:on =>:update
+  after_validation :geocode, :if => [:is_not_locate?,:address_changed?]#,:on =>:create
+  #after_validation :geocode, :if => :address_changed?,:on =>:update
   #before_create :valid_singleton_for_tuan
 
   scope :running,where("finish_at > ? OR finish_at is null",Time.now)

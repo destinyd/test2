@@ -1,73 +1,36 @@
 # coding: utf-8
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Mayor.create(:name => 'Daley', :city => cities.first)
-#TuanApi.destroy_all
-#TuanUrl.destroy_all
-#
-  #{
-  #:name => "hao1235",
-  #:docfind => "//urlset/url",
-#:suite=>"d=d.children[5].children[1];d.each{|a|n[a.name]=a.content};p[:price]=n['price'];p[:type_id]=21;p[:finish_at]=Time.at(n['endTime'].to_i);p[:started_at]=Time.at(n['startTime'].to_i);p[:address]=n['city'];p[:title]=n['title'];p[:title].gsub!(/<!\\[CDATA\\[(.*)\\]\\]>/,'\\1');o=p[:outlinks_attributes]=[{:url=>n['loc']}];p[:uploads_attributes]=[{:image_file_name=>n['image']}];",
-  ##:tuan_urls=> [
-    ##TuanUrl.find_or_create_by_name("拉手团柳州").update_attributes(:name=>"拉手团柳州" , :url => "http://open.client.lashou.com/api/detail/city/427", :enable => true),
-  #]
-  #},
+TuanUrl.all.each{|tuan_url| tuan_url.update_attribute :enable ,0}
 
-  TuanApi.find_or_create_by_name("hao1231").update_attributes(
-  :name => "hao1231",
+TuanApi.find_or_create_by_name("hao1233").update_attributes(
+  :name => "hao123",
   :docfind => "//urlset/url",
-:suite=>"d=d.children[1].children[0];d.each{|a|n[a.name]=a.content};p[:price]=n['price'];p[:type_id]=21;p[:finish_at]=Time.at(n['endTime'].to_i);p[:started_at]=Time.at(n['startTime'].to_i);p[:address]=n['city'];p[:title]=n['title'];p[:title].gsub!(/<!\\[CDATA\\[(.*)\\]\\]>/,'\\1');o=p[:outlinks_attributes]=[{:url=>n['loc']}];p[:uploads_attributes]=[{:image_file_name=>n['image']}];",
-  )
-  #:tuan_urls=> [
-    #TuanUrl.find_or_create_by_name("24卷柳州").update_attributes(:name=>"24卷柳州" , :url => "http://static.24quan.com/cms/liuzhou_bus.php", :enable => true),
-    #TuanUrl.find_or_create_by_name("糯米团柳州").update_attributes(:name=>"糯米团柳州" , :url => "http://www.nuomi.com/api/dailydeal?version=v1&city=liuzhou", :enable => true),
-    TuanUrl.find_or_create_by_name("F团柳州").update_attributes(:name=>"F团柳州" , :url => "http://newapi.ftuan.com/api/v2.aspx?city=liuzhou", :enable => true,:tuan_api_name => 'hao1231')
-    #TuanUrl.find_or_create_by_name("趣团").update_attributes(:name=>"趣团" , :url => "http://www.quwan.com/tuan/api/hao123.php", :enable => true), 2 0
-  #]
+  :suite=>"p=self.get_one(d,{:title=>'data/display/title',:price=>'data/display/price',:started_at => 'data/display/startTime',:finish_at => 'data/display/endTime',:address=>'data/display/city'});p[:type_id]=21;p[:finish_at]=Time.at(p[:finish_at].to_i);p[:started_at]=Time.at(p[:started_at].to_i);p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'data/display/image'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'loc'})];",
+)
+TuanUrl.find_or_create_by_name("信团柳州").update_attributes(:name=>"信团柳州" , :url => "http://www.cn403.com/api/hao123.php", :enable => true,:tuan_api_name => 'hao123')
+TuanUrl.find_or_create_by_name("米奇").update_attributes(:name=>"米奇" , :url => "http://www.miqi.cn/xml/apis/lab.api.hao123.xml", :enable => true,:tuan_api_name => 'hao123')
+TuanUrl.find_or_create_by_name("聚美优品").update_attributes(:name=>"聚美优品" , :url => "http://www.jumei.com/api/dealsv3.php", :enable => true,:tuan_api_name => 'hao123')
+TuanUrl.find_or_create_by_name("爱帮团").update_attributes(:name=>"爱帮团" , :url => "http://tuan.aibang.com/api/digest", :enable => true,:tuan_api_name => 'hao123')
+TuanUrl.find_or_create_by_name("F团柳州").update_attributes(:name=>"F团柳州" , #:url => "http://newapi.ftuan.com/api/v2.aspx?city=liuzhou", 
+                                                            :url=>"http://newapi.ftuan.com/api/v2.aspx", #所有
+                                                            :enable => true,:tuan_api_name => 'hao123')
 
-  TuanApi.find_or_create_by_name("hao1233").update_attributes(
-  :name => "hao1233",
-  :docfind => "//urlset/url",
-:suite=>"d=d.children[3].children[1];d.each{|a|n[a.name]=a.content};p[:price]=n['price'];p[:type_id]=21;p[:finish_at]=Time.at(n['endTime'].to_i);p[:started_at]=Time.at(n['startTime'].to_i);p[:address]=n['city'];p[:title]=n['title'];p[:title].gsub!(/<!\\[CDATA\\[(.*)\\]\\]>/,'\\1');o=p[:outlinks_attributes]=[{:url=>n['loc']}];p[:uploads_attributes]=[{:image_file_name=>n['image']}];",
-  )
-  #:tuan_urls=> [
-    TuanUrl.find_or_create_by_name("信团柳州").update_attributes(:name=>"信团柳州" , :url => "http://www.cn403.com/api/hao123.php", :enable => true,:tuan_api_name => 'hao1233')
-    #TuanUrl.find_or_create_by_name("美团柳州").update_attributes(:name=>"美团柳州" , :url => "http://www.meituan.com/api/v1/liuzhou/deals", :enable => true),
-    TuanUrl.find_or_create_by_name("米奇").update_attributes(:name=>"米奇" , :url => "http://www.miqi.cn/xml/apis/lab.api.hao123.xml", :enable => true,:tuan_api_name => 'hao1233')
-    TuanUrl.find_or_create_by_name("聚美优品").update_attributes(:name=>"聚美优品" , :url => "http://www.jumei.com/api/dealsv3.php", :enable => true,:tuan_api_name => 'hao1233')
-    TuanUrl.find_or_create_by_name("爱帮团").update_attributes(:name=>"爱帮团" , :url => "http://tuan.aibang.com/api/digest", :enable => true,:tuan_api_name => 'hao1233')
-    #TuanUrl.find_or_create_by_name("高朋").update_attributes(:name=>"高朋" , :url => "http://tuan1212.com/gaopeng.php", :enable => true,:tuan_api_name => 'hao1233'),
-    #TuanUrl.find_or_create_by_name("团宝柳州").update_attributes(:name=>"团宝柳州" , :url => "http://p5.groupon.cn/xml/city/cityproduct/?cityid=236", :enable => true,:tuan_api_name => 'hao1233')
-  #]
-
-  TuanApi.find_or_create_by_name("窝窝团").update_attributes(
+TuanApi.find_or_create_by_name("窝窝团").update_attributes(
   :name => "窝窝团",
   :docfind => "//deals/deal",
-  :suite  => "p[:price]=n['price'];p[:type_id]=21;p[:finish_at]=Time.at(n['end_date'].to_i);p[:started_at]=Time.at(n['start_date'].to_i);p[:address]=n['division_name'];p[:title]=n['title'];p[:title].gsub!(/<!\\[CDATA\\[(.*)\\]\\]>/,'\\1');o=p[:outlinks_attributes]=[{:url =>n['deal_url']}];p[:uploads_attributes]=[{:image_file_name => n['large_image_url']}];",
+  :suite=>"p=self.get_one(d,{:title=>'title',:price=>'price',:started_at => 'start_date',:finish_at => 'end_date',:address=>'division_name'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'large_image_url'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'deal_url'})];",
 )
-  #:tuan_urls=> [
 TuanUrl.find_or_create_by_name("窝窝团柳州").update_attributes(:name=>"窝窝团柳州" , :url => "http://www.55tuan.com/openAPI.do?city=liuzhou", :enable => true,:tuan_api_name => '窝窝团')
-#,]
 
-  TuanApi.find_or_create_by_name("google").update_attributes(
+TuanApi.find_or_create_by_name("google").update_attributes(
   :name => "google",
   :docfind => "//offer",
-  :suite=>"p=self.get_one(d,{:title=>'title',:price=>'current_price',:started_at => 'start_timestamp',:desc => 'description',:finish_at => 'end_timestamp',:address=>'shops/shop_info/shop_address',:longitude=>'shops/shop_info/longitude',:latitude=>'shops/shop_info/latitude'});p[:type_id]=21;p[:finish_at]=Time.at(p[:finish_at].to_i);p[:started_at]=Time.at(p[:started_at].to_i);p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'image_url'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'url'})];",
-  )
-  ##:tuan_urls=> [
-    TuanUrl.find_or_create_by_name("拉手google").update_attributes(:name=>"拉手google" , :url => "http://open.client.lashou.com/google", :enable => true,:tuan_api_name => 'google')
-    TuanUrl.find_or_create_by_name("58团google").update_attributes(:name=>"58团google" , :url => "http://open.t.58.com/api/google", :enable => true,:tuan_api_name => 'google')
-    TuanUrl.find_or_create_by_name("团宝google").update_attributes(:name=>"团宝google" , :url => "http://p5.groupon.cn/xml/city/cityproduct/google", :enable => true,:tuan_api_name => 'google')
-    TuanUrl.find_or_create_by_name("糯米团google").update_attributes(:name=>"糯米团google" , :url => "http://www.nuomi.com/api/google", :enable => true,:tuan_api_name => 'google')
-    TuanUrl.find_or_create_by_name("24卷google").update_attributes(:name=>"24卷google" , :url => "http://static.24quan.com/cms/google.php", :enable => true,:tuan_api_name => 'google')
-  #]
-
-#]
+  :suite=>"p=self.get_one(d,{:title=>'title',:price=>'current_price',:started_at => 'start_timestamp',:finish_at => 'end_timestamp',:desc => 'description',:address=>'shops/shop_info/shop_address',:longitude=>'shops/shop_info/longitude',:latitude=>'shops/shop_info/latitude'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'image_url'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'url'})];",
+)
+TuanUrl.find_or_create_by_name("拉手google").update_attributes(:name=>"拉手google" , :url => "http://open.client.lashou.com/google", :enable => true,:tuan_api_name => 'google')
+TuanUrl.find_or_create_by_name("58团google").update_attributes(:name=>"58团google" , :url => "http://open.t.58.com/api/google", :enable => true,:tuan_api_name => 'google')
+TuanUrl.find_or_create_by_name("团宝google").update_attributes(:name=>"团宝google" , :url => "http://p5.groupon.cn/xml/city/cityproduct/google", :enable => true,:tuan_api_name => 'google')
+TuanUrl.find_or_create_by_name("糯米团google").update_attributes(:name=>"糯米团google" , :url => "http://www.nuomi.com/api/google", :enable => true,:tuan_api_name => 'google')
+TuanUrl.find_or_create_by_name("24卷google").update_attributes(:name=>"24卷google" , :url => "http://static.24quan.com/cms/google.php", :enable => true,:tuan_api_name => 'google')
 
 Article.create(
   [{

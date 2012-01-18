@@ -4,20 +4,23 @@ class GetTuangou
   require 'xml'
   attr_accessor :last
   def initialize
-    @tuan_urls =TuanUrl.where(:enable => true).includes(:tuan_api)
+    @tuan_urls =TuanUrl.enables
   end
 
   def get_all
-    #log = Rails.logger
-    #log.info "获取团购数据开始"
+    log = Rails.logger
+    log.info "获取团购数据开始"
     @tuan_urls.each do |t|
-      #log.info "开始获取#{t.name}的数据"
-      uri = URI.parse t.url
-      contents = get_contents_from_t_and_uri t,uri
-      create contents if contents
-      #log.info "获取#{t.name}的数据结束"
+      log.info "开始获取#{t.name}的数据"
+      deal t
+      log.info "获取#{t.name}的数据结束"
     end
-    #log.info "获取团购数据结束"
+    log.info "获取团购数据结束"
+  end
+
+  def deal t
+    uri = URI.parse t.url
+    get_contents_from_t_and_uri t,uri
   end
 
   def create contents
@@ -27,30 +30,35 @@ class GetTuangou
   def get_contents_from_t_and_uri t,uri
     xml = get_xml uri
     return if xml.nil?
-    #xml.gsub! /\n/,''
     doc = get_doc xml
     return if doc.nil?
     self.last = t.got_at 
-    contents = get_contents doc,t
+    get_contents doc,t
     if t.got_at.nil? or self.last > t.got_at
       t.got_at = self.last
       t.save
     end
-    contents
   end
 
   def get_contents doc,t
-    contents = []
     doc.find(t.docfind).each do |d|
-      n = {}
-      p = {}
-      d.each{|a| n[a.name] = a.content}
-      eval(t.suite)
-      self.last = p[:started_at] if last.nil? or p[:started_at] > last 
-      next if !t.got_at.nil? and p[:started_at] < t.got_at
-      contents.push p
+      p = get_p d,t
     end
-    contents
+  end
+
+  def get_p d,t
+    n = {}
+    p = {}
+    d.each{|a| n[a.name] = a.content}
+    eval(t.suite)
+    p[:type_id]=21
+    p[:finish_at]=Time.at(p[:finish_at].to_i)
+    p[:started_at]=Time.at(p[:started_at].to_i)
+    p[:title].gsub! /\n/,'' if p[:title]
+    p[:desc].gsub! /\n/,'' if p[:desc]
+
+    self.last = p[:started_at] if self.last.nil? or p[:started_at] > self.last 
+    create p unless !t.got_at.nil? and p[:started_at] < t.got_at
   end
 
   def get_one dom,hashs
@@ -78,11 +86,9 @@ class GetTuangou
   def get_doc xml
     begin
       parser = XML::Parser.string xml
-      #parser = XML::Parser.file 'google.1'
       doc = parser.parse
     rescue
-      #log.info "获取#{t.name}的数据失败"
-      #next
+      log.info "获取#{t.name}的数据失败"
     end
   end
 end
