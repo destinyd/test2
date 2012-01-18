@@ -1,12 +1,14 @@
 module ApplicationHelper
   def initialize(a,b,c)
     super(a,b,c)
-    unless session[:geo_result]
-      session[:loc] = request.location unless session[:loc]
-      @loc = session[:loc]
-      session[:geo_result] = Geocoder.search(@loc.city).first if session[:geo_result].nil? and @loc
-    end 
-    @geo_result = session[:geo_result]
+    #unless cookies[:geo] and cookies[:geo][:city]
+      #@geo = request.location
+      #if @geo
+        #cookies[:geo] = {:lat => @geo.latitude,:lon => @geo.longitude}
+      #end
+      ##cookies[:geo][:city] = Geocoder.search(@geo.city).first.city if @geo
+    #end 
+    @geo = nil# cookies[:geo]
   end
 
   def sortable(column, title = nil)  

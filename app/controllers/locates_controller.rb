@@ -18,8 +18,12 @@ class LocatesController < ApplicationController
   end
 
   def create
-    geo_result = Geocoder.search(params[:id]).first
-    session[:geo_result]  = geo_result if geo_result
+    @geo = Geocoder.search(params[:id]).first
+    if @geo
+      cookies[:geo] = {:lat => @geo.latitude,:lon => @geo.longitude}
+    end
+    #cookies[:geo][:city] = Geocoder.search(@geo.city).first.city if @geo
+    #cookies[:geo][:city] = params[:id] unless @geo
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path
