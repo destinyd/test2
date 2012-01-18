@@ -6,8 +6,8 @@
     <li><%= link_to costs_prices_path do %><div>实际消费</div><% end %></li>
     <li><%= link_to '/cities' do %><div>区域价格</div><% end %></li>
     <li>您的位置:
-    <%=link_to @geo[:city],city_path(@geo[:city]) if @geo %>
-    <%="无法确认" unless @geo%>
+    <%=link_to cookies[:city],city_path(cookies[:city]) if cookies[:city] %>
+    <%="无法确认" unless cookies[:city]%>
     <small><%= link_to '(重新定位)',new_locate_path(:format => :js),:method => :get,:remote => true %></small>
     </li>
     <li style="margin-left:5px;">
