@@ -26,23 +26,4 @@ class LocatesController < ApplicationController
   rescue ActionController::RedirectBackError
     redirect_to root_path
   end
-
-  private
-  def get_city_name geo
-    if geo.nil?
-      city = City.find_by_name(params[:id])
-      if city
-        cookies[:lat] = city.lat
-        cookies[:lon] = city.lon
-        cookies[:city] = city.name
-      end
-    else
-      if geo
-        cookies[:lat] = geo.latitude
-        cookies[:lon] = geo.longitude
-        cookies[:city] = geo.city 
-      end
-    end
-  end
-
 end
