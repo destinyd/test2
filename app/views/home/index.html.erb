@@ -12,22 +12,34 @@
 </div>
 
 <div class="mt">
-  <%= render 'section',:plus => {:things => @cheapest,:title=> "最低价格",:section_path => cheapest_prices_path,:plusclass => 'home_section'} %>
-  <%= render 'section',:plus => {:things => @recent_prices,:title=> "最新价格",:section_path => prices_path,:plusclass => 'home_section'} %>
-  <%= render 'section',:plus => {:things => @recent_groupbuy,:title=> "最新团购",:section_path => groupbuy_prices_path,:plusclass => 'home_section'} %>
+  <% cache "index_prices1_#{$price_pageid}" do %>
+    <%= render 'section',:plus => {:things => Price.cheapest.group(:title).limit(10),:title=> "最低价格",:section_path => cheapest_prices_path,:plusclass => 'home_section'} %>
+    <%= render 'section',:plus => {:things => Price.recent.group(:title).limit(10),:title=> "最新价格",:section_path => prices_path,:plusclass => 'home_section'} %>
+    <%= render 'section',:plus => {:things => Price.groupbuy.group(:title).limit(10),:title=> "最新团购",:section_path => groupbuy_prices_path,:plusclass => 'home_section'} %>
+  <% end %>
 </div>
 
 <div class="mt">
-  <%= render 'section',:plus => {:things => @recent_cost,:title=> "最新消费记录",:section_path => costs_prices_path,:plusclass => 'home_section'} %>
+  <% cache "index_prices2_#{$price_pageid}" do %>
+    <%= render 'section',:plus => {:things => Price.costs.limit(10),:title=> "最新消费记录",:section_path => costs_prices_path,:plusclass => 'home_section'} %>
+  <% end %>
   <%#= render 'section',:plus => {:things => @recent_local,:title=> "附近消费",:section_path => local_prices_path,:plusclass => 'home_section'} %>
-  <%= render 'section',:plus => {:things => @recent_goods,:title=> "最新产品",:section_path => goods_path,:plusclass => 'home_section'} %>
-  <%= render 'section',:plus => {:things => @good_tags,:title=> "商品Tags",:section_path => tags_goods_path,:link_name => 'name',:link_path => 'tag_good_path',:plusclass => 'home_section'} %>
+  <% cache "index_goods_#{$good_pageid}" do %>
+    <%= render 'section',:plus => {:things => Good.recent.limit(10),:title=> "最新产品",:section_path => goods_path,:plusclass => 'home_section'} %>
+    <%= render 'section',:plus => {:things => Good.tag_counts.order('count desc').limit(10),:title=> "商品Tags",:section_path => tags_goods_path,:link_name => 'name',:link_path => 'tag_good_path',:plusclass => 'home_section'} %>
+  <% end %>
 </div>
 <div class="mt">
-  <%= render 'section',:plus => {:things => @focus,:title=> "最多关注",:plusclass => 'home_section',:plusable=>'focusable'} %>
+  <% cache "index_focus_#{$focus_pageid}" do %>
+    <%= render 'section',:plus => {:things => Focus.most,:title=> "最多关注",:plusclass => 'home_section',:plusable=>'focusable'} %>
+  <% end %>
   <div class="section"><h3>经验排行榜</h3>
     <ul>
-      <%= render 'integrals/li' %>
+      <% cache "index_exps_#{$integral_pageid}" do %>
+        <% @exps.each do |exp| %>
+          <li><%=  exp.user %>  (<%=exp.points.to_i%>) </li>
+        <% end %>
+      <% end %>
     </ul>
   </div>
   <!--
@@ -38,11 +50,11 @@
   -->
 </div>
 <script>
-//  $(document).ready(function(){
+  //  $(document).ready(function(){
     $("#slider").easySlider({
       auto: true,
       numeric: true,
       continuous: true
     });
-//  });                
+    //  });                
 </script>
