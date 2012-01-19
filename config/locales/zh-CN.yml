@@ -282,3 +282,8 @@ zh-CN:
       new: '登录'
     registrations:
       new: '注册'
+
+  will_paginate:
+    previous_label: "&#8592; 下一页"
+    next_label: "上一页 &#8594;"
+    page_gap: "&hellip;"
