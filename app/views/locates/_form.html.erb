@@ -1,7 +1,8 @@
 <div id='locate'>
-  <h3><%= t 'labels.locate' %></h3>
+  <h3>所在城市</h3>
 <%= form_tag '/locates' do |f| -%>
-  你所在城市/地址：<%= text_field_tag :id %><br />
+  <small>(不要输入"市"，例如北京，不能为北京市)</small>：<br />
+  <%= text_field_tag :id %><br />
   <%= submit_tag '定位' %><br />
 <% end -%>
 </div>
