@@ -4,8 +4,10 @@ module ApplicationHelper
     unless cookies[:lat] and cookies[:lon]
       unless cookies[:city]
         @geo = request.location
-        @geo = Geocoder.search(@geo.city).first
-        get_city_name @geo
+        if @geo
+          @geo = Geocoder.search(@geo.city).first
+          get_city_name @geo
+        end
       end
     end 
   end
