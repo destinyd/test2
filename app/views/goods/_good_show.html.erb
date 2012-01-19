@@ -5,22 +5,23 @@
 
 <div class="goods_div_<%=good.id%>" id="product_detail_<%= good.id -%>">
 <p>
-  <b>名称:</b>
-  <%= good.name %>
+<b>名称:</b>
+<%= good.name %>
 </p>
 
 <p>
-  <b>描述:</b>
-  <%= good.desc %>
+<b>描述:</b>
+<%= good.desc %>
 </p>
 
 <p>
-  <b>标签:</b>
-  <%= good.tag_list %>
+<b>标签:</b>
+<%= good.tag_list %>
 </p>
 <% if !good.uploads.blank? %>
-<%= image_tag good.uploads.first.image.url if good.uploads.first %>
-<% end  %>
+
+  <img srt="good.uploads.first.image.url" alt="<%= good.name %>" />
+<% end %>
 </div>
 
 <% @commentable = good %>
@@ -29,21 +30,21 @@
 </div>
 
 <div class="goods_div_<%=good.id%> h" id="product_attrs_<%= good.id -%>">
-  <div id='attrs'>
-  </div>
-  <%= link_to '新建',new_good_attr_path(good),:remote => true %>
+<div id='attrs'>
+</div>
+<%= link_to '新建',new_good_attr_path(good),:remote => true %>
 </div>
 
 <div class="product_links goods_div_<%=good.id%> h" id="product_links_<%= good.id -%>">
-  <ul id='links'%>
-    <%= render good.outlinks %>
-  </ul>
-  <%= link_to '新建',new_good_outlink_path(good),:remote => true %>
+<ul id='links'%>
+  <%= render good.outlinks %>
+</ul>
+<%= link_to '新建',new_good_outlink_path(good),:remote => true %>
 </div>
 
-  <p>
-    <%= button_to '关注',good_focus_path(good),:remote => true %>
-    <% @reviewable = good %>
-    <%= render 'reviews/links',:reviewable => good %>
-  </p>
+<p>
+<%= button_to '关注',good_focus_path(good),:remote => true %>
+<% @reviewable = good %>
+<%= render 'reviews/links',:reviewable => good %>
+</p>
 
