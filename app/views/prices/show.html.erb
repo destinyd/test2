@@ -43,7 +43,9 @@
   <%= raw @price.desc if @price.is_tuangou? %>
   <%= @price.desc unless @price.is_tuangou? %>
   </p>
-  <%= image_tag @price.uploads.first.image_file_name unless @price.type_id != "团购价" or @price.uploads.blank?%>
+  <% unless @price.type_id != "团购价" or @price.uploads.first.nil? %>
+    <img src="<%=@price.uploads.first.image_file_name%>" alt="<%= @price.name %>" />
+<% end %>
   <%= render 'reviews/links',:reviewable => @price %>
   <div class="c"></div>
 </div>
