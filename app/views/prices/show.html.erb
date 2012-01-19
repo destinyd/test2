@@ -3,7 +3,7 @@
 <% content_for :keywords do -%><%= @price.type_id %>,<% end -%>
 <% @where_name = @price.title %>
 <% @where = @price %>
-<div>
+<div id="price">
   <p>
   <b><%= label :price,:title%>:</b>
   <%= @price.title %>
@@ -32,16 +32,20 @@
   <b><%= label :price,:finish_at%>:</b>
   <%= @price.human_finish_at %>
   </p>
+  <%  unless @price.outlinks.blank? %>
+  <p>
+  <b>链接：</b>
+  <%= link_to @price.outlinks.first.url,@price.outlinks.first.url ,:rel=>"nofollow",:target => :blank%>
+  <% end -%>
+
   <p>
   <b><%= label :price,:desc%>:</b>
-  <%= @price.desc %>
+  <%= raw @price.desc if @price.is_tuangou? %>
+  <%= @price.desc unless @price.is_tuangou? %>
   </p>
-  <%  unless @price.outlinks.blank? %>
-    链接：<%= link_to @price.outlinks.first.url,@price.outlinks.first.url ,{:rel=>"nofollow"}%>
-    <div class="c"></div>
-  <% end -%>
   <%= image_tag @price.uploads.first.image_file_name unless @price.type_id != "团购价" or @price.uploads.blank?%>
   <%= render 'reviews/links',:reviewable => @price %>
+  <div class="c"></div>
 </div>
 
 <% content_for :plus do -%>

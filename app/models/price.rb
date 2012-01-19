@@ -124,6 +124,10 @@ class Price < ActiveRecord::Base
     user and !self.goods.map(&:user_id).include?(user.id)
   end
 
+  def is_tuangou?
+    [21,22].include? self.read_attribute(:type_id)
+  end
+
   before_save  :valid_good
   private
   def valid_good
@@ -140,10 +144,6 @@ class Price < ActiveRecord::Base
         self.goods << self.goods.new(:name => self.good_name,:user_id => self.good_user_id) 
       end
     end
-  end
-
-  def is_tuangou?
-    [21,22].include? self.read_attribute(:type_id)
   end
 
   #def valid_singleton_for_tuan

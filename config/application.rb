@@ -46,5 +46,6 @@ module Zhekou
     # Enable the asset pipeline
     config.assets.enabled = true
     config.autoload_paths += %W(#{config.root}/lib)
+    config.assets.paths << Rails.root.join("app", "assets", "images")
   end
 end

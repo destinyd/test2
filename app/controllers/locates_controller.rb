@@ -38,7 +38,7 @@ class LocatesController < ApplicationController
       end
     else
       if geo
-        cookies.merge cookies[:lat] = geo.latitude
+        cookies[:lat] = geo.latitude
         cookies[:lon] = geo.longitude
         cookies[:city] = geo.city 
       end

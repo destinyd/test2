@@ -12,11 +12,11 @@
       <% end -%>
     <% end %>
   </div>
-  <div class="detail">[<%= price.type_id %>] <%=link_to  price.title.block,price %>
+  <div class="detail">[<%= price.type_id %>] <%=link_to  price.title.block(150),price,:target => :blank %>
     <br />
     价格：<%= price.human_price %>
-  <% if price.address %><br />地址：<%= price.address %><% end %>
+    <% if price.address %><br />地址：<%= price.address %><% end %>
     <% if price.finish_at %><br />
-    截止日期：<em> <%= price.created_at %></em><% end -%>
+      截止日期：<em> <%= price.created_at %></em><% end -%>
   </div>
 </div>

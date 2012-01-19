@@ -196,16 +196,19 @@ a{
 .product_l{
     float:left;
     width:60%;
+    min-width:588px;
     .section{
       margin-bottom:10px;
     }
 }
 aside{
-    margin-left:10px;
+    margin-left:5px;
     float:left;
     width:35%;
+    min-width:337px;
+    overflow:hidden;
     .section{
-      width:95%;
+      /*width:95%;*/
     }
 }
 aside,.product_l{
@@ -272,7 +275,8 @@ header{
 
 
 article {
-  width: 75%;
+  width: 95%;
+  min-width:980px;
   margin: 0 auto;
   padding: 20px 40px;
   margin-top: 20px;
@@ -328,10 +332,12 @@ footer{
       margin-right:10px;
   }
 }
+/*列表*/
 .price{
   padding:5px;
   height:135px;
   border-bottom:dashed 1px black;
+  overflow:hidden;
   .l{
     padding:2px;
     a img{
@@ -341,6 +347,14 @@ footer{
   }
   .detail{
     margin-left: 130px;
+  }
+}
+/*详细*/
+#price{
+  padding:10px;
+  overflow:hidden;
+  img{
+    width:95%;
   }
 }
 .cities{
