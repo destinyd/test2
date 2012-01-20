@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
   def index
-    @articles = @recent_articles
+    #@articles = @recent_articles
 #    @categories = Category.roots
-    @flashes = Flash.recent# if @flashes.blank?
+    #@flashes = Flash.recent# if @flashes.blank?
     #@cheapest =     Price.cheapest.group(:title).limit(10)
     #@recent_prices =     Price.recent.group(:title).limit(10)
     #@recent_groupbuy =     Price.groupbuy.group(:title).limit(10)
