@@ -1,8 +1,14 @@
 <%= render 'before_layout' %>
-    <article>
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <% end %>
-      <%= yield %>
-    </article>
+<article>
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %>
+<%= yield %>
+</article>
+<script>
+  if('<%=current_user.to_s%>' != '')
+  $(".user_show").show();
+  else
+  $(".user_hide").show();
+</script>
 <%= render 'after_layout' %>

@@ -4,74 +4,78 @@
 <% @where_name = @price.title %>
 <% @where = @price %>
 <div id="price">
-  <p>
-  <b><%= label :price,:title%>:</b>
-  <%= @price.title %>
-  </p>
-  <p>
-  <b><%= label :price,:price%>:</b>
-  <%= @price.price %>
-  </p>
+  <% cache "prices/show/#{@price.address[0,20]}/#{@cache_id}" do %>
+    <p>
+    <b><%= label :price,:title%>:</b>
+    <%= @price.title %>
+    </p>
+    <p>
+    <b><%= label :price,:price%>:</b>
+    <%= @price.price %>
+    </p>
 
-  <p>
-  <b><%= label :price,:type%>:</b>
-  <%= @price.type_id %>
-  </p>
+    <p>
+    <b><%= label :price,:type%>:</b>
+    <%= @price.type_id %>
+    </p>
 
-  <p>
-  <b><%= label :price,:address%>:</b>
-  <%= @price.address %>
-  </p>
+    <p>
+    <b><%= label :price,:address%>:</b>
+    <%= @price.address %>
+    </p>
 
-  <p>
-  <b><%= label :price,:amount%>:</b>
-  <%= @price.human_amount %>
-  </p>
+    <p>
+    <b><%= label :price,:amount%>:</b>
+    <%= @price.human_amount %>
+    </p>
 
-  <p>
-  <b><%= label :price,:finish_at%>:</b>
-  <%= @price.human_finish_at %>
-  </p>
-  <%  unless @price.outlinks.blank? %>
-  <p>
-  <b>链接：</b>
-  <%= link_to @price.outlinks.first.url,@price.outlinks.first.url ,:rel=>"nofollow",:target => :blank%>
-  <% end -%>
+    <p>
+    <b><%= label :price,:finish_at%>:</b>
+    <%= @price.human_finish_at %>
+    </p>
+    <%  unless @price.outlinks.blank? %>
+      <p>
+      <b>链接：</b>
+      <%= link_to @price.outlinks.first.url,@price.outlinks.first.url ,:rel=>"nofollow",:target => :blank%>
+    <% end -%>
 
-  <p>
-  <b><%= label :price,:desc%>:</b>
-  <%= raw @price.desc if @price.is_tuangou? %>
-  <%= @price.desc unless @price.is_tuangou? %>
-  </p>
-  <% unless @price.type_id != "团购价" or @price.uploads.first.nil? %>
-    <img src="<%=@price.uploads.first.image_file_name%>" alt="<%= @price.title %>" />
-<% end %>
+    <p>
+    <b><%= label :price,:desc%>:</b>
+    <%= raw @price.desc if @price.is_tuangou? %>
+    <%= @price.desc unless @price.is_tuangou? %>
+    </p>
+    <% unless @price.type_id != "团购价" or @price.uploads.first.nil? %>
+      <img src="<%=@price.uploads.first.image_file_name%>" alt="<%= @price.title %>" />
+    <% end %>
+  <% end %>
   <%= render 'reviews/links',:reviewable => @price %>
   <div class="c"></div>
 </div>
 
 <% content_for :plus do -%>
-  <% if @price.near_prices %>
-    <div class="section" style="width:95%;float:none">
-      <h3>附近价格</h3>
-      <ul>
-        <% @price.near_prices.each do |price| %>
-          <li><%#= price.type_id != "团购价" ? %>
-          <%=link_to(price,price)%><%= price.address %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+  <% cache "prices/show/near_prices/#{@price.address[0,15]}/#{@cache_id}" do %>
+    <% if @price.near_prices %>
+      <div class="section" style="width:95%;float:none">
+        <h3>附近价格</h3>
+        <ul>
+          <% @price.near_prices.each do |price| %>
+            <li><%#= price.type_id != "团购价" ? %>
+            <%=link_to(price,price)%><%= price.address %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   <% end %>
   <%= render 'comments/comments' %>
 <% end -%>
 
 <% content_for :sidebar do -%>
   <div id="goods">
-    <% @price.goods.each do |good| %>
-      <%= render 'prices/price_good',:good => good %>
-      <% end unless @price.goods.blank? %>
-    </div>
+      <% @price.goods.each do |good| %>
+        <%= render 'prices/price_good',:good => good %>
+        <% end unless @price.goods.blank? %>
+      </div>
     <div class="section" id='section_form_price_good'>
       <%= render 'prices/price_good_form',:price => @price %>
     </div>

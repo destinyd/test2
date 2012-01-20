@@ -5,8 +5,8 @@ module ApplicationHelper
       unless cookies[:city]
         @geo = request.location
         if @geo
-          @geo = Geocoder.search(@geo.city).first
-          get_city_name @geo
+          @geo = Geocoder.search(@geo.city).first 
+          get_city_name @geo if @geo
         end
       end
     end 

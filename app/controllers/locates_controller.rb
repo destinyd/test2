@@ -6,10 +6,7 @@ class LocatesController < ApplicationController
   # 类似搜索
   def show  
     @name = params[:id]
-    @cheapest = Price.cheapest.near(@name,10).limit 10
-    @recent_prices =     Price.recent.near(@name,10).limit 10
-    @recent_groupbuy =     Price.near(@name,10).groupbuy.limit 10
-    @recent_cost =     Price.near(@name,10).costs.limit 10
+    @value = @name
 
     render 'cities/show'
   end

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :get_recents
+  before_filter :get_cache_id
   def sort_direction  
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"  
   end  
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
 
 
   private
-  def get_recents
-    @recent_articles = Article.recent
+  def get_cache_id
+    @cache_id = Time.now.strftime "%Y%m/%d-%H/"
   end
 end
