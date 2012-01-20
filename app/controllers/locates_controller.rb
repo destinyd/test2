@@ -7,10 +7,6 @@ class LocatesController < ApplicationController
   def show  
     @name = params[:id]
     @value = @name
-    #@cheapest = Price.cheapest.near(@value,10)).limit(10)
-    #@recent_prices =     Price.near(@value,10)).recent.limit(10)
-    #@recent_groupbuy =     Price.near(@value,10)).groupbuy.limit(10)
-    #@recent_cost =     Price.near(@value,10)).costs.limit(10)
 
     render 'cities/show'
   end

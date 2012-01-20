@@ -70,7 +70,8 @@ class PricesController < ApplicationController
     params.each do |name, value|
       if name =~ /(.+)_id$/
         if $1 == 'city'
-          @able = $1.classify.constantize.where(:name =>value).limit(1).first
+          @able = $1.classify.constantize.where(:name =>value).first
+          value = @able.lat,@able.lon
         else
           @able = $1.classify.constantize.find(value) 
           @prices = @able.prices
