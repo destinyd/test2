@@ -4,7 +4,7 @@
 <% @where_name = @price.title %>
 <% @where = @price %>
 <div id="price">
-  <% cache "prices/show/#{@price.address}/#{@cache_id}" do %>
+  <% cache "prices/show/#{@price.address[0,20]}/#{@cache_id}" do %>
     <p>
     <b><%= label :price,:title%>:</b>
     <%= @price.title %>
