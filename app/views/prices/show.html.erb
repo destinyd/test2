@@ -53,7 +53,7 @@
 </div>
 
 <% content_for :plus do -%>
-  <% cache "prices/show/near_prices/#{@price.address}/#{@cache_id}" do %>
+  <% cache "prices/show/near_prices/#{@price.address[0,15]}/#{@cache_id}" do %>
     <% if @price.near_prices %>
       <div class="section" style="width:95%;float:none">
         <h3>附近价格</h3>
