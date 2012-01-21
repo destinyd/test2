@@ -4,7 +4,7 @@
   <div class="section">
     <h3>
       <a href='/'>神马价</a>
-      <% cache "bread/#{params.keys.join}" do %>
+      <%# cache "bread/#{params.keys.join}" do %>
         <% if @able  %>
           &raquo; <%= link_to @able,@able  %>
         <% end -%>
@@ -14,7 +14,7 @@
         <% unless ( could_bread? and ['index'].include? action_name) or @where -%>
           &raquo; <%= link_to t("action.#{controller_name}.#{action_name}") %>
         <% end -%>
-      <% end %>
+      <%# end %>
       <% if could_bread? and @where -%>
         &raquo; <%= link_to @where_name,@where  %>
       <% end -%>

@@ -79,7 +79,7 @@ class PricesController < ApplicationController
       @prices = @prices.send action_name if ['cheapest','groupbuy','costs'].include? action_name
       @prices = @prices.recent if action_name == 'index'
       @prices = @prices.near(value,20) if $1 == 'city'
-      return @prices.with_uploads
+      return @prices = @prices.with_uploads
       end  
     end  
     @prices = Price.send action_name if ['cheapest','groupbuy','costs'].include? action_name

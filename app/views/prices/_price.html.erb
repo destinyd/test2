@@ -12,7 +12,7 @@
       <% end -%>
     <% end %>
   </div>
-  <div class="detail">[<%= price.type_id %>] <%=link_to  price.title.block(150),price,:target => :blank %>
+  <div class="detail">[<%= price.type_id %>] <%=link_to  price.title.block(150),price,:target => '_blank' %>
     <br />
     价格：<%= price.human_price %>
     <% if price.address %><br />地址：<%= price.address %><% end %>
