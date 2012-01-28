@@ -5,6 +5,8 @@ Zhekou::Application.routes.draw do
         get :cheapest
         get :groupbuy
         get :costs
+        get :just_started
+        get :nearly_finish
       end
     end
   end
@@ -15,6 +17,8 @@ Zhekou::Application.routes.draw do
         get :cheapest
         get :groupbuy
         get :costs
+        get :just_started
+        get :nearly_finish
       end
     end
   end
@@ -36,6 +40,8 @@ Zhekou::Application.routes.draw do
       get :cheapest
       get :groupbuy
       get :costs
+      get :just_started
+      get :nearly_finish
     end
   end
   resources :reviews

@@ -135,8 +135,8 @@ a{
   margin-top:10px;
   min-height:250px;
   .section{
-      width:30%;
-      margin-right:10px;
+      width:33%;
+      margin-right:0.2%;
       a img{
         width:90px;
         height:90px;
@@ -151,6 +151,12 @@ a{
     border:solid 1px $main-color;
     float:left;
     @include rounded-corners(5px);
+    li{
+      a{
+        display:inline;
+        white-space:nowrap;
+      }
+    }
     h3{
       height:25px;
       line-height:25px;
@@ -169,13 +175,37 @@ a{
       }
     }
 }
+.liner{
+    border:solid 1px $main-color;
+    float:left;
+    @include rounded-corners(5px);
+    h3{
+      height:25px;
+      line-height:25px;
+      padding:3px 5px;
+      background-color:$main-color;
+      color:$first-color;
+      a{
+        font-size:14px;
+        color:$first-color;
+      }
+    }
+    ul{
+      padding:2px 8px 8px 8px;
+      li,div{
+        float:left;
+        width:15%;
+        margin:5px 0.75%;
+        a img{
+          max-width:95%;
+          max-height:160px;
+        }
+      }
+    }
+}
 .section li,.articles li{
     list-style-position:inside;
     overflow:hidden;
-}
-.section li a{
-    display:inline;
-    white-space:nowrap;
 }
 .articles{
     margin-left:20px;

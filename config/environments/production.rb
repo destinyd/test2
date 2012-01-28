@@ -42,6 +42,7 @@ Zhekou::Application.configure do
   #  require "redis-store" # HACK
   #  config.cache_store = :redis_store, "redis://127.0.0.1:6379/0"
   #config.cache_store = :redis_store#, $config.redis[:server]
+  config.action_controller.cache_store = :file_store, Rails.root + 'tmp/file_store'
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this

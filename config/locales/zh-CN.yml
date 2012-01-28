@@ -274,6 +274,8 @@ zh-CN:
       groupbuy: '团购'
       costs: '消费'
       index: '最新'
+      just_started: '刚刚开始'
+      nearly_finish: '即将结束'
     goods:
       new: '添加'
     articles:

@@ -1,8 +1,13 @@
 <% tmp = t("action.#{controller_name}.#{action_name}") %>
-<% tmp1 = "最新、最全#{@able}的#{tmp}信息 尽在" %>
+<% if @able %>
+  <% tmp1 = "#{@able}的#{tmp}的价格信息 尽在" %>
+<% else %>
+  <% tmp1 = "#{tmp}的价格信息 尽在" %>
+<% end -%>
+<% tmp1 = "#{@able}的#{tmp}的价格信息 尽在" %>
 <% content_for :title do -%><%= tmp1 %><% end if tmp -%>
 <% content_for :desc do -%><%= tmp1 %>神马价。<% end if tmp -%>
-<% content_for :keywords do -%>最新<%=tmp%>,<%=tmp%>,<%=tmp%>信息,<% end if tmp -%>
+<% content_for :keywords do -%><%=tmp%>,<%=tmp%>价格,<%=tmp%>价格信息,<%=tmp%>信息,<% end if tmp -%>
 <%= render 'prices_types' %>
 <% cache "prices/index/#{params}/#{@cache_id}" do %>
   <%= render @prices %>

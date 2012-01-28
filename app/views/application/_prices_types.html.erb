@@ -1,5 +1,5 @@
 <% pre_path =''; pre_path ='prices/' if action_name == 'index' %>
-<% hashs = {:index => '../prices',:costs =>'costs',:groupbuy =>'groupbuy',:cheapest =>'cheapest'} %>
+<% hashs = {:index => '../prices',:costs =>'costs',:groupbuy =>'groupbuy',:cheapest =>'cheapest',:just_started =>'just_started',:nearly_finish =>'nearly_finish'} %>
 <% hashs.each do |key,val| %>
   <%= link_to t("action.prices.#{key}"),"#{pre_path}#{val}"  %>
 <% end %>

@@ -40,6 +40,9 @@ class Price < ActiveRecord::Base
   scope :cheapest,running.order("price")
   scope :recent,running.order("id desc")
   scope :groupbuy,recent.where(:type_id=>[21,22])
+  scope :not_finish,where("finish_at > ?",Time.now)
+  scope :just_started,not_finish.order("id desc")
+  scope :nearly_finish,not_finish.order(:finish_at)
   scope :costs,recent.where(:type_id=>0..20)#.includes(:reviews)
   #scope :nearest,running.near_prices
   scope :with_uploads,includes(:uploads)
@@ -103,13 +106,8 @@ class Price < ActiveRecord::Base
     self.user.get_point(1,self)
   end
 
-  def near_prices long = 2
-    @nears = self.nearbys(long)
-    if @nears.length != 0
-      good_nears = @nears.where(:good_id => self.good_id).limit(10)
-      return good_nears if good_nears.length > 0
-    end
-    @nears.limit(10) if @nears.length > 0
+  def near_prices long = 20
+    @nears = self.nearbys(long).running.limit(10)
   end
 
   def to_s
