@@ -1,23 +1,21 @@
-<% unless plus[:things].blank? %>
-  <div class="liner <%=plus[:plusclass] if plus[:plusclass]  %>">
-    <h3><%=plus[:title] %><% if plus[:section_path]  %><span style='float:right;font-size:12px'><%= link_to "更多",plus[:section_path] %> </span><% end %></h3>
-    <ul>
-      <% plus[:things].each do |thing| %>
-        <li>
-        <%= link_to thing do %>
-          <% if thing.uploads.first  %>
-            <% if thing.uploads.first.image_file_name.scan(/http/).blank? %>
-              <img src='<%=thing.uploads.first.image.url %>' alt='<%= thing.title %>' />
-            <% else %>
-              <img src='<%=thing.uploads.first.image_file_name %>' alt='<%= thing.title %>'/>
-            <% end %>
+<div class="liner <%=plus[:plusclass] if plus[:plusclass]  %>">
+  <h3><%=plus[:title] %><% if plus[:section_path]  %><span style='float:right;font-size:12px'><%= link_to "更多",plus[:section_path] %> </span><% end %></h3>
+  <ul>
+    <% plus[:things].each do |thing| %>
+      <li>
+      <%= link_to thing do %>
+        <% if thing.uploads.first  %>
+          <% if thing.uploads.first.image_file_name.scan(/http/).blank? %>
+            <img src='<%=thing.uploads.first.image.url %>' alt='<%= thing.title %>' />
           <% else %>
-            <img src='/images/nopic.gif' alt='nopic' />
-          <% end -%>
-        <% end -%><br />
-        <%= link_to thing.to_s.block(50),thing %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+            <img src='<%=thing.uploads.first.image_file_name %>' alt='<%= thing.title %>'/>
+          <% end %>
+        <% else %>
+          <img src='/images/nopic.gif' alt='nopic' />
+        <% end -%>
+      <% end -%><br />
+      <%= link_to thing.to_s.block(50),thing %>
+      </li>
+    <% end %>
+  </ul>
+</div>

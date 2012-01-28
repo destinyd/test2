@@ -147,7 +147,6 @@ a{
   margin-left:10px;
 }
 .section{
-
     border:solid 1px $main-color;
     float:left;
     @include rounded-corners(5px);
@@ -178,6 +177,8 @@ a{
 .liner{
     border:solid 1px $main-color;
     float:left;
+    width:99.5%;
+    height:100%;
     @include rounded-corners(5px);
     h3{
       height:25px;
