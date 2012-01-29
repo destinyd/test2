@@ -82,6 +82,9 @@ class PricesController < ApplicationController
         if $1 == 'city'
           @able = $1.classify.constantize.where(:name =>value).first
           value = @able.lat,@able.lon
+        elsif $1 == 'locate'
+          able = Geocoder.search(value).first
+          value = able.latitude,able.longitude
         else
           @able = $1.classify.constantize.find(value) 
           @prices = @able.prices
