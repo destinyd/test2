@@ -45,7 +45,7 @@ class FlashesController < ApplicationController
 
     respond_to do |format|
       if @flash.save
-        format.html { redirect_to(@flash, :notice => 'Flash was successfully created.') }
+        format.html { redirect_to(@flash, :notice => t('notice.create_success')) }
         format.xml  { render :xml => @flash, :status => :created, :location => @flash }
       else
         format.html { render :action => "new" }

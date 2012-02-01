@@ -59,7 +59,7 @@ class GoodsController < ApplicationController
 
     respond_to do |format|
       if @good.save
-        format.html { redirect_to(@good, :notice => 'Good was successfully created.') }
+        format.html { redirect_to(@good, :notice => t('notice.create_success')) }
         format.xml  { render :xml => @good, :status => :created, :location => @good }
       else
         format.html { render :action => "new" }

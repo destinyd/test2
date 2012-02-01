@@ -44,7 +44,7 @@ class MsgsController < ApplicationController
 
     respond_to do |format|
       if @msg.save
-        format.html { redirect_to(@msg, :notice => 'Msg was successfully created.') }
+        format.html { redirect_to(@msg, :notice => t('notice.create_success')) }
         format.xml  { render :xml => @msg, :status => :created, :location => @msg }
       else
         format.html { render :action => "new" }

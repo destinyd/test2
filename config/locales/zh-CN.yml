@@ -242,6 +242,7 @@ zh-CN:
     locate: 定位
   notice:
     success: 成功
+    create_success: 提交成功
   titles:
     new: "新增%{model}"
     edit: "修改%{model}"

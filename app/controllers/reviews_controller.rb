@@ -49,7 +49,7 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to :back, notice: '@reviewable was successfully created.' }
+        format.html { redirect_to :back, notice: t('notice.create_success')) }
         format.js 
       else
         #format.html { render action: "new" }

@@ -44,7 +44,7 @@ class IntegralsController < ApplicationController
 
     respond_to do |format|
       if @integral.save
-        format.html { redirect_to(@integral, :notice => 'Integral was successfully created.') }
+        format.html { redirect_to(@integral, :notice => t('notice.create_success')) }
         format.xml  { render :xml => @integral, :status => :created, :location => @integral }
       else
         format.html { render :action => "new" }

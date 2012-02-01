@@ -32,7 +32,7 @@ class PricesController < ApplicationController
     @price = current_user.prices.build(params[:price]) 
     @price.good_id = @able.id if @price.good_id.nil? and !@able.nil?
     if @price.save
-      redirect_to(@price, :notice => 'Price was successfully created.')
+      redirect_to(@price, :notice => t('notice.create_success'))
     else
       render :action => "new"
     end

@@ -19,9 +19,6 @@
         &raquo; <%= link_to @where_name,@where  %>
       <% end -%>
     </h3>
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, :class => 'flash_message' %>
-    <% end %>
     <%= yield %>
   </div>
   <div class="c"></div>
@@ -44,10 +41,4 @@
 </aside>
 <div class="c"></div>
 </article>
-<script>
-  if('<%=current_user.to_s%>' != '')
-  $(".user_show").show();
-  else
-  $(".user_hide").show();
-</script>
 <%= render 'after_layout' %>

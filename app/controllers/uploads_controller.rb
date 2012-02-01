@@ -46,7 +46,7 @@ class UploadsController < ApplicationController
     @upload.uploadable  = @uploadable
 
       if @upload.save
-        redirect_to(@uploadable, :notice => 'Upload was successfully created.') 
+        redirect_to(@uploadable, :notice => t('notice.create_success')) 
       else
         render :action => "new"
       end
