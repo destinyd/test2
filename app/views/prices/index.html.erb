@@ -8,7 +8,7 @@
 <% content_for :desc do -%><%= tmp1 %>神马价。<% end if tmp -%>
 <% content_for :keywords do -%><%=tmp%>,<%=tmp%>价格,<%=tmp%>价格信息,<%=tmp%>信息,<% end if tmp -%>
 <%= render 'prices_types' %>
-<% cache "prices/index/#{params}/#{@cache_id}" do %>
+<% cache "p/i/#{params}/#{@cache_id}" do %>
   <%= render @prices %>
 <% end %>
 <%= raw "<div><h4>暂无数据</h4></div>" if @prices.blank? %>
