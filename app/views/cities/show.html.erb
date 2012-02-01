@@ -4,7 +4,7 @@
 <% @counts = 0 %>
 <% cache "place/#{controller_name}/#{@name}/#{@cache_id}" do %>
   <div class="mt">
-    <%= render 'liner',:plus => {:things => Price.just_started.limit(6),:title=> "刚刚开始",:section_path => eval("just_started_#{controller_name.singularize}_prices_path(@name)")} %>
+    <%= render 'liner',:plus => {:things => Price.just_started.near(@value,20).limit(6),:title=> "刚刚开始",:section_path => eval("just_started_#{controller_name.singularize}_prices_path(@name)")} %>
   </div>
   <div class="mt">
     <%= render 'section',:plus => {:things => Price.recent.near(@value,20).limit(10),:title=> "《#{@name}》最新价格",:section_path => eval("#{controller_name.singularize}_prices_path(@name)"),:plusclass => 'home_section'} %>
@@ -12,7 +12,7 @@
     <%= render 'section',:plus => {:things => Price.groupbuy.near(@value,20).limit(10),:title=> "《#{@name}》最新团购",:section_path => eval("groupbuy_#{controller_name.singularize}_prices_path(@name)"),:plusclass => 'home_section'} %>
   </div>
   <div class="mt">
-    <%= render 'liner',:plus => {:things => Price.nearly_finish.limit(6),:title=> "即将结束",:section_path => eval("nearly_finish_#{controller_name.singularize}_prices_path(@name)")} %>
+    <%= render 'liner',:plus => {:things => Price.nearly_finish.near(@value,20).limit(6),:title=> "即将结束",:section_path => eval("nearly_finish_#{controller_name.singularize}_prices_path(@name)")} %>
   </div>
   <div class="mt">
     <%= render 'section',:plus => {:things => Price.costs.near(@value,20).limit(10),:title=> "《#{@name}》最新消费记录",:section_path => eval("costs_#{controller_name.singularize}_prices_path(@name)"),:plusclass => 'home_section'} %>
