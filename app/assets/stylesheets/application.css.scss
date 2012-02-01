@@ -255,6 +255,7 @@ aside,.product_l{
   width:80px;
 }
 header{
+  min-width:980px;
   background-color: $main-color;
   color: $first-color;
   height:30px;
@@ -312,7 +313,7 @@ article {
   width: 95%;
   min-width:980px;
   margin: 0 auto;
-  padding: 20px 40px;
+  /*padding: 20px 40px;*/
   margin-top: 20px;
   clear:both;
   position:relative;
