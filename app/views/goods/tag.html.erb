@@ -1,6 +1,5 @@
 <% content_for :title do -%>Tag:<%= @tagname %> 商品价格信息 尽在<% end -%>
 <% content_for :desc do -%>Tag:<%= @tagname %> 商品价格信息，什么价格，尽在神马价。<% end -%>
 <% content_for :keywords do -%><%=@tagname%>,<%=@tagname%>价格,<%=@tagname%>价格信息,<%=@tagname%>信息,<% end -%>
-<%= render 'prices_types' %>
 <% @where_name = @tagname; @where = tag_good_path(@tagname) %>
 <%= render @taggables %>
