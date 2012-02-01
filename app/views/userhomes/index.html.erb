@@ -1,1 +1,4 @@
-你好<%= current_user.email %>
+您好<span><%= current_user.email %></span><br />
+您当前的经验值为<%= @integrals[0] || 0 %>点<br />
+您当前拥有<%= @integrals[1] || 0 %>积分<br />
+您当前拥有<%= @integrals[2] || 0 %>金币<br />

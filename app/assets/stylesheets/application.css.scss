@@ -150,6 +150,7 @@ a{
 .section{
     border:solid 1px $main-color;
     float:left;
+    position:relative;
     @include rounded-corners(5px);
     li{
       a{
@@ -418,6 +419,33 @@ button{
   height:20px;
   padding: 1px 6px;
   line-height:20px\9;
+}
+.userhome_left{
+  /*width:30%;*/
+  width:240px;
+  overflow:hidden;
+  margin-right:10px;
+  .content{
+    font-size:20px;
+    text-align:center;
+  }
+}
+.userhome_right{
+  width:70%;
+  min-width:650px;
+  min-height:300px;
+}
+.content{
+  padding:5px;
+}
+.clearer{
+	height:1px;
+	overflow:hidden;
+	margin-top:-1px;
+        clear:both;
+}
+.powerby{
+  margin-bottom:20px;
 }
 
 /* Easy Slider */

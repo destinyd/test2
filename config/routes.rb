@@ -51,6 +51,7 @@ Zhekou::Application.routes.draw do
 
   resources :userhomes do
     collection do
+      get :costs
       get :integrals
     end
   end

@@ -285,6 +285,11 @@ zh-CN:
       new: '登录'
     registrations:
       new: '注册'
+    userhomes:
+      index: 用户主页
+      costs: 消费记录
+      integral: 积分记录
+      gold: 神币记录
 
   will_paginate:
     previous_label: "&#8592; 下一页"

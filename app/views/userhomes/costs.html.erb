@@ -1,0 +1,11 @@
+您总共有<span style="color:red"><%=@costs.count%></span>笔消费
+<% @count = 0 %>
+<%= content_tag :ol do %>
+  <% @costs.each do |cost| %>
+    <%= content_tag :li do%>
+      <% cost_one = cost.price * (cost.amount || 1) ;@count = @count+cost_one %>
+      <%= cost.title %>:花费<span style="color:red"><%=cost.price%>*<%= cost.amount || 1 %></span>元 于 <%=cost.created_at %>
+    <% end %>
+  <% end %>
+<% end %>
+从<%= @costs.first.created_at  %>至现在，总共花费<span style="color:red"><%= @count %></span>元
