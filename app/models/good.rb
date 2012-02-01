@@ -10,6 +10,7 @@ class Good < ActiveRecord::Base
   has_many :focuss, :as => :focusable
   has_many :attrs, :as => :attrable
   has_many :reviews, :as => :reviewable
+  has_many :integrals, :as => :integralable
 
   accepts_nested_attributes_for :outlinks
 
@@ -43,11 +44,11 @@ class Good < ActiveRecord::Base
     self.name
   end
 
-  has_many :integrals, :as => :integralable
   def valid
     return if self.is_valid
     self.update_attribute(:is_valid, true)
-    self.user.get_point(5,self)
+    self.user.get_point(1,self) if self.user_id
   end
   
+  after_create :valid
 end

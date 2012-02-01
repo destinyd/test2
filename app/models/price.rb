@@ -103,7 +103,7 @@ class Price < ActiveRecord::Base
   def valid
     return if self.is_valid
     self.update_attribute(:is_valid, true)
-    self.user.get_point(1,self)
+    self.user.get_point(1,self) if self.user_id
   end
 
   def near_prices long = 20
@@ -128,6 +128,7 @@ class Price < ActiveRecord::Base
   end
 
   before_save  :valid_good
+  after_create :valid
   private
   def valid_good
     if self.good_name
