@@ -137,6 +137,7 @@ a{
   .section{
       width:33%;
       margin-right:0.2%;
+      margin-right:0.1%\9;
       a img{
         width:90px;
         height:90px;
@@ -414,6 +415,9 @@ button{
   background-color:$main-color;
   color:$first-color;
   border:$first-color solid 1px;
+  height:20px;
+  padding: 1px 6px;
+  line-height:20px\9;
 }
 
 /* Easy Slider */
