@@ -47,6 +47,8 @@ class Price < ActiveRecord::Base
   #scope :nearest,running.near_prices
   scope :with_uploads,includes(:uploads)
 
+  scope :you_like,running.order('rand()')#.includes(:reviews)
+
   #type [0:userlocal1day 1:userurl1day 2:团购 3:拍卖 10:商家普价 11:上架优惠 12:商家限量]
 
   TYPE = {
