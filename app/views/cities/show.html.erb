@@ -1,6 +1,6 @@
-<% tmp1 = "最新、最全的#{"《#{@name}》附近的" if @name}价格信息 尽在" %>
-<% content_for :title do -%><%= tmp1 %><% end if tmp1 -%>
-<% content_for :desc do -%><%= tmp1 %>神马价。<% end if tmp1 -%>
+<% tmp1 = "最新、最全的#{"《#{@name}》附近的" if @name}价格信息" %>
+<% content_for :title do -%><%= tmp1 %> - <% end if tmp1 -%>
+<% content_for :desc do -%><%= tmp1 %>。<% end if tmp1 -%>
 <% @counts = 0 %>
 <% cache "place/#{controller_name}/#{@name}/#{@cache_id}" do %>
   <div class="mt">

@@ -251,9 +251,9 @@ zh-CN:
     pending: 待审
     s1: '+1'
     s-1: '睬'
-  title: '神马价 测试版0.2 -- 记您消费，查你所需'
+  title: '神马价 - 记您消费，查你所需'
   desc: '神马价可以保存您记下您所有的消费，帮您查找您所需要的商品价格，让您更好的把住自己的钱包，享受更多实惠。'
-  keywords: '神马价,记账,价格对比'
+  keywords: '神马价,什么价,记账,价格对比'
 
   controller:
     prices: "价格"
@@ -273,7 +273,7 @@ zh-CN:
       new: '记账'
       cheapest: '最便宜'
       groupbuy: '团购'
-      costs: '消费'
+      costs: '实际消费'
       index: '最新'
       just_started: '刚刚开始'
       nearly_finish: '即将结束'

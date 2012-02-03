@@ -4,6 +4,7 @@
   <%= content_tag :div, msg, :id => "flash_#{name}" %>
 <% end %>
 <%= yield %>
+<div class="clearer"></div>
 </article>
 <script>
   if('<%=current_user.to_s%>' != '')
