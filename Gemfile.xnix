@@ -26,6 +26,7 @@ gem 'jquery-rails'
 #gem 'awesome_nested_set'
 
 gem 'acts-as-taggable-on'#, '~>2.1.0'
+gem 'dynamic_sitemaps'
 #gem "mocha", :group => :test
 
 group :development do

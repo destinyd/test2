@@ -1,4 +1,6 @@
 Zhekou::Application.routes.draw do
+  match 'sitemap.xml' => 'sitemaps#sitemap'
+
   resources :locates,:only => [:index,:show,:create,:new] do
     resources :prices do
       collection do
