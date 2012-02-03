@@ -11,3 +11,4 @@ Disallow: /users/
 Disallow: /users
 Disallow: /*/new$
 Disallow: /*/edit$
+Sitemap:http://shenmajia/sitemap.xml
