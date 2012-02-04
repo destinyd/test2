@@ -30,7 +30,6 @@ class PricesController < ApplicationController
 
   def create
     @price = current_user.prices.build(params[:price]) 
-    @price.good_id = @able.id if @price.good_id.nil? and !@able.nil?
     if @price.save
       redirect_to(@price, :notice => t('notice.create_success'))
     else
