@@ -78,7 +78,7 @@ class GetTuangou
     begin
       xml = Net::HTTP.get uri.host, uri.request_uri
     rescue #Timeout::Error
-      if @error_times > 2
+      if @error_times > 1
         @error_times =0
         return nil
       end
