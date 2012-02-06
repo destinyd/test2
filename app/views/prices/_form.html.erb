@@ -12,12 +12,6 @@
     </div>
   <% end %>
 
-<!--  <%= f.fields_for :good do |gf| %>
-    <div class="field">
-      <%= f.label :name %><br />
-      <%= f.text_field :good_name %>
-    </div>
-    <% end if @able.blank? %>-->
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
@@ -42,6 +36,9 @@
     <%= f.label :amount,"商品数量(不填为未知)" %><br />
     <%= f.text_field :amount %>
   </div>
+  <%#= f.fields_for :outlinks do |o| %>
+    <%#= o.text_field :url %>
+  <%# end -%>
   <div class="actions">
     <%= f.submit %>
   </div>
