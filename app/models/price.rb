@@ -3,7 +3,6 @@ class Price < ActiveRecord::Base
   STATUS_LOW = 5
   belongs_to :user
 #  belongs_to :good
-  has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   validates :type_id, :presence => true
   validates :price, :presence => true
   validates :title, :presence => true
@@ -15,6 +14,7 @@ class Price < ActiveRecord::Base
   attr_accessor :good_name,:good_user_id
   attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:started_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude
 
+  has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   has_many :integrals, :as => :integralable, :dependent => :destroy
   has_many :reviews, :as => :reviewable, :dependent => :destroy
   has_many :uploads, :as => :uploadable, :dependent => :destroy
@@ -23,7 +23,7 @@ class Price < ActiveRecord::Base
   has_many :goods, :through => :price_goods
   accepts_nested_attributes_for :goods
   accepts_nested_attributes_for :uploads
-  accepts_nested_attributes_for :outlinks
+  accepts_nested_attributes_for :outlinks, :reject_if => lambda { |outlink| outlink[:url].blank? }, :allow_destroy => true
 
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
   scope :review_low, Filter.new(self).extend(ReviewFilter)

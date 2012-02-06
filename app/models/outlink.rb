@@ -6,12 +6,12 @@ class Outlink < ActiveRecord::Base
   has_many :reviews, :as => :reviewable
   #validates :url, :presence => true,:uniqueness =>{:scope => [:outlinkable_id, :outlinkable_type]} #to urls 再去验证
   def human_link
-    @status = self.reviews.sum(:status)
-    if @status < STATUS_LOW
-      read_attribute(:url) + '(待审)'
-    else
+    #@status = self.reviews.sum(:status)
+    #if @status < STATUS_LOW
+      #read_attribute(:url) + '(待审)'
+    #else
       read_attribute(:url)
-    end
+    #end
   end
 #  include Filter::ReviewPending
 #  Filter.new(self).extend(ReviewPending)

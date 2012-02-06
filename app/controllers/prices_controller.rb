@@ -15,11 +15,10 @@ class PricesController < ApplicationController
   end
 
   def new
-    if @able.blank?
-      @price =  Price.new  
-      #@price.goods.new
-    else
+    if @able
       @price = @able.prices.build
+    else
+      @price =  Price.new
     end
   end
 

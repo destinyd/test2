@@ -1,5 +1,6 @@
 <% @price ||= Price.new %>
-<%= form_for [@good,@price]  do |f| %>
+<% @price.outlinks.new %>
+<%= form_for @price  do |f| %>
   <% if @price.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@price.errors.count, "error") %> prohibited this price from being saved:</h2>
@@ -36,9 +37,10 @@
     <%= f.label :amount,"商品数量(不填为未知)" %><br />
     <%= f.text_field :amount %>
   </div>
-  <%#= f.fields_for :outlinks do |o| %>
-    <%#= o.text_field :url %>
-  <%# end -%>
+  <%= f.fields_for :outlinks,:outlinks do |builder| %>
+    <%= render 'prices/outlink_fields',:f => builder %>
+  <% end -%>
+  <p><%#= link_to_add_fields "Add Question", f, :questions %>
   <div class="actions">
     <%= f.submit %>
   </div>
