@@ -33,6 +33,10 @@ zh-CN:
       updated: '帐号资料更新成功.'
       destroyed: '再见！您的帐户已成功注销。我们希望很快可以再见到您.'
       inactive_signed_up: 'Y您的帐号已注册成功. 然后, 你没能正常登录，因为 %{reason}.'      
+
+      signed_up_but_unconfirmed: '我们已经发送了一封确认邮件到您的邮箱，请查看并点击Email里的确认链接，激活您的帐号.'
+      signed_up_but_inactive: '您已经注册成功. 但是还不能登录，因为您的帐号还没有被激活.'
+      signed_up_but_locked: '您已经注册成功. 但是还不能登录，因为您的帐号已经被锁定.'
     unlocks:
       send_instructions: '几分后，您将收到一封帐号解锁的邮件.'
       unlocked: '您的帐号已成功解锁，请登录.'
