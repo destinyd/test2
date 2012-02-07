@@ -22,7 +22,7 @@ gem 'devise' # Devise must be required before RailsAdmin
 gem 'paperclip'
 gem 'mime-types', :require => 'mime/types'
 gem "will_paginate", "~> 3.0.pre2"
-gem 'jquery-rails'
+gem 'jquery-rails',"~> 1.0.13"
 #gem 'awesome_nested_set'
 
 gem 'acts-as-taggable-on'#, '~>2.1.0'
