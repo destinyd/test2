@@ -6,6 +6,7 @@ class UserhomesController < ApplicationController
 
   def costs
     @costs=current_user.prices.where(:type_id => [0,1])
+    @cost_months = @costs.group_by{|a| a.created_at.beginning_of_month}
   end
 
 

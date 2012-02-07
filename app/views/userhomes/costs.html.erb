@@ -1,11 +1,27 @@
-您总共有<span style="color:red"><%=@costs.count%></span>笔消费
 <% @count = 0 %>
-<%= content_tag :ol do %>
-  <% @costs.each do |cost| %>
-    <%= content_tag :li do%>
-      <% cost_one = cost.price * (cost.amount || 1) ;@count = @count+cost_one %>
-      <%= cost.title %>:花费<span style="color:red"><%=cost.price%>*<%= cost.amount || 1 %></span>元 于 <%=cost.created_at %>
+<% @cost_months.sort.each do |month,costs| %>
+  <% month_count = 0 %>
+  <%= content_tag :div,:class => 'month' do %>
+    <%= month.strftime('%Y-%m') %>
+  <% end %>
+  <% costs.each do |cost| %>
+    <%= content_tag :div,:class => 'price_cost' do %>
+      <% cost_one = cost.price * (cost.amount || 1) ;@count = @count+cost_one;month_count = month_count + cost_one %>
+      <%= content_tag :div,:class => 'time' do %>
+        <%=cost.created_at.strftime('%d日%H:%M') %>
+      <% end %>
+      <%= content_tag :div,:class => 'title' do %>
+        <%=cost.title %>
+      <% end %>
+      <%= content_tag :div,:class => 'price' do %>
+        <span style="color:red"><%= cost.price %>*<%= cost.amount || 1 %></span>元
+      <% end %>
+      <div class='clearer'></div>
     <% end %>
   <% end %>
+  <%= content_tag :div,:class => 'r' do %>
+    <%= month.strftime('%Y年%m月')  %> <%= costs.length %>笔消费，总共花费<span style="color:red"><%= month_count %></span>元
+  <% end %>
+  <div class="clearer"></div>
 <% end %>
-从<%= @costs.first.created_at  %>至现在，总共花费<span style="color:red"><%= @count %></span>元
+<div class="r">从<%= @costs.first.created_at  %>至现在，总共<%= @costs.length %>笔消费，总共花费<span style="color:red"><%= @count %></span>元</div>

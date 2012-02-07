@@ -371,20 +371,22 @@ footer{
   }
 }
 /*列表*/
-.price{
-  padding:5px;
-  height:135px;
-  border-bottom:dashed 1px black;
-  overflow:hidden;
-  .l{
-    padding:2px;
-    a img{
-      width:120px;
-      height:120px;
+.product_l{
+  .price{
+    padding:5px;
+    height:135px;
+    border-bottom:dashed 1px black;
+    overflow:hidden;
+    .l{
+      padding:2px;
+      a img{
+        width:120px;
+        height:120px;
+      }
     }
-  }
-  .detail{
-    margin-left: 130px;
+    .detail{
+      margin-left: 130px;
+    }
   }
 }
 /*详细*/
@@ -438,7 +440,36 @@ button{
   min-height:300px;
 }
 .content{
-  padding:5px;
+  .price_cost{
+    margin-left:10px;
+    border-bottom:1px dashed;
+    div{
+      overflow:hidden;
+    }
+    .time{
+      min-width:100px;
+      float:left;
+    }
+    .title{
+      width:60%;
+      min-width:400px;
+      float:left;
+    }
+    .price{
+      text-align:right;
+      min-width:100px;
+      float:right;
+    }
+  }
+  .month{
+    margin-left:0px;
+    padding-left:5px;
+    height:30px;
+    line-height:30px;
+    color:$first-color;
+    background-color:$main-color;
+    font-size:12pt;
+  }
 }
 .clearer{
 	height:1px;
