@@ -53,9 +53,6 @@ Article.create(
 ]
 )
 
-City.all.each do |city|
-  Locate.create! :name => city.name,:lat => city.lat,:lon => city.lon
-end
 
 #geocode
 #Price.where("latitude is null and address <> '全国'").group(:address).each do |b|
