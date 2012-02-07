@@ -83,14 +83,14 @@ class PricesController < ApplicationController
         elsif $1 == 'locate'
           @able = $1.classify.constantize.where(:name =>value).first
           @able = Locate.create(:name => value) unless @able
-          @prices = @able.prices
+          value = @able.lat,@able.lon
         else
           @able = $1.classify.constantize.find(value) 
           @prices = @able.prices
         end 
       @prices = @prices.send action_name if ['cheapest','groupbuy','costs','just_started','nearly_finish'].include? action_name
       @prices = @prices.recent if action_name == 'index'
-      @prices = @prices.near(value,20) if $1 == 'city'
+      @prices = @prices.near(value,20) if $1 == 'city' or $1 == 'locate'
       return @prices = @prices.with_uploads
       end  
     end  

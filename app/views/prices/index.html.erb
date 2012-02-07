@@ -11,7 +11,6 @@
 <% cache "p/i/#{params}/#{@cache_id}" do %>
   <%= render @prices %>
 <% end %>
-<%= raw "<div><h4>暂无数据</h4></div>" if @prices.blank? %>
 <div class="c"></div>
 <div class="r">
   <%= will_paginate @prices %> 
