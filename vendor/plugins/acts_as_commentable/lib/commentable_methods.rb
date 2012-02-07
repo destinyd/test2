@@ -12,8 +12,10 @@ module Juixe
       module ClassMethods
         def acts_as_commentable(*args)
           comment_roles = args.to_a.flatten.compact.map(&:to_sym)
-          write_inheritable_attribute(:comment_types, (comment_roles.blank? ? [:comments] : comment_roles))
-          class_inheritable_reader(:comment_types)
+          class_attribute :comment_types
+          self.comment_types = comment_roles.blank? ? [:comments] : comment_roles
+          # write_inheritable_attribute(:comment_types, (comment_roles.blank? ? [:comments] : comment_roles))
+          # class_attribute(:comment_types)
 
           options = ((args.blank? or args[0].blank?) ? {} : args[0])
 
