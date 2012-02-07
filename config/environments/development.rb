@@ -12,7 +12,7 @@ Zhekou::Application.configure do
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
 #  config.action_view.debug_rjs             = true
-  config.action_controller.cache_store = :file_store, Rails.root + 'tmp/file_store'
+  #config.action_controller.cache_store = :file_store, Rails.root + 'tmp/file_store'
   config.action_controller.perform_caching = false
 #  config.action_controller.perform_caching = true
 
@@ -21,6 +21,16 @@ Zhekou::Application.configure do
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
+
+  # Only use best-standards-support built into browsers
+  config.action_dispatch.best_standards_support = :builtin
+
+  # Raise exception on mass assignment protection for Active Record models
+  config.active_record.mass_assignment_sanitizer = :strict
+
+  # Log the query plan for queries taking more than this (works
+  # with SQLite, MySQL, and PostgreSQL)
+  config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
