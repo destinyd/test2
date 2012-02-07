@@ -55,4 +55,8 @@ module ApplicationHelper
     end
     link_to_function(name, h("add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")"))
   end
+  
+  def base_target_blank
+    content_for :head ,raw('<base target="_blank">')
+  end
 end
