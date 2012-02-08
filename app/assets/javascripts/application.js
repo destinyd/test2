@@ -84,3 +84,28 @@ function add_fields(link, association, content) {
       before: content.replace(regexp, new_id)
     });
 }
+function toggle_cheap_price(obj){
+  if($(obj).attr('checked'))
+  {
+    $('#div_original_price').show();
+  }
+  else
+  {
+    $('#div_original_price').hide();
+    $('#original_price').val('');
+  }
+}
+function onchange_type_id(obj){
+  var val = parseInt($(obj).val());
+  if(val > 1 && val < 11)
+  {
+    $('#span_is_cheap_price').hide();
+    $('#div_original_price').hide();
+    $('#is_cheap_price').attr('checked',false)
+    //$('#original_price').val('');
+  }
+  else
+  {
+    $('#span_is_cheap_price').show();
+  }
+}

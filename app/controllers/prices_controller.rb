@@ -1,6 +1,6 @@
 class PricesController < ApplicationController
-  before_filter :authenticate_user!,:only =>[:new,:create,:update]
-  before_filter :find_able_and_prices, :except => [:update,:create]
+  before_filter :authenticate_user!,:only =>[:new,:create,:update,:edit]
+  before_filter :find_able_and_prices, :except => [:update,:create,:new,:edit,:destroy]
   respond_to :html,:js
   #caches_action :index, :show
   #cache_sweeper :price_sweeper,:only => [:index,:show]

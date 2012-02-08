@@ -11,8 +11,8 @@ class Price < ActiveRecord::Base
   #] } ,
   :if => :is_tuangou? #,:on => :create #限制 当创建的时候
 
-  attr_accessor :good_name,:good_user_id
-  attr_accessible :price,:type_id,:address,:region_id,:amount,:good_name,:finish_at,:started_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude
+  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price
+  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price
 
   has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   has_many :integrals, :as => :integralable, :dependent => :destroy
@@ -105,7 +105,37 @@ class Price < ActiveRecord::Base
   def valid
     return if self.is_valid
     self.update_attribute(:is_valid, true)
+    self.user.get_point(1,self,1) if self.user_id
+  end
+
+  def exp
     self.user.get_point(1,self) if self.user_id
+  end
+
+  def deal_cheap_price
+    create_alias_price 6,self.price if self.is_cheap_price
+  end
+
+  def deal_original_price
+    create_alias_price 7,self.original_price if self.is_cheap_price and !self.original_price.blank?
+  end
+
+  def create_alias_price type_id,price
+    p = Price.new :title => self.title,
+      :type_id => type_id,
+      :price => price,
+      :address => self.address,
+      :latitude => self.latitude,
+      :longitude => self.longitude,
+      :desc => self.desc,
+      :amount => self.amount
+    self.outlinks.each do |outlink|
+      o = Outlink.new :url => outlink.url
+      o.user_id = outlink.user_id
+      p.outlinks << o
+    end
+    p.user_id = self.user_id
+    p.save
   end
 
   def near_prices long = 20
@@ -129,8 +159,15 @@ class Price < ActiveRecord::Base
     [21,22].include? self.read_attribute(:type_id)
   end
 
+  def outlink_user
+    self.outlinks.each do |outlink|
+      outlink.user_id = self.user_id
+    end
+  end
+
+  before_create :outlink_user
   before_save  :valid_good
-  after_create :valid
+  after_create :exp,:deal_cheap_price,:deal_original_price
   private
   def valid_good
     if self.good_name
@@ -149,10 +186,10 @@ class Price < ActiveRecord::Base
   end
 
   #def valid_singleton_for_tuan
-    #if self.type_id == '团购价'
-      #links = Outlink.where(:url => self.outlinks.map(&:url))
-      #self.errors.add(:url,'has') unless links.blank?
-    #end
+  #if self.type_id == '团购价'
+  #links = Outlink.where(:url => self.outlinks.map(&:url))
+  #self.errors.add(:url,'has') unless links.blank?
+  #end
   #end
 
 

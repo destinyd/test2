@@ -224,6 +224,8 @@ zh-CN:
     type_id: 类型
     username: 用户名
     password_confirmation: 密码验证
+    is_cheap_price: '特价?'
+    original_price: '原价'
 
 
   labels:

@@ -20,10 +20,16 @@
   <div class="field">
     <%= f.label :price %><br />
     <%= f.text_field :price %>
+    <span id="span_is_cheap_price"><%= f.label :is_cheap_price %>
+      <%= f.check_box :is_cheap_price,:onclick =>"toggle_cheap_price(this)",:id => 'is_cheap_price' %></span>
+  </div>
+  <div class="field h" id="div_original_price">
+    <%= f.label :original_price %><br />
+    <%= f.text_field :original_price,:id => 'original_price' %>
   </div>
   <div class="field">
     <%= f.label :type_id %><br />
-    <%= f.select :type_id,Price.selects %>
+    <%= f.select :type_id,Price.selects,{},:onchange => "onchange_type_id(this)" %>
   </div>
   <div class="field">
     <%= f.label :address %><br />
