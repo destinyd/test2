@@ -11,8 +11,8 @@ class Price < ActiveRecord::Base
   #] } ,
   :if => :is_tuangou? #,:on => :create #限制 当创建的时候
 
-  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price
-  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price
+  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360
+  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360
 
   has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   has_many :integrals, :as => :integralable, :dependent => :destroy
@@ -117,7 +117,7 @@ class Price < ActiveRecord::Base
   end
 
   def deal_original_price
-    create_alias_price 7,self.original_price if self.is_cheap_price and !self.original_price.blank?
+    create_alias_price 7,self.original_price unless self.original_price.blank?
   end
 
   def create_alias_price type_id,price
