@@ -20,7 +20,7 @@
     <%= render 'section',:plus => {:things => Price.groupbuy.limit(10),:title=> "最新团购",:section_path => groupbuy_prices_path} %>
   </div>
   <div class="mt">
-  <%= render 'liner',:plus => {:things => Price.just_started.limit(6),:title=> "刚刚开始",:section_path => just_started_prices_path} %>
+  <%= render 'liner',:plus => {:things => Price.just_started.with_uploads.limit(6),:title=> "刚刚开始",:section_path => just_started_prices_path} %>
   </div>
   <div class="mt">
     <%= render 'section',:plus => {:things => Price.costs.limit(10),:title=> "最新消费记录",:section_path => costs_prices_path} %>
@@ -29,7 +29,7 @@
     <%= render 'section',:plus => {:things => Good.tag_counts.order('count desc').limit(10),:title=> "商品Tags",:section_path => tags_goods_path,:link_name => 'name',:link_path => 'tag_good_path'} %>
   </div>
   <div class="mt">
-  <%= render 'liner',:plus => {:things => Price.nearly_finish.limit(6),:title=> "即将结束",:section_path => nearly_finish_prices_path} %>
+  <%= render 'liner',:plus => {:things => Price.nearly_finish.with_uploads.limit(6),:title=> "即将结束",:section_path => nearly_finish_prices_path} %>
   </div>
   <div class="mt">
     <%= render 'section',:plus => {:things => Focus.most,:title=> "最多关注",:plusable=>'focusable'} %>
