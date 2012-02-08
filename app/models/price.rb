@@ -43,7 +43,7 @@ class Price < ActiveRecord::Base
   scope :not_finish,where("finish_at > ?",Time.now)
   scope :just_started,not_finish.order("id desc")
   scope :nearly_finish,not_finish.order(:finish_at)
-  scope :costs,recent.where(:type_id=>0..20)#.includes(:reviews)
+  scope :costs,recent.where(:type_id=>[0,1])#.includes(:reviews)
   #scope :nearest,running.near_prices
   scope :with_uploads,includes(:uploads)
 

@@ -41,8 +41,8 @@
 
     <p>
     <b><%= label :price,:desc%>:</b>
-    <%= raw @price.desc if @price.is_tuangou? %>
-    <%= @price.desc unless @price.is_tuangou? %>
+    <%= raw @price.desc if @price.is_tuangou? or @price.type_id == '商品标示原价' %>
+    <%= @price.desc unless @price.is_tuangou? or @price.type_id == '商品标示原价' %>
     </p>
     <% unless @price.type_id != "团购价" or @price.uploads.first.nil? %>
       <img src="<%=@price.uploads.first.image_file_name%>" alt="<%= @price.title %>" />

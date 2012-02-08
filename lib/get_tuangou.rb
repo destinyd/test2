@@ -2,23 +2,24 @@
 class GetTuangou
   require 'net/http'
   require 'xml'
-  attr_accessor :last
+  attr_accessor :last,:log
   def initialize
     @tuan_urls =TuanUrl.enables
   end
 
   def get_all
-    log = Rails.logger
-    log.info "获取团购数据开始"
+    @log = Rails.logger
+    @log.info "获取团购数据开始"
     @tuan_urls.each do |t|
-      log.info "开始获取#{t.name}的数据"
+      @log.info "开始获取#{t.name}的数据"
       deal t
-      log.info "获取#{t.name}的数据结束"
+      @log.info "获取#{t.name}的数据结束"
     end
-    log.info "获取团购数据结束"
+    @log.info "获取团购数据结束"
   end
 
   def deal t
+    return if t.updated_at > 2.hour.ago
     uri = URI.parse t.url
     get_contents_from_t_and_uri t,uri
   end
@@ -38,6 +39,7 @@ class GetTuangou
       t.got_at = self.last
       t.save
     end
+    t.touch
   end
 
   def get_contents doc,t
@@ -61,7 +63,15 @@ class GetTuangou
     p[:address].strip if p[:address]
     p[:desc].gsub! /\n/,'' if p[:desc]
     self.last = p[:started_at] if self.last.nil? or p[:started_at] > self.last 
-    create p unless !t.got_at.nil? and p[:started_at] < t.got_at
+    unless !t.got_at.nil? and p[:started_at] < t.got_at
+      begin
+        create p
+      rescue
+        @log.info "这货create失败"
+        @log.info t.inspect
+        @log.info p.inspect
+      end
+    end
   end
 
   def get_one dom,hashs
@@ -91,7 +101,7 @@ class GetTuangou
       parser = XML::Parser.string xml
       doc = parser.parse
     rescue
-      log.info "获取#{t.name}的数据失败"
+      @log.info "获取#{t.name}的数据失败"
     end
   end
 end
