@@ -56,7 +56,7 @@ class GetTuangou
     p[:type_id]=21
     p[:type_id]=22 if p[:city] == '全国'
     p[:city] = '中国' if p[:city] == '全国'
-    p[:addrnss] = p[:city] if p[:address].blank?
+    p[:address] = p[:city] if p[:address].blank?
     p[:finish_at]=Time.at(p[:finish_at].to_i) unless p[:is_360]
     p[:started_at]=Time.at(p[:started_at].to_i) unless p[:is_360]
     p[:title].gsub! /\n/,'' if p[:title]
