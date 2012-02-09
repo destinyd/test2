@@ -15,8 +15,8 @@
   </div>
 
   <div class="mt">
-    <%= render 'section',:plus => {:things => Price.cheapest.limit(10),:title=> "最低价格",:section_path => cheapest_prices_path} %>
-    <%= render 'section',:plus => {:things => Price.recent.limit(10),:title=> "最新价格",:section_path => prices_path} %>
+    <%= render 'section',:plus => {:things => Price.group(:title).cheapest.limit(10),:title=> "最低价格",:section_path => cheapest_prices_path} %>
+    <%= render 'section',:plus => {:things => Price.group(:title).recent.limit(10),:title=> "最新价格",:section_path => prices_path} %>
     <%= render 'section',:plus => {:things => Price.groupbuy.limit(10),:title=> "最新团购",:section_path => groupbuy_prices_path} %>
   </div>
   <div class="mt">
@@ -24,7 +24,6 @@
   </div>
   <div class="mt">
     <%= render 'section',:plus => {:things => Price.costs.limit(10),:title=> "最新消费记录",:section_path => costs_prices_path} %>
-    <%#= render 'section',:plus => {:things => @recent_local,:title=> "附近消费",:section_path => local_prices_path} %>
     <%= render 'section',:plus => {:things => Good.recent.limit(10),:title=> "最新产品",:section_path => goods_path} %>
     <%= render 'section',:plus => {:things => Good.tag_counts.order('count desc').limit(10),:title=> "商品Tags",:section_path => tags_goods_path,:link_name => 'name',:link_path => 'tag_good_path'} %>
   </div>
