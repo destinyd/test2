@@ -4,7 +4,7 @@ TuanUrl.all.each{|tuan_url| tuan_url.update_attribute :enable ,0}
 TuanApi.find_or_create_by_name("hao123").update_attributes(
   :name => "hao123",
   :docfind => "//urlset/url",
-  :suite=>"p=self.get_one(d,{:title=>'data/display/title',:price=>'data/display/price',:original_price=>'data/display/value',:desc => 'data/display/description',:started_at => 'data/display/startTime',:finish_at => 'data/display/endTime',:address=>'data/display/city'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'data/display/image'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'loc'})];p[:address]=p[:address]+d.find('data/display/address').first.content if d.find('data/display/address').first;",
+  :suite=>"p=self.get_one(d,{:title=>'data/display/title',:price=>'data/display/price',:original_price=>'data/display/value',:desc => 'data/display/description',:started_at => 'data/display/startTime',:finish_at => 'data/display/endTime',:address=>'data/display/address',:city=>'data/display/city'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'data/display/image'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'loc'})];",
 )
 TuanUrl.find_or_create_by_name("信团柳州").update_attributes(:name=>"信团柳州" , :url => "http://www.cn403.com/api/hao123.php", :enable => true,:tuan_api_name => 'hao123')
 TuanUrl.find_or_create_by_name("米奇").update_attributes(:name=>"米奇" , :url => "http://www.miqi.cn/xml/apis/lab.api.hao123.xml", :enable => true,:tuan_api_name => 'hao123')
@@ -20,12 +20,12 @@ TuanApi.find_or_create_by_name("窝窝团").update_attributes(
   :docfind => "//deals/deal",
   :suite=>"p=self.get_one(d,{:title=>'title',:price=>'price',:started_at => 'start_date',:finish_at => 'end_date',:address=>'division_name'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'large_image_url'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'deal_url'})];",
 )
-TuanUrl.find_or_create_by_name("窝窝团柳州").update_attributes(:name=>"窝窝团柳州" , :url => "http://www.55tuan.com/openAPI.do?city=liuzhou", :enable => false,:tuan_api_name => '窝窝团')
+#TuanUrl.find_or_create_by_name("窝窝团柳州").update_attributes(:name=>"窝窝团柳州" , :url => "http://www.55tuan.com/openAPI.do?city=liuzhou", :enable => false,:tuan_api_name => '窝窝团')
 
 TuanApi.find_or_create_by_name("google").update_attributes(
   :name => "google",
   :docfind => "//offer",
-  :suite=>"p=self.get_one(d,{:title=>'title',:price=>'current_price',:original_price=>'original_price',:started_at => 'start_timestamp',:finish_at => 'end_timestamp',:desc => 'description',:address=>'shops/shop_info/shop_address',:longitude=>'shops/shop_info/longitude',:latitude=>'shops/shop_info/latitude'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'image_url'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'url'})];",
+  :suite=>"p=self.get_one(d,{:title=>'title',:price=>'current_price',:original_price=>'original_price',:started_at => 'start_timestamp',:finish_at => 'end_timestamp',:desc => 'description',:address=>'shops/shop_info/shop_address',:city => 'publish_cities/city',:longitude=>'shops/shop_info/longitude',:latitude=>'shops/shop_info/latitude'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'image_url'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'url'})];",
 )
 TuanUrl.find_or_create_by_name("拉手google").update_attributes(:name=>"拉手google" , :url => "http://open.client.lashou.com/google", :enable => true,:tuan_api_name => 'google')
 TuanUrl.find_or_create_by_name("58团google").update_attributes(:name=>"58团google" , :url => "http://open.t.58.com/api/google", :enable => true,:tuan_api_name => 'google')
@@ -36,7 +36,7 @@ TuanUrl.find_or_create_by_name("24卷google").update_attributes(:name=>"24卷goo
 TuanApi.find_or_create_by_name("美团").update_attributes(
   :name => "美团",
   :docfind => "//deals/data",
-  :suite=>"p=self.get_one(d,{:title=>'deal/deal_title',:price=>'deal/price',:original_price => 'deal/value',:started_at => 'deal/start_time',:finish_at => 'deal/end_time',:desc => 'deal/deal_desc',:address => 'shops/shop/shop_addr',:latitude => 'shops/shop/shop_lat',:longitude => 'shops/shop/shop_long'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'deal/deal_img'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'deal/deal_url'})];p[:desc]+='<br />'+d.find('deal/deal_wow').first.content if d.find('deal/deal_wow').first;p[:desc]+='<br />'+d.find('deal/deal_tips').first.content if d.find('deal/deal_tips').first;p[:desc]+='<br />'+d.find('shops/shop/shop_trafficinfo').first.content if d.find('shops/shop/shop_trafficinfo').first;p[:address] = '全国' if p[:address].length > 150;p[:address]=d.find('deal/city_name').first.content+p[:address] if d.find('deal/city_name').first;",
+  :suite=>"p=self.get_one(d,{:title=>'deal/deal_title',:price=>'deal/price',:original_price => 'deal/value',:started_at => 'deal/start_time',:finish_at => 'deal/end_time',:desc => 'deal/deal_desc',:address => 'shops/shop/shop_addr',:city => 'deal/city_name',:latitude => 'shops/shop/shop_lat',:longitude => 'shops/shop/shop_long'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'deal/deal_img'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'deal/deal_url'})];p[:desc]+='<br />'+d.find('deal/deal_wow').first.content.strip if d.find('deal/deal_wow').first;p[:desc]+='<br />'+d.find('deal/deal_tips').first.content.strip if d.find('deal/deal_tips').first;p[:desc]+='<br />'+d.find('shops/shop/shop_trafficinfo').first.content.strip if d.find('shops/shop/shop_trafficinfo').first;p[:city] = '全国' if p[:city].length > 50;",
 )
 
 TuanUrl.find_or_create_by_name("美团北京").update_attributes(:name=>"美团北京",:url => "http://www.meituan.com/api/v2/beijing/deals",:enable => true,:tuan_api_name => '美团')
@@ -136,7 +136,7 @@ TuanUrl.find_or_create_by_name("美团顺德").update_attributes(:name=>"美团�
 TuanApi.find_or_create_by_name("360").update_attributes(
   :name => "360",
   :docfind => "//data/goodsdata/goods",
-  :suite=>"p=self.get_one(d,{:title=>'title',:price=>'sale_price',:started_at => 'start_time',:finish_at => 'close_time',:address=>'city_name',:original_price => 'original_price'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'img_url'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'site_url'})];p[:address]=p[:address]+d.find('merchant_addr').first.content if p[:address] != '全国' and d.find('merchant_addr').first ;p[:is_360]=true;",
+  :suite=>"p=self.get_one(d,{:title=>'title',:price=>'sale_price',:started_at => 'start_time',:finish_at => 'close_time',:address=>'merchant_addr',:city=>'city_name',:original_price => 'original_price'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'img_url'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'site_url'})];p[:is_360]=true;p[:started_at]=DateTime.parse p[:started_at];p[:finish_at]=DateTime.parse p[:finish_at];",
 )
 TuanUrl.find_or_create_by_name("窝窝团360").update_attributes(:name=>"窝窝团360" , :url => "http://www.55tuan.com/360api", :enable => true,:tuan_api_name => '360')
 

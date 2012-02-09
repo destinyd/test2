@@ -11,8 +11,8 @@ class Price < ActiveRecord::Base
   #] } ,
   :if => :is_tuangou? #,:on => :create #限制 当创建的时候
 
-  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360
-  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360
+  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city
+  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city
 
   has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   has_many :integrals, :as => :integralable, :dependent => :destroy
@@ -31,10 +31,6 @@ class Price < ActiveRecord::Base
 
   acts_as_commentable
   geocoded_by :address
-  before_create :geocode, :if => [:is_not_locate?,:address_changed?]#,:on =>:create
-  before_update :geocode, :if => :address_changed?#,:on =>:create
-  #after_validation :geocode, :if => :address_changed?,:on =>:update
-  #before_create :valid_singleton_for_tuan
 
   scope :running,where("finish_at > ? OR finish_at is null",Time.now)
   scope :cheapest,running.order("price")
@@ -66,7 +62,7 @@ class Price < ActiveRecord::Base
   #103=>'商家限量价'
   }
 
-  def is_not_locate?
+  def no_locate?
     self.longitude.nil? or self.latitude.nil?
   end
 
@@ -167,10 +163,24 @@ class Price < ActiveRecord::Base
     end
   end
 
+  after_validation :locate_by_city
+  before_create :geocode, :if => [:no_locate?,:address_changed?]#,:on =>:create
+  before_update :geocode, :if => :address_changed?#,:on =>:create
+  #after_validation :geocode, :if => :address_changed?,:on =>:update
+  #before_create :valid_singleton_for_tuan
   before_create :outlink_user
   before_save  :valid_good
   after_create :exp,:deal_cheap_price,:deal_original_price
   private
+  def locate_by_city
+    if self.user_id.nil? and self.no_locate? and ! self.city.blank?
+      if @locate = Locate.where(:name => self.city).first_or_create
+        self.latitude = @locate.lat
+        self.longitude = @locate.lon
+      end
+    end
+  end
+
   def valid_good
     if self.good_name
       good = Good.where(:name => self.good_name).first

@@ -53,22 +53,20 @@ class GetTuangou
     p = {}
     d.each{|a| n[a.name] = a.content}
     eval(t.suite)
-    p[:type_id]=21 unless p[:address] == '全国'
-    p[:type_id]=22 if p[:address] == '全国'
-    p[:address] = '中国' if p[:address] == '全国'
+    p[:type_id]=21
+    p[:type_id]=22 if p[:city] == '全国'
+    p[:city] = '中国' if p[:city] == '全国'
+    p[:addrnss] = p[:city] if p[:address].blank?
     p[:finish_at]=Time.at(p[:finish_at].to_i) unless p[:is_360]
     p[:started_at]=Time.at(p[:started_at].to_i) unless p[:is_360]
     p[:title].gsub! /\n/,'' if p[:title]
-    p[:title].strip if p[:title]
-    p[:address].strip if p[:address]
     p[:desc].gsub! /\n/,'' if p[:desc]
-    self.last = p[:started_at] if self.last.nil? or p[:started_at] > self.last 
+    self.last = p[:started_at] if self.last.nil? or p[:started_at] > self.last
     unless !t.got_at.nil? and p[:started_at] < t.got_at
       begin
         create p
       rescue
-        @log.info "这货create失败"
-        @log.info t.inspect
+        @log.info "#{t.name}的这货create失败"
         @log.info p.inspect
       end
     end
@@ -77,7 +75,7 @@ class GetTuangou
   def get_one dom,hashs
     result = {}
     hashs.each do |key,value|
-      result[key] = dom.find(value.to_s).first.content if dom.find(value.to_s).first
+      result[key] = dom.find(value.to_s).first.content.strip if dom.find(value.to_s).first
     end
     result
   end
@@ -101,7 +99,8 @@ class GetTuangou
       parser = XML::Parser.string xml
       doc = parser.parse
     rescue
-      @log.info "获取#{t.name}的数据失败"
+      @log.info "parse失败"
+      return nil
     end
   end
 end
