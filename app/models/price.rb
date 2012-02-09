@@ -146,6 +146,8 @@ class Price < ActiveRecord::Base
     case self.type_id
     when '团购价'
       self.title
+    when '全国配送团购价'
+      self.title
     else
       "(#{human_price})#{self.title}"
     end
