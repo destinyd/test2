@@ -136,7 +136,7 @@ TuanUrl.find_or_create_by_name("美团顺德").update_attributes(:name=>"美团�
 TuanApi.find_or_create_by_name("360").update_attributes(
   :name => "360",
   :docfind => "//data/goodsdata/goods",
-  :suite=>"p=self.get_one(d,{:title=>'title',:price=>'sale_price',:started_at => 'start_time',:finish_at => 'close_time',:address=>'merchant_addr',:city=>'city_name',:original_price => 'original_price'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'img_url'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'site_url'})];p[:is_360]=true;p[:started_at]=DateTime.parse p[:started_at];p[:finish_at]=DateTime.parse p[:finish_at];",
+  :suite=>"p=self.get_one(d,{:title=>'title',:price=>'sale_price',:started_at => 'start_time',:finish_at => 'close_time',:address=>'merchant_addr',:city=>'city_name',:original_price => 'original_price'});p[:uploads_attributes]=[self.get_one(d,{:image_file_name=>'img_url'})];p[:outlinks_attributes]=[self.get_one(d,{:url=>'goods_url'})];p[:is_360]=true;p[:started_at]=DateTime.parse p[:started_at];p[:finish_at]=DateTime.parse p[:finish_at];",
 )
 TuanUrl.find_or_create_by_name("窝窝团360").update_attributes(:name=>"窝窝团360" , :url => "http://www.55tuan.com/360api", :enable => true,:tuan_api_name => '360')
 

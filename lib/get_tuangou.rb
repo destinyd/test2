@@ -49,9 +49,7 @@ class GetTuangou
   end
 
   def get_p d,t
-    n = {}
     p = {}
-    d.each{|a| n[a.name] = a.content}
     eval(t.suite)
     p[:type_id]=21
     p[:type_id]=22 if p[:city] == '全国'
