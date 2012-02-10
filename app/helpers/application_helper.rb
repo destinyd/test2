@@ -6,7 +6,7 @@ module ApplicationHelper
   def city_info_of_ip
     return @ip_infos if @ip_infos
     unless cookies[:got_ip]
-      cookies[:lon] = true
+      cookies[:got_ip] = true
       ip = request.ip
       @ip = Ip.where(:ip => ip).first_or_create
       get_city_name @ip
@@ -16,9 +16,9 @@ module ApplicationHelper
 
   def ip_infos
     @ip_infos = {
-      :city => ip.city_name,
-      :lat => ip.lat,
-      :lon => ip.lon
+      :city => cookies[:city],
+      :lat => cookies[:lat],
+      :lon => cookies[:lon]
     }
   end
 
