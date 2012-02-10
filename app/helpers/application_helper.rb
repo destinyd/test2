@@ -33,7 +33,7 @@ module ApplicationHelper
 
   def get_city_name ip
     if ip.lat
-      cookies[:city] = ip.name
+      cookies[:city] = ip.city_name
       cookies[:lat] = ip.lat
       cookies[:lon] = ip.lon
     end
