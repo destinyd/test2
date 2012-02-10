@@ -3,7 +3,7 @@ module ApplicationHelper
     super(a,b,c)
   end
 
-  def get_city_name_form_ip
+  def city_info_of_ip
     return @ip_infos if @ip_infos
     unless cookies[:got_ip]
       cookies[:lon] = true
