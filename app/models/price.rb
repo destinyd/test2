@@ -5,14 +5,14 @@ class Price < ActiveRecord::Base
 #  belongs_to :good
   validates :type_id, :presence => true
   validates :price, :presence => true
-  validates :title, :presence => true
+  #validates :title, :presence => true
   
-  validates :title, :uniqueness =>true,# { :scope => [:finish_at,:address,#:price 不知道为什么 falut
-  #] } ,
-  :if => :is_tuangou? #,:on => :create #限制 当创建的时候
+  #validates :title, :uniqueness =>true,# { :scope => [:finish_at,:address,#:price 不知道为什么 falut
+  ##] } ,
+  #:if => :is_tuangou? #,:on => :create #限制 当创建的时候
 
   attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city
-  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:title,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city
+  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:name,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city
 
   has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   has_many :integrals, :as => :integralable, :dependent => :destroy
@@ -117,7 +117,7 @@ class Price < ActiveRecord::Base
   end
 
   def create_alias_price type_id,price
-    p = Price.new :title => self.title,
+    p = Price.new :name => self.name,
       :type_id => type_id,
       :price => price,
       :address => self.address,
@@ -141,11 +141,11 @@ class Price < ActiveRecord::Base
   def to_s
     case self.type_id
     when '团购价'
-      self.title
+      self.name
     when '全国配送团购价'
-      self.title
+      self.name
     else
-      "(#{human_price})#{self.title}"
+      "(#{human_price})#{self.name}"
     end
   end
 
@@ -161,6 +161,10 @@ class Price < ActiveRecord::Base
     self.outlinks.each do |outlink|
       outlink.user_id = self.user_id
     end
+  end
+
+  def name
+    self.goods.first.try(:name)
   end
 
   after_validation :locate_by_city

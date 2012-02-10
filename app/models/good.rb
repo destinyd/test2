@@ -47,8 +47,13 @@ class Good < ActiveRecord::Base
   def valid
     return if self.is_valid
     self.update_attribute(:is_valid, true)
+    self.user.get_point(1,self,1) if self.user_id
+  end
+
+  def exp
     self.user.get_point(1,self) if self.user_id
   end
+
   
-  after_create :valid
+  after_create :exp
 end
