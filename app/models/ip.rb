@@ -10,11 +10,7 @@ class Ip < ActiveRecord::Base
     city = @get_ip.city
     unless city.blank?
       @city = City.find_by_name city
-      if @city
-        self.city = @city
-        self.lat = @city.lat
-        self.lon = @city.lon
-      end
+      self.city,self.lat,self.lon = @city,@city.lat,@city.lon if @city
     end
   end
 end

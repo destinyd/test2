@@ -1,15 +1,25 @@
 module ApplicationHelper
   def initialize(a,b,c)
     super(a,b,c)
-    unless cookies[:lat] and cookies[:lon]
-      unless cookies[:city]
-        ip = request.ip
-        @ip = Ip.where(:ip => ip).first_or_create
-        if @ip
-          get_city_name @ip if @ip
-        end
-      end
-    end 
+  end
+
+  def get_city_name_form_ip
+    return @ip_infos if @ip_infos
+    unless cookies[:got_ip]
+      cookies[:lon] = true
+      ip = request.ip
+      @ip = Ip.where(:ip => ip).first_or_create
+      get_city_name @ip
+    end
+    ip_infos
+  end
+
+  def ip_infos
+    @ip_infos = {
+      :city => ip.city_name,
+      :lat => ip.lat,
+      :lon => ip.lon
+    }
   end
 
   def sortable(column, title = nil)  
@@ -32,11 +42,9 @@ module ApplicationHelper
   end
 
   def get_city_name ip
-    if ip.lat
-      cookies[:city] = ip.city_name
-      cookies[:lat] = ip.lat
-      cookies[:lon] = ip.lon
-    end
+    cookies[:city] = ip.city_name
+    cookies[:lat] = ip.lat
+    cookies[:lon] = ip.lon
   end
 
   def link_to_add_fields(name, f, association)
