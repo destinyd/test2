@@ -3,10 +3,10 @@ module ApplicationHelper
     super(a,b,c)
     unless cookies[:lat] and cookies[:lon]
       unless cookies[:city]
-        @geo = request.location
-        if @geo
-          @geo = Geocoder.search(@geo.city).first 
-          get_city_name @geo if @geo
+        ip = request.ip
+        @ip = Ip.where(:ip => ip).first_or_create
+        if @ip
+          get_city_name @ip if @ip
         end
       end
     end 
@@ -31,20 +31,11 @@ module ApplicationHelper
     !['home','sessions','registrations'].include? controller_name
   end
 
-  def get_city_name geo
-    if geo.nil?
-      city = City.find_by_name(params[:id])
-      if city
-        cookies[:lat] = city.lat
-        cookies[:lon] = city.lon
-        cookies[:city] = city.name
-      end
-    else
-      if geo
-        cookies[:lat] = geo.latitude
-        cookies[:lon] = geo.longitude
-        cookies[:city] = geo.city 
-      end
+  def get_city_name ip
+    if ip.lat
+      cookies[:city] = ip.name
+      cookies[:lat] = ip.lat
+      cookies[:lon] = ip.lon
     end
   end
 
@@ -55,7 +46,7 @@ module ApplicationHelper
     end
     link_to_function(name, h("add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")"))
   end
-  
+
   def base_target_blank
     content_for :head ,raw('<base target="_blank">')
   end
