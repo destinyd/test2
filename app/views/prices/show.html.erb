@@ -1,13 +1,13 @@
 <% content_for :title do -%>[<%= @price.type_id %>]<%= @price %> <% end -%>
 <% content_for :desc do -%>[<%= @price.type_id %>]<%= @price %> <% end -%>
 <% content_for :keywords do -%><%= @price.type_id %>,<% end -%>
-<% @where_name = @price.title %>
+<% @where_name = @price.name %>
 <% @where = @price %>
 <div id="price">
   <% cache "prices/show/#{@price.id}/#{@cache_id}" do %>
     <p>
-    <b><%= label :price,:title%>:</b>
-    <%= @price.title %>
+    <b><%= label :price,:name %>:</b>
+    <%= @price.name %>
     </p>
     <p>
     <b><%= label :price,:price%>:</b>
@@ -45,7 +45,7 @@
     <%= @price.desc if @price.user_id %>
     </p>
     <% unless @price.type_id != "团购价" or @price.uploads.first.nil? %>
-      <img src="<%=@price.uploads.first.image_file_name%>" alt="<%= @price.title %>" />
+      <img src="<%=@price.uploads.first.image_file_name%>" alt="<%= @price.name %>" />
     <% end %>
   <% end %>
   <%= render 'reviews/links',:reviewable => @price %>

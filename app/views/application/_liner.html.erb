@@ -6,9 +6,9 @@
       <%= link_to thing do %>
         <% if thing.uploads.first  %>
           <% if thing.uploads.first.image_file_name.scan(/http/).blank? %>
-            <img src='<%=thing.uploads.first.image.url %>' alt='<%= thing.title %>' />
+            <img src='<%=thing.uploads.first.image.url %>' alt='<%= thing %>' />
           <% else %>
-            <img src='<%=thing.uploads.first.image_file_name %>' alt='<%= thing.title %>'/>
+            <img src='<%=thing.uploads.first.image_file_name %>' alt='<%= thing %>'/>
           <% end %>
         <% else %>
           <img src='/images/nopic.gif' alt='nopic' />

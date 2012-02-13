@@ -12,7 +12,7 @@ class Price < ActiveRecord::Base
   #:if => :is_tuangou? #,:on => :create #限制 当创建的时候
 
   attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city
-  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:name,:desc,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city
+  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:name,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city
 
   has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   has_many :integrals, :as => :integralable, :dependent => :destroy
@@ -139,13 +139,17 @@ class Price < ActiveRecord::Base
   end
 
   def to_s
-    case self.type_id
-    when '团购价'
-      self.name
-    when '全国配送团购价'
-      self.name
+    if self.name
+      case self.type_id
+      when '团购价'
+        self.name
+      when '全国配送团购价'
+        self.name
+      else
+        "(#{human_price})#{self.name}"
+      end 
     else
-      "(#{human_price})#{self.name}"
+      ""
     end
   end
 
@@ -165,6 +169,10 @@ class Price < ActiveRecord::Base
 
   def name
     self.goods.first.try(:name)
+  end
+
+  def desc 
+    self.goods.first.try(:desc)
   end
 
   after_validation :locate_by_city
