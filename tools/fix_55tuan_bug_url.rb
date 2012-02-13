@@ -1,6 +1,12 @@
 sql = "delete from outlinks where url like 'http://www.55tuan.com/backUrlUTF8.do?%';"
 ActiveRecord::Base.connection.execute(sql)
 
+t = TuanUrl.find_by_name '窝窝团360'
+uri = URI.parse t.url
+gt = GetTuangou.new
+xml = gt.get_xml uri
+doc = gt.get_doc xml
+
 doc.find(t.docfind).each do |d|
   title = d.find('title').first.try(:content)
   url = d.find('goods_url').first.try(:content)
