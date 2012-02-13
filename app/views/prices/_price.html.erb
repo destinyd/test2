@@ -3,16 +3,16 @@
     <%= link_to price do %>
       <% if price.uploads.first  %>
         <% if price.uploads.first.image_file_name.scan(/http/).blank? %>
-          <img src='<%=price.uploads.first.image.url %>' alt='<%= price.title %>' />
+          <img src='<%=price.uploads.first.image.url %>' alt='<%= price.name %>' />
         <% else %>
-          <img src='<%=price.uploads.first.image_file_name %>' alt='<%= price.title %>'/>
+          <img src='<%=price.uploads.first.image_file_name %>' alt='<%= price.name %>'/>
         <% end %>
       <% else %>
         <img src='/images/nopic.gif' alt='nopic' />
       <% end -%>
     <% end %>
   </div>
-  <div class="detail">[<%= price.type_id %>] <%=link_to  price.title.block(150),price,:target => '_blank' %>
+  <div class="detail">[<%= price.type_id %>] <%=link_to  price.name.block(150),price,:target => '_blank' %>
     <br />
     价格：<%= price.human_price %>
     <% if price.address %><br />地址：<%= price.address %><% end %>

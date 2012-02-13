@@ -28,7 +28,7 @@
 <aside>
 <%= yield(:sidebar) %>
 <% cache "sidebar/prices/#{@cache_id}" do %>
-  <%= render 'section',:plus => {:things => Price.recent.group(:title).limit(10),:title=> "最新价格信息",:section_path => prices_path} %>
+  <%= render 'section',:plus => {:things => Price.recent.group(:good_id).limit(10),:title=> "最新价格信息",:section_path => prices_path} %>
   <%= render 'section',:plus => {:things => Price.you_like.limit(10),:title=> "猜你喜欢"} %>
 <% end %>
 <% cache "sidebar/articles/#{@cache_id}" do %>
