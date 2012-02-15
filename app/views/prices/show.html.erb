@@ -72,11 +72,11 @@
 
 <% content_for :sidebar do -%>
   <div id="goods">
-      <% @price.goods.each do |good| %>
-        <%= render 'prices/price_good',:good => good %>
-        <% end unless @price.goods.blank? %>
-      </div>
-    <div class="section" id='section_form_price_good'>
-      <%= render 'prices/price_good_form',:price => @price %>
-    </div>
-  <% end -%>
+    <% @price.goods.each do |good| %>
+      <%= render 'prices/price_good',:good => good %>
+    <% end %>
+  </div>
+  <div class="section" id='section_form_price_good'>
+    <%= render 'prices/price_good_form',:price => @price %>
+  </div>
+<% end -%>
