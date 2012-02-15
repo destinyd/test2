@@ -16,6 +16,9 @@ class Good < ActiveRecord::Base
   has_many :goods,:through => :package_goods,:source =>:package#,:foreign_key => :package_id
   has_many :packages,:through => :good_packages,:source =>:good,:foreign_key => :package_id
 
+  has_many :shop_goods,:dependent => :destroy
+  has_many :shops,:through => :shop_goods
+
   accepts_nested_attributes_for :outlinks
 
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
