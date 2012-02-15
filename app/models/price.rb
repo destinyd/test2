@@ -109,7 +109,7 @@ class Price < ActiveRecord::Base
   end
 
   def deal_cheap_price
-    create_alias_price 6,self.price if self.is_cheap_price
+    create_alias_price 6,self.price if self.is_cheap_price and [0,1].include? self.read_attribute(:type_id)
   end
 
   def deal_original_price
