@@ -97,7 +97,7 @@ function toggle_cheap_price(obj){
 }
 function onchange_type_id(obj){
   var val = parseInt($(obj).val());
-  if(val > 1 && val < 11)
+  if(val > 1)// && val < 11)
   {
     $('#span_is_cheap_price').hide();
     $('#div_original_price').hide();

@@ -10,12 +10,12 @@
       <% end %>
       <li>
       <% if diy_path.blank? %>
-        <%= link_to thing,thing %>
+        <%= link_to thing,thing,:target => '_blank' %>
       <% else %>
         <% if plus[:link_name] %>
-          <%= link_to thing.try(plus[:link_name]),diy_path %>
+          <%= link_to thing.try(plus[:link_name]),diy_path,:target => '_blank' %>
         <% else %>
-          <%= link_to thing,diy_path  %>
+          <%= link_to thing,diy_path,:target => '_blank'  %>
         <% end -%>
       <% end %>
       </li>

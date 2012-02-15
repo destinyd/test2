@@ -3,7 +3,7 @@
   <ul>
     <% plus[:things].each do |thing| %>
       <li>
-      <%= link_to thing do %>
+      <%= link_to thing,:target => '_blank' do %>
         <% if thing.uploads.first  %>
           <% if thing.uploads.first.image_file_name.scan(/http/).blank? %>
             <img src='<%=thing.uploads.first.image.url %>' alt='<%= thing.title %>' />
@@ -14,7 +14,7 @@
           <img src='/images/nopic.gif' alt='nopic' />
         <% end -%>
       <% end -%><br />
-      <%= link_to thing.to_s.block(50),thing %>
+      <%= link_to thing.to_s.block(50),thing,:target => '_blank' %>
       </li>
     <% end %>
   </ul>
