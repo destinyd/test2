@@ -71,6 +71,8 @@
 <% end -%>
 
 <% content_for :sidebar do -%>
+  <div id="google_map">
+  </div>
   <div id="goods">
     <% @price.goods.each do |good| %>
       <%= render 'prices/price_good',:good => good %>

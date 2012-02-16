@@ -195,7 +195,8 @@ zh-CN:
       price_good: "商品绑定"
     attributes:
       price:
-        price: 价格
+        price: 单价
+        total: 总价
 
   attributes:
     created_at: '创建于'

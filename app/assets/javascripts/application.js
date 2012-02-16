@@ -109,3 +109,20 @@ function onchange_type_id(obj){
     $('#span_is_cheap_price').show();
   }
 }
+function price_on_blur(){
+  var price = parseFloat($('#price_price').val());
+  var amount = parseFloat($('#price_amount').val());
+  var total = parseFloat($('#price_total').val());
+  if(isNaN(price) && amount && total)
+  {
+    $('#price_price').val(total / amount);
+  }
+  if(price && isNaN(amount) && total)
+  {
+    $('#price_amount').val(total / price);
+  }
+  if(price  && amount && isNaN(total))
+  {
+    $('#price_total').val(price * amount);
+  }
+}
