@@ -11,8 +11,8 @@ class Price < ActiveRecord::Base
   ##] } ,
   #:if => :is_tuangou? #,:on => :create #限制 当创建的时候
 
-  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city
-  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:name,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city
+  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city,:title
+  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:name,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city,:title
 
   has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   has_many :integrals, :as => :integralable, :dependent => :destroy
@@ -81,13 +81,13 @@ class Price < ActiveRecord::Base
   end
 
   def human_amount
-    return '不限量' if self.amount.nil?
-    self.amount 
+    return '不限量' if amount.nil?
+    amount 
   end
 
   def human_finish_at
-    return '不限时' if self.finish_at.nil?
-    self.finish_at
+    return '不限时' if finish_at.nil?
+    finish_at
   end
 
   def self.types
@@ -99,54 +99,53 @@ class Price < ActiveRecord::Base
   end
 
   def valid
-    return if self.is_valid
-    self.update_attribute(:is_valid, true)
-    self.user.get_point(1,self,1) if self.user_id
+    return if is_valid
+    update_attribute(:is_valid, true)
+    user.get_point(1,self,1) if user_id
   end
 
   def exp
-    self.user.get_point(1,self) if self.user_id
+    user.get_point(1,self) if user_id
   end
 
   def deal_cheap_price
-    create_alias_price 6,self.price if self.is_cheap_price and [0,1].include? self.read_attribute(:type_id)
+    create_alias_price 6,price if is_cheap_price and is_cheap_price != "0"
   end
 
   def deal_original_price
-    create_alias_price 7,self.original_price unless self.original_price.blank?
+    create_alias_price 7,original_price unless is_cheap_price and is_cheap_price != "0"
   end
 
   def create_alias_price type_id,price
-    p = Price.new :name => self.name,
+    p = Price.new :title => title,
       :type_id => type_id,
       :price => price,
-      :address => self.address,
-      :latitude => self.latitude,
-      :longitude => self.longitude,
-      :desc => self.desc,
-      :amount => self.amount
-    self.outlinks.each do |outlink|
+      :address => address,
+      :latitude => latitude,
+      :longitude => longitude,
+      :amount => amount
+    outlinks.each do |outlink|
       o = Outlink.new :url => outlink.url
       o.user_id = outlink.user_id
       p.outlinks << o
     end
-    p.user_id = self.user_id
+    p.user_id = user_id
     p.save
   end
 
   def near_prices long = 20
-    @nears = self.nearbys(long).running.limit(10)
+    @nears = nearbys(long).running.limit(10)
   end
 
   def to_s
-    if self.name
-      case self.type_id
+    if name
+      case type_id
       when '团购价'
-        self.name
+        name
       when '全国配送团购价'
-        self.name
+        name
       else
-        "(#{human_price})#{self.name}"
+        "(#{human_price})#{name}"
       end 
     else
       ""
@@ -154,25 +153,25 @@ class Price < ActiveRecord::Base
   end
 
   def could_post_good? user
-    user and !self.goods.map(&:user_id).include?(user.id)
+    user and !goods.map(&:user_id).include?(user.id)
   end
 
   def is_tuangou?
-    [21,22].include? self.read_attribute(:type_id)
+    [21,22].include? read_attribute(:type_id)
   end
 
   def outlink_user
-    self.outlinks.each do |outlink|
-      outlink.user_id = self.user_id
+    outlinks.each do |outlink|
+      outlink.user_id = user_id
     end
   end
 
   def name
-    self.goods.first.try(:name)
+    goods.first.try(:name)
   end
 
   def desc 
-    self.goods.first.try(:desc)
+    goods.first.try(:desc)
   end
 
   after_validation :locate_by_city
@@ -182,7 +181,7 @@ class Price < ActiveRecord::Base
   #before_create :valid_singleton_for_tuan
   before_create :outlink_user
   before_save  :valid_good
-  after_create :exp,:deal_cheap_price,:deal_original_price
+  after_create :exp,:deal_cheap_price,:deal_original_price,:deal_good
   private
   def locate_by_city
     if self.user_id.nil? and self.no_locate? and ! self.city.blank?
@@ -207,6 +206,10 @@ class Price < ActiveRecord::Base
         self.goods << self.goods.new(:name => self.good_name,:user_id => self.good_user_id) 
       end
     end
+  end
+
+  def deal_good
+    goods << Good.where(:name => title).first_or_create
   end
 
   #def valid_singleton_for_tuan
