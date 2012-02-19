@@ -1,0 +1,8 @@
+<p>
+<% @shops.each do |shop| %>
+  <%= link_to shop,shop %>
+<% end %>
+</p>
+<p>
+<%= link_to t('labels.new'),new_shop_path %>
+</p>

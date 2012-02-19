@@ -1,11 +1,12 @@
+<% upload = price.good.try(:uploads).try(:first) %>
 <div class="price c" data-time="<%= price.created_at.to_i %>">  
   <div class="l">
     <%= link_to price do %>
-      <% if price.uploads.first  %>
-        <% if price.uploads.first.image_file_name.scan(/http/).blank? %>
-          <img src='<%=price.uploads.first.image.url %>' alt='<%= price.name %>' />
+      <% if upload  %>
+        <% if upload.image_file_name.scan(/http/).blank? %>
+          <img src='<%=upload.image.url %>' alt='<%= price.name %>' />
         <% else %>
-          <img src='<%=price.uploads.first.image_file_name %>' alt='<%= price.name %>'/>
+          <img src='<%=upload.image_file_name %>' alt='<%= price.name %>'/>
         <% end %>
       <% else %>
         <img src='/images/nopic.gif' alt='nopic' />

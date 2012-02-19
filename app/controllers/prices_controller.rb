@@ -5,7 +5,7 @@ class PricesController < ApplicationController
   #caches_action :index, :show
   #cache_sweeper :price_sweeper,:only => [:index,:show]
   def index
-    @prices = @prices.paginate( :page => params[:page])
+    @prices = @prices.includes(:good).paginate( :page => params[:page])
   end
 
   def show
@@ -48,27 +48,27 @@ class PricesController < ApplicationController
   end
 
   def cheapest
-    @prices = @prices.paginate( :page => params[:page])
+    @prices = @prices.includes(:good).paginate( :page => params[:page])
     render :action => "index"
   end
 
   def groupbuy
-    @prices = @prices.paginate( :page => params[:page])
+    @prices = @prices.includes(:good).paginate( :page => params[:page])
     render :action => "index"
   end
 
   def costs
-    @prices = @prices.paginate( :page => params[:page])
+    @prices = @prices.includes(:good).paginate( :page => params[:page])
     render :action => "index"
   end
 
   def just_started
-    @prices = @prices.paginate( :page => params[:page])
+    @prices = @prices.includes(:good).paginate( :page => params[:page])
     render :action => "index"
   end
 
   def nearly_finish
-    @prices = @prices.paginate( :page => params[:page])
+    @prices = @prices.includes(:good).paginate( :page => params[:page])
     render :action => "index"
   end
 
@@ -91,11 +91,11 @@ class PricesController < ApplicationController
       @prices = @prices.send action_name if ['cheapest','groupbuy','costs','just_started','nearly_finish'].include? action_name
       @prices = @prices.recent if action_name == 'index'
       @prices = @prices.near(value,20) if $1 == 'city' or $1 == 'locate'
-      return @prices = @prices.with_uploads
+      return @prices = @prices.includes(:good)#with_uploads
       end  
     end  
     @prices = Price.send action_name if ['cheapest','groupbuy','costs','just_started','nearly_finish'].include? action_name
     @prices = Price.recent if action_name == 'index'
-    @prices = @prices.with_uploads
+    @prices = @prices.includes(:good)#.with_uploads
   end
 end

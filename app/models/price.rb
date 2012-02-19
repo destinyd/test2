@@ -21,6 +21,7 @@ class Price < ActiveRecord::Base
 
   has_many :price_goods, :dependent => :destroy
   has_many :goods, :through => :price_goods
+  belongs_to :good
   accepts_nested_attributes_for :goods
   accepts_nested_attributes_for :uploads
   accepts_nested_attributes_for :outlinks, :reject_if => lambda { |outlink| outlink[:url].blank? }, :allow_destroy => true

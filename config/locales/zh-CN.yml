@@ -271,6 +271,7 @@ zh-CN:
     attrs: 属性
     outlinks: 外链
     price_goods: "商品绑定"
+    shops: 商店
   action:
     prices:
       new: '记账'
