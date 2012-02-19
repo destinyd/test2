@@ -9,8 +9,11 @@ class Shop < ActiveRecord::Base
   def no_locate?
     self.lat.nil? or self.lon.nil?
   end
+<<<<<<< HEAD
 
   def to_s
     name
   end
+=======
+>>>>>>> ca2097107999e2fbf347d86a608174815640e84a
 end

@@ -5,8 +5,8 @@
       <% thing =  eval("thing.#{plus[:plusable]}") if plus[:plusable] -%>
       <% diy_path =  eval("#{plus[:link_path]}(thing.#{plus[:link_name]})") if plus[:link_name] -%>
       <li>
-      <% if diy_path.blank? %>
-        <%= link_to thing,thing,:target => '_blank' %>
+      <% if diy_path.blank? -%>
+        <%= link_to thing,thing,:target => '_blank' -%>
       <% else -%>
         <%= link_to thing.try(plus[:link_name]),diy_path,:target => '_blank' if plus[:link_name] -%>
         <%= link_to thing,diy_path,:target => '_blank' unless plus[:link_name] -%>
