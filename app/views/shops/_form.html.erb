@@ -9,8 +9,9 @@
 <%= simple_form_for @shop do |f| -%>
   <%= f.input :name %>
   <%= f.input :desc %>
-  <%= f.input :address,:id => 'form_address' %>
-  <%= f.input :lat , :as => :hidden,:id => 'form_lat' %>
-  <%= f.input :lon , :as => :hidden,:id => 'form_lon' %>
+  <%= f.input :address,:input_html => {:id => 'form_address'} %>
+  <%= f.input :lat , :as => :hidden,:input_html => {:id => 'form_lat'} %>
+  <%= f.input :lon , :as => :hidden,:input_html => {:id => 'form_lon'} %>
+  <%= f.submit %>
 <% end -%>
 

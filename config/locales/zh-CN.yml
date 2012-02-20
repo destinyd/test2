@@ -193,6 +193,7 @@ zh-CN:
       attr: 属性
       outlink: 外链
       price_good: "商品绑定"
+      shop: 商店
     attributes:
       price:
         price: 单价

@@ -18,28 +18,30 @@
 <b>标签:</b>
 <%= good.tag_list %>
 </p>
-<% if !good.uploads.blank? %>
-
-  <img srt="good.uploads.first.image.url" alt="<%= good.name %>" />
+<% upload = good.try(:uploads).try(:first) %>
+<% if upload.image_file_name.scan(/http/).blank? %>
+  <img src="<%= upload.image.url %>" alt="<%= good.name %>" />
+<% else %>
+  <img src="<%= upload.image_file_name %>" alt="<%= good.name %>" />
 <% end %>
 </div>
 
 <% @commentable = good %>
 <div class="goods_div_<%=good.id%> h" id="product_images_<%= good.id -%>">
-<%= render  'uploads/uploads',:commentable  => good,:uploads => good.uploads %>
-</div>
+  <%= render  'uploads/uploads',:commentable  => good,:uploads => good.uploads %>
+  </div>
 
-<div class="goods_div_<%=good.id%> h" id="product_attrs_<%= good.id -%>">
-<div id='attrs'>
-</div>
-<%= link_to '新建',new_good_attr_path(good),:remote => true %>
-</div>
+  <div class="goods_div_<%=good.id%> h" id="product_attrs_<%= good.id -%>">
+  <div id='attrs'>
+  </div>
+  <%= link_to '新建',new_good_attr_path(good),:remote => true %>
+  </div>
 
-<div class="product_links goods_div_<%=good.id%> h" id="product_links_<%= good.id -%>">
-<ul id='links'%>
-  <%= render good.outlinks %>
-</ul>
-<%= link_to '新建',new_good_outlink_path(good),:remote => true %>
+  <div class="product_links goods_div_<%=good.id%> h" id="product_links_<%= good.id -%>">
+  <ul id='links'%>
+    <%= render good.outlinks %>
+  </ul>
+  <%= link_to '新建',new_good_outlink_path(good),:remote => true %>
 </div>
 
 <p>

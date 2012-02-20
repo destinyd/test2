@@ -188,3 +188,18 @@ function form_map_init(){
         infowindow.open(map, marker);
       });
 }
+    function show_map_init() {
+      var mapOptions = {
+        center: new google.maps.LatLng(lat, lon),
+        zoom: 17,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById('google_map'), mapOptions);
+
+      var infowindow = new google.maps.InfoWindow();
+      var marker = new google.maps.Marker({
+        map: map
+      });
+      marker.setPosition(new google.maps.LatLng(lat, lon));
+
+    }
