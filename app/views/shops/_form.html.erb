@@ -1,0 +1,16 @@
+<% content_for :head do -%>
+  <script src="http://maps.google.com/maps/api/js?sensor=false&libraries=places" type="text/javascript"></script>
+  <script>
+    lat = <%= cookies[:lat].blank? ? (@shop.try(:lat) || 39.9042) : (@shop.try(:lat) || cookies[:lat] || 39.9042) %>;
+    lon = <%= cookies[:lon].blank? ? (@shop.try(:lon) || 116.407) : (@shop.try(:lon) || cookies[:lon] || 116.407) %>;
+    google.maps.event.addDomListener(window, 'load',form_map_init );
+  </script>
+<% end -%>
+<%= simple_form_for @shop do |f| -%>
+  <%= f.input :name %>
+  <%= f.input :desc %>
+  <%= f.input :address,:id => 'form_address' %>
+  <%= f.input :lat , :as => :hidden,:id => 'form_lat' %>
+  <%= f.input :lon , :as => :hidden,:id => 'form_lon' %>
+<% end -%>
+
