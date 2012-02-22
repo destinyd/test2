@@ -1,4 +1,14 @@
 Zhekou::Application.routes.draw do
+
+  namespace :userhome do
+    resources :homes
+    resources :prices
+    resources :shops
+    root :to => "homes#index"
+    match 'costs' => 'homes#costs'
+    match 'integrals' => 'homes#integrals'
+  end
+
   resources :shops
   match 'sitemap.xml' => 'sitemaps#sitemap'
 
@@ -52,12 +62,6 @@ Zhekou::Application.routes.draw do
     resources :reviews
   end
 
-  resources :userhomes do
-    collection do
-      get :costs
-      get :integrals
-    end
-  end
   resources :flashes
 
   resources :articles do

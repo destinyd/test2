@@ -16,7 +16,7 @@
   <% cache "prices/show/#{@price.id}/#{@cache_id}" do %>
     <p>
     <b><%= label :price,:name %>:</b>
-    <%= link_to @price.name,@price.good %>
+    <%= @price.name %>
     </p>
     <p>
     <b><%= label :price,:price%>:</b>
@@ -91,5 +91,8 @@
     <% @price.goods.each do |good| %>
       <%= render 'prices/price_good',:good => good %>
     <% end %>
+  </div>
+  <div class="section" id='section_form_price_good'>
+    <%= render 'prices/price_good_form',:price => @price %>
   </div>
 <% end -%>

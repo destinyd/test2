@@ -8,22 +8,27 @@
 <b>名称:</b>
 <%= good.name %>
 </p>
-
+<% if good.desc %>
 <p>
 <b>描述:</b>
 <%= good.desc %>
 </p>
+<% end %>
 
+<% if good.tag_list %>
 <p>
 <b>标签:</b>
-<%= good.tag_list %>
+<% good.tags.each do |tag| %>
+  <%= link_to tag,tag_good_path(tag.name) -%>
+<% end -%>
 </p>
+<% end %>
 <% upload = good.try(:uploads).try(:first) %>
 <% if upload.image_file_name.scan(/http/).blank? %>
   <img src="<%= upload.image.url %>" alt="<%= good.name %>" />
 <% else %>
   <img src="<%= upload.image_file_name %>" alt="<%= good.name %>" />
-<% end %>
+<% end if upload %>
 </div>
 
 <% @commentable = good %>

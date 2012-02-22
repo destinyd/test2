@@ -2,15 +2,8 @@
 class Price < ActiveRecord::Base
   STATUS_LOW = 5
   belongs_to :user
-#  belongs_to :good
   validates :type_id, :presence => true
   validates :price, :presence => true
-  #validates :title, :presence => true
-  
-  #validates :title, :uniqueness =>true,# { :scope => [:finish_at,:address,#:price 不知道为什么 falut
-  ##] } ,
-  #:if => :is_tuangou? #,:on => :create #限制 当创建的时候
-
   attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city,:title
   attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:name,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city,:title
 
@@ -40,14 +33,10 @@ class Price < ActiveRecord::Base
   scope :not_finish,where("finish_at > ?",Time.now)
   scope :just_started,not_finish.order("id desc")
   scope :nearly_finish,not_finish.order(:finish_at)
-  scope :costs,recent.where(:type_id=>[0,1])#.includes(:reviews)
-  #scope :nearest,running.near_prices
-  scope :with_uploads,includes(:uploads)
+ scope :costs,recent.where(:type_id=>[0,1])  
+ scope :with_uploads,includes(:uploads)
 
-  scope :you_like,running.order('rand()')#.includes(:reviews)
-
-  #type [0:userlocal1day 1:userurl1day 2:团购 3:拍卖 10:商家普价 11:上架优惠 12:商家限量]
-
+  scope :you_like,running.order('rand()')
   TYPE = {
   0=>'消费',
   1=>'网上消费',
@@ -177,11 +166,8 @@ class Price < ActiveRecord::Base
 
   after_validation :locate_by_city
   before_create :geocode, :if => [:no_locate?,:address_changed?]#,:on =>:create
-  before_update :geocode, :if => :address_changed?#,:on =>:create
-  #after_validation :geocode, :if => :address_changed?,:on =>:update
-  #before_create :valid_singleton_for_tuan
+  before_update :geocode, :if => :address_changed?
   before_create :outlink_user
-  before_save  :valid_good
   after_create :exp,:deal_cheap_price,:deal_original_price,:deal_good
   private
   def locate_by_city
@@ -193,32 +179,11 @@ class Price < ActiveRecord::Base
     end
   end
 
-  def valid_good
-    if self.good_name
-      good = Good.where(:name => self.good_name).first
-      if good
-        if self.goods.include? good
-          self.errors.add(:goods,"has_post") 
-          return false
-        else
-          self.goods <<  good
-        end
-      else
-        self.goods << self.goods.new(:name => self.good_name,:user_id => self.good_user_id) 
-      end
-    end
-  end
-
   def deal_good
-    goods << Good.where(:name => title).first_or_create
+    tmp = Good.where(:name => title).first_or_create
+    goods << tmp
+    good_id = tmp.id unless good_id
+    save if changed?
   end
-
-  #def valid_singleton_for_tuan
-  #if self.type_id == '团购价'
-  #links = Outlink.where(:url => self.outlinks.map(&:url))
-  #self.errors.add(:url,'has') unless links.blank?
-  #end
-  #end
-
 
 end

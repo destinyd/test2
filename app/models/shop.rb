@@ -3,6 +3,7 @@ class Shop < ActiveRecord::Base
   validates :address, :presence => true
   has_many :shop_goods,:dependent => :destroy
   has_many :goods,:through => :shop_goods
+  belongs_to :user
   geocoded_by :address, :latitude  => :lat, :longitude => :lon
   after_validation :geocode, :if => [:no_locate?,:address_changed?]#,:on =>:create
 
