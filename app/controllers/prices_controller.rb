@@ -10,8 +10,6 @@ class PricesController < ApplicationController
 
   def show
     @price = @prices.find(params[:id])
-    @commentable = @price
-    @reviewable = @price
   end
 
   def new

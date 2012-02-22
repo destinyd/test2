@@ -1,0 +1,12 @@
+<% if near_prices %>
+  <div class="section" style="width:95%;float:none">
+    <h3>附近特价商品信息</h3>
+    <ul>
+      <% near_prices.each do |price| %>
+        <li>
+        <%=link_to(price,price)%><%= price.address %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

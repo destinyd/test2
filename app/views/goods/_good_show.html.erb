@@ -8,10 +8,11 @@
 <b>名称:</b>
 <%= good.name %>
 </p>
-<% if good.desc %>
+<% unless good.desc.blank? %>
 <p>
 <b>描述:</b>
-<%= good.desc %>
+<%= raw good.desc unless good.user_id %>
+<%= good.desc if good.user_id %>
 </p>
 <% end %>
 
@@ -31,9 +32,8 @@
 <% end if upload %>
 </div>
 
-<% @commentable = good %>
 <div class="goods_div_<%=good.id%> h" id="product_images_<%= good.id -%>">
-  <%= render  'uploads/uploads',:commentable  => good,:uploads => good.uploads %>
+  <%= render  'uploads/uploads',:uploadable  => good,:uploads => good.uploads %>
   </div>
 
   <div class="goods_div_<%=good.id%> h" id="product_attrs_<%= good.id -%>">
@@ -51,7 +51,6 @@
 
 <p>
 <%= button_to '关注',good_focus_path(good),:remote => true %>
-<% @reviewable = good %>
 <%= render 'reviews/links',:reviewable => good %>
 </p>
 

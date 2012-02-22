@@ -27,8 +27,6 @@ class GoodsController < ApplicationController
     @uploads  = @good.uploads
     @links  = @good.outlinks
     
-    @commentable = @good
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @good }

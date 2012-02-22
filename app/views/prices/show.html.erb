@@ -63,20 +63,9 @@
 
 <% content_for :plus do -%>
   <% cache "prices/show/near_prices/#{@price.address[0,15]}/#{@cache_id}" do %>
-    <% if @price.near_prices %>
-      <div class="section" style="width:95%;float:none">
-        <h3>附近价格</h3>
-        <ul>
-          <% @price.near_prices.each do |price| %>
-            <li><%#= price.type_id != "团购价" ? %>
-            <%=link_to(price,price)%><%= price.address %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <% end if @price.address and @price.latitude %>
-  <%= render 'comments/comments' %>
+    <%= render 'near_prices',:near_prices => @price.near_prices.groupbuy %>
+    <% end unless @price.no_locate? %>
+    <%= render 'comments/comments',:commentable => @price %>
 <% end -%>
 
 <% content_for :sidebar do -%>

@@ -11,6 +11,7 @@
         <%= link_to thing.try(plus[:link_name]),diy_path,:target => '_blank' if plus[:link_name] -%>
         <%= link_to thing,diy_path,:target => '_blank' unless plus[:link_name] -%>
       <% end -%>
+      <%= eval("thing.#{plus[:plus_text]}") if plus[:plus_text] -%>
       </li>
     <% end -%>
   </ul>

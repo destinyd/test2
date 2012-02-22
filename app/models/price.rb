@@ -127,6 +127,10 @@ class Price < ActiveRecord::Base
     @nears = nearbys(long).running.limit(10)
   end
 
+  def self.near_prices coordinates,long = 20
+    Price.near(coordinates,long).running.limit(10)
+  end
+
   def to_s
     if name
       case type_id

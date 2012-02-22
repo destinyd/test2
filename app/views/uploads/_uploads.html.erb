@@ -1,5 +1,5 @@
 <%  uploads.each do |upload| %>
-  <%= link_to [@commentable,upload] do%>
+  <%= link_to [uploadable,upload] do%>
 <%= image_tag(upload.image.url) %>
 <%  end %>
 <% end %><br />
