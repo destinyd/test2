@@ -48,11 +48,6 @@
       <%= link_to @price.outlinks.first.url,@price.outlinks.first.url ,:rel=>"nofollow",:target => '_blank'%>
     <% end -%>
 
-    <p>
-    <b><%= label :price,:desc%>:</b>
-    <%= raw @price.desc unless @price.user_id %>
-    <%= @price.desc if @price.user_id %>
-    </p>
     <% unless @price.type_id != "团购价" or @price.uploads.first.nil? %>
       <img src="<%=@price.uploads.first.image_file_name%>" alt="<%= @price.name %>" />
     <% end %>
