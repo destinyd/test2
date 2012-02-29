@@ -77,8 +77,6 @@
     </div>
   <% end %>
   <div id="goods">
-    <% @price.goods.each do |good| %>
-      <%= render 'prices/price_good',:good => good %>
-    <% end %>
+    <%= render 'prices/price_good',:good => @price.good %>
   </div>
 <% end -%>

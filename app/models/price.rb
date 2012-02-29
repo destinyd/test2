@@ -12,10 +12,9 @@ class Price < ActiveRecord::Base
   has_many :reviews, :as => :reviewable, :dependent => :destroy
   has_many :uploads, :as => :uploadable, :dependent => :destroy
 
-  has_many :price_goods, :dependent => :destroy
-  has_many :goods, :through => :price_goods
   belongs_to :good
-  accepts_nested_attributes_for :goods
+  belongs_to :good
+  accepts_nested_attributes_for :good
   accepts_nested_attributes_for :uploads
   accepts_nested_attributes_for :outlinks, :reject_if => lambda { |outlink| outlink[:url].blank? }, :allow_destroy => true
 
@@ -161,11 +160,11 @@ class Price < ActiveRecord::Base
   end
 
   def name
-    goods.first.try(:name)
+    good.name
   end
 
   def desc 
-    goods.first.try(:desc)
+    good.desc
   end
 
   after_validation :locate_by_city

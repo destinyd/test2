@@ -4,7 +4,7 @@
     <% plus[:things].each do |thing| %>
       <li>
       <%= link_to thing,:target => '_blank' do %>
-        <% upload =  thing.goods.first.uploads.first %>
+        <% upload =  thing.good.uploads.first %>
         <% if upload  %>
           <% if upload.image_file_name.scan(/http/).blank? %>
             <img src='<%=upload.image.url %>' alt='<%= thing %>' />
