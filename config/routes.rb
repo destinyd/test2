@@ -34,6 +34,7 @@ Zhekou::Application.routes.draw do
         get :nearly_finish
       end
     end
+    resources :shops
   end
 
 
