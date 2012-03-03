@@ -1,5 +1,5 @@
 class PricesController < ApplicationController
-  before_filter :authenticate_user!,:only =>[:new,:create,:update,:edit]
+  before_filter :authenticate_user!,:only =>[:new,:create,:update,:edit,:buy_one]
   before_filter :find_able_and_prices, :except => [:update,:create,:new,:edit,:destroy]
   respond_to :html,:js
   #caches_action :index, :show
@@ -68,6 +68,18 @@ class PricesController < ApplicationController
   def nearly_finish
     @prices = @prices.includes(:good).paginate( :page => params[:page])
     render :action => "index"
+  end
+
+  def buy_one
+    price = Price.find(params[:id])
+    @price = current_user.prices.new :type_id => 0,
+      :price => price.price,
+      :address => price.address,
+      :latitude => price.latitude,
+      :longitude => price.longitude
+    @price.good_id = price.good_id
+    @price.save
+    redirect_to @price
   end
 
   private

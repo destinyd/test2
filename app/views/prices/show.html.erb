@@ -52,6 +52,11 @@
       <img src="<%=@price.uploads.first.image_file_name%>" alt="<%= @price.name %>" />
     <% end %>
   <% end %>
+
+    <br />
+    <br />
+
+    <%= link_to '我也这价在这买了一件！',buy_one_price_path(@price) %>
   <%= render 'reviews/links',:reviewable => @price %>
   <div class="c"></div>
 </div>
@@ -71,7 +76,9 @@
       </div>
     </div>
   <% end %>
-  <div id="goods">
-    <%= render 'prices/price_good',:good => @price.good %>
-  </div>
+<% cache "sidebar_prices_#{@cache_id}" do %>
+  <%#= render 'section',:plus => {:things => @price.near_prices.where(:good_id=>@price.good_id).recent,:title=> "本产品周边最新价格",:section_path => prices_path} %>
+  <%= render 'section',:plus => {:things => @price.near_prices.where(:good_id=>@price.good_id).cheapest,:title=> "本产品周边最低价格"} %>
+  <%= render 'section',:plus => {:things => @price.good.prices.cheapest,:title=> "本产品全国最低价格"} %>
+<% end %>
 <% end -%>

@@ -1,7 +1,5 @@
 <div id='sign_in'>
-  <h3><%= t 'labels.sign_in' %></h3>
-
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:remote => true) do |f| %>
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:remote => @is_remote || false ) do |f| %>
     <p><%= f.label :email %><br />
     <%= f.email_field :email %></p>
 

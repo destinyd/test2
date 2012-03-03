@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  desc: MyText
+  user_id: 1
+  is_valid: false
+  company_id: 1
+
+two:
+  name: MyString
+  desc: MyText
+  user_id: 1
+  is_valid: false
+  company_id: 1

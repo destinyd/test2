@@ -57,6 +57,9 @@ Zhekou::Application.routes.draw do
       get :just_started
       get :nearly_finish
     end
+    member do
+      get :buy_one
+    end
   end
   resources :reviews
   resources :attrs,:only => [:new] do
