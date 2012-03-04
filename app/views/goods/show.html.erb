@@ -23,18 +23,22 @@
       <% if min %><li>月内最低价为：<%= link_to min.price,min   %>元 <strong><%= link_to "价格链接",min   %></strong></li><% end %>
     </ul>
   </div> 
-  <%= render 'section',:plus => {:things => @good.prices.running.recent.limit(10),:title=> "该商品最新价格",:section_path => good_prices_path(@good),:plus_text => "address" } %>
   <%# @good alias or tag %>
     <% end unless cookies[:lat].blank? %>
+    <%= render 'section',:plus => {:things => @good.find_related_tags,:title=> "相关商品",:not_count => true} %>
   <%= render 'comments/comments',:commentable => @good %>
 <% end -%>
 <% content_for :sidebar do -%>
-  <div id="prices" class="section" style="width:95%">
+  <%= render 'section',:plus => {:things => @good.packages,:title=> "本商品组合包"} %>
+  <%= render 'section',:plus => {:things => @good.goods,:title=> "本组合包包含商品"} %>
+  <%= render 'section',:plus => {:things => @good.prices.recent,:title=> "本商品最新价格"} %>
+  <%= render 'section',:plus => {:things => @good.prices.cheapest,:title=> "本商品最低价格"} %>
+<!--  <div id="prices" class="section" style="width:95%">
   <h3>您也消费过？</h3>  
   <div>
     <%# price = @good.prices.new; price.good_id = @good.id; price.title = @good.name %>
     <%#= render 'prices/form',:price => price %>  
   </div>
-</div>
+</div>-->
   <%#= render 'prices/prices' %>
 <% end -%>
