@@ -194,6 +194,7 @@ zh-CN:
       outlink: 外链
       price_good: "商品绑定"
       shop: 商店
+      brand: 品牌
     attributes:
       price:
         price: 单价
@@ -273,6 +274,7 @@ zh-CN:
     outlinks: 外链
     price_goods: "商品绑定"
     shops: 商店
+    brands: 品牌
   action:
     prices:
       new: '记账'
@@ -282,6 +284,10 @@ zh-CN:
       index: '最新'
       just_started: '刚刚开始'
       nearly_finish: '即将结束'
+    brands:
+      new: '添加'
+    shops:
+      new: '添加'
     goods:
       new: '添加'
     articles:

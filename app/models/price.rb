@@ -13,7 +13,7 @@ class Price < ActiveRecord::Base
   has_many :uploads, :as => :uploadable, :dependent => :destroy
 
   belongs_to :good
-  belongs_to :good
+  belongs_to :brand
   accepts_nested_attributes_for :good
   accepts_nested_attributes_for :uploads
   accepts_nested_attributes_for :outlinks, :reject_if => lambda { |outlink| outlink[:url].blank? }, :allow_destroy => true
@@ -100,7 +100,7 @@ class Price < ActiveRecord::Base
   end
 
   def deal_cheap_price
-    create_alias_price 6,price if is_cheap_price and is_cheap_price != "0"
+    create_alias_price 6,price if !is_cheap_price.blank? and is_cheap_price != "0"
   end
 
   def deal_original_price

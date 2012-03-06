@@ -1,4 +1,4 @@
 class BrandGood < ActiveRecord::Base
-  belongs :brand
-  belongs :good
+  belongs_to :brand
+  belongs_to :good
 end

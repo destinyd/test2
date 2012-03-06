@@ -1,4 +1,5 @@
 Zhekou::Application.routes.draw do
+  resources :brands
 
   namespace :userhome do
     resources :homes
