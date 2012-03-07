@@ -1,0 +1,21 @@
+<h1>Listing userhome_costs</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @costs.each do |userhome_cost| %>
+  <tr>
+    <td><%= link_to 'Show', userhome_cost %></td>
+    <td><%= link_to 'Edit', edit_userhome_cost_path(userhome_cost) %></td>
+    <td><%= link_to 'Destroy', userhome_cost, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Cost', new_userhome_cost_path %>

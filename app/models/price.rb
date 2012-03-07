@@ -12,6 +12,8 @@ class Price < ActiveRecord::Base
   has_many :reviews, :as => :reviewable, :dependent => :destroy
   has_many :uploads, :as => :uploadable, :dependent => :destroy
 
+  has_many :costs
+
   belongs_to :good
   belongs_to :brand
   accepts_nested_attributes_for :good

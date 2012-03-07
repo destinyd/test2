@@ -1,0 +1,2 @@
+module Userhome::CostsHelper
+end

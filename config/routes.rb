@@ -1,12 +1,14 @@
 Zhekou::Application.routes.draw do
+  resources :costs
   resources :brands
 
   namespace :userhome do
     resources :homes
     resources :prices
     resources :shops
+    resources :costs
     root :to => "homes#index"
-    match 'costs' => 'homes#costs'
+    #match 'costs' => 'homes#costs'
     match 'integrals' => 'homes#integrals'
   end
 
