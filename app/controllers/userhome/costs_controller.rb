@@ -1,2 +1,2 @@
-class Userhome::CostsController < InheritedResources::Base
+class Userhome::CostsController < UserhomeController
 end

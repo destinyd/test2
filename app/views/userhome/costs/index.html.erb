@@ -1,21 +1,33 @@
-<h1>Listing userhome_costs</h1>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @costs.each do |userhome_cost| %>
-  <tr>
-    <td><%= link_to 'Show', userhome_cost %></td>
-    <td><%= link_to 'Edit', edit_userhome_cost_path(userhome_cost) %></td>
-    <td><%= link_to 'Destroy', userhome_cost, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% @count = 0 %>
+<%  if @cost_months = collection.group_by{|a| a.created_at.beginning_of_month} %>
+<% @cost_months.sort.each do |month,costs| %>
+  <% month_count = 0 %>
+  <%= content_tag :div,:class => 'month' do %>
+    <%= month.strftime('%Y-%m') %>
+  <% end %>
+  <% costs.each do |cost| %>
+    <%= content_tag :div,:class => 'price_cost' do %>
+      <% cost_one = cost.price.price * (cost.price.amount || 1) ;@count = @count+cost_one;month_count = month_count + cost_one %>
+      <%= content_tag :div,:class => 'time' do %>
+        <%=cost.created_at.strftime('%d日%H:%M') %>
+      <% end %>
+      <%= content_tag :div,:class => 'title' do %>
+        <%=link_to cost.price.name,cost %>
+      <% end %>
+      <%= content_tag :div,:class => 'price' do %>
+        <span style="color:red"><%= cost.price.price %>*<%= cost.price.amount || 1 %></span>元
+      <% end %>
+      <div class='clearer'></div>
+    <% end %>
+  <% end %>
+  <%= content_tag :div,:class => 'r' do %>
+    <%= month.strftime('%Y年%m月')  %> <%= costs.length %>笔消费，总共花费<span style="color:red"><%= month_count %></span>元
+  <% end %>
+  <div class="clearer"></div>
 <% end %>
-</table>
+<div class="r">从<%= collection.first.created_at  %>至现在，总共<%= collection.length %>笔消费，总共花费<span style="color:red"><%= @count %></span>元</div>
+<% else %>
+  <div>暂无消费数据</div>
+<% end %>
+<%= link_to '记录消费',new_userhome_cost_path %>
 
-<br />
-
-<%= link_to 'New Cost', new_userhome_cost_path %>

@@ -127,7 +127,9 @@ class Price < ActiveRecord::Base
   end
 
   def near_prices long = 20
-    @nears ||= nearbys(long).running.limit(10)
+    return if no_locate?
+    @nears ||= nearbys(long)
+    @nears ||= @nears.running.limit(10) unless @nears == []
     @nears
   end
 
@@ -189,7 +191,7 @@ class Price < ActiveRecord::Base
 
   def deal_good
     tmp = Good.where(:name => title).first_or_create
-    good = tmp  unless good_id
+    self.good_id = tmp.id  unless self.good_id
     save if changed?
   end
 

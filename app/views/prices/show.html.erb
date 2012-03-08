@@ -78,7 +78,7 @@
   <% end %>
 <% cache "sidebar_prices_#{@cache_id}" do %>
   <%#= render 'section',:plus => {:things => @price.near_prices.where(:good_id=>@price.good_id).recent,:title=> "本商品周边最新价格",:section_path => prices_path} %>
-  <%= render 'section',:plus => {:things => @price.near_prices.where(:good_id=>@price.good_id).cheapest,:title=> "本商品周边最低价格"} %>
+  <%= render 'section',:plus => {:things => @price.near_prices.where(:good_id=>@price.good_id).cheapest,:title=> "本商品周边最低价格"} unless @price.no_locate? %>
   <%= render 'section',:plus => {:things => @price.good.prices.cheapest,:title=> "本商品全国最低价格"} %>
 <% end %>
 <% end -%>

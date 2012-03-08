@@ -1,9 +1,16 @@
 class CostsController < InheritedResources::Base
-  action :all,:only => [:index,:show]
+  before_filter :authenticate_user!,:only => [:new,:create]
+  actions :all, :except => [:edit,:update,:destroy]
   belongs_to :city,:finder => :find_by_name!, :optional => true
   respond_to :html
+
+  def create
+    @cost = current_user.costs.new params[:cost]
+    create!
+  end
+
   protected
   def collection
-    @shops ||= end_of_association_chain.paginate(:page => params[:page])
+    @costs ||= end_of_association_chain.paginate(:page => params[:page])
   end
 end
