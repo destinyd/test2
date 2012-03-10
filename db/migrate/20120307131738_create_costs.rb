@@ -4,7 +4,8 @@ class CreateCosts < ActiveRecord::Migration
       t.integer :price_id
       t.integer :locate_id
       t.integer :user_id
-
+      t.decimal :amount, :precision => 10, :scale => 3
+      t.decimal :cost, :precision => 16,:scale => 2
       t.timestamps
     end
     add_index :costs, :price_id
