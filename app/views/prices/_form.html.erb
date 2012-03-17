@@ -54,7 +54,6 @@
   </div>  
   <%= f.hidden_field :latitude,:id => 'form_lat' %>
   <%= f.hidden_field :longitude,:id => 'form_lon' %>
-  <%= f.hidden_field :title if price.id.nil? and price.good_id  %>
   <%= f.fields_for :outlinks,:outlinks do |builder| %>
     <%= render 'prices/outlink_fields',:f => builder %>
   <% end -%>

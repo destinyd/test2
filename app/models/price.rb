@@ -4,7 +4,7 @@ class Price < ActiveRecord::Base
   belongs_to :user
   validates :type_id, :presence => true
   validates :price, :presence => true
-  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city,:title
+  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city,:name,:title
   attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:name,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city,:title
 
   has_many :outlinks, :as => :outlinkable, :dependent => :destroy
@@ -106,7 +106,7 @@ class Price < ActiveRecord::Base
   end
 
   def deal_original_price
-    create_alias_price 7,original_price unless is_cheap_price and is_cheap_price != "0"
+    create_alias_price 7,original_price unless original_price.blank?
   end
 
   def create_alias_price type_id,price
@@ -167,7 +167,7 @@ class Price < ActiveRecord::Base
   end
 
   def name
-    good.name
+    good.name if good
   end
 
   def desc 
@@ -190,6 +190,7 @@ class Price < ActiveRecord::Base
   end
 
   def deal_good
+    return if good_id
     tmp = Good.where(:name => title).first_or_create
     self.good_id = tmp.id  unless self.good_id
     save if changed?

@@ -5,12 +5,12 @@ class CostsController < InheritedResources::Base
   respond_to :html
 
   def create
-    @cost = current_user.costs.new params[:cost]
+    @cost = resource = current_user.costs.new params[:cost]
     create!
   end
 
   protected
   def collection
-    @costs ||= end_of_association_chain.paginate(:page => params[:page])
+    @costs = collection ||= end_of_association_chain.paginate(:page => params[:page])
   end
 end

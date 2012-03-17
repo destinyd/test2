@@ -1,10 +1,32 @@
-<%= simple_form_for(@cost) do |f| %>
+<%= simple_form_for(resource) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= f.simple_fields_for :price_attributes do |price_form| %>
+      <%= price_form.input :name,:input_html => {:id => 'good_name'} %>
+      <%= price_form.input :price,:input_html => {:id => 'price_price'} %>
+    <% end %>
+    <%= f.input :good_id, :as => :hidden ,:input_html => {:id => 'good_id'}%>
+    <%= f.input :price_id, :as => :hidden ,:input_html => {:id => 'price_id'}%>
+    <%= f.input :locate_id, :as => :hidden,:input_html => {:id => 'locate_id'} %>
   </div>
 
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
+  <script>
+$(document).ready(function() {
+    $('#good_name').bind('change', function(e,ui){
+        $('#good_id').val('');
+    });
+    $('#good_name').autocomplete({
+      source: '/goods.json',
+      minLength: 2,
+      select: function(e,ui){
+        $('#good_id').val(ui['item']['id']);
+      },
+    });
+});
+
+  </script>
 <% end %>
