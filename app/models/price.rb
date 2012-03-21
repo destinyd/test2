@@ -4,8 +4,8 @@ class Price < ActiveRecord::Base
   belongs_to :user
   validates :type_id, :presence => true
   validates :price, :presence => true
-  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city,:name,:title
-  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:name,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city,:title
+  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city,:name,:title,:img
+  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:name,:good_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city,:title,:img
 
   has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   has_many :integrals, :as => :integralable, :dependent => :destroy
@@ -178,7 +178,7 @@ class Price < ActiveRecord::Base
   before_create :geocode, :if => [:no_locate?,:address_changed?]#,:on =>:create
   before_update :geocode, :if => :address_changed?
   before_create :outlink_user
-  after_create :exp,:deal_cheap_price,:deal_original_price,:deal_good
+  after_create :exp,:deal_cheap_price,:deal_original_price,:deal_good,:deal_img
   private
   def locate_by_city
     if self.user_id.nil? and self.no_locate? and ! self.city.blank?
@@ -196,4 +196,10 @@ class Price < ActiveRecord::Base
     save if changed?
   end
 
+  def deal_img
+    return if img.blank?
+    good.uploads.first_or_create :image_file_name => img
+    #self.good_id = tmp.id  unless self.good_id
+    #save if changed?
+  end
 end

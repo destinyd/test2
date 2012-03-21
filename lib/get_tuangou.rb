@@ -73,9 +73,13 @@ class GetTuangou
   def get_one dom,hashs
     result = {}
     hashs.each do |key,value|
-      result[key] = dom.find(value.to_s).first.content.strip if dom.find(value.to_s).first
+      result[key] = get_in_dom(dom,value) if dom.find(value.to_s).first and !get_in_dom(dom,value).blank?
     end
     result
+  end
+
+  def get_in_dom dom,path
+    dom.find(path.to_s).first.content.strip if dom.find(path.to_s).first
   end
 
   def get_xml uri

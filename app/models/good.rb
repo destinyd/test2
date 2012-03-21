@@ -20,6 +20,7 @@ class Good < ActiveRecord::Base
   has_many :shops,:through => :shop_goods
 
   accepts_nested_attributes_for :outlinks
+  accepts_nested_attributes_for :uploads
 
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
 
