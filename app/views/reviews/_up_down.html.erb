@@ -1,5 +1,5 @@
-<% if @reviewable.user != current_user and @reviewable.reviews.reviewed_by(current_user).blank?%>
-  <%= link_to t('review.s1'),reviewable_path(:reviewable_id => @reviewable,:reviewable_type => @reviewable.class.name.pluralize.downcase,:review => {:status => 1}),:remote => true,:method => :post,:class => "new_review_#{@reviewable.class.name}_#{@reviewable.id}" %>
-  <%= link_to t('review.s-1'),reviewable_path(:reviewable_id => @reviewable,:reviewable_type => @reviewable.class.name.pluralize.downcase,:review => {:status => -1}),:remote => true,:method => :post,:class => "new_review_#{@reviewable.class.name}_#{@reviewable.id}" %>
+<% if reviewable.user != current_user and reviewable.reviews.reviewed_by(current_user).blank?%>
+  <%= link_to t('review.s1'),reviewable_path(:reviewable_id => reviewable,:reviewable_type => reviewable.class.name.pluralize.downcase,:review => {:status => 1}),:remote => true,:method => :post,:class => "new_review_#{reviewable.class.name}_#{reviewable.id}" %>
+  <%= link_to t('review.s-1'),reviewable_path(:reviewable_id => reviewable,:reviewable_type => reviewable.class.name.pluralize.downcase,:review => {:status => -1}),:remote => true,:method => :post,:class => "new_review_#{reviewable.class.name}_#{reviewable.id}" %>
 <% end -%>
 

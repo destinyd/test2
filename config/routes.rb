@@ -1,4 +1,16 @@
 Zhekou::Application.routes.draw do
+  resources :brands
+
+  namespace :userhome do
+    resources :homes
+    resources :prices
+    resources :shops
+    root :to => "homes#index"
+    match 'costs' => 'homes#costs'
+    match 'integrals' => 'homes#integrals'
+  end
+
+  resources :shops
   match 'sitemap.xml' => 'sitemaps#sitemap'
 
   resources :locates,:only => [:index,:show,:create,:new] do
@@ -23,6 +35,7 @@ Zhekou::Application.routes.draw do
         get :nearly_finish
       end
     end
+    resources :shops
   end
 
 
@@ -45,18 +58,15 @@ Zhekou::Application.routes.draw do
       get :just_started
       get :nearly_finish
     end
+    member do
+      get :buy_one
+    end
   end
   resources :reviews
   resources :attrs,:only => [:new] do
     resources :reviews
   end
 
-  resources :userhomes do
-    collection do
-      get :costs
-      get :integrals
-    end
-  end
   resources :flashes
 
   resources :articles do

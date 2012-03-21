@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  brand_id: 1
+  good_id: 1
+  down_at: 2012-03-02 20:44:02
+
+two:
+  brand_id: 1
+  good_id: 1
+  down_at: 2012-03-02 20:44:02

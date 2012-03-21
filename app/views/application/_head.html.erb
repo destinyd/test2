@@ -6,8 +6,8 @@
     <li><%= link_to costs_prices_path do %><div>实际消费</div><% end %></li>
     <li><%= link_to '/cities' do %><div>区域价格</div><% end %></li>
     <li>您的位置:
-    <%=link_to city_info_of_ip[:city],city_path(city_info_of_ip[:city]) if city_info_of_ip[:city] %>
-    <%="无法确认" unless city_info_of_ip[:city]%>
+    <%= link_to city_info_of_ip[:city],city_path(city_info_of_ip[:city]) unless city_info_of_ip[:city].blank? %>
+    <%= "无法确认" if city_info_of_ip[:city].blank? %>
     <small><%= link_to '(重新定位)',new_locate_path(:format => :js),:method => :get,:remote => true %></small>
     </li>
     <li style="margin-left:5px;">

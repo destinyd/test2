@@ -193,9 +193,12 @@ zh-CN:
       attr: 属性
       outlink: 外链
       price_good: "商品绑定"
+      shop: 商店
+      brand: 品牌
     attributes:
       price:
-        price: 价格
+        price: 单价
+        total: 总价
 
   attributes:
     created_at: '创建于'
@@ -270,6 +273,8 @@ zh-CN:
     attrs: 属性
     outlinks: 外链
     price_goods: "商品绑定"
+    shops: 商店
+    brands: 品牌
   action:
     prices:
       new: '记账'
@@ -279,6 +284,10 @@ zh-CN:
       index: '最新'
       just_started: '刚刚开始'
       nearly_finish: '即将结束'
+    brands:
+      new: '添加'
+    shops:
+      new: '添加'
     goods:
       new: '添加'
     articles:

@@ -1,13 +1,22 @@
 <% content_for :title do -%>[<%= @price.type_id %>]<%= @price %> <% end -%>
 <% content_for :desc do -%>[<%= @price.type_id %>]<%= @price %> <% end -%>
 <% content_for :keywords do -%><%= @price.type_id %>,<% end -%>
-<% @where_name = @price.title %>
+<% @where_name = @price.name %>
 <% @where = @price %>
+<% content_for :head do -%>
+  <script src="http://maps.google.com/maps/api/js?sensor=false&libraries=places" type="text/javascript"></script>
+  <script>
+      lat = <%= @price.latitude %>;
+      lon = <%= @price.longitude %>;
+      google.maps.event.addDomListener(window, 'load', show_map_init);
+  </script>
+<% end unless @price.no_locate? -%>
+
 <div id="price">
   <% cache "prices/show/#{@price.id}/#{@cache_id}" do %>
     <p>
-    <b><%= label :price,:title%>:</b>
-    <%= @price.title %>
+    <b><%= label :price,:name %>:</b>
+    <%= link_to @price.name,@price.good %>
     </p>
     <p>
     <b><%= label :price,:price%>:</b>
@@ -39,44 +48,37 @@
       <%= link_to @price.outlinks.first.url,@price.outlinks.first.url ,:rel=>"nofollow",:target => '_blank'%>
     <% end -%>
 
-    <p>
-    <b><%= label :price,:desc%>:</b>
-    <%= raw @price.desc unless @price.user_id %>
-    <%= @price.desc if @price.user_id %>
-    </p>
     <% unless @price.type_id != "团购价" or @price.uploads.first.nil? %>
-      <img src="<%=@price.uploads.first.image_file_name%>" alt="<%= @price.title %>" />
+      <img src="<%=@price.uploads.first.image_file_name%>" alt="<%= @price.name %>" />
     <% end %>
   <% end %>
+
+    <br />
+    <br />
+
+    <%= link_to '我也这价在这买了一件！',buy_one_price_path(@price) %>
   <%= render 'reviews/links',:reviewable => @price %>
   <div class="c"></div>
 </div>
 
 <% content_for :plus do -%>
   <% cache "prices/show/near_prices/#{@price.address[0,15]}/#{@cache_id}" do %>
-    <% if @price.near_prices %>
-      <div class="section" style="width:95%;float:none">
-        <h3>附近价格</h3>
-        <ul>
-          <% @price.near_prices.each do |price| %>
-            <li><%#= price.type_id != "团购价" ? %>
-            <%=link_to(price,price)%><%= price.address %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <% end if @price.address and @price.latitude %>
-  <%= render 'comments/comments' %>
+    <%= render 'near_prices',:near_prices => @price.near_prices.groupbuy %>
+    <% end unless @price.no_locate? %>
+    <%= render 'comments/comments',:commentable => @price %>
 <% end -%>
 
 <% content_for :sidebar do -%>
-  <div id="goods">
-      <% @price.goods.each do |good| %>
-        <%= render 'prices/price_good',:good => good %>
-        <% end unless @price.goods.blank? %>
+  <% unless @price.no_locate? %>
+    <div class="section">
+      <h3>地图显示</h3>
+      <div id="google_map" style="height:400px;">
       </div>
-    <div class="section" id='section_form_price_good'>
-      <%= render 'prices/price_good_form',:price => @price %>
     </div>
-  <% end -%>
+  <% end %>
+<% cache "sidebar_prices_#{@cache_id}" do %>
+  <%#= render 'section',:plus => {:things => @price.near_prices.where(:good_id=>@price.good_id).recent,:title=> "本商品周边最新价格",:section_path => prices_path} %>
+  <%= render 'section',:plus => {:things => @price.near_prices.where(:good_id=>@price.good_id).cheapest,:title=> "本商品周边最低价格"} %>
+  <%= render 'section',:plus => {:things => @price.good.prices.cheapest,:title=> "本商品全国最低价格"} %>
+<% end %>
+<% end -%>

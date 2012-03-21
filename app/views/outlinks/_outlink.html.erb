@@ -1,4 +1,3 @@
 <li><%= link_to outlink.human_link,outlink.url ,:target => :blank,:rel=>"nofollow"%> 
-<% @reviewable = outlink %>
-<%= render :partial => 'reviews/up_down' %></li>
+<%= render :partial => 'reviews/up_down',:reviewable => outlink %></li>
 

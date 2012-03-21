@@ -2,8 +2,8 @@
 class Good < ActiveRecord::Base
   STATUS_LOW = 2
   belongs_to :user
-  has_many :price_goods
-  has_many :prices,:through => :price_goods
+  #has_many :price_goods
+  has_many :prices#,:through => :price_goods
   has_many :outlinks, :as => :outlinkable
   has_many :records, :as => :recordable
   has_many :uploads, :as => :uploadable
@@ -11,6 +11,13 @@ class Good < ActiveRecord::Base
   has_many :attrs, :as => :attrable
   has_many :reviews, :as => :reviewable
   has_many :integrals, :as => :integralable
+  has_many :package_goods, :dependent => :destroy
+  has_many :good_packages, :dependent => :destroy,:foreign_key => :package_id,:class_name => 'PackageGood'
+  has_many :goods,:through => :package_goods,:source =>:package#,:foreign_key => :package_id
+  has_many :packages,:through => :good_packages,:source =>:good,:foreign_key => :package_id
+
+  has_many :shop_goods,:dependent => :destroy
+  has_many :shops,:through => :shop_goods
 
   accepts_nested_attributes_for :outlinks
 
@@ -47,8 +54,13 @@ class Good < ActiveRecord::Base
   def valid
     return if self.is_valid
     self.update_attribute(:is_valid, true)
+    self.user.get_point(1,self,1) if self.user_id
+  end
+
+  def exp
     self.user.get_point(1,self) if self.user_id
   end
+
   
-  after_create :valid
+  after_create :exp
 end

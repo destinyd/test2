@@ -1,17 +1,15 @@
 class PricesController < ApplicationController
-  before_filter :authenticate_user!,:only =>[:new,:create,:update,:edit]
+  before_filter :authenticate_user!,:only =>[:new,:create,:update,:edit,:buy_one]
   before_filter :find_able_and_prices, :except => [:update,:create,:new,:edit,:destroy]
   respond_to :html,:js
   #caches_action :index, :show
   #cache_sweeper :price_sweeper,:only => [:index,:show]
   def index
-    @prices = @prices.paginate( :page => params[:page])
+    @prices = @prices.includes(:good).paginate( :page => params[:page])
   end
 
   def show
     @price = @prices.find(params[:id])
-    @commentable = @price
-    @reviewable = @price
   end
 
   def new
@@ -48,28 +46,40 @@ class PricesController < ApplicationController
   end
 
   def cheapest
-    @prices = @prices.paginate( :page => params[:page])
+    @prices = @prices.includes(:good).paginate( :page => params[:page])
     render :action => "index"
   end
 
   def groupbuy
-    @prices = @prices.paginate( :page => params[:page])
+    @prices = @prices.includes(:good).paginate( :page => params[:page])
     render :action => "index"
   end
 
   def costs
-    @prices = @prices.paginate( :page => params[:page])
+    @prices = @prices.includes(:good).paginate( :page => params[:page])
     render :action => "index"
   end
 
   def just_started
-    @prices = @prices.paginate( :page => params[:page])
+    @prices = @prices.includes(:good).paginate( :page => params[:page])
     render :action => "index"
   end
 
   def nearly_finish
-    @prices = @prices.paginate( :page => params[:page])
+    @prices = @prices.includes(:good).paginate( :page => params[:page])
     render :action => "index"
+  end
+
+  def buy_one
+    price = Price.find(params[:id])
+    @price = current_user.prices.new :type_id => 0,
+      :price => price.price,
+      :address => price.address,
+      :latitude => price.latitude,
+      :longitude => price.longitude
+    @price.good_id = price.good_id
+    @price.save
+    redirect_to @price
   end
 
   private
@@ -91,11 +101,11 @@ class PricesController < ApplicationController
       @prices = @prices.send action_name if ['cheapest','groupbuy','costs','just_started','nearly_finish'].include? action_name
       @prices = @prices.recent if action_name == 'index'
       @prices = @prices.near(value,20) if $1 == 'city' or $1 == 'locate'
-      return @prices = @prices.with_uploads
+      return @prices = @prices.includes(:good)#with_uploads
       end  
     end  
     @prices = Price.send action_name if ['cheapest','groupbuy','costs','just_started','nearly_finish'].include? action_name
     @prices = Price.recent if action_name == 'index'
-    @prices = @prices.with_uploads
+    @prices = @prices.includes(:good)#.with_uploads
   end
 end

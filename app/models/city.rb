@@ -4,6 +4,9 @@ class City < ActiveRecord::Base
   has_many    :ips
   geocoded_by :name, :latitude  => :lat, :longitude => :lon
   #after_validation :geocode
+  def shops
+    Shop.near(self,20)
+  end
   def prices
     Price.near(self,20)
   end

@@ -1,4 +1,5 @@
-class UserhomesController < ApplicationController
+class Userhome::HomesController < ApplicationController
+  layout 'userhome'
   before_filter :authenticate_user!,:except =>[:index,:show]
   def index
     @integrals = current_user.integrals.group(:type_id).sum(:point)

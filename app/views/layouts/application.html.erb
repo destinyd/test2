@@ -27,24 +27,12 @@
 </div>
 <aside>
 <%= yield(:sidebar) %>
-<% cache "sidebar_prices_#{@cache_id}" do %>
-  <%= render 'section',:plus => {:things => Price.recent.group(:title).limit(10),:title=> "最新价格信息",:section_path => prices_path} %>
+<% cache "sidebar_all_#{@cache_id}" do %>
+  <%= render 'section',:plus => {:things => Price.recent.limit(10),:title=> "最新价格信息",:section_path => prices_path} %>
 <% end %>
 <% cache "sidebar_prices_youlike_#{@cache_id}" do %>
   <%= render 'section',:plus => {:things => Price.you_like.limit(10),:title=> "猜你喜欢"} %>
-<% end %>
-<% cache "sidebar_articles_#{@cache_id}" do %>
-  <%= render 'section',:plus => {:things => Article.recent,:title=> "最新公告",:section_path => articles_path} %>
-<% end %>
-<script type="text/javascript"><!--
-  google_ad_client = "ca-pub-5438485447883222";
-  /* sjm sidebar fit */
-  google_ad_slot = "6645977803";
-  google_ad_width = 336;
-  google_ad_height = 280;
-  //-->
-</script>
-<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+<% end if nil%>
 </aside>
 <div class="c"></div>
 </article>

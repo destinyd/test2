@@ -9,8 +9,36 @@
   </div>
 </div>
 <% content_for :plus do -%>
-  <%= render 'comments/comments' %>
+  <% cache "g/{@good.id}/near/#{@cache_id}" do %>
+ <div class="section" style="width:95%;float:none">
+    <h3>价格分析</h3>
+    <ul>
+      <li>商品的平均价格为：<%= @good.prices.sum(&:price) / @good.prices.count  %>元</li>
+      <% adv = @good.prices.where(:created_at=>Time.now.beginning_of_month..Time.now) %>
+      <% if adv.count > 0 %>
+        <% adv = adv.sum(&:price) / adv.count %>
+        <li>商品当月平均价格为：<%= adv  %>元</li>
+      <% end %>
+      <% min = @good.prices.where(:created_at => Time.now.beginning_of_month..Time.now).order("price").first %>
+      <% if min %><li>月内最低价为：<%= link_to min.price,min   %>元 <strong><%= link_to "价格链接",min   %></strong></li><% end %>
+    </ul>
+  </div> 
+  <%# @good alias or tag %>
+    <% end unless cookies[:lat].blank? %>
+    <%= render 'section',:plus => {:things => @good.find_related_tags,:title=> "相关商品",:not_count => true} %>
+  <%= render 'comments/comments',:commentable => @good %>
 <% end -%>
 <% content_for :sidebar do -%>
-  <%= render 'prices/prices' %>
+  <%= render 'section',:plus => {:things => @good.packages,:title=> "本商品组合包"} %>
+  <%= render 'section',:plus => {:things => @good.goods,:title=> "本组合包包含商品"} %>
+  <%= render 'section',:plus => {:things => @good.prices.recent,:title=> "本商品最新价格"} %>
+  <%= render 'section',:plus => {:things => @good.prices.cheapest,:title=> "本商品最低价格"} %>
+<!--  <div id="prices" class="section" style="width:95%">
+  <h3>您也消费过？</h3>  
+  <div>
+    <%# price = @good.prices.new; price.good_id = @good.id; price.title = @good.name %>
+    <%#= render 'prices/form',:price => price %>  
+  </div>
+</div>-->
+  <%#= render 'prices/prices' %>
 <% end -%>

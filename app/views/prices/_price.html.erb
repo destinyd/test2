@@ -1,18 +1,19 @@
+<% upload = price.good.try(:uploads).try(:first) %>
 <div class="price c" data-time="<%= price.created_at.to_i %>">  
   <div class="l">
     <%= link_to price do %>
-      <% if price.uploads.first  %>
-        <% if price.uploads.first.image_file_name.scan(/http/).blank? %>
-          <img src='<%=price.uploads.first.image.url %>' alt='<%= price.title %>' />
+      <% if upload  %>
+        <% if upload.image_file_name.scan(/http/).blank? %>
+          <img src='<%=upload.image.url %>' alt='<%= price.name %>' />
         <% else %>
-          <img src='<%=price.uploads.first.image_file_name %>' alt='<%= price.title %>'/>
+          <img src='<%=upload.image_file_name %>' alt='<%= price.name %>'/>
         <% end %>
       <% else %>
         <img src='/images/nopic.gif' alt='nopic' />
       <% end -%>
     <% end %>
   </div>
-  <div class="detail">[<%= price.type_id %>] <%=link_to  price.title.block(150),price,:target => '_blank' %>
+  <div class="detail">[<%= price.type_id %>] <%=link_to  price.name.try(:block,150),price,:target => '_blank' %>
     <br />
     价格：<%= price.human_price %>
     <% if price.address %><br />地址：<%= price.address %><% end %>

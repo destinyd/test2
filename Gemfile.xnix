@@ -40,3 +40,7 @@ end
 #gem 'redis-store','~> 1.0.0.1'
 #gem 'thin'
 gem 'unicorn'
+
+#dev
+gem 'inherited_resources'
+gem 'simple_form'

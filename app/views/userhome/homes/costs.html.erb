@@ -11,7 +11,7 @@
         <%=cost.created_at.strftime('%d日%H:%M') %>
       <% end %>
       <%= content_tag :div,:class => 'title' do %>
-        <%=cost.title %>
+        <%=link_to cost.name,cost %>
       <% end %>
       <%= content_tag :div,:class => 'price' do %>
         <span style="color:red"><%= cost.price %>*<%= cost.amount || 1 %></span>元

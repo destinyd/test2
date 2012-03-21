@@ -1,0 +1,98 @@
+<% content_for :title do -%>[<%= @price.type_id %>]<%= @price %> <% end -%>
+<% content_for :desc do -%>[<%= @price.type_id %>]<%= @price %> <% end -%>
+<% content_for :keywords do -%><%= @price.type_id %>,<% end -%>
+<% @where_name = @price.name %>
+<% @where = @price %>
+<% content_for :head do -%>
+  <script src="http://maps.google.com/maps/api/js?sensor=false&libraries=places" type="text/javascript"></script>
+  <script>
+      lat = <%= @price.latitude %>;
+      lon = <%= @price.longitude %>;
+      google.maps.event.addDomListener(window, 'load', show_map_init);
+  </script>
+<% end unless @price.no_locate? -%>
+
+<div id="price">
+  <% cache "prices/show/#{@price.id}/#{@cache_id}" do %>
+    <p>
+    <b><%= label :price,:name %>:</b>
+    <%= @price.name %>
+    </p>
+    <p>
+    <b><%= label :price,:price%>:</b>
+    <%= @price.price %>
+    </p>
+
+    <p>
+    <b><%= label :price,:type%>:</b>
+    <%= @price.type_id %>
+    </p>
+
+    <p>
+    <b><%= label :price,:address%>:</b>
+    <%= @price.address %>
+    </p>
+
+    <p>
+    <b><%= label :price,:amount%>:</b>
+    <%= @price.human_amount %>
+    </p>
+
+    <p>
+    <b><%= label :price,:finish_at%>:</b>
+    <%= @price.human_finish_at %>
+    </p>
+    <%  unless @price.outlinks.blank? %>
+      <p>
+      <b>链接：</b>
+      <%= link_to @price.outlinks.first.url,@price.outlinks.first.url ,:rel=>"nofollow",:target => '_blank'%>
+    <% end -%>
+
+    <p>
+    <b><%= label :price,:desc%>:</b>
+    <%= raw @price.desc unless @price.user_id %>
+    <%= @price.desc if @price.user_id %>
+    </p>
+    <% unless @price.type_id != "团购价" or @price.uploads.first.nil? %>
+      <img src="<%=@price.uploads.first.image_file_name%>" alt="<%= @price.name %>" />
+    <% end %>
+  <% end %>
+  <%= render 'reviews/links',:reviewable => @price %>
+  <div class="c"></div>
+</div>
+
+<% content_for :plus do -%>
+  <% cache "prices/show/near_prices/#{@price.address[0,15]}/#{@cache_id}" do %>
+    <% if @price.near_prices %>
+      <div class="section" style="width:95%;float:none">
+        <h3>附近价格</h3>
+        <ul>
+          <% @price.near_prices.each do |price| %>
+            <li><%#= price.type_id != "团购价" ? %>
+            <%=link_to(price,price)%><%= price.address %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <% end if @price.address and @price.latitude %>
+  <%= render 'comments/comments' %>
+<% end -%>
+
+<% content_for :sidebar do -%>
+  <% unless @price.no_locate? %>
+    <div class="section">
+      <h3>地图显示</h3>
+      <div id="google_map" style="height:400px;">
+      </div>
+    </div>
+  <% end %>
+  <div id="goods">
+    <% @price.goods.each do |good| %>
+      <%= render 'prices/price_good',:good => good %>
+    <% end %>
+  </div>
+  <div class="section" id='section_form_price_good'>
+    <%= render 'prices/price_good_form',:price => @price %>
+  </div>
+<% end -%>

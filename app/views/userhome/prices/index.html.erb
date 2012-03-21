@@ -1,0 +1,10 @@
+<% cache "p/i/#{params}/#{@cache_id}" do %>
+  <ul>
+  <%= render @prices %>
+</ul>
+<% end if @prices %>
+<div class="c"></div>
+<div class="r">
+  <%= will_paginate @prices if @prices %> 
+</div>
+<%#= link_to t('labels.new'), new_price_path %>

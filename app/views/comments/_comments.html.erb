@@ -1,9 +1,9 @@
-<% @comments = @commentable.comments.paginate(:per_page => 10, :page => params[:comments_page]) %>
+<% comments = commentable.comments.paginate(:per_page => 10, :page => params[:comments_page]) %>
   <div class="section" style="width:95%">
-    <h3 id="comments_size"><%= "#{@commentable.comments.size}条评论" %></h3>  
+    <h3 id="comments_size"><%= "#{commentable.comments.size}条评论" %></h3>  
     <div id="comments">  
-  <% unless @comments.empty? %>  
-      <%= render 'comments/livecomments' %>
+  <% unless comments.empty? %>  
+    <%= render 'comments/livecomments',:comments => comments %>
   <% end %> 
     </div> 
   </div>
@@ -11,7 +11,7 @@
 <div class="section" style="width:95%">
     <h3>评论</h3> 
   <div class="user_show"> 
-  <%= render :partial => 'comments/form' %>
+  <%= render 'comments/form',:commentable => commentable %>
   </div>
   <div class="user_hide">
     登录之后你也写几句？
