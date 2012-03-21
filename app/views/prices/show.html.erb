@@ -63,7 +63,7 @@
 
 <% content_for :plus do -%>
   <% cache "prices/show/near_prices/#{@price.address[0,15]}/#{@cache_id}" do %>
-    <%= render 'near_prices',:near_prices => @price.near_prices.groupbuy %>
+    <%= render 'near_prices',:near_prices => @price.near_prices.groupbuy.limit(10) %>
     <% end unless @price.no_locate? %>
     <%= render 'comments/comments',:commentable => @price %>
 <% end -%>
@@ -78,7 +78,7 @@
   <% end %>
 <% cache "sidebar_prices_#{@cache_id}" do %>
   <%#= render 'section',:plus => {:things => @price.near_prices.where(:good_id=>@price.good_id).recent,:title=> "本商品周边最新价格",:section_path => prices_path} %>
-  <%= render 'section',:plus => {:things => @price.near_prices.where(:good_id=>@price.good_id).cheapest,:title=> "本商品周边最低价格"} unless @price.no_locate? %>
-  <%= render 'section',:plus => {:things => @price.good.prices.cheapest,:title=> "本商品全国最低价格"} if @price.good %>
+  <%= render 'section',:plus => {:things => @price.near_prices.where(:good_id=>@price.good_id).cheapest.limit(10),:title=> "本商品周边最低价格"} unless @price.no_locate? %>
+  <%= render 'section',:plus => {:things => @price.good.prices.cheapest.limit(10),:title=> "本商品全国最低价格"} if @price.good %>
 <% end %>
 <% end -%>
