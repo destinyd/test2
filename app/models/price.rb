@@ -56,7 +56,7 @@ class Price < ActiveRecord::Base
   }
 
   def no_locate?
-    self.longitude.nil? or self.latitude.nil?
+    self.longitude.blank? or self.latitude.blank?
   end
 
   def type_id
@@ -176,7 +176,7 @@ class Price < ActiveRecord::Base
 
   after_validation :locate_by_city
   before_create :geocode, :if => [:no_locate?,:address_changed?]#,:on =>:create
-  before_update :geocode, :if => :address_changed?
+  #before_update :geocode, :if => :address_changed?
   before_create :outlink_user
   after_create :exp,:deal_cheap_price,:deal_original_price,:deal_good,:deal_img
   private
@@ -188,7 +188,7 @@ class Price < ActiveRecord::Base
       end
     end
   end
-
+  
   def deal_good
     return if good_id
     tmp = Good.where(:name => title).first_or_create

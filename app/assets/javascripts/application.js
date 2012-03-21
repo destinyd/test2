@@ -169,9 +169,10 @@ function form_map_init(){
           map.setCenter(place.geometry.location);
           map.setZoom(17);  // Why 17? Because it looks good.
         }
+        console.log(place);
         marker.setPosition(place.geometry.location);
-        $('#form_lat').val(place.geometry.location.Qa);
-        $('#form_lon').val(place.geometry.location.Ra);
+        $('#form_lat').val(place.geometry.location.Ua);
+        $('#form_lon').val(place.geometry.location.Va);
 
         var address = '';
         if (place.address_components) {
