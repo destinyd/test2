@@ -20,6 +20,7 @@ class Good < ActiveRecord::Base
   has_many :shops,:through => :shop_goods
 
   accepts_nested_attributes_for :outlinks
+  accepts_nested_attributes_for :uploads
 
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
 
@@ -34,7 +35,7 @@ class Good < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where('name LIKE ?', "%#{search}%")
+      where('name LIKE ?', "#{search}%")
     else
       scoped
     end

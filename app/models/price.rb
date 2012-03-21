@@ -4,13 +4,15 @@ class Price < ActiveRecord::Base
   belongs_to :user
   validates :type_id, :presence => true
   validates :price, :presence => true
-  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city,:title
-  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:name,:good_attributes,:uploads_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city,:title
+  attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city,:name,:title,:img
+  attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:name,:good_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city,:title,:img
 
   has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   has_many :integrals, :as => :integralable, :dependent => :destroy
   has_many :reviews, :as => :reviewable, :dependent => :destroy
   has_many :uploads, :as => :uploadable, :dependent => :destroy
+
+  has_many :costs
 
   belongs_to :good
   belongs_to :brand
@@ -104,7 +106,7 @@ class Price < ActiveRecord::Base
   end
 
   def deal_original_price
-    create_alias_price 7,original_price unless is_cheap_price and is_cheap_price != "0"
+    create_alias_price 7,original_price unless original_price.blank?
   end
 
   def create_alias_price type_id,price
@@ -125,7 +127,9 @@ class Price < ActiveRecord::Base
   end
 
   def near_prices long = 20
-    @nears ||= nearbys(long).running.limit(10)
+    return if no_locate?
+    @nears ||= nearbys(long)
+    @nears ||= @nears.running.limit(10) unless @nears == []
     @nears
   end
 
@@ -163,7 +167,7 @@ class Price < ActiveRecord::Base
   end
 
   def name
-    good.name
+    good.name if good
   end
 
   def desc 
@@ -174,7 +178,7 @@ class Price < ActiveRecord::Base
   before_create :geocode, :if => [:no_locate?,:address_changed?]#,:on =>:create
   before_update :geocode, :if => :address_changed?
   before_create :outlink_user
-  after_create :exp,:deal_cheap_price,:deal_original_price,:deal_good
+  after_create :exp,:deal_cheap_price,:deal_original_price,:deal_good,:deal_img
   private
   def locate_by_city
     if self.user_id.nil? and self.no_locate? and ! self.city.blank?
@@ -186,9 +190,16 @@ class Price < ActiveRecord::Base
   end
 
   def deal_good
+    return if good_id
     tmp = Good.where(:name => title).first_or_create
-    good = tmp  unless good_id
+    self.good_id = tmp.id  unless self.good_id
     save if changed?
   end
 
+  def deal_img
+    return if img.blank?
+    good.uploads.first_or_create :image_file_name => img
+    #self.good_id = tmp.id  unless self.good_id
+    #save if changed?
+  end
 end

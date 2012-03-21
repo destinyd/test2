@@ -1,6 +1,9 @@
 class Locate < ActiveRecord::Base
   validates :name, :uniqueness =>true
   geocoded_by :name, :latitude  => :lat, :longitude => :lon
+
+  has_many :costs
+
   after_validation do
     self.geocode unless self.lat and self.lon
   end

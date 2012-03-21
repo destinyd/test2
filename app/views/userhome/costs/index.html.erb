@@ -1,4 +1,5 @@
 <% @count = 0 %>
+<%  if @cost_months = collection.group_by{|a| a.created_at.beginning_of_month} %>
 <% @cost_months.sort.each do |month,costs| %>
   <% month_count = 0 %>
   <%= content_tag :div,:class => 'month' do %>
@@ -6,15 +7,15 @@
   <% end %>
   <% costs.each do |cost| %>
     <%= content_tag :div,:class => 'price_cost' do %>
-      <% cost_one = cost.price * (cost.amount || 1) ;@count = @count+cost_one;month_count = month_count + cost_one %>
+      <% cost_one = cost.price.price * (cost.price.amount || 1) ;@count = @count+cost_one;month_count = month_count + cost_one %>
       <%= content_tag :div,:class => 'time' do %>
         <%=cost.created_at.strftime('%d日%H:%M') %>
       <% end %>
       <%= content_tag :div,:class => 'title' do %>
-        <%=link_to cost.name,cost %>
+        <%=link_to cost.price.name,cost %>
       <% end %>
       <%= content_tag :div,:class => 'price' do %>
-        <span style="color:red"><%= cost.price %>*<%= cost.amount || 1 %></span>元
+        <span style="color:red"><%= cost.price.price %>*<%= cost.price.amount || 1 %></span>元
       <% end %>
       <div class='clearer'></div>
     <% end %>
@@ -24,4 +25,9 @@
   <% end %>
   <div class="clearer"></div>
 <% end %>
-<div class="r">从<%= @costs.first.created_at  %>至现在，总共<%= @costs.length %>笔消费，总共花费<span style="color:red"><%= @count %></span>元</div>
+<div class="r">从<%= collection.first.created_at  %>至现在，总共<%= collection.length %>笔消费，总共花费<span style="color:red"><%= @count %></span>元</div>
+<% else %>
+  <div>暂无消费数据</div>
+<% end %>
+<%= link_to '记录消费',new_userhome_cost_path %>
+

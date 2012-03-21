@@ -7,7 +7,8 @@ class GoodsController < ApplicationController
   # GET /goods
   # GET /goods.xml
   def index
-    @goods = Good.search(params[:term]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+    #@goods = Good.search(params[:term]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
+    @goods = Good.search(params[:term]).paginate(:per_page => 10, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
