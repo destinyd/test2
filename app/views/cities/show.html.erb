@@ -17,4 +17,21 @@
   <div class="mt">
     <%= render 'section',:plus => {:things => Price.costs.near(@value,20).limit(10),:title=> "《#{@name}》最新消费记录",:section_path => eval("costs_#{controller_name.singularize}_prices_path(@name)"),:plusclass => 'home_section'} %>
   </div>
+<% end if nil %>
+<div id="good_flows">
+<% Price.recent.near(@value,20).group(:good_id).limit(50).each do |price| %>
+  <%= render 'good_flow',:price => price %>
 <% end %>
+</div>
+<script>
+  $(document).ready(function(){
+    $('#good_flows .img img').load(function(){$(this).css('height',$(this).height())
+      $('#good_flows').masonry({
+        // options
+        itemSelector : '.pin',
+        columnWidth : 240,
+        isAnimated: true
+      });
+    });
+  });
+</script>

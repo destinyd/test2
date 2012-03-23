@@ -1,0 +1,27 @@
+<div class="pin">
+  <div class="good" style="height:auto;">
+    <% if upload = price.good.uploads.first %>
+      <div class="img">
+        <%= link_to price.good do %>
+          <% if upload.image_file_name.scan(/http/).blank? %>
+            <img src='<%=upload.image.url %>' alt='<%= price.name %>' />
+          <% else %>
+            <img src='<%=upload.image_file_name %>' alt='<%= price.name %>'/>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="title">
+      <h4><%= link_to price.name,price.good %></h4>
+    </div>
+  </div>
+  <div class="prices">
+    <% if price.good.prices.any? %>
+      <% price.good.prices.each do |price| %>
+        <div class="price">
+          <div class="type_id">[<%= price.type_id %>]</div><div class="price"> <%= link_to price.price,price %></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
