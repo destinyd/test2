@@ -17,13 +17,13 @@
   </div>
   <div class="prices">
     <% if good.prices.any? %>
-      <% good.prices.running.recent.limit(6).each do |price| %>
+      <% good.prices.running.recent.limit(5).each do |price| %>
         <div class="per_price">
           <div class="type_id">[<%= price.type_id %>]</div><div class="price"> <%= link_to price.price,price,:target => '_blank' %></div>
         </div>
       <% end %>
       <div class="more_price">
-        <%= link_to "总共#{good.prices.count}条价格信息，点击查看。",good_prices_path(good),:target => '_blank' %>
+        <%= link_to "总共#{good.prices.count}条价格信息，点击查看。",good_prices_path(good),:target => '_blank' if good.prices.count > 5 %>
       </div>
     <% end %>
   </div>
