@@ -1,23 +1,4 @@
 module ApplicationHelper
-  def city_info_of_ip
-    return @ip_infos if @ip_infos
-    unless cookies[:got_ip]
-      cookies[:got_ip] = true
-      ip = request.ip
-      @ip = Ip.where(:ip => ip).first_or_create
-      get_city_name @ip
-    end
-    ip_infos
-  end
-
-  def ip_infos
-    @ip_infos = {
-      :city => cookies[:city],
-      :lat => cookies[:lat],
-      :lon => cookies[:lon]
-    }
-  end
-
   def sortable(column, title = nil)  
     title ||= column.titleize  
     css_class = (column == sort_column) ? "current #{sort_direction}" : nil  
@@ -35,12 +16,6 @@ module ApplicationHelper
 
   def could_bread?
     !['home','sessions','registrations'].include? controller_name
-  end
-
-  def get_city_name ip
-    cookies[:city] = ip.city_name
-    cookies[:lat] = ip.lat
-    cookies[:lon] = ip.lon
   end
 
   def link_to_add_fields(name, f, association)
