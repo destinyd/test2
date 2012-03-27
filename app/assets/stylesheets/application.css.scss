@@ -609,8 +609,10 @@ article{
       .good{
         .title{
           h4{
-            font-size:12px;
-            color:#211922;
+            font-size:14px;
+            /*color:#211922;*/
+            color:#000;
+            font-weight:normal;
           }
         }
         height:auto;
@@ -623,9 +625,10 @@ article{
         }
       }
       .prices{
-        .price{
+        .per_price{
           height:20px;
           line-height:20px;
+          clear:both;
           .type_id {
             text-align:right;
             float:left;
@@ -639,9 +642,29 @@ article{
 
           /*background-color:red;*/
         }
+        .more_price{
+          clear:both;
+          text-align:right;
+        }
         padding-bottom:5px;
         position:relative;
       }
     }
   }
+}
+/* Infinite Scroll loader */
+#infscr-loading { 
+  text-align: center;
+  z-index: 100;
+  position: fixed;
+  left: 45%;
+  bottom: 40px;
+  width: 200px;
+  padding: 10px;
+  background: #000; 
+  opacity: 0.8;
+  color: #FFF;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }

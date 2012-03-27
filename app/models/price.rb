@@ -34,8 +34,6 @@ class Price < ActiveRecord::Base
   scope :recent,running.order("id desc")
   scope :groupbuy,recent.where(:type_id=>[21,22])
   scope :not_finish,where("finish_at > ?",Time.now)
-  scope :just_started,not_finish.order("id desc")
-  scope :nearly_finish,not_finish.order(:finish_at)
  scope :costs,recent.where(:type_id=>[0,1])  
  scope :with_uploads,includes(:uploads)
 
@@ -43,7 +41,7 @@ class Price < ActiveRecord::Base
   TYPE = {
   0=>'消费',
   1=>'网上消费',
-  6=>'折扣价/特价/促销价',
+  6=>'特价',
   7=>'商品标示原价',
   11=>'商家叫价',
   21=>'团购价',

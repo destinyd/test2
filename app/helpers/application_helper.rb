@@ -1,8 +1,4 @@
 module ApplicationHelper
-  def initialize(a,b,c)
-    super(a,b,c)
-  end
-
   def city_info_of_ip
     return @ip_infos if @ip_infos
     unless cookies[:got_ip]

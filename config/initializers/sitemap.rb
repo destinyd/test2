@@ -3,10 +3,10 @@ DynamicSitemaps::Sitemap.draw do
   # default per_page is 50.000 which is the specified maximum.
   per_page 500
 
-  url root_url,
-:last_mod => Price.last.created_at,
-    :change_freq => 'daily', :priority => 0.8
-  #new_page!
+  #url root_url,
+#:last_mod => Price.last.created_at,
+    #:change_freq => 'daily', :priority => 0.8
+  ##new_page!
 
   url prices_url, 
 :last_mod => Price.last.created_at,
@@ -18,12 +18,6 @@ DynamicSitemaps::Sitemap.draw do
 :last_mod => Price.last.created_at,
  :change_freq => 'daily', :priority => 0.6
   url groupbuy_prices_url, 
-:last_mod => Price.last.created_at,
- :change_freq => 'daily', :priority => 0.6
-  url just_started_prices_url, 
-:last_mod => Price.last.created_at,
- :change_freq => 'daily', :priority => 0.6
-  url nearly_finish_prices_url, 
 :last_mod => Price.last.created_at,
  :change_freq => 'daily', :priority => 0.6
 

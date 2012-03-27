@@ -1,27 +1,30 @@
 <div class="pin">
   <div class="good" style="height:auto;">
-    <% if upload = price.good.uploads.first %>
+    <% if upload = good.uploads.first %>
       <div class="img">
-        <%= link_to price.good do %>
+        <%= link_to good,:target => '_blank' do %>
           <% if upload.image_file_name.scan(/http/).blank? %>
-            <img src='<%=upload.image.url %>' alt='<%= price.name %>' />
+            <img src='<%=upload.image.url %>' alt='<%= good.name %>' />
           <% else %>
-            <img src='<%=upload.image_file_name %>' alt='<%= price.name %>'/>
+            <img src='<%=upload.image_file_name %>' alt='<%= good.name %>'/>
           <% end %>
         <% end %>
       </div>
     <% end %>
     <div class="title">
-      <h4><%= link_to price.name,price.good %></h4>
+      <h4><%= link_to good.name,good,:target => '_blank' %></h4>
     </div>
   </div>
   <div class="prices">
-    <% if price.good.prices.any? %>
-      <% price.good.prices.each do |price| %>
-        <div class="price">
-          <div class="type_id">[<%= price.type_id %>]</div><div class="price"> <%= link_to price.price,price %></div>
+    <% if good.prices.any? %>
+      <% good.prices.running.recent.limit(6).each do |price| %>
+        <div class="per_price">
+          <div class="type_id">[<%= price.type_id %>]</div><div class="price"> <%= link_to price.price,price,:target => '_blank' %></div>
         </div>
       <% end %>
+      <div class="more_price">
+        <%= link_to "总共#{good.prices.count}条价格信息，点击查看。",good_prices_path(good),:target => '_blank' %>
+      </div>
     <% end %>
   </div>
 </div>

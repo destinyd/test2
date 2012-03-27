@@ -60,16 +60,6 @@ class PricesController < ApplicationController
     render :action => "index"
   end
 
-  def just_started
-    @prices = @prices.includes(:good).paginate( :page => params[:page])
-    render :action => "index"
-  end
-
-  def nearly_finish
-    @prices = @prices.includes(:good).paginate( :page => params[:page])
-    render :action => "index"
-  end
-
   def buy_one
     price = Price.find(params[:id])
     @price = current_user.prices.new :type_id => 0,
@@ -98,13 +88,13 @@ class PricesController < ApplicationController
           @able = $1.classify.constantize.find(value) 
           @prices = @able.prices
         end 
-      @prices = @prices.send action_name if ['cheapest','groupbuy','costs','just_started','nearly_finish'].include? action_name
+      @prices = @prices.send action_name if ['cheapest','groupbuy','costs'].include? action_name
       @prices = @prices.recent if action_name == 'index'
       @prices = @prices.near(value,20) if $1 == 'city' or $1 == 'locate'
       return @prices = @prices.includes(:good)#with_uploads
       end  
     end  
-    @prices = Price.send action_name if ['cheapest','groupbuy','costs','just_started','nearly_finish'].include? action_name
+    @prices = Price.send action_name if ['cheapest','groupbuy','costs'].include? action_name
     @prices = Price.recent if action_name == 'index'
     @prices = @prices.includes(:good)#.with_uploads
   end

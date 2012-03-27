@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
+    redirect_to city_path(city_info_of_ip[:city]) unless city_info_of_ip[:city].blank?
+    redirect_to City.first if city_info_of_ip[:city].blank?
     #@articles = @recent_articles
 #    @categories = Category.roots
     #@flashes = Flash.recent# if @flashes.blank?

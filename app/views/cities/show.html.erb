@@ -1,37 +1,47 @@
 <% tmp1 = "最新、最全的#{"《#{@name}》附近的" if @name}价格信息" %>
 <% content_for :title do -%><%= tmp1 %> - <% end if tmp1 -%>
 <% content_for :desc do -%><%= tmp1 %>。<% end if tmp1 -%>
-<% @counts = 0 %>
-<% cache "place/#{controller_name}/#{@name}/#{@cache_id}" do %>
-  <div class="mt">
-    <%= render 'liner',:plus => {:things => Price.just_started.near(@value,20).with_uploads.limit(6),:title=> "刚刚开始",:section_path => eval("just_started_#{controller_name.singularize}_prices_path(@name)")} %>
-  </div>
-  <div class="mt">
-    <%= render 'section',:plus => {:things => Price.recent.near(@value,20).limit(10),:title=> "《#{@name}》最新价格",:section_path => eval("#{controller_name.singularize}_prices_path(@name)"),:plusclass => 'home_section'} %>
-    <%= render 'section',:plus => {:things => Price.cheapest.near(@value,20).limit(10),:title=> "《#{@name}》最低价格",:section_path => eval("cheapest_#{controller_name.singularize}_prices_path(@name)"),:plusclass => 'home_section'} %>
-    <%= render 'section',:plus => {:things => Price.groupbuy.near(@value,20).limit(10),:title=> "《#{@name}》最新团购",:section_path => eval("groupbuy_#{controller_name.singularize}_prices_path(@name)"),:plusclass => 'home_section'} %>
-  </div>
-  <div class="mt">
-    <%= render 'liner',:plus => {:things => Price.nearly_finish.near(@value,20).with_uploads.limit(6),:title=> "即将结束",:section_path => eval("nearly_finish_#{controller_name.singularize}_prices_path(@name)")} %>
-  </div>
-  <div class="mt">
-    <%= render 'section',:plus => {:things => Price.costs.near(@value,20).limit(10),:title=> "《#{@name}》最新消费记录",:section_path => eval("costs_#{controller_name.singularize}_prices_path(@name)"),:plusclass => 'home_section'} %>
-  </div>
-<% end if nil %>
+<% cache "city_#{params[:id]}_#{params[:page]}_#{@cache_id}" do %>
 <div id="good_flows">
-<% Price.recent.near(@value,20).group(:good_id).limit(50).each do |price| %>
-  <%= render 'good_flow',:price => price %>
+  <% prices =  Price.running.near(@value,20).group(:good_id).paginate( :page => params[:page]).limit(50).each do |price| %>
+  <%= render 'good_flow',:good => price.good %>
 <% end %>
 </div>
+<nav id="page-nav" style="display:none;">
+  <%= will_paginate prices %> 
+</nav>
+<% end %>
 <script>
-  $(document).ready(function(){
-    $('#good_flows .img img').load(function(){$(this).css('height',$(this).height())
-      $('#good_flows').masonry({
-        // options
-        itemSelector : '.pin',
-        columnWidth : 240,
-        isAnimated: true
+  $(function(){
+    var gf = $('#good_flows');// .img img').load(function(){$(this).css('height',$(this).height())
+      gf.imagesLoaded(function(){
+        gf.masonry({
+          // options
+          itemSelector : '.pin',
+          columnWidth : 240,
+          isAnimated: true
+        });
       });
+    gf.infinitescroll({
+      navSelector  : '#page-nav',    // selector for the paged navigation 
+      nextSelector : '#page-nav a',  // selector for the NEXT link (to page 2)
+      itemSelector : '.pin',     // selector for all items you'll retrieve
+      loading: {
+          finishedMsg: 'No more pages to load.',
+          img: 'http://i.imgur.com/6RMhx.gif'
+        }
+      },
+      // trigger Masonry as a callback
+      function( newElements ) {
+        // hide new items while they are loading
+        var $newElems = $( newElements ).css({ opacity: 0 });
+        // ensure that images load before adding to masonry layout
+        $newElems.imagesLoaded(function(){
+          // show elems now they're ready
+          $newElems.animate({ opacity: 1 });
+          gf.masonry( 'appended', $newElems, true ); 
+        });
+      }
+    );
     });
-  });
-</script>
+  </script>
