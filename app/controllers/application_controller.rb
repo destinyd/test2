@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     if geo
       cookies[:lat] = geo.lat
       cookies[:lon] = geo.lon
-      cookies[:city] = geo.name
+      cookies[:city] = geo.city
     end
   end
 
