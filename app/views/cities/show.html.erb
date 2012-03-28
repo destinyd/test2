@@ -3,8 +3,9 @@
 <% content_for :desc do -%><%= tmp1 %>。<% end if tmp1 -%>
 <% cache "city_#{params[:id]}_#{params[:page]}_#{@cache_id}" do %>
 <div id="good_flows">
-  <% prices =  Price.running.near(@value,20).group(:good_id).paginate( :page => params[:page]).limit(50).each do |price| %>
-  <%= render 'good_flow',:good => price.good %>
+  <% prices =  Price.running.near(@value,20).paginate( :page => params[:page]).limit(50) %>
+  <% prices.group_by(&:good).each do |good,prices_group| %>
+    <%= render 'good_flow',:good => good,:prices => prices_group %>
 <% end %>
 </div>
 <nav id="page-nav" style="display:none;">
