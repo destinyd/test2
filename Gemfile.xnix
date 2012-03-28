@@ -32,8 +32,8 @@ gem 'dynamic_sitemaps'
 
 group :development do
   gem "nifty-generators"
-  #gem 'linecache19', :git => 'https://github.com/mark-moseley/linecache.git' 
-  #gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
+  gem 'linecache19', :git => 'https://github.com/mark-moseley/linecache.git' 
+  gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
   gem 'ruby-debug19'#, :require => 'ruby-debug'
 end
 

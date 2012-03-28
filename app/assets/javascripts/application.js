@@ -37,7 +37,6 @@ $(function(){
 function good_bound(){
   var obj = $('#price_good_good_id');
   var obj_good_name = $('#price_good_good_name');
-  console.log(obj_good_name);
   if(obj.val())
   {
     //obj_good_name.remove();
@@ -48,7 +47,6 @@ function good_bound(){
   }
   else{
     $('#new_price_good_btn').hide();
-    console.log(obj_good_name.val());
     $('#price_good_name').val(obj_good_name.val());
     obj_good_name.remove();
     $('#price_good_good_id').remove();
@@ -149,8 +147,8 @@ function form_map_init(){
       google.maps.event.addDomListener(map, 'click', 
       function(a){
         marker.setPosition(a.latLng);
-        $('#form_lat').val(a.latLng.Qa);
-        $('#form_lon').val(a.latLng.Ra);
+        $('#form_lat').val(a.latLng.Ua);
+        $('#form_lon').val(a.latLng.Ta);
         //geocoder.geocode({'latLng': a.latLng}, function(results, status) {
         //  if (status == google.maps.GeocoderStatus.OK) {
         //    if (results[1]) {
@@ -169,10 +167,9 @@ function form_map_init(){
           map.setCenter(place.geometry.location);
           map.setZoom(17);  // Why 17? Because it looks good.
         }
-        console.log(place);
         marker.setPosition(place.geometry.location);
         $('#form_lat').val(place.geometry.location.Ua);
-        $('#form_lon').val(place.geometry.location.Va);
+        $('#form_lon').val(place.geometry.location.Ta);
 
         var address = '';
         if (place.address_components) {
