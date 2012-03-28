@@ -5,7 +5,7 @@ class UploadsController < ApplicationController
   # GET /uploads
   # GET /uploads.xml
   def index
-    @uploads = @uploadable.nil? ? Upload.all : @uploadable.uploads
+    @uploads = @uploadable.nil? ? Upload.paginate(:page => params[:page]) : @uploadable.uploads.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
