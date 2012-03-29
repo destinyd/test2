@@ -21,8 +21,8 @@
         <div class="type_id">[<%= price.type_id %>]</div><div class="price"> <%= link_to price.price,price,:target => '_blank' %></div>
       </div>
     <% end %>
-    <div class="more_price">
-      <%= link_to "总共#{good.prices.count}条价格信息，点击查看。",good_prices_path(good),:target => '_blank' if good.prices.count > 5 %>
-    </div>
+    <%# <div class="more_price">
+      <%= link_to "总共#{good.prices.count}条价格信息，点击查看。",good_prices_path(good),:target => '_blank' if prices.count > 5 % >
+      </div>%>
   </div>
 </div>

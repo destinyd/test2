@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     if geo
       cookies[:lat] = geo.lat
       cookies[:lon] = geo.lon
-      cookies[:city] = geo.city
+      cookies[:city] = geo.name
     end
   end
 
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
       cookies[:got_ip] = true
       ip = request.ip
       @ip = Ip.where(:ip => ip).first_or_create
-      get_city_name @ip
+      get_city_name @ip.city
     end
     ip_infos
   end

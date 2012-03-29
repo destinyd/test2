@@ -20,8 +20,6 @@ class Price < ActiveRecord::Base
   accepts_nested_attributes_for :uploads
   accepts_nested_attributes_for :outlinks, :reject_if => lambda { |outlink| outlink[:url].blank? }, :allow_destroy => true
 
-  default_scope includes(:good)
-
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
   scope :review_low, Filter.new(self).extend(ReviewFilter)
   scope :truth,review_low(Review.truth_point)

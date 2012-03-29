@@ -79,23 +79,23 @@ class PricesController < ApplicationController
       if name =~ /(.+)_id$/
         if $1 == 'city'
           @able = $1.classify.constantize.where(:name =>value).first
-          value = @able.lat,@able.lon
+          loc = @able.lat,@able.lon
         elsif $1 == 'locate'
           @able = $1.classify.constantize.where(:name =>value).first
           @able = Locate.create(:name => value) unless @able
-          value = @able.lat,@able.lon
+          loc = @able.lat,@able.lon
         else
           @able = $1.classify.constantize.find(value) 
           @prices = @able.prices
         end 
       @prices = @prices.send action_name if ['cheapest','groupbuy','costs'].include? action_name
       @prices = @prices.recent if action_name == 'index'
-      @prices = @prices.near(value,20) if $1 == 'city' or $1 == 'locate'
-      return @prices = @prices.includes(:good)#with_uploads
+      @prices = @prices.near(loc,20) if $1 == 'city' or $1 == 'locate'
+      return @prices#with_uploads
       end  
     end  
     @prices = Price.send action_name if ['cheapest','groupbuy','costs'].include? action_name
     @prices = Price.recent if action_name == 'index'
-    @prices = @prices.includes(:good)#.with_uploads
+    @prices = @prices#.with_uploads
   end
 end
