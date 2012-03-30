@@ -147,8 +147,8 @@ function form_map_init(){
       google.maps.event.addDomListener(map, 'click', 
       function(a){
         marker.setPosition(a.latLng);
-        $('#form_lat').val(a.latLng.Ua);
-        $('#form_lon').val(a.latLng.Ta);
+        $('#form_lat').val(a.latLng.Ta);
+        $('#form_lon').val(a.latLng.Ua);
         //geocoder.geocode({'latLng': a.latLng}, function(results, status) {
         //  if (status == google.maps.GeocoderStatus.OK) {
         //    if (results[1]) {
@@ -168,8 +168,8 @@ function form_map_init(){
           map.setZoom(17);  // Why 17? Because it looks good.
         }
         marker.setPosition(place.geometry.location);
-        $('#form_lat').val(place.geometry.location.Ua);
-        $('#form_lon').val(place.geometry.location.Ta);
+        $('#form_lat').val(place.geometry.location.Ta);
+        $('#form_lon').val(place.geometry.location.Ua);
 
         var address = '';
         if (place.address_components) {
