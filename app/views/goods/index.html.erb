@@ -1,10 +1,11 @@
-<h1><%= action_show %></h1>
-
-<%= render 'goods/search' %>
 <div id="goods">
-<%= render 'goods/goods' %>
+  <ul class="table pretty">  
+    <li>名称</li>  
+    <li>最低价</li>  
+    <li>创建时间</li>  
+  </ul>
+  <%= render @goods %>
+  <div class="r">
+    <%= will_paginate @goods %>
+  </div>
 </div>
-
-<br />
-
-<%#= link_to t('labels.new'), new_good_path %>

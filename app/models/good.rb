@@ -2,6 +2,12 @@
 class Good < ActiveRecord::Base
   STATUS_LOW = 2
   belongs_to :user
+  belongs_to :brand
+  has_many :shop_goods,:dependent => :destroy
+  has_many :shops,:through => :shop_goods
+  has_many :brand_goods,:dependent => :destroy
+  has_many :brands,:through => :brand_goods
+
   #has_many :price_goods
   has_many :prices#,:through => :price_goods
   has_many :outlinks, :as => :outlinkable
