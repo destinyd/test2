@@ -1,4 +1,6 @@
 Zhekou::Application.routes.draw do
+  resources :products
+
   resources :costs
   resources :brands
 

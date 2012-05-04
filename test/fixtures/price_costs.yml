@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  price_id: 1
+  cost_id: 1
+  amount: 1
+
+two:
+  price_id: 1
+  cost_id: 1
+  amount: 1

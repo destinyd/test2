@@ -1,24 +1,20 @@
 # coding: utf-8
 class Price < ActiveRecord::Base
   STATUS_LOW = 5
-  belongs_to :user
-  validates :type_id, :presence => true
-  validates :price, :presence => true
   attr_accessor :good_name,:good_user_id,:original_price,:is_cheap_price,:is_360,:city,:name,:title,:img
   attr_accessible :price,:type_id,:address,:amount,:good_name,:finish_at,:started_at,:name,:good_attributes,:outlinks_attributes,:longitude, :latitude,:original_price,:is_cheap_price,:is_360,:city,:title,:img
+  validates :type_id, :presence => true
+  validates :price, :presence => true
+  belongs_to :user
+  belongs_to :good
+  belongs_to :shop
 
   has_many :outlinks, :as => :outlinkable, :dependent => :destroy
   has_many :integrals, :as => :integralable, :dependent => :destroy
   has_many :reviews, :as => :reviewable, :dependent => :destroy
   has_many :uploads, :as => :uploadable, :dependent => :destroy
-
-  has_many :costs
-
-  belongs_to :good
-  belongs_to :brand
-  accepts_nested_attributes_for :good
-  accepts_nested_attributes_for :uploads
-  accepts_nested_attributes_for :outlinks, :reject_if => lambda { |outlink| outlink[:url].blank? }, :allow_destroy => true
+  has_many :price_costs,:dependent => :destroy
+  has_many :price,:through => :price_costs
 
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
   scope :review_low, Filter.new(self).extend(ReviewFilter)
@@ -32,10 +28,15 @@ class Price < ActiveRecord::Base
   scope :recent,running.order("id desc")
   scope :groupbuy,recent.where(:type_id=>[21,22])
   scope :not_finish,where("finish_at > ?",Time.now)
- scope :costs,recent.where(:type_id=>[0,1])  
- scope :with_uploads,includes(:uploads)
-
+  scope :costs,recent.where(:type_id=>[0,1])  
+  scope :with_uploads,includes(:uploads)
   scope :you_like,running.order('rand()')
+
+
+  accepts_nested_attributes_for :good
+  accepts_nested_attributes_for :uploads
+  accepts_nested_attributes_for :outlinks, :reject_if => lambda { |outlink| outlink[:url].blank? }, :allow_destroy => true
+
   TYPE = {
   0=>'消费',
   1=>'网上消费',

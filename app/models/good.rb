@@ -3,6 +3,8 @@ class Good < ActiveRecord::Base
   STATUS_LOW = 2
   belongs_to :user
   belongs_to :brand
+  belongs_to :product
+  belongs_to :norm
   has_many :shop_goods,:dependent => :destroy
   has_many :shops,:through => :shop_goods
   has_many :brand_goods,:dependent => :destroy
@@ -29,6 +31,7 @@ class Good < ActiveRecord::Base
   accepts_nested_attributes_for :uploads
 
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
+  scope :recent,order('id desc').includes(:reviews).limit(10)
 
   validates :name, :presence => true,:uniqueness => true
   
@@ -37,8 +40,6 @@ class Good < ActiveRecord::Base
 
 #  default_scope order('id desc')#.includes(:prices) #
 
-  scope :recent,order('id desc').includes(:reviews).limit(10)
-
   def self.search(search)
     if search
       where('name LIKE ?', "#{search}%")
@@ -46,6 +47,10 @@ class Good < ActiveRecord::Base
       scoped
     end
   end
+
+  # def build_name
+  #   brand.try(:name) + product.try(:name) + norm.try(:name)
+  # end
 
   def cheapest
     @cheapest = self.prices.min{|price| price.price}

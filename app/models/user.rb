@@ -18,12 +18,13 @@ class User < ActiveRecord::Base
   has_many :focuss
   has_many :outlinks
   has_many :records
-
   has_many :user_tasks
   has_many :tasks,:through => :user_tasks
   has_many :price_goods
   has_many :shops
-  has_many :costs
+  has_many :user_costs
+  has_many :costs,:through => :user_costs
+  has_many :companies
 
   validates :username, :presence => true,:uniqueness => true
 

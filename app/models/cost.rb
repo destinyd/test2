@@ -1,14 +1,14 @@
 class Cost < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :price
-  belongs_to :locate
-  belongs_to :good
-  #accepts_nested_attributes_for :good
-  #alias good_attributes good
-  #accepts_nested_attributes_for :locate
-  #accepts_nested_attributes_for :price
   attr_accessor :name,:good_id,:address,:shop
   attr_accessible :name,:good_id,:price_id,:locate_id,:price,:shop_id
-#  alias_method :price=, :price_attributes=
-#  attr_accessible :price,:good_id,:price_id,:locate_id
+  belongs_to :user
+  belongs_to :locate
+  belongs_to :good
+  belongs_to :shop
+  belongs_to :cost
+  has_many :costs
+  has_many :user_costs,:dependent => :destroy
+  has_many :users,:through => :user_costs
+  has_many :price_costs,:dependent => :destroy
+  has_many :price,:through => :price_costs
 end
