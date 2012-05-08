@@ -1,4 +1,5 @@
 class Shop < ActiveRecord::Base
+  attr_accessible :desc, :name,:lat,:lon,:brand_id,:address
   validates :name, :presence => true
   validates :address, :presence => true
 

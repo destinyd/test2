@@ -6,5 +6,7 @@ class AddProductIdAndNormIdToGood < ActiveRecord::Migration
     add_index :goods, :norm_id
     add_column :goods, :brand_id, :integer
     add_index :goods, :brand_id
+    add_column :goods, :unit_id, :integer
+    add_index :goods, :unit_id
   end
 end

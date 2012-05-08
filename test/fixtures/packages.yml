@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  good_id: 1
-  child_id: 1
-
-two:
-  good_id: 1
-  child_id: 1

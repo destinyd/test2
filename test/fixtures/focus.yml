@@ -1,7 +1,0 @@
-one:
-  focusable_id: 1
-  focusable_type: MyString
-
-two:
-  focusable_id: 1
-  focusable_type: MyString

@@ -1,6 +1,7 @@
 class Cost < ActiveRecord::Base
   attr_accessor :name,:good_id,:address,:shop
-  attr_accessible :name,:good_id,:price_id,:locate_id,:price,:shop_id
+  attr_accessible :name,:good_id,:price_id,:locate_id,:money,:shop_id
+  validates :money, :presence => true
   belongs_to :user
   belongs_to :locate
   belongs_to :good

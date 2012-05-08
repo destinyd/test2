@@ -14,7 +14,8 @@ class Price < ActiveRecord::Base
   has_many :reviews, :as => :reviewable, :dependent => :destroy
   has_many :uploads, :as => :uploadable, :dependent => :destroy
   has_many :price_costs,:dependent => :destroy
-  has_many :price,:through => :price_costs
+  has_many :prices,:through => :price_costs
+  has_many :costs
 
   scope :review_type, Filter.new(self).extend(ReviewTypeFilter)
   scope :review_low, Filter.new(self).extend(ReviewFilter)
@@ -28,7 +29,7 @@ class Price < ActiveRecord::Base
   scope :recent,running.order("id desc")
   scope :groupbuy,recent.where(:type_id=>[21,22])
   scope :not_finish,where("finish_at > ?",Time.now)
-  scope :costs,recent.where(:type_id=>[0,1])  
+  # scope :costs,recent.where(:type_id=>[0,1])  
   scope :with_uploads,includes(:uploads)
   scope :you_like,running.order('rand()')
 

@@ -1,4 +1,6 @@
 #source 'http://rubygems.org'
+require 'rbconfig'
+HOST_OS = RbConfig::CONFIG['host_os']
 source 'http://ruby.taobao.org/'
 
 gem 'rails', '3.2.3'
@@ -6,7 +8,11 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'#, '0.2.13te3'
-gem "therubyracer"#, :require => 'v8'
+
+if HOST_OS =~ /linux/i
+  gem 'therubyracer', '>= 0.8.2'
+end
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -18,37 +24,49 @@ end
 #gem 'libxml-ruby'
 #for Tuan
 gem 'geocoder'
-#gem 'rake'
 gem 'devise' # Devise must be required before RailsAdmin
 gem 'paperclip'
 gem 'mime-types', :require => 'mime/types'
 gem "will_paginate", "~> 3.0.pre2"
 gem 'jquery-rails',"~> 1.0.13"
-#gem 'awesome_nested_set'
 
 gem 'acts-as-taggable-on'#, '~>2.1.0'
 gem 'dynamic_sitemaps'
-#gem "mocha", :group => :test
 
 group :development do
   gem "nifty-generators"
-#  gem 'linecache19', :git => 'https://github.com/mark-moseley/linecache.git' 
-#  gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
   gem 'ruby-debug19'#, :require => 'ruby-debug'
+  gem "rspec-rails", "~> 2.0"
+  gem 'guard-rspec'#, '0.5.5'
+end
+
+case HOST_OS
+  when /darwin/i
+    gem 'rb-fsevent', :group => :development
+    gem 'growl', :group => :development
+    gem 'guard-pow', :group => :development
+  when /linux/i
+    gem 'libnotify', :group => :development
+    gem 'rb-inotify', :group => :development
+  when /mswin|windows/i
+  gem 'rb-fchange', :group => :development
+  gem 'win32console', :group => :development
+  gem 'rb-notifu', :group => :development
 end
 
 #gem 'redis-store','~> 1.0.0.1'
+#
+#
 #gem 'thin'
 gem 'unicorn'
 
 #dev
 gem 'inherited_resources'
 gem 'simple_form'
-# group :test do
-#   gem "rspec-rails", "~> 2.0"
-#   gem 'capybara'#, '1.1.2'
-#   gem 'rb-inotify'#, '0.8.8'
-#   gem 'libnotify'#, '0.5.9'
-#   gem 'guard-spork'#, '0.3.2'
-#   gem 'spork'#, '0.9.0'
-# end
+
+group :test do
+  gem "rspec-rails", "~> 2.0"
+  gem 'capybara'#, '1.1.2'
+  gem 'guard-spork'#, '0.3.2'
+  gem 'spork'#, '0.9.0'
+end
