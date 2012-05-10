@@ -7,16 +7,14 @@ gem 'rails', '3.2.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'#, '0.2.13te3'
-
-if HOST_OS =~ /linux/i
-  gem 'therubyracer', '>= 0.8.2'
-end
-
+gem 'mysql2'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier'#, '>= 1.0.3'
+  if HOST_OS =~ /linux/i
+    gem 'therubyracer', '>= 0.8.2'
+  end
 end
 
 
@@ -24,11 +22,11 @@ end
 #gem 'libxml-ruby'
 #for Tuan
 gem 'geocoder'
-gem 'devise' # Devise must be required before RailsAdmin
+gem "devise", ">= 2.1.0.rc"
 gem 'paperclip'
 gem 'mime-types', :require => 'mime/types'
-gem "will_paginate", "~> 3.0.pre2"
-gem 'jquery-rails',"~> 1.0.13"
+gem "will_paginate", ">= 3.0.3"
+gem 'jquery-rails'
 
 gem 'acts-as-taggable-on'#, '~>2.1.0'
 gem 'dynamic_sitemaps'
