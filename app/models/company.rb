@@ -7,4 +7,7 @@ class Company < ActiveRecord::Base
   # has_many :products
   # has_many :norms
   belongs_to :user
+  def to_s
+    name
+  end
 end

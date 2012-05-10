@@ -147,8 +147,8 @@ function form_map_init(){
       google.maps.event.addDomListener(map, 'click', 
       function(a){
         marker.setPosition(a.latLng);
-        $('#form_lat').val(a.latLng.Ta);
-        $('#form_lon').val(a.latLng.Ua);
+        $('#form_lat').val(a.latLng.lat());
+        $('#form_lon').val(a.latLng.lng());
         //geocoder.geocode({'latLng': a.latLng}, function(results, status) {
         //  if (status == google.maps.GeocoderStatus.OK) {
         //    if (results[1]) {
@@ -161,6 +161,7 @@ function form_map_init(){
       google.maps.event.addListener(autocomplete, 'place_changed', function() {
         infowindow.close();
         place = autocomplete.getPlace();
+        aaa = place;
         if (place.geometry.viewport) {
           map.fitBounds(place.geometry.viewport);
         } else {
@@ -168,8 +169,8 @@ function form_map_init(){
           map.setZoom(17);  // Why 17? Because it looks good.
         }
         marker.setPosition(place.geometry.location);
-        $('#form_lat').val(place.geometry.location.Ta);
-        $('#form_lon').val(place.geometry.location.Ua);
+        $('#form_lat').val(place.geometry.location.lat());
+        $('#form_lon').val(place.geometry.location.lng());
 
         var address = '';
         if (place.address_components) {

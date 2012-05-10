@@ -11,4 +11,7 @@ class Brand < ActiveRecord::Base
   has_many :norms
 
   acts_as_taggable
+  def to_s
+    name
+  end
 end

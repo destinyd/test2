@@ -1,0 +1,8 @@
+<%= simple_form_for @product do |f| -%>
+  <%= f.input :name %>
+  <%= f.input :desc %>
+  <%= f.input :tag_list%>
+  <% # , :hint => "半角逗号(,)分割。填写商店类别，让客户更容易找到你。" %>
+  <%= f.submit %>
+<% end -%>
+

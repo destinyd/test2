@@ -1,0 +1,28 @@
+<% @where_name = @product.name %>
+<% @where = @product %>
+<p>
+<b>品牌名称:</b>
+<%= @product.name %>
+</p>
+<p>
+<b>描述:</b>
+<%= @product.desc %>
+</p>
+<% if @product.tag_list %>
+<p>
+<b>标签:</b>
+<% @product.tags.each do |tag| %>
+  <%= tag -%>
+<% end -%>
+</p>
+<% end %>
+<% content_for :plus do -%>
+  <% unless @product.goods.blank? %>
+    <div class="section">
+      <h3>品牌商品</h3>
+      <div>
+        <%= render @product.goods %>
+      </div>
+    </div>
+  <% end %>
+<% end -%>

@@ -4,13 +4,29 @@
       <h2><%= pluralize(good.errors.count, "error") %> prohibited this good from being saved:</h2>
 
       <ul>
-      <% good.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% good.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :brand_name %><br />
+    <%= f.text_field :brand_name %>
+  </div>
+  <div class="field">
+    <%= f.label :product_name %><br />
+    <%= f.text_field :product_name %>
+  </div>
+  <div class="field">
+    <%= f.label :norm_name %><br />
+    <%= f.text_field :norm_name %>
+  </div>
+  <%# <div class="field">%>
+    <%#= f.label :unit_name %><br />
+    <%#= f.text_field :unit_name %>
+  <%# </div>%>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -26,8 +42,40 @@
   <%= f.fields_for :outlinks do |ff| %>
     <%= ff.label :url %><br />
     <%= ff.text_field :url %>
-  <%end %>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
+  <%= f.hidden_field :brand_id %>
 <% end %>
+<script>
+  function feet_good_autocomplete(cn){
+  $( "#good_" + cn + "_name" ).autocomplete({
+    source: function( request, response ) {
+      $.ajax({
+        url: "/" +cn + "s/searchJSON",
+        dataType: "json",
+        data: {
+          name_q: request.term
+        },
+        success: function( data ) {
+          response( $.map( data, function( item ) {
+            return {
+              label: item.name,
+              value: item.name,
+              id: item.id
+            }
+          }));
+        },
+      });
+    },
+    select: function( event, ui ) {
+      $('#good_'+ cn+'_id').val(ui.item.id);
+    },
+    minLength: 2
+  });
+}
+feet_good_autocomplete('brand');
+feet_good_autocomplete('product');
+feet_good_autocomplete('norm');
+</script>

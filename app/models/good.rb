@@ -1,5 +1,6 @@
 # coding: utf-8
 class Good < ActiveRecord::Base
+  attr_accessor :brand_name,:product_name,:norm_name#,:brand_name,
   STATUS_LOW = 2
   belongs_to :user
   belongs_to :brand
