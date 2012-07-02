@@ -3,7 +3,7 @@ require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
 source 'http://ruby.taobao.org/'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -33,9 +33,9 @@ gem 'dynamic_sitemaps'
 
 group :development do
   gem "nifty-generators"
-  gem 'ruby-debug19'#, :require => 'ruby-debug'
   gem "rspec-rails", "~> 2.0"
   gem 'guard-rspec'#, '0.5.5'
+  gem 'debugger'
 end
 
 case HOST_OS
@@ -68,3 +68,4 @@ group :test do
   gem 'guard-spork'#, '0.3.2'
   gem 'spork'#, '0.9.0'
 end
+gem 'quiet_assets', :group => :development
